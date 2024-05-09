@@ -1,9 +1,11 @@
-import Image from "next/image";
+import Experience from "@/components/Experience";
+import Landing from "@/components/Landing";
 
 export default function Home() {
   return (
     <main>
-      <p>Hello</p>
+      <Landing />
+      <Experience />
     </main>
   );
 }

@@ -8,12 +8,12 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "hero-pattern": "url('/public/assets/background.jpg')",
+        "footer-texture": "url('/img/footer-texture.png')",
       },
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
+        poppins: ["Poppins"],
+        'great-vibes': ['Great Vibes', 'cursive'],
       },
     },
   },
