@@ -1,16 +1,14 @@
-import Link from 'next/link'
-import React from 'react'
+import Link from "next/link";
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 const NavDesktop = (props: Props) => {
-    return (
-        <nav className="nav-desktop">
-            <ul className="">
+  return (
+    <nav className="nav-desktop">
+      <ul className=""></ul>
+    </nav>
+  );
+};
 
-            </ul>
-        </nav>    
-    )
-}
-
-export default NavDesktop
+export default NavDesktop;
