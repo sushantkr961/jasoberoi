@@ -1,14 +1,13 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 const NavMobile = (props: Props) => {
-    return (
-        <nav className="nav-mobile">
-            <ul className="">
-            </ul>
-        </nav>
-    )
-}
+  return (
+    <nav className="nav-mobile">
+      <ul className=""></ul>
+    </nav>
+  );
+};
 
-export default NavMobile
+export default NavMobile;

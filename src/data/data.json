@@ -1,0 +1,64 @@
+{
+  "navLinks": [
+    {
+      "href": "/",
+      "text": "HOME",
+      "options": []
+    },
+    {
+      "href": "/mission",
+      "text": "MISSION",
+      "options": []
+    },
+    {
+      "href": "/properties",
+      "text": "PROPERTIES",
+      "options": []
+    },
+    {
+      "href": "/real-estate-insights",
+      "text": "REAL ESTATE INSIGHTS",
+      "options": []
+    },
+    {
+      "href": "/contact",
+      "text": "CONTACT US",
+      "options": []
+    },
+    {
+      "href": "/",
+      "text": "Hosting",
+      "options": [
+        { "href": "/", "text": "Cloud Hosting" },
+        { "href": "/", "text": "Shared Hosting" },
+        { "href": "/", "text": "Wordpress Hosting" },
+        { "href": "/", "text": "Reseller Hosting" },
+        { "href": "/", "text": "VPS Hosting" },
+        { "href": "/", "text": "Dedicated Hosting" },
+        { "href": "/", "text": "Unlimited Hosting" }
+      ]
+    },
+    {
+      "href": "/",
+      "text": "Hosting by Service",
+      "options": [
+        { "href": "/", "text": "Business Hosting" },
+        { "href": "/", "text": "eCommerce Hosting" }
+      ]
+    },
+    {
+      "href": "/",
+      "text": "Resources",
+      "options": [{ "href": "/", "text": "Blog" }]
+    },
+    {
+      "href": "/",
+      "text": "Contact",
+      "options": [
+        { "href": "/", "text": "Contact Us" },
+        { "href": "/", "text": "About Us" },
+        { "href": "/", "text": "Support" }
+      ]
+    }
+  ]
+}
