@@ -8,7 +8,7 @@
     {
       "href": "",
       "text": "MISSION",
-      "options":  [
+      "options": [
         { "href": "/about", "text": "About us" },
         { "href": "/our-culture", "text": "Our Culture" },
         { "href": "/our-culture", "text": "Our Contributions" }
@@ -17,7 +17,7 @@
     {
       "href": "",
       "text": "PROPERTIES",
-      "options":  [
+      "options": [
         { "href": "/featured-listing", "text": "Featured Listings" },
         { "href": "/mls-search", "text": "MLS Search" },
         { "href": "/commercial-listing", "text": "Commercial Listing" },
@@ -29,7 +29,7 @@
     {
       "href": "/real-estate-insights",
       "text": "REAL ESTATE INSIGHTS",
-      "options":  [
+      "options": [
         { "href": "/blog", "text": "Blog" },
         { "href": "/mortgage-calculator-2", "text": "Mortgage Calculator" },
         { "href": "/podcast", "text": "Podcast" },
@@ -42,5 +42,47 @@
       "text": "CONTACT US",
       "options": []
     }
-  ]
+  ],
+
+  "footer": {
+    "description": "A keen eye on the market, a passion to excel, and a wide network of industry professionals. J.O. Group works to deliver the best possible experience with Real Estate.",
+    "quickLinks": {
+      "title": "QUICK LINKS",
+      "links": [
+        {
+          "name": "About us",
+          "url": "/about"
+        },
+        {
+          "name": "Our Culture",
+          "url": "/our-culture"
+        },
+        {
+          "name": "Featured Listing",
+          "url": "/featured-listing"
+        },
+        {
+          "name": "Commercial Listing",
+          "url": "/commercial-listing"
+        },
+        {
+          "name": "Contact us",
+          "url": "/contact-us"
+        },
+        {
+          "name": "Privacy Policy",
+          "url": "/privacy-policy"
+        }
+      ]
+    },
+    "contactUs": {
+      "title": "CONTACT US",
+      "phone": "778-994-7450",
+      "email": "jo@jasoberoi.ca",
+      "address": "#306 - 1493 Foster Street, White Rock. BC"
+    },
+    "socialMedia": {
+      "title": "FOLLOW US ON:"
+    }
+  }
 }

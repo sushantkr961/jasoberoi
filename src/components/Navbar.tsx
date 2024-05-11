@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
           </div>
           <button
             type="button"
-            className="text-white rounded focus:outline-none bg-black font-medium text-[12px] sm:text-[16px] py-[12px] sm:py-[14px] px-[30px] text-center uppercase"
+            className="text-white focus:outline-none bg-black font-medium text-[12px] sm:text-[16px] py-[12px] sm:py-[14px] px-[30px] text-center uppercase"
           >
             BOOK NOW
           </button>
