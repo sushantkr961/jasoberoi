@@ -85,9 +85,9 @@ function NavMobile({ setOpen, isOpen }: Props) {
                 </button>
                 {link.options && (
                     <div
-                        className={`bg-black shadow-md min-w-[220px] transition-all duration-300 ${isMenuOpen ? 'h-auto opacity-100 pointer-events: auto' : 'h-0 overflow-hidden opacity-0 pointer-events: none'}`}
+                        className={`bg-[#F4F4F4] min-w-[220px] transition-all duration-300 ${isMenuOpen ? 'h-auto opacity-100 pointer-events: auto' : 'h-0 overflow-hidden opacity-0 pointer-events: none'}`}
                     >
-                        <ul className="block text-md text-white">
+                        <ul className="block text-md text-black py-4">
                             {link.options.map((subLink) => (
                                 <li key={subLink.text}>
                                     <Link
