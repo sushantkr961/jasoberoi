@@ -6,59 +6,41 @@
       "options": []
     },
     {
-      "href": "/mission",
+      "href": "",
       "text": "MISSION",
-      "options": []
+      "options":  [
+        { "href": "/about", "text": "About us" },
+        { "href": "/our-culture", "text": "Our Culture" },
+        { "href": "/our-culture", "text": "Our Contributions" }
+      ]
     },
     {
-      "href": "/properties",
+      "href": "",
       "text": "PROPERTIES",
-      "options": []
+      "options":  [
+        { "href": "/featured-listing", "text": "Featured Listings" },
+        { "href": "/mls-search", "text": "MLS Search" },
+        { "href": "/commercial-listing", "text": "Commercial Listing" },
+        { "href": "/sold-commercials", "text": "Sold Commercials" },
+        { "href": "/exclusive-properties", "text": "Exclusive Properties" },
+        { "href": "/sold-stories", "text": "Sold Stories" }
+      ]
     },
     {
       "href": "/real-estate-insights",
       "text": "REAL ESTATE INSIGHTS",
-      "options": []
+      "options":  [
+        { "href": "/blog", "text": "Blog" },
+        { "href": "/mortgage-calculator-2", "text": "Mortgage Calculator" },
+        { "href": "/podcast", "text": "Podcast" },
+        { "href": "/buyers-guide", "text": "Buyer's Guide" },
+        { "href": "/sellers-guide", "text": "Seller's Guide" }
+      ]
     },
     {
       "href": "/contact",
       "text": "CONTACT US",
       "options": []
-    },
-    {
-      "href": "/",
-      "text": "Hosting",
-      "options": [
-        { "href": "/", "text": "Cloud Hosting" },
-        { "href": "/", "text": "Shared Hosting" },
-        { "href": "/", "text": "Wordpress Hosting" },
-        { "href": "/", "text": "Reseller Hosting" },
-        { "href": "/", "text": "VPS Hosting" },
-        { "href": "/", "text": "Dedicated Hosting" },
-        { "href": "/", "text": "Unlimited Hosting" }
-      ]
-    },
-    {
-      "href": "/",
-      "text": "Hosting by Service",
-      "options": [
-        { "href": "/", "text": "Business Hosting" },
-        { "href": "/", "text": "eCommerce Hosting" }
-      ]
-    },
-    {
-      "href": "/",
-      "text": "Resources",
-      "options": [{ "href": "/", "text": "Blog" }]
-    },
-    {
-      "href": "/",
-      "text": "Contact",
-      "options": [
-        { "href": "/", "text": "Contact Us" },
-        { "href": "/", "text": "About Us" },
-        { "href": "/", "text": "Support" }
-      ]
     }
   ]
 }
