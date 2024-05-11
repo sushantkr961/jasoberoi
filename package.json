@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "animated-number-react": "^0.1.2",
     "clsx": "^2.1.1",
     "framer-motion": "^11.1.9",
     "hamburger-react": "^2.5.0",

@@ -20,12 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       {/* <body className={inter.className}> */}
-
       <body className={cn('relative', inter.className,
         { "debug-screens": process.env.NODE_ENV === "development" })}>
         <Navbar />
         <main>{children}</main>
-        <Footer />
+        {/* <Footer />   */}
       </body>
     </html>
   );
