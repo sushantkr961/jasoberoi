@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <>
       <section
-        className="relative min-h-[688px] flex items-center justify-center "
+        className="relative py-28 lg:py-0 lg:min-h-[668px] w-full flex items-center justify-center "
         style={{
           backgroundImage: "url('/assets/background.jpg')",
           backgroundPosition: "top center",
@@ -14,7 +14,7 @@ export default function Home() {
       >
         <div className="min-w-full h-auto flex justify-center align-middle p-[10px]">
           <div className="">
-            <div className="mb-[20px]">
+            <div className="mb-4 md:mb-8">
               <Image
                 src="/assets/Belleza-White-.png"
                 alt="logo"
@@ -24,7 +24,7 @@ export default function Home() {
               />
             </div>
             <div className="flex items-center justify-center p-[10px]">
-              <button className="px-10 py-5 bg-white font-medium transition-colors text-[18px] font-poppins uppercase text-black">
+              <button className="px-10 py-5 rounded bg-white font-medium transition-colors text-[18px] font-poppins uppercase text-black">
                 Book Now
               </button>
             </div>
@@ -32,7 +32,7 @@ export default function Home() {
         </div>
       </section>
       {/*  */}
-      <section className="mt-0 mb-0 pt-[7%] pb-[7%] relative z-10 flex items-center justify-center">
+      {/* <section className="mt-0 mb-0 pt-[7%] pb-[7%] relative z-10 flex items-center justify-center">
         <div className="max-w-[1340px] flex justify-between">
           <div className="max-w-[48%] flex align-middle justify-center items-center">
             <div className="flex flex-col">
@@ -86,9 +86,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/*  */}
-      <section className="relative bg-white flex items-center justify-center">
+      {/* <section className="relative bg-white flex items-center justify-center">
         <div className="bg-black max-w-[1340px]">
           <div className="relative flex justify-between items-center">
             <div>
@@ -110,7 +110,7 @@ export default function Home() {
           </div>
           <div></div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }
