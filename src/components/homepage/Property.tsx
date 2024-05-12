@@ -19,13 +19,13 @@ const Property = () => {
                 backgroundSize: "100% auto",
             }}
         >
-            <Container className='grid grid-cols-3 justify-between mb-[-100px] mx-auto '>   
+            <div className='grid grid-cols-1  lg:grid-cols-3  max-w-[1440px] px-4 md:px-6 xl:px-0 justify-between mb-[-100px] mx-auto gap-8 xl:gap-12 '>   
             {
                 properties.map((property,index)=>(
                     <PropertyCard key={index} imgUrl={property.imgUrl} imageName={property.name} />
                 ))
             }
-            </Container>
+            </div>
         </section>
     )
 }
