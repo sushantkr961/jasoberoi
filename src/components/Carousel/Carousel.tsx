@@ -7,7 +7,7 @@ function Carousel() {
   const [display, setDisplay] = useState(true);
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 8,
@@ -42,21 +42,24 @@ function Carousel() {
   ];
 
   return (
-    <div className="slider-container max-w-[1300px] w-full mx-auto">
-      <Slider {...settings}>
-        {imageUrls.map((url, index) => (
-          <div key={index} className="p-2">
-            <Image
-              src={url}
-              alt={`Slide ${index + 1}`}
-              width={600}
-              height={300}
-              layout="responsive"
-              unoptimized
-            />
-          </div>
-        ))}
-      </Slider>
+    <div className="">
+      <div className="bg-black slider-container max-w-[1350px] w-full mx-auto">
+        <Slider {...settings}>
+          {imageUrls.map((url, index) => (
+            <div key={index} className="p-2">
+              <Image
+                src={url}
+                alt={`Slide ${index + 1}`}
+                width={600}
+                height={300}
+                layout="responsive"
+                unoptimized
+              />
+            </div>
+          ))}
+        </Slider>
+      </div>
+
     </div>
   );
 }

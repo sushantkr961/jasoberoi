@@ -1,3 +1,4 @@
+import Carousel from "@/components/Carousel/Carousel";
 import Footer from "@/components/Footer";
 import ContactJas from "@/components/homepage/ContactJas";
 import Experience from "@/components/homepage/Experience";
@@ -15,5 +16,3 @@ export default function Home() {
     </>
   );
 }
-
-
