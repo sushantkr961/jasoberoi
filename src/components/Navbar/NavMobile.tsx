@@ -46,7 +46,7 @@ function NavMobile({ setOpen, isOpen }: Props) {
     const renderNavLink = (link: NavLink) => (
         <Link
             href={link.href}
-            className="py-4 px-4 w-full text-[15px] rounded md:bg-transparent border-[1px]   inline-flex items-center"
+            className="py-4 px-4 w-full text-[15px] rounded md:bg-transparent border-[1px] inline-flex items-center"
             // onClick={() => handleClick(link)}
             onClick={(e) => {
                 e.stopPropagation(); // Stop event propagation
@@ -64,7 +64,7 @@ function NavMobile({ setOpen, isOpen }: Props) {
         return (
             <div className="relative group">
                 <button
-                    className="py-4 px-4 w-full text-[15px] text-black rounded flex items-center justify-between"
+                    className="py-4 px-4 w-full text-[15px] border-[1px] text-black rounded flex items-center justify-between"
                     onClick={() => handleClick(link)}
                 >
                     {link.text}
@@ -85,9 +85,9 @@ function NavMobile({ setOpen, isOpen }: Props) {
                 </button>
                 {link.options && (
                     <div
-                        className={`bg-[#F4F4F4] min-w-[220px] transition-all duration-300 ${isMenuOpen ? 'h-auto opacity-100 pointer-events: auto' : 'h-0 overflow-hidden opacity-0 pointer-events: none'}`}
+                        className={`bg-black min-w-[220px] transition-all duration-300 ${isMenuOpen ? 'h-auto opacity-100 pointer-events: auto' : 'h-0 overflow-hidden opacity-0 pointer-events: none'}`}
                     >
-                        <ul className="block text-md text-black py-4">
+                        <ul className="block text-md text-white ">
                             {link.options.map((subLink) => (
                                 <li key={subLink.text}>
                                     <Link
