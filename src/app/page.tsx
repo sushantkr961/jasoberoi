@@ -12,7 +12,7 @@ export default function Home() {
       <HeroSection />
       <Experience />
       <ContactJas />
-      {/* <Property /> */}
+      <Property />
     </>
   );
 }
