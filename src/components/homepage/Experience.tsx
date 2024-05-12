@@ -1,30 +1,25 @@
 
 "use client"
 import { useEffect, useState } from "react";
-import Container from "../Containers/Container"
+import { useInView } from "react-intersection-observer";
+
 import AnimatedNumber from "animated-number-react";
+import Container from "../Containers/Container";
 
 type Props = {}
 
 const Experience = (props: Props) => {
-    const [isVisible, setIsVisible] = useState<boolean>(false);
+
+    const [ref, inView] = useInView({
+        threshold: 0.5, // Trigger when 50% of the element is in view
+    });
+    const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => {
-            const section = document.getElementById("experience-section");
-            if (!isVisible && section) {
-                const { top, bottom } = section.getBoundingClientRect();
-                const screenHeight = window.innerHeight || document.documentElement.clientHeight;
-                if (top < screenHeight && bottom > 0) {
-                    setIsVisible(true);
-                }
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [isVisible]);
-
+        if (inView) {
+            setIsVisible(true);
+        }
+    }, [inView]);
     return (
 
         <section className="mt-0 mb-0 py-11 lg:py-24 relative z-10 flex items-center justify-center">
@@ -56,32 +51,36 @@ const Experience = (props: Props) => {
                         </div>
                     </div>
                 </div>
-                <div id="experience-section" className="lg:max-w-[551px] 2xl:max-w-[651px] px-5 py-2 grid grid-cols-1 lg:grid-cols-2 items-center justify-center border-solid border-4 border-[#C0AC6A] ">
-                    {/* <div className="flex flex-col justify-center items-center  lg:p-[2rem]"> */}
-                    <div className={`flex flex-col justify-center items-center  lg:p-[2rem]`}>
-                        <div className="text-[58px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
-                            {isVisible && <AnimatedNumber value={800} formatValue={(value: number) => Math.round(value).toLocaleString()} />}M+
-                        </div>
-                        <p className="text-[19px] lg:[1rem] xl:text-[1.2rem] font-poppins text-center">in Career Sales</p>
-                    </div>
-                    <div className="flex flex-col justify-center items-center  lg:p-[30px]">
-                        <div className="text-[58px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
-                            {isVisible && <AnimatedNumber value={35} formatValue={(value: number) => Math.round(value).toLocaleString()} />}M+
-                        </div>
-                        <p className="text-[19px] lg:[1rem] xl:text-[1.2rem] font-poppins">Real Estate Awards</p>
-                    </div>
-                    <div className="flex flex-col justify-center items-center  lg:p-[30px]">
-                        <div className="text-[58px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
-                            {isVisible && <AnimatedNumber value={8} formatValue={(value: number) => Math.round(value).toLocaleString()} />}M+
-                        </div>
-                        <p className="text-[19px] lg:[1rem] xl:text-[1.2rem] font-poppins">Year of Experience</p>
-                    </div>
-                    <div className="flex flex-col justify-center items-center  lg:p-[30px]">
-                        <div className="text-[58px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
-                            {isVisible && <AnimatedNumber value={1} formatValue={(value: number) => Math.round(value).toLocaleString()} />}M+
-                        </div>
-                        <p className="text-[19px] lg:[1rem] xl:text-[1.2rem] font-poppins">Total Sales Volume</p>
-                    </div>
+
+                <div ref={ref} id="experience-section" className="lg:max-w-[551px] 2xl:max-w-[651px] px-5 py-2 grid grid-cols-1 lg:grid-cols-2 items-center justify-center border-solid border-4 border-[#C0AC6A]">
+                    {isVisible && (
+                        <>
+                            <div className="flex flex-col justify-center items-center  lg:p-[2rem]">
+                                <div className="text-[58px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
+                                    <AnimatedNumber value={800} formatValue={(value: number) => Math.round(value).toLocaleString()} />M+
+                                </div>
+                                <p className="text-[19px] lg:[1rem] xl:text-[1.2rem] font-poppins text-center">in Career Sales</p>
+                            </div>
+                            <div className="flex flex-col justify-center items-center  lg:p-[30px]">
+                                <div className="text-[58px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
+                                    <AnimatedNumber value={35} formatValue={(value: number) => Math.round(value).toLocaleString()} />M+
+                                </div>
+                                <p className="text-[19px] lg:[1rem] xl:text-[1.2rem] font-poppins">Real Estate Awards</p>
+                            </div>
+                            <div className="flex flex-col justify-center items-center  lg:p-[30px]">
+                                <div className="text-[58px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
+                                    <AnimatedNumber value={8} formatValue={(value: number) => Math.round(value).toLocaleString()} />M+
+                                </div>
+                                <p className="text-[19px] lg:[1rem] xl:text-[1.2rem] font-poppins">Year of Experience</p>
+                            </div>
+                            <div className="flex flex-col justify-center items-center  lg:p-[30px]">
+                                <div className="text-[58px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
+                                    <AnimatedNumber value={1} formatValue={(value: number) => Math.round(value).toLocaleString()} />M+
+                                </div>
+                                <p className="text-[19px] lg:[1rem] xl:text-[1.2rem] font-poppins">Total Sales Volume</p>
+                            </div>
+                        </>
+                    )}
                 </div>
             </Container>
         </section>
