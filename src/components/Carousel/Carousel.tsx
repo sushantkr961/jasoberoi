@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useState } from "react";
 import Slider from "react-slick";
 
@@ -6,7 +7,6 @@ import Slider from "react-slick";
 
 function Carousel() {
   const [display, setDisplay] = useState(true);
-  const [width, setWidth] = useState(600);
 
   const settings = {
     dots: true,
@@ -16,48 +16,47 @@ function Carousel() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 5000,
-    arrows: false
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
+
+  const imageUrls = [
+    "/assets/asset 4.png",
+    "/assets/asset 5.png",
+    "/assets/asset 6.png",
+    "/assets/asset 7.png",
+    "/assets/asset 8.png",
+    "/assets/asset 9.png",
+    "/assets/asset 10.png",
+    "/assets/asset 11.png",
+    "/assets/asset 12.png",
+    "/assets/asset 13.png",
+    "/assets/asset 14.png",
+    "/assets/asset 15.png",
+  ];
+
   return (
-    <div className="slider-container">
-      <div
-        style={{
-          width: width + "px",
-          display: display ? "block" : "none",
-        }}
-      >
-        {/* /assets/asset 4-.png */}
-        {/* /assets/asset 22-.png */}
-        <Slider {...settings}>
-          <div>
-            <h3>1</h3>
-          </div>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
-          <div>
-            <h3>7</h3>
-          </div>
-          <div>
-            <h3>8</h3>
-          </div>
-          <div>
-            <h3>9</h3>
-          </div>
-        </Slider>
-      </div>
+    <div className="slider-container max-w-[1300px] w-full mx-auto">
+      <Slider {...settings}>
+        {imageUrls.map((url, index) => (
+          <div key={index} className="p-2">
+            <Image
+              src={url}
+              alt={`Slide ${index + 1}`}
+              width={600}
+              height={300}
+              layout="responsive"
+              unoptimized
+            />
+      </Slider>
     </div>
   );
 }
