@@ -1,38 +1,46 @@
-import Image from 'next/image'
-import React from 'react'
-import Container from '../Containers/Container'
+import Image from "next/image";
+import React from "react";
+import Container from "../Containers/Container";
+import Carousel from "../Carousel/Carousel";
 
-type Props = {}
+interface ContactJasProps {}
 
-const ContactJas = (props: Props) => {
-    return (
-        <section className="relative bg-white flex items-center justify-center">
-            <Container className='bg-black  py-[80px] px-[36px]'>
-                <div className="relative flex ">
-                    <div className='w-[47%] flex justify-center'>
-                        <img
-                            src="/assets/jas-oberoi-team.jpg"
-                            alt="team"
-                            // width={800}
-                            // height={389}
-                            className="h-[389px] block max-w-full"
-                        />
-                    </div>
-                    <div className=' pr-[10%] pl-[7%] '>
-                            {/* padding: 0% 19% 0% 7%; */}
-                        <h2 className="text-white font-[300] text-[1.6rem] uppercase leading-[3rem] tracking-[0.8px] font-poppins">
-                            AT JAS OBEROI GROUP, WE ARE A TEAM OF EXPERT ADVISORS WITH A
-                            VAST NETWORK OF INDUSTRY PROFESSIONALS SO THAT ALL YOUR REAL
-                            ESTATE NEEDS ARE UNDER ONE ROOF.
-                        </h2>
-                    </div>
-                </div>
-                <div>
+const ContactJas: React.FC<ContactJasProps> = () => {
+  return (
+    <section className="bg-white text-white">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 bg-black max-w-[1350px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center py-12">
+          <div className="flex justify-center">
+            <Image
+              src="/assets/jas-oberoi-team.jpg"
+              alt="Team Image"
+              width={700}
+              height={400}
+              layout="intrinsic"
+            />
+          </div>
+          <div className="text-center md:text-left space-y-4">
+            <h2 className="text-xl font-bold">
+              At JAS OBEROI GROUP, WE ARE A TEAM OF EXPERT ADVISORS
+            </h2>
+            <p>
+              A keen eye on the market, a passion to excel, and a wide network
+              of industry professionals so that all your real estate needs are
+              under one roof.
+            </p>
+            <button className="mt-4 bg-yellow-500 text-black px-6 py-2 rounded shadow-lg hover:bg-yellow-600 transition-colors">
+              Connect with Jas
+            </button>
+          </div>
+        </div>
+        <div className="flex justify-center space-x-2 py-4">
+          {/* Icons and text for awards */}
+          <Carousel />
+          {/* Repeat for other icons */}
+        </div>
+      </div>
+    </section>
+  );
+};
 
-                </div>
-            </Container>
-        </section>
-    )
-}
-
-export default ContactJas
+export default ContactJas;
