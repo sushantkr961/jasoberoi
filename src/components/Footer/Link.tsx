@@ -12,7 +12,7 @@ const Link: React.FC<Props> = ({ Icon, text, url, index }) => {
     <li key={index}>
       <a
         href={url}
-        className="text-[15px] leading-6 text-white hover:text-white flex items-center font-[300]"
+        className="text-[15px] leading-6 text-white hover:text-white flex items-center font-[300] min-w-[160px] w-auto"
       >
         <Icon size={20} className="mr-1" /> {text}
       </a>
