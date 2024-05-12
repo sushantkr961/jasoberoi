@@ -3,6 +3,8 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Slider from "react-slick";
 
+
+
 function Carousel() {
   const [display, setDisplay] = useState(true);
 
@@ -54,11 +56,10 @@ function Carousel() {
               layout="responsive"
               unoptimized
             />
-          </div>
-        ))}
       </Slider>
     </div>
   );
 }
 
 export default Carousel;
+

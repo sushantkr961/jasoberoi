@@ -59,25 +59,25 @@ const Experience = (props: Props) => {
                 <div id="experience-section" className="lg:max-w-[551px] 2xl:max-w-[651px] px-5 py-2 grid grid-cols-1 lg:grid-cols-2 items-center justify-center border-solid border-4 border-[#C0AC6A] ">
                     {/* <div className="flex flex-col justify-center items-center  lg:p-[2rem]"> */}
                     <div className={`flex flex-col justify-center items-center  lg:p-[2rem]`}>
-                        <div className="text-[60px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
+                        <div className="text-[58px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
                             {isVisible && <AnimatedNumber value={800} formatValue={(value: number) => Math.round(value).toLocaleString()} />}M+
                         </div>
                         <p className="text-[19px] lg:[1rem] xl:text-[1.2rem] font-poppins text-center">in Career Sales</p>
                     </div>
                     <div className="flex flex-col justify-center items-center  lg:p-[30px]">
-                        <div className="text-[60px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
+                        <div className="text-[58px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
                             {isVisible && <AnimatedNumber value={35} formatValue={(value: number) => Math.round(value).toLocaleString()} />}M+
                         </div>
                         <p className="text-[19px] lg:[1rem] xl:text-[1.2rem] font-poppins">Real Estate Awards</p>
                     </div>
                     <div className="flex flex-col justify-center items-center  lg:p-[30px]">
-                        <div className="text-[60px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
+                        <div className="text-[58px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
                             {isVisible && <AnimatedNumber value={8} formatValue={(value: number) => Math.round(value).toLocaleString()} />}M+
                         </div>
                         <p className="text-[19px] lg:[1rem] xl:text-[1.2rem] font-poppins">Year of Experience</p>
                     </div>
                     <div className="flex flex-col justify-center items-center  lg:p-[30px]">
-                        <div className="text-[60px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
+                        <div className="text-[58px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
                             {isVisible && <AnimatedNumber value={1} formatValue={(value: number) => Math.round(value).toLocaleString()} />}M+
                         </div>
                         <p className="text-[19px] lg:[1rem] xl:text-[1.2rem] font-poppins">Total Sales Volume</p>
