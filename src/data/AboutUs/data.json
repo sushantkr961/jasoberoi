@@ -1,0 +1,116 @@
+{
+    "JASOBEROI": {
+        "firstname": "JAS",
+        "lastname": "OBEROI",
+        "workd": "PERSONAL REAL ESTATE COORPORATION",
+        "descriptions": [
+            {
+                "title": "description_1",
+                "content": "From serving tables 15 years ago as a new immigrant, to owning a multi-million dollar business as a family man. My success is built on my dedication to helping investors achieve their real estate investment goals."
+            },
+            {
+                "title": "description_2",
+                "content": "I believe that everyone should have equal right to information and opportunity to secure their own wealth. In a digital age, the information is out there, but it may be hard to find direction."
+            },
+            {
+                "title": "description_3",
+                "content": "No matter what stage of the investment journey you’re at, I create strategies based on portfolios at all levels. Through the years I have experienced all sorts of ups and downs involved with real estate, more than enough to know that there is always a solution. This is how I can confidently ease any fears, and tackle any problems involved in real estate."
+            },
+            {
+                "title": "description_4",
+                "content": "Realtors should do more than open doors and put a “for sale” sign out. My job is to nurture your investments and to be your guide from start to finish."
+            }
+        ],
+        "benefits": "Save time for yourself, seize financial efficiency, and work with Jas Oberoi."
+    },
+    "TEAM": [
+        {
+            "name": "Manpreet Sidhu",
+            "image": "asset 3",
+            "role": "Office Manager & Real Estate Advisor",
+            "email": "manpreet@jasoberoi.ca",
+            "description": [
+                {
+                    "title": "description_1",
+                    "content": "Manpreet, a Penticton native with strong ties to the Sikh community, transitioned from Vancouver studies to a successful career as an executive assistant in her hometown, drawing on her extensive customer service experience. Her passion for real estate, inspired by her parents’ property ownership, has led her to collaborate with various real estate teams in the Okanagan and engage in real estate marketing."
+                },
+                {
+                    "title": "description_2",
+                    "content": "As a new homeowner, she intimately understands the process of buying your first home. Beyond work, Manpreet enjoys exploring the Okanagan’s offerings, unwinding with TV series and podcasts, and cherishing scenic sunsets over Skaha or Okanagan Lake in the place she proudly calls home."
+                }
+            ]
+        },
+        {
+            "name": "Maria Hussain",
+            "image": "asset 4",
+            "role": "Real Estate Professional",
+            "email": "maria@jasoberoi.ca",
+            "descriptions": [
+                {
+                    "title": "description_1",
+                    "content": "Maria is a well connected realtor based out of Surrey. Growing up Maria always wanted to invest and learn more about stocks and real estate but she found herself struggling to learn as often simple things were made complicated. It’s now her mission to make real estate simple for her clients; guiding them through every step of their real estate journey."
+                },
+                {
+                    "title": "description_2",
+                    "content": "With a Bachelor of Business Administration degree from BCIT and years of experience working in the corporate world, it was natural for Maria to transition to a career in the real estate industry. In her previous roles, she worked closely with executives from various multinational companies allowing her to expand her network of global industry professionals."
+                },
+                {
+                    "title": "description_3",
+                    "content": "Ambitious, hardworking, and committed are few adjectives often used to describe Maria. Her involvement and dedication to her clients has built long lasting relationships and trust which she believes is the most critical part of being a real estate professional."
+                },
+                {
+                    "title": "description_4",
+                    "content": "When not at the office, Maria enjoys spending time with her family and friends, reading, volunteering, shopping, and travelling."
+                },
+                {
+                    "title": "description_5",
+                    "content": "Fluent in: Urdu/Hindi, Dari/Farsi, and English."
+                }
+            ]
+        },
+        {
+            "name": "Claudia",
+            "image": "asset 3",
+            "role": "Marketing Manager",
+            "email": "info@jasoberoi.ca",
+            "descriptions": [
+                {
+                    "title": "description_1",
+                    "content": "Equipped with a diverse skill set encompassing photo and video editing, media design, journalism, social media, and more, Claudia’s passion spans all realms of art, from capturing moments through visuals to crafting captivating prose. Throughout her journey, she discovered that her true calling lies in generating innovative ideas that blend creativity with a deep understanding of others’ needs."
+                },
+                {
+                    "title": "description_2",
+                    "content": "Through her collaboration with the J.O. Group, Claudia finds fulfillment in combining her love for aesthetics with her passion for real estate. Her work not only allows her to excel professionally but also serves as a platform to express her boundless creativity."
+                },
+                {
+                    "title": "description_3",
+                    "content": "A self-proclaimed minimalist, Claudia embraces simplicity in her life. She finds joy in relishing delectable cuisine, cherishing moments with her beloved beaglier puppy, and embracing experiences that evoke both fun and horror."
+                },
+                {
+                    "title": "description_4",
+                    "content": "While you may not have the opportunity to work directly with Claudia, her influence permeates the essence of J.O. Group, leaving an indelible mark on its distinguishing characteristics."
+                }
+            ]
+        },
+        {
+            "name": "Emmanuel Gatica",
+            "image": "asset 3",
+            "role": "Media Director",
+            "email": "info@jasoberoi.ca",
+            "descriptions": [
+                {
+                    "title": "description_1",
+                    "content": "Meet Emmanuel Gatica, a skilled filmmaker and digital media specialist hailing from Mexico City. With a degree in Digital Media and Communications from the esteemed Monterey Institute of Technology, as well as a specialized background in Film Production, Emmanuel has honed his craft through experience and education alike. He’s even attended the Vancouver Film School’s summer program, further broadening his knowledge and skills."
+                },
+                {
+                    "title": "description_2",
+                    "content": "Emmanuel’s career has largely centered around film production, though he is also well versed in Digital Marketing – with a particular affinity for SEO. He’s founded his own digital marketing agency, Laudify Media, which showcases his entrepreneurial spirit and drive."
+                },
+                {
+                    "title": "description_3",
+                    "content": "Beyond work, Emmanuel is a lover of all animals – but his heart truly belongs to canines and owls. He’s also an avid fan of games, movies, and TV shows, bringing a new creative inspiration to set every time."
+                }
+            ]
+        }
+    ]
+}
