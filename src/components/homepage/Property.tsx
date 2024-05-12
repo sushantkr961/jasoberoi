@@ -1,34 +1,40 @@
-import Container from '../Containers/Container';
-import PropertyCard from './PropertyCard';
+import Image from "next/image";
+import PropertyCard from "./PropertyCard";
+import Container from "../Containers/Container";
 
 const Property = () => {
+  const categories = [
+    {
+      name: "Residential",
+      image: "/assets/asset 29.jpeg",
+    },
+    {
+      name: "Commercial",
+      image: "/assets/asset 30.jpeg",
+    },
+    {
+      name: "Exclusive Properties",
+      image: "/assets/asset 31.jpeg",
+    },
+  ];
 
+  return (
+    <section className="relative mt-[10%] bg-white w-full">
+      <div className="bg-white h-96 w-full hidden md:block"></div>
 
-    const properties = [
-        { name: "Property 1", imgUrl: "/assets/asset 29.jpeg" },
-        { name: "Property 2", imgUrl: "/assets/asset 30.jpeg" },
-        { name: "Property 3", imgUrl: "/assets/asset 31.jpeg" },
-    ];
-    return (
-        <section
-            className="bg-white text-white max-h-[530px] relative " // Added relative positioning
-            style={{
-                backgroundImage: "url('/assets/asset 28.jpeg')",
-                backgroundPosition: "top center",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "100% auto",
-            }}
-        >
-            <div className='grid grid-cols-1  lg:grid-cols-3  max-w-[1440px] px- md:px-6 xl:px-0 justify-between mb-[-100px] mx-auto gap-8 xl:gap-12 '>   
-            {
-                properties.map((property,index)=>(
-                    <PropertyCard key={index} imgUrl={property.imgUrl} imageName={property.name} />
-                ))
-            }
-            </div>
-        </section>
-    )
-}
+      <div className="bg-[url('https://jasoberoi.ca/wp-content/uploads/2023/11/jas-cities.jpg')] h-80 w-full bg-cover hidden md:block"></div>
+
+      <Container className="absolute md:top-[50%] md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+        {categories.map((category, index) => (
+            <PropertyCard
+              imgUrl={category.image}
+              imageName={category.name}
+              title={category.name}
+            />
+        ))}
+      </Container>
+    </section>
+  );
+};
 
 export default Property;
-

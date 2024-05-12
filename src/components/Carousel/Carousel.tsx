@@ -42,24 +42,21 @@ function Carousel() {
   ];
 
   return (
-    <div className="">
-      <div className="bg-black slider-container max-w-[1350px] w-full mx-auto">
-        <Slider {...settings}>
-          {imageUrls.map((url, index) => (
-            <div key={index} className="p-2">
-              <Image
-                src={url}
-                alt={`Slide ${index + 1}`}
-                width={600}
-                height={300}
-                layout="responsive"
-                unoptimized
-              />
-            </div>
-          ))}
-        </Slider>
-      </div>
-
+    <div className="bg-black slider-container max-w-[1350px] w-full mx-auto">
+      <Slider {...settings}>
+        {imageUrls.map((url, index) => (
+          <div key={index} className="p-2">
+            <Image
+              src={url}
+              alt={`Slide ${index + 1}`}
+              width={600}
+              height={300}
+              layout="responsive"
+              unoptimized
+            />
+          </div>
+        ))}
+      </Slider>
     </div>
   );
 }
