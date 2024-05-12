@@ -59,6 +59,7 @@ function Carousel() {
           ))}
         </Slider>
       </div>
+
     </div>
   );
 }
