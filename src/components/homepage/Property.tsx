@@ -19,18 +19,18 @@ const Property = () => {
   ];
 
   return (
-    <section className="relative mt-[10%] bg-white w-full mb-[10%] md:mb-0">
-      <div className="bg-white h-96 w-full hidden md:block"></div>
+    <section className="relative  bg-white w-full mt-[10%] lg:mt-[0%] mb-[10%] md:mb-0">
+      <div className="bg-white lg:h-[20rem] w-full hidden md:block"></div>
 
-      <div className="bg-[url('https://jasoberoi.ca/wp-content/uploads/2023/11/jas-cities.jpg')] h-80 w-full bg-cover hidden md:block"></div>
+      <div className="bg-[url('https://jasoberoi.ca/wp-content/uploads/2023/11/jas-cities.jpg')]  lg:h-[12rem] xl:h-80 w-full bg-cover hidden md:block"></div>
 
-      <Container className="md:absolute md:top-[50%] md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+      <Container className="lg:absolute lg:top-[50%] lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 grid grid-cols-1 lg:grid-cols-3 gap-4 w-full">
         {categories.map((category, index) => (
-            <PropertyCard
-              imgUrl={category.image}
-              imageName={category.name}
-              title={category.name}
-            />
+          <PropertyCard
+            imgUrl={category.image}
+            imageName={category.name}
+            title={category.name}
+          />
         ))}
       </Container>
     </section>

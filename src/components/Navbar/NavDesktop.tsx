@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import navData from "../../data/data.json";
+import Link from 'next/link';
 
 type Props = {}
 type NavLink = {
@@ -26,12 +27,12 @@ function NavDesktop({ }: Props) {
 
 
     const renderNavLink = (link: NavLink) => (
-        <a
+        <Link
             href={link.href}
             className=" py-4 px-3 text-[15px] rounded md:bg-transparent md:p-0  md:py-4 md:bg-red-700 inline-flex items-center"
         >
             {link.text}
-        </a>
+        </Link>
     );
 
     const renderDropdown = (link: NavLink) => (
@@ -63,12 +64,12 @@ function NavDesktop({ }: Props) {
                     <ul className="block text-sm text-white">
                         {link.options.map((subLink) => (
                             <li key={subLink.text}>
-                                <a
+                                <Link
                                     href={subLink.href}
                                     className="block py-[15px] px-4 hover:text-[#707070] transition-colors duration-500"
                                 >
                                     {subLink.text}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>

@@ -29,42 +29,44 @@ const contact = (props: Props) => {
                   <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-first-name">
                     First Name
                   </label>
-                  <input className="transition-all duration-200 outline-none focus:outline-none appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-gray-500" id="grid-first-name" type="text" placeholder="Jane" />
+                  <input className="transition-all duration-200 outline-none focus:outline-none appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-gray-500" id="grid-first-name" type="text" placeholder="Enter your first name" />
                   <p className="text-red text-xs italic">Please fill out this field.</p>
                 </div>
                 <div className="md:w-1/2 px-3 mb-6 md:mb-0" style={{ transition: "border-color 0.3s ease" }}>
-                  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-first-name">
-                    First Name
+                  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-last-name">
+                    Last Name
                   </label>
-                  <input className="transition-all duration-200 outline-none focus:outline-none appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-gray-500" id="grid-first-name" type="text" placeholder="Jane" />
+                  <input className="transition-all duration-200 outline-none focus:outline-none appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-gray-500" id="grid-last-name" type="text" placeholder="Enter your last name" />
                   <p className="text-red text-xs italic">Please fill out this field.</p>
                 </div>
               </div>
               <div className="-mx-3 md:flex mb-2">
                 <div className="md:w-1/2 px-3 mb-6 md:mb-0" style={{ transition: "border-color 0.3s ease" }}>
-                  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-first-name">
-                    First Name
+                  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-phone">
+                  Phone
                   </label>
-                  <input className="transition-all duration-200 outline-none focus:outline-none appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-gray-500" id="grid-first-name" type="text" placeholder="Jane" />
+                  <input className="transition-all duration-200 outline-none focus:outline-none appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-gray-500" id="grid-phone" type="text" placeholder="Enter your phone number" />
                   <p className="text-red text-xs italic">Please fill out this field.</p>
                 </div>
                 <div className="md:w-1/2 px-3 mb-6 md:mb-0" style={{ transition: "border-color 0.3s ease" }}>
-                  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-first-name">
-                    First Name
+                  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-email">
+                  Email
+
                   </label>
-                  <input className="transition-all duration-200 outline-none focus:outline-none appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-gray-500" id="grid-first-name" type="text" placeholder="Jane" />
+                  <input className="transition-all duration-200 outline-none focus:outline-none appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-gray-500" id="grid-email" type="text" placeholder="Enter your email address" />
                   <p className="text-red text-xs italic">Please fill out this field.</p>
                 </div>
               </div>
               <div className="md:w-2/2 mb-4 relative">
                 <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-state">
-                  State
+                Looking for?
                 </label>
                 <div className="relative">
                   <select className="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-state">
-                    <option>New Mexico</option>
-                    <option>Missouri</option>
-                    <option>Texas</option>
+                    <option>Investor</option>
+                    <option>Buying a house</option>
+                    <option>commercial</option>
+                    <option>selling my house</option>
                   </select>
                   <div className="pointer-events-none absolute pin-y pin-r flex items-center px-2 right-0 top-[50%] translate--[-50%] text-grey-darker">
                     <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
@@ -73,10 +75,10 @@ const contact = (props: Props) => {
               </div>
               <div className="-mx-3 md:flex mb-6">
                 <div className="md:w-full px-3 mb-6 md:mb-0" style={{ transition: "border-color 0.3s ease" }}>
-                  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-first-name">
-                    Address
+                  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-additional-info">
+                  Additional Information
                   </label>
-                  <textarea className="transition-all duration-200 outline-none focus:outline-none appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-gray-500" id="grid-first-name" placeholder="Jane" style={{ width: "100%" }}></textarea>
+                  <textarea className="transition-all duration-200 outline-none focus:outline-none appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-gray-500" id="grid-additional-info" placeholder="Enter any additional information" style={{ width: "100%" }}></textarea>
                   <p className="text-red text-xs italic">Please fill out this field.</p>
                 </div>
               </div>
