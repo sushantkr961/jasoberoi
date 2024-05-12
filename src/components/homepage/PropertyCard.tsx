@@ -1,18 +1,38 @@
-import React from 'react'
+import Image from "next/image";
+import { title } from "process";
+import React from "react";
 
 type Props = {
   imgUrl: string;
   imageName: string;
-}
+  title: string;
+};
 
 const PropertyCard = (props: Props) => {
   return (
-    <div className='relative w-full h-[400px] lg:h-[552px]'>
-      <img src={props.imgUrl} className='object-cover h-full w-full absolute' alt={props.imageName} />
-      <button className='left-[50%] translate-x-[-50%] bottom-[40px] z-40 absolute bg-white text-black text-[18px] py-3 px-4 '>
-        RESIDENTIAL
+    <div className="relative w-full md:px-5">
+      <Image
+        src={props.imgUrl}
+        alt={props.imageName}
+        width={500}
+        height={300}
+        layout="responsive"
+        objectFit="cover"
+        className="hidden md:block"
+      />
+      <Image
+        src={props.imgUrl}
+        alt={props.imageName}
+        width={200}
+        height={150}
+        // layout="responsive"
+        objectFit="cover"
+        className="block md:hidden w-full h-36"
+      />
+      <button className="left-[50%] translate-x-[-50%] bottom-[40px] z-40 absolute bg-white text-black text-[18px] py-3 px-4 uppercase whitespace-nowrap overflow-hidden text-overflow-ellipsis min-w-[160px] w-auto">
+        {props.title}
       </button>
     </div>
-  )
-}
-export default PropertyCard
+  );
+};
+export default PropertyCard;

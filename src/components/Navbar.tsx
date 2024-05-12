@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="md:relative bg-white w-full z-20 top-0 start-0 ">
-      <div className="flex flex-wrap items-center justify-between mx-auto py-3 px-4 lg:max-w-[1340px]   flex-col sm:flex-row">
+      <div className="flex flex-wrap items-center justify-between mx-auto py-3 px-4 lg:max-w-[1440px]   flex-col sm:flex-row">
         {/* Logo */}
         <Link
           href="/"
