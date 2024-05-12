@@ -1,6 +1,7 @@
-"use client";
+"use client"
 import React, { useState } from "react";
 import Slider from "react-slick";
+import Image from "next/image"; // Assuming you're using Next.js for image optimization
 
 function Carousel() {
   const [display, setDisplay] = useState(true);
@@ -16,8 +17,18 @@ function Carousel() {
     autoplaySpeed: 5000,
     arrows: false
   };
+
+  const assets = [];
+  for (let i = 4; i <= 22; i++) {
+    assets.push(
+      <div key={i}>
+        <Image src={`/assets/asset ${i}.png`} alt={`Asset ${i}`} width={300} height={200} />
+      </div>
+    );
+  }
+
   return (
-    <div className="slider-container">
+    <div className="slider-container py-2">
       <div
         style={{
           width: width + "px",
@@ -25,33 +36,7 @@ function Carousel() {
         }}
       >
         <Slider {...settings}>
-          <div>
-            <h3>1</h3>
-          </div>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
-          <div>
-            <h3>7</h3>
-          </div>
-          <div>
-            <h3>8</h3>
-          </div>
-          <div>
-            <h3>9</h3>
-          </div>
+          {assets}
         </Slider>
       </div>
     </div>
