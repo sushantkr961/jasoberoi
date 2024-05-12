@@ -10,7 +10,7 @@ type Props = {
 
 const PropertyCard = (props: Props) => {
   return (
-    <div className="relative w-full px-5">
+    <div className="relative w-full px-5 hidden md:block">
       <Image
         src={props.imgUrl}
         alt={props.imageName}
