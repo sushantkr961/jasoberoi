@@ -25,7 +25,7 @@ const ContactJas: React.FC<ContactJasProps> = () => {
             <p className="font-lato  lg:leading-[2.6rem] leading-[1.6rem] uppercase font-[500] text-[16px] lg:text-[22px] xl:text-[24px]  text-[#FFFFFF] text-center  lg:text-left"   >
               AT JAS OBEROI GROUP, WE ARE A TEAM OF EXPERT ADVISORS WITH A VAST NETWORK OF INDUSTRY PROFESSIONALS SO THAT ALL YOUR REAL ESTATE NEEDS ARE UNDER ONE ROOF.
             </p>
-            <button className="w-[210px] sm:w-[260px] lg:w-[48%] uppercase bg-[#E7C67C] text-black px-6 py-2 font-bold shadow-lg  lg:text-left transition-colors">
+            <button className="w-[210px] sm:w-[260px] lg:w-[48%] uppercase bg-[#E7C67C] text-black px-3 py-2 font-bold shadow-lg   transition-colors">
               Connect with Jas
             </button>
           </div>
