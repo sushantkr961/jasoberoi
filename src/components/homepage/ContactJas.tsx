@@ -31,9 +31,7 @@ const ContactJas: React.FC<ContactJasProps> = () => {
           </div>
         </div>
         <div className="flex justify-center space-x-2 py-4">
-          {/* Icons and text for awards */}
-          {/* <Carousel /> */}
-          {/* Repeat for other icons */}
+          <Carousel />
         </div>
       </Container>
 
