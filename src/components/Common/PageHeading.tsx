@@ -12,8 +12,8 @@ const PageHeading: React.FC<Props> = ({ imageSrc, heading }) => {
         style={{ position: 'relative', pointerEvents: 'none' }}>
             <img src={imageSrc} alt={heading} className='absolute object-cover h-full w-full' style={{ pointerEvents: 'none' }} />
             <div className='absolute h-full w-full bg-black opacity-80 ' ></div>
-            <Container className='w-full z-30 m-auto text-center md:text-center leading-0'>
-                <h1 className='font-poppins font-bold text-[35px] md:text-[60px]  text-center md:text-center z-30 text-white'>
+            <Container className='w-full z-10 m-auto text-center md:text-center leading-0'>
+                <h1 className='font-poppins font-bold text-[35px] md:text-[60px]  text-center md:text-center  text-white'>
                     {heading}
                 </h1>
             </Container>
