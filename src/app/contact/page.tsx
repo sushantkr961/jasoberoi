@@ -2,14 +2,14 @@
 
 import PageHeading from "@/components/Common/PageHeading";
 import Container from "@/components/Containers/Container";
-import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import { FaLinkedin } from "react-icons/fa";
 import {
-  FaSquareInstagram,
   FaSquareFacebook,
+  FaSquareInstagram,
   FaSquareYoutube,
 } from "react-icons/fa6";
-import { FaLinkedin } from "react-icons/fa";
-import { useRouter } from "next/navigation";
 
 type Props = {};
 interface FormData {

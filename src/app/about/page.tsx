@@ -5,7 +5,7 @@ import React from "react";
 import Data from "../../data/AboutUs/data.json";
 import { FaInstagramSquare, FaYoutubeSquare, FaFacebookSquare, FaMobileAlt } from "react-icons/fa";
 import { CiMail } from "react-icons/ci";
-import TeamCard from "@/components/aboutpage/TeamCard";
+import TeamCard from "@/components/Missons/TeamCard";
 type Props = {};
 
 const About = (props: Props) => {
@@ -22,7 +22,7 @@ const About = (props: Props) => {
         <div className="flex flex-col md:flex-row justify-between mt-[48px] sm:mt-[44px] lg:mt-[108px] mb-[80px]">
           <div className="md:w-[47%] flex justify-center">
             <Image
-              src="/assets/aboutus/asset 2.jpeg"
+              src={`/assets/aboutus/${JASOBEROI.image}`}
               height={700}
               width={580}
               alt="JASOBEROI"
@@ -53,7 +53,7 @@ const About = (props: Props) => {
               <p className="font-poppins text-[15px] font-semibold">{JASOBEROI.benefits}</p>
               <hr className="border-t-2" />
 
-              <div className="grid grid-cols-1 gap-3  place-items-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
+              <div className="grid grid-cols-1 gap-3  place-items-center md:place-items-start md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
                 <div className="flex gap-2 items-center">
                   <FaMobileAlt />
                   <a href="tel:7789947450">
@@ -85,8 +85,8 @@ const About = (props: Props) => {
         <div>
           {/* Here Come 4 Card */}
           <div className="heading text-center">
-            <p className="text-[#D3AA54] text-[19px] md:text-[16px] font-poppins font-[500]">It’s our people who make the difference</p>
-            <h2 className="font-poppins text-[18px] md:text-[44px] uppercase leading-[1em] text-[#002244] font-[700]">MEET OUR TEAM</h2>
+            <p className="text-[#D3AA54] text-[19px] md:text-[16px] font-poppins font-[500] mb-1">It’s our people who make the difference</p>
+            <h2 className="font-poppins text-[18px] md:text-[44px] uppercase leading-[1.1em] text-[#002244] font-[700] ">MEET OUR TEAM</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-6 lg:grid-cols-4 items-center justify-center w-full m-auto mt-[35px]">
             {/* Here Come Four Card */}

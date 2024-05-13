@@ -1,0 +1,53 @@
+{
+    "OUR-CULTURE": {
+        "title": "OUR",
+        "subtitle": "CULTURE",
+        "tagline":"One name, Two solutions: Commercial & Residential Real Estate.",
+        "img":"asset 2.jpg",
+        "descriptions": [
+            {
+                "title": "description_1",
+                "content": "At Jas Oberoi Group, our mission is to redefine real estate experiences through unwavering dedication and a commitment to excellence."
+            },
+            {
+                "title": "description_2",
+                "content": "With a dedicated in-house marketing team, we strive to showcase your property in the best light possible, utilizing cutting-edge techniques from photos to video tours and targeted advertising."
+            },
+            {
+                "title": "description_3",
+                "content": "Our team, boasting a track record of negotiating over thousands of deals, we operate as fierce advocates for your interests, ensuring you receive the best possible value for your property."
+            },
+            {
+                "title": "description_4",
+                "content": "The strength of our professional network, a cornerstone of our success, empowers us to effortlessly navigate any task, regardless of its complexity."
+            },
+            {
+                "title": "description_5",
+                "content": "With a collective force of 10 experienced realtors, we offer not just individual expertise when you work with us, but a team of experts to offer unwavering support throughout the entire process."
+            },
+            {
+                "title": "description_6",
+                "content": "At Jas Oberoi Group, we are not just real estate professionals; we are dedicated partners committed to delivering unparalleled results and exceeding your expectations in every transaction."
+            }
+        ]
+    },
+    "OUR-GOAL":{
+        "title": "OUR",
+        "subtitle": "GOAL",        
+        "descriptions": [
+            {
+                "title": "description_1",
+                "content": "With Jas Oberoi Group, experience a seamless real estate relationship."
+            },
+            {
+                "title": "description_2",
+                "content": "Our commitment is to provide tailored, innovative solutions, ensuring unparalleled excellence in both commercial and residential ventures with the expertise of our network."
+            },
+            {
+                "title": "description_3",
+                "content": "Jas Oberoi Group: One Name, Two Solutions — Commercial and Residential Real Estate."
+            }
+        ]
+    }
+
+}
