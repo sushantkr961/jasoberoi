@@ -286,6 +286,8 @@ const contact = (props: Props) => {
               </p>
             )}
           </div>
+
+          {/* Right Side Black Part */}
           <div className="right w-full md:w-[36%] xl:min-w-[410px] mt-[50px] bg-black text-white p-[20px] flex flex-col gap-16 max-h-[416px]">
             <div className="flex flex-col gap-4 ">
               <h5 className="text-[20px] font-poppins">
