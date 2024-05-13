@@ -92,7 +92,7 @@ function NavMobile({ setOpen, isOpen }: Props) {
                                 <li key={subLink.text}>
                                     <Link
                                         href={subLink.href}
-                                        className="block py-[15px] hover:bg-black hover:text-white px-4 hover:text-[#707070] transition-colors duration-500"
+                                        className="block py-[15px] hover:bg-black hover:text-white px-4  transition-colors duration-500"
                                         onClick={(e) => {
                                             e.stopPropagation(); // Stop event propagation
                                             handleClick(subLink);

@@ -61,14 +61,17 @@ function Footer(props: Props) {
                   {quickLinks.title}
                 </h3>
                 <ul role="list" className="mt-3 md:mt-6 space-y-1 md:space-y-4 ">
+                  <li>
                   {quickLinks.links.map((link, index) => (
                     <Link
                       key={index}
                       Icon={MdKeyboardArrowRight}
                       text={link.name}
                       url={link.url}
+                      
                     />
                   ))}
+                  </li>
                 </ul>
               </div>
 
@@ -81,7 +84,7 @@ function Footer(props: Props) {
                   <li>
                     <a
                       href="#"
-                      className="text-[15px] leading-6 text-white hover:text-white flex items-center font-[300] min-w-[160px] w-auto justify-center md:justify-start"
+                      className="text-[15px] leading-6 text-white hover:text-slate-200 duration-300 flex items-center font-[300] min-w-[160px] w-auto justify-center md:justify-start"
                     >
                       <MdPhoneIphone size={20} className="mr-2 hidden md:block " />
                       {contactUs.phone}
@@ -90,7 +93,7 @@ function Footer(props: Props) {
                   <li>
                     <a
                       href="#"
-                      className="text-[15px] leading-6 text-white hover:text-white flex items-center font-[300] min-w-[160px] w-auto justify-center md:justify-start"
+                      className="text-[15px] leading-6 text-white hover:text-slate-200 duration-300 flex items-center font-[300] min-w-[160px] w-auto justify-center md:justify-start"
                     >
                       <MdMailOutline size={20} className="mr-2 hidden md:block " />
                       {contactUs.email}
@@ -99,7 +102,7 @@ function Footer(props: Props) {
                   <li className="max-w-[60px] md:max-w-full">
                     <a
                       href="#"
-                      className="text-[15px] leading-6 text-wrap text-white hover:text-white flex items-center font-[300] min-w-[160px] w-auto text-center md:text-left"
+                      className="text-[15px] leading-6 text-wrap text-white hover:text-slate-300 duration-300 flex items-center font-[300] min-w-[160px] w-auto text-center md:text-left"
                     >
                       <FaAddressCard size={20} className="mr-2  hidden md:block  " />
                       {contactUs.address}
@@ -116,16 +119,16 @@ function Footer(props: Props) {
                   {socialMedia.title}
                 </h3>
                 <div className="flex space-x-6">
-                  <a href="#" className="text-white hover:text-white">
+                  <a href="#" className="text-white hover:text-slate-300 duration-300">
                     <FaInstagram size={30} />
                   </a>
-                  <a href="#" className="text-white hover:text-white">
+                  <a href="#" className="text-white hover:text-slate-300 duration-300">
                     <FaTiktok size={25} />
                   </a>
-                  <a href="#" className="text-white hover:text-blue-4">
+                  <a href="#" className="text-white hover:text-blue-4 hover:text-slate-300 duration-300">
                     <FaYoutube size={30} />
                   </a>
-                  <a href="#" className="text-white hover:text-white">
+                  <a href="#" className="text-white hover:text-slate-300 duration-300">
                     <FaFacebookF size={25} />
                   </a>
                 </div>

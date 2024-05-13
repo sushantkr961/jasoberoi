@@ -59,7 +59,7 @@ function NavDesktop({ }: Props) {
             </button>
             {link.options && (
                 <div
-                    className={`absolute bg-black shadow-md min-w-[220px] pt-4  pb-4 transform transition-transform duration-300 ${isVisible === link.text ? (isAnimating ? 'translate-y-[-6px]' : ' translate-y-[-10px]') : 'hidden'
+                    className={`absolute z-[10000] bg-black shadow-md min-w-[220px] pt-4  pb-4 transform transition-transform duration-300 ${isVisible === link.text ? (isAnimating ? 'translate-y-[-6px]' : ' translate-y-[-10px]') : 'hidden'
                         }`}>
                     <ul className="block text-sm text-white">
                         {link.options.map((subLink) => (
