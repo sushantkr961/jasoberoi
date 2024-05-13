@@ -53,7 +53,7 @@ const About = (props: Props) => {
               <p className="font-poppins text-[15px] font-semibold">{JASOBEROI.benefits}</p>
               <hr className="border-t-2" />
 
-              <div className="grid grid-cols-1 gap-3  place-items-center md:place-items-start md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
+              <div className="grid grid-cols-1 gap-3  place-items-center lg:place-items-start md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
                 <div className="flex gap-2 items-center">
                   <FaMobileAlt />
                   <a href="tel:7789947450">

@@ -7,7 +7,8 @@ import GoalCard from "@/components/Missons/GoalCard";
 import { GoPeople } from "react-icons/go";
 import { GrSupport } from "react-icons/gr";
 import { TbGridDots } from "react-icons/tb";
-import { FaPeopleArrows } from "react-icons/fa";
+import { FaArrowRight, FaPeopleArrows } from "react-icons/fa";
+import Link from "next/link";
 
 type Props = {};
 
@@ -94,6 +95,15 @@ const ourCulture = (props: Props) => {
             name="Supporting our communities"
           />
         </div>
+      </div>
+      <div className="w-full justify-center flex mb-[80px]">
+        <Link
+          href={"/contact"}
+          className="m-auto flex gap-2 items-center "
+        >
+            <div className="text-[29px]">Contact </div>
+            <FaArrowRight className='hidden md:block text-[24px] text-[#D3AA54]' />
+        </Link>
       </div>
     </Container>
   </section>;

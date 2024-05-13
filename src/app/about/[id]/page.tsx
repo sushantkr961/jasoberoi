@@ -48,7 +48,7 @@ const page = ({ params }: Props) => {
                         }
                         <hr className="border-t-2" />
 
-                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-0 justify-between w-full items-center">
+                        <div className="flex flex-col sm:flex-row gap-5 sm:gap-0 justify-between w-full items-center">
                             <div className="flex gap-2 items-center">
                                 <CiMail />
                                 <a href={`mailto:${member.email}`}>
