@@ -15,9 +15,6 @@ const ContactJas: React.FC<ContactJasProps> = () => {
               src="/assets/jas-oberoi-team.jpg"
               alt="Team Image"
               className="w-full lg:w-[80%] m-auto"
-              // width={590}
-              // height={390}
-
             />
           </div>
           {/* 19% 0%  */}
