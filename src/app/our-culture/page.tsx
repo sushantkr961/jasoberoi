@@ -38,7 +38,7 @@ const ourCulture = (props: Props) => {
 
         </div>
         {/* Right Side Description */}
-        <div className="md:w-[51%] mt-7 md:mt-0  pr-3 lg:pr-10  md:text-center  xl:text-left">
+        <div className="md:w-[51%] mt-7 md:mt-0  pr-3 lg:pr-10  text-center xl:text-left">
           <div className="heading text-center">
             <h2 className="font-poppins text-[35px] md:text-[48px] uppercase leading-[1.2em] font-[300]"><strong className="font-[600] ">{OUR_CULTURE.title}</strong> {OUR_CULTURE.subtitle}</h2>
             <p className="text-[#D3AA54] text-[15px] md:text-[21px] font-poppins mt-4 md:mt-4">{OUR_CULTURE.tagline}</p>
