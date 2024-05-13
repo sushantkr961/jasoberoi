@@ -15,6 +15,10 @@ type NavLink = {
 const Navbar: React.FC = () => {
   const [isOpen, setOpen] = useState(false);
 
+  const handleClick = () => {
+    window.location.href = 'https://www.jaoberoigroup.com/website_clicks';
+  };
+
   return (
     <nav className="md:relative bg-white w-full z-20 top-0 start-0 ">
       <div className="flex flex-wrap items-center justify-between mx-auto py-3 px-4 lg:max-w-[1440px]   flex-col sm:flex-row">
@@ -37,7 +41,6 @@ const Navbar: React.FC = () => {
           </div>
           <button
             type="button"
-            onClick={() => window.location.href = 'https://www.jaoberoigroup.com/website_clicks'}
             className="text-white focus:outline-none bg-black font-medium text-[12px] sm:text-[16px] py-[12px] sm:py-[14px] px-[30px] text-center uppercase"
           >
             BOOK NOW

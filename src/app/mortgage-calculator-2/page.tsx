@@ -63,6 +63,7 @@ const mortgageCalculator = (props: Props) => {
                   value={propertyPrice}
                   onChange={(e) => setPropertyPrice(e.target.value)}
                   placeholder="$2,000,000.00"
+                  required
                 />
               </div>
               <div
@@ -82,6 +83,7 @@ const mortgageCalculator = (props: Props) => {
                   value={downPayment}
                   onChange={(e) => setDownPayment(e.target.value)}
                   placeholder="$3,000,000.00"
+                  required
                 />
               </div>
             </div>
@@ -105,6 +107,7 @@ const mortgageCalculator = (props: Props) => {
                   onChange={(e) => setYears(e.target.value)}
                   placeholder="30 Years"
                   name="phone"
+                  required
                 />
               </div>
               <div
@@ -125,6 +128,7 @@ const mortgageCalculator = (props: Props) => {
                   value={interestRate}
                   onChange={(e) => setInterestRate(e.target.value)}
                   placeholder="3%"
+                  required
                 />
               </div>
             </div>
