@@ -61,7 +61,6 @@ function Footer(props: Props) {
                   {quickLinks.title}
                 </h3>
                 <ul role="list" className="mt-3 md:mt-6 space-y-1 md:space-y-4 ">
-                  <li>
                   {quickLinks.links.map((link, index) => (
                     <Link
                       key={index}
@@ -71,7 +70,6 @@ function Footer(props: Props) {
                       
                     />
                   ))}
-                  </li>
                 </ul>
               </div>
 
