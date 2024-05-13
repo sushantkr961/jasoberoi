@@ -60,7 +60,7 @@ const ourCulture = (props: Props) => {
 
         <div className="lg:w-[50%] mt-7 md:mt-0  pr-3 lg:pr-10 text-center  lg:text-left">
           <div className="heading">
-            <h2 className="font-poppins text-[35px]  md:text-[48px] uppercase leading-[1.2em] font-[300]"><strong className="font-[600] ">{OUR_GOAL.title}</strong> {OUR_GOAL.subtitle}</h2>
+            <h2 className="font-poppins text-[35px]  md:text-[48px] uppercase leading-[1.2em] font-[300] text-center"><strong className="font-[600] ">{OUR_GOAL.title}</strong> {OUR_GOAL.subtitle}</h2>
           </div>
           <div className="flex flex-col gap-7 mt-7">
             {
