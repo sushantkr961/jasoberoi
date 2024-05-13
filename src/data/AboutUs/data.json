@@ -25,11 +25,12 @@
     },
     "TEAM": [
         {
+            "id":1,
             "name": "Manpreet Sidhu",
-            "image": "asset 3",
+            "image": "asset-3.jpeg",
             "role": "Office Manager & Real Estate Advisor",
             "email": "manpreet@jasoberoi.ca",
-            "description": [
+            "descriptions": [
                 {
                     "title": "description_1",
                     "content": "Manpreet, a Penticton native with strong ties to the Sikh community, transitioned from Vancouver studies to a successful career as an executive assistant in her hometown, drawing on her extensive customer service experience. Her passion for real estate, inspired by her parents’ property ownership, has led her to collaborate with various real estate teams in the Okanagan and engage in real estate marketing."
@@ -41,8 +42,9 @@
             ]
         },
         {
+            "id":2,
             "name": "Maria Hussain",
-            "image": "asset 4",
+            "image": "asset-4.jpeg",
             "role": "Real Estate Professional",
             "email": "maria@jasoberoi.ca",
             "descriptions": [
@@ -69,8 +71,10 @@
             ]
         },
         {
+            
+            "id":3,
             "name": "Claudia",
-            "image": "asset 3",
+            "image": "asset-5.jpeg",
             "role": "Marketing Manager",
             "email": "info@jasoberoi.ca",
             "descriptions": [
@@ -93,8 +97,9 @@
             ]
         },
         {
+            "id":4,
             "name": "Emmanuel Gatica",
-            "image": "asset 3",
+            "image": "asset-6.jpeg",
             "role": "Media Director",
             "email": "info@jasoberoi.ca",
             "descriptions": [

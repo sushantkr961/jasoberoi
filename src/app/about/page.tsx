@@ -5,10 +5,13 @@ import React from "react";
 import Data from "../../data/AboutUs/data.json";
 import { FaInstagramSquare, FaYoutubeSquare, FaFacebookSquare, FaMobileAlt } from "react-icons/fa";
 import { CiMail } from "react-icons/ci";
+import TeamCard from "@/components/aboutpage/TeamCard";
 type Props = {};
 
 const About = (props: Props) => {
   const { JASOBEROI, TEAM } = Data;
+  console.log(TEAM);
+  
   return (
     <section >
       <PageHeading
@@ -17,7 +20,7 @@ const About = (props: Props) => {
       />
 
       <Container className="m-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between my-[108px] ">
+        <div className="flex flex-col md:flex-row justify-between mt-[108px] mb-[80px]">
           <div className="md:w-[47%] flex justify-center">
             <Image
               src="/assets/aboutus/asset 2.jpeg"
@@ -80,9 +83,26 @@ const About = (props: Props) => {
           </div>
         </div>
         {/* Card Section */}
-
         <div>
           {/* Here Come 4 Card */}
+          <div className="heading text-center">
+            <p className="text-[#D3AA54] text-[19px] md:text-[16px] font-poppins font-[500]">It’s our people who make the difference</p>
+            <h2 className="font-poppins text-[18px] md:text-[44px] uppercase leading-[1em] text-[#002244] font-[700]">MEET OUR TEAM</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-6 lg:grid-cols-4 items-center justify-center w-full m-auto mt-[35px]">
+            {/* Here Come Four Card */}
+            {
+              TEAM.map((data) => (
+                <TeamCard
+                  teamMemberDetails={data}
+                  key={data.name}
+                />
+              ))
+            }
+          </div>
+            <div className="p-[50px] mb-[18px] flex">
+              <button className="bg-black m-auto uppercase text-[14px] py-[12px] px-[24px] text-center text-white  font-bold">View All Properties</button>
+            </div>
         </div>
       </ Container >
     </section>
