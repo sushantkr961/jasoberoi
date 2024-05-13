@@ -10,7 +10,6 @@ type Props = {};
 
 const About = (props: Props) => {
   const { JASOBEROI, TEAM } = Data;
-  console.log(TEAM);
   
   return (
     <section >
