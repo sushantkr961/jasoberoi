@@ -27,10 +27,6 @@ const HeroSection = (props: Props) => {
           <div className="flex items-end justify-center lh:p-[10px] md:mb-6 xl:mb-0">
             <button
               className="hidden md:block px-10 py-4 lg:py-4 rounded bg-white text-black font-semibold transition-colors sm:text-[1rem] font-poppins uppercase "
-              onClick={() =>
-                (window.location.href =
-                  "https://www.jaoberoigroup.com/website_clicks")
-              }
             >
               Book Now
             </button>
