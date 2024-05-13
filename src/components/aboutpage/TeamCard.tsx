@@ -41,8 +41,8 @@ const TeamCard = ({ teamMemberDetails }: { teamMemberDetails: any }) => {
                     showInfo ? 'opacity-0 translate-x-[-100%] pointer-events-none' : 'opacity-100 translate-x-0'
                 }`}
             >
-                <strong className='text-[15px] leading-7'>Manpreet Sidhu</strong>
-                <div className="team-title font-poppins text-[14px]">Office Manager &amp; Real Estate Advisor</div>
+                <strong className='text-[15px] leading-7'>{teamMemberDetails.name}</strong>
+                <div className="team-title font-poppins text-[14px]">{teamMemberDetails.role}</div>
             </div>
             <div
                 className={`flex flex-col items-center justify-center text-center px-8 absolute bottom-0 right-0 h-full w-full bg-white   transition-all duration-200 ${showInfo ? 'opacity-80 translate-x-0' : hideInfo ? 'opacity-0 translate-x-full pointer-events-none' : 'opacity-0 translate-x-full pointer-events-none'
@@ -50,7 +50,7 @@ const TeamCard = ({ teamMemberDetails }: { teamMemberDetails: any }) => {
                 style={{ visibility: hideInfo ? 'hidden' : 'visible' }}
             >
             
-                <strong className='text-[16px] leading-7'>Manpreet Sidhu</strong>
+                <strong className='text-[16px] leading-7'>{teamMemberDetails.name}</strong>
                 <p className='font-poppins text-[15px]  '>{teamMemberDetails.role}</p>
                 {teamMemberDetails.descriptions && teamMemberDetails.descriptions.length > 0 && (
                     <div className="team-title leading-[22px] font-poppins text-[15px] overflow-ellipsis mt-5">{teamMemberDetails.descriptions[0].content.substring(0, 160)}...</div>

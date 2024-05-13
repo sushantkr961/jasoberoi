@@ -20,7 +20,7 @@ const About = (props: Props) => {
       />
 
       <Container className="m-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between mt-[108px] mb-[80px]">
+        <div className="flex flex-col md:flex-row justify-between mt-[48px] sm:mt-[44px] lg:mt-[108px] mb-[80px]">
           <div className="md:w-[47%] flex justify-center">
             <Image
               src="/assets/aboutus/asset 2.jpeg"
