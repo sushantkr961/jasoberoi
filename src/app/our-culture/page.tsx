@@ -38,7 +38,7 @@ const ourCulture = (props: Props) => {
 
         </div>
         {/* Right Side Description */}
-        <div className="md:w-[51%] mt-7 md:mt-0  pr-3 lg:pr-10   md:text-left">
+        <div className="md:w-[51%] mt-7 md:mt-0  pr-3 lg:pr-10  md:text-center  xl:text-left">
           <div className="heading text-center">
             <h2 className="font-poppins text-[35px] md:text-[48px] uppercase leading-[1.2em] font-[300]"><strong className="font-[600] ">{OUR_CULTURE.title}</strong> {OUR_CULTURE.subtitle}</h2>
             <p className="text-[#D3AA54] text-[15px] md:text-[21px] font-poppins mt-4 md:mt-4">{OUR_CULTURE.tagline}</p>
@@ -58,14 +58,14 @@ const ourCulture = (props: Props) => {
       {/* Our Goals */}
       <div className="flex flex-col lg:flex-row justify-between  gap-8 lg:gap-0 mb-[80px] mt-6 md:px-[60px] ">
 
-        <div className="lg:w-[50%] mt-7 md:mt-0  pr-3 lg:pr-10 text-center  lg:text-left">
+        <div className="lg:w-[50%] mt-7 md:mt-0  pr-3 lg:pr-10 text-center  xl:text-left">
           <div className="heading">
             <h2 className="font-poppins text-[35px]  md:text-[48px] uppercase leading-[1.2em] font-[300] text-center"><strong className="font-[600] ">{OUR_GOAL.title}</strong> {OUR_GOAL.subtitle}</h2>
           </div>
           <div className="flex flex-col gap-7 mt-7">
             {
               OUR_GOAL.descriptions.map((data, index) => (
-                <p key={index} className="font-poppins text-[15px] md:text-[18px] lg:text-[22px] md:leading-[1.7em] text-[#2D2D2D]">{data.content}</p>
+                <p key={index} className="font-poppins text-[15px] md:text-[18px] lg:text-[19px] xl:text-[22px] md:leading-[1.7em] text-[#2D2D2D]">{data.content}</p>
               ))
             }
 
