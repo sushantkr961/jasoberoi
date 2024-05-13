@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import navData from "../../data/data.json";
-import Link from 'next/link';
+import Link from "next/link";
 
-type Props = {}
+type Props = {};
 type NavLink = {
     href: string;
     text: string;
@@ -25,7 +25,6 @@ function NavDesktop({ }: Props) {
         setIsAnimating(false);
     };
 
-
     const renderNavLink = (link: NavLink) => (
         <Link
             href={link.href}
@@ -36,7 +35,8 @@ function NavDesktop({ }: Props) {
     );
 
     const renderDropdown = (link: NavLink) => (
-        <div className="relative group"
+        <div
+            className="relative group"
             onMouseEnter={() => handleMouseEnter(link)}
             onMouseLeave={handleMouseLeave}
         >
@@ -59,8 +59,13 @@ function NavDesktop({ }: Props) {
             </button>
             {link.options && (
                 <div
-                    className={`absolute z-[10000] bg-black shadow-md min-w-[220px] pt-4  pb-4 transform transition-transform duration-300 ${isVisible === link.text ? (isAnimating ? 'translate-y-[-6px]' : ' translate-y-[-10px]') : 'hidden'
-                        }`}>
+                    className={`absolute z-[10000] bg-black shadow-md min-w-[220px] pt-4  pb-4 transform transition-transform duration-300 ${isVisible === link.text
+                            ? isAnimating
+                                ? "translate-y-[-6px]"
+                                : " translate-y-[-10px]"
+                            : "hidden"
+                        }`}
+                >
                     <ul className="block text-sm text-white">
                         {link.options.map((subLink) => (
                             <li key={subLink.text}>
@@ -78,13 +83,12 @@ function NavDesktop({ }: Props) {
         </div>
     );
 
-
     return (
         <nav
             className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
             id="navbar-sticky"
         >
-            <ul className="hidden lg:flex  lg:flex-row p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:space-x-8 lg:space-x-2 xl:space-x-8 rtl:space-x-reverse  md:mt-0 md:border-0">
+            <ul className="hidden lg:flex lg:flex-row p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:space-x-8 lg:space-x-2 xl:space-x-8 rtl:space-x-reverse  md:mt-0 md:border-0">
                 {navData.navLinks.map((link) => (
                     <li key={link.text} className="md:mr-8">
                         {link.options.length > 0
@@ -94,7 +98,7 @@ function NavDesktop({ }: Props) {
                 ))}
             </ul>
         </nav>
-    )
+    );
 }
 
-export default NavDesktop
+export default NavDesktop;
