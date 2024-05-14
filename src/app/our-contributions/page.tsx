@@ -8,7 +8,7 @@ type Props = {}
 function page({ }: Props) {
     return (
         <section>
-            <div className="w-full h-[260px] sm:h-[320px] md:h-[420px] lg:h-[520px] xl:h-[100vh] mx-auto max-h-[600px] xl:max-h-full mt-[50px]">
+            <div className="w-full h-[260px] sm:h-[320px] md:h-[420px] lg:h-[520px] xl:h-[100vh] mx-auto max-h-[600px] xl:max-h-full mt-[50px] ">
                 {/* Youtube video */}
                 <YoutubeVideo
                     src="https://www.youtube.com/embed/QN6rR1zuu_k?si=Zi48mup3kGDCDPZs"
@@ -17,9 +17,9 @@ function page({ }: Props) {
                 />
             </div>
             {/* BantingGalaw */}
-            <div className='bg-[#111B1E] sm:py-[4%] flex justify-center pb-[10%]'>
+            <div className='bg-[#111B1E] sm:py-[2%] flex justify-center pb-[10%] md:pb-0'>
                 <Container >
-                    <div className="flex flex-col md:flex-row items-center justify-between mt-[36px] sm:mt-[44px] lg:mt-[108px] md:mb-[80px]  text-white sm:px-6">
+                    <div className="flex flex-col md:flex-row items-center justify-between mt-[36px] sm:mt-[44px] lg:mt-[80px] md:mb-[80px]  text-white sm:px-6">
                         {/* Right Side Description */}
                         <div className="md:w-[51%] mt-7 md:mt-0 pr-3 lg:pr-0 text-center ">
                             <div className="heading text-center">
