@@ -141,7 +141,7 @@ function page({ }: Props) {
                         <h2 className='text-white text-[25px] md:text-[39px] leading-[1.4em] text-center tracking-[4.2px] md:tracking-[6.7px]'>SPONSORS AND SPEAKERS</h2>
                     </div>
                     {/* Sponsors Card */}
-                    <div className='grid mt-8 md:mt-12 xl:mt-16 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10 lg:gap-y-14 md:px-9'>
+                    <div className='grid mt-8 md:mt-12 xl:mt-16 grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-x-5 gap-y-10 lg:gap-y-14 md:px-9'>
                         {
                             sponsors.map((data) => (
                                 <SponnsorsCard
