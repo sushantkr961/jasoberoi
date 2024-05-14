@@ -51,7 +51,6 @@ const ourCulture = (props: Props) => {
                 <p key={index} className="font-poppins text-[15px] text-[#2D2D2D]">{data.content}</p>
               ))
             }
-
           </div>
         </div>
       </div>

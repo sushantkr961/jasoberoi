@@ -1,0 +1,53 @@
+{
+    "guide": {
+        "guide": [
+            {
+                "title": "PREPARE YOUR FINANCING",
+                "contents":[
+                    {
+                        "content":"Before anything else, you’ll need to have your finances prepared. When buying a house it is recommended that you have 20% prepared for downpayment (though 5% would be the minimum). You will also need to meet with a mortgage broker and get pre-approved in order to understand what you can afford before looking at properties. If you are unsure what mortgage brokerage to use, we will be happy to help refer one to you."
+                    }
+                ] 
+            },
+            {
+                "title": "UNDERSTANDING YOUR LIFESTYLE",
+                "contents":[
+                    {
+                        "content": "Finding the perfect home will be unique to your own lifestyle. What are the most important things to you in a home? A place for a home office, easy access to shops, or a view of the oceanfront? These are questions you need to know the answer to as we move forward to buying your dream home. The more you understand your own wants and needs, the better we can help you find the right home!"
+                    }
+                ]
+            },
+            {
+                "title": "MEETING YOUR REALTOR",
+                "contents":[
+                    {
+                        "content": "Finding the right realtor is just as important as finding the right property because it goes hand-in-hand with attaining that dream home! Your realtor should be someone who you can have full confidence in. They will be setting up your view appointments, negotiating your demands, and helping you navigate around any concerns you may have about this home-buying process. You’ll want to work with someone who represents your best interests and will actively reach out to you to keep you updated."
+                    }
+                ]
+            },
+            {
+                "title": "FINDING YOUR DREAM HOME",
+                "contents":[
+                    {
+                        "content": "Upon discussing with your realtor what kind of home you are looking for and in which area, your real estate agent will prepare homes for you to view in your desired neighbourhood. They will continue to keep you updated on any new listings matching your home criteria and research and schedule any other homes you have any interest in."
+                    },
+                    {
+                        "content":"Our job as your realtor isn’t over until we’ve found and closed on that perfect home for you."
+                    }
+                ]            
+            },
+            {
+                "title": "FINDING YOUR DREAM HOME",
+                "contents":[
+                    {
+                        "content": "Once you’ve found your dream home. We will help you place an offer that will either be accepted, countered, or rejected by the seller. We will sit with you and discuss how you’d like to negotiate on an offer, things such as conducting a home-inspection, dealing with repairs, and finalizing your mortgage. Once you’ve signed off on the ownership it’ll be smooth sailing from there!"
+
+                    },
+                    {
+                        "content":"Congratulations! You are now a homeowner!"
+                    }
+                ]
+            }
+        ]
+    }
+}
