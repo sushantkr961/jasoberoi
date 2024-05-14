@@ -17,9 +17,9 @@ function page({ }: Props) {
                 />
             </div>
             {/* BantingGalaw */}
-            <div className='bg-[#111B1E] sm:py-[2%] flex justify-center pb-[10%] md:pb-0'>
+            <div className='bg-[#111B1E] sm:py-[3%] flex justify-center pb-[10%] '>
                 <Container >
-                    <div className="flex flex-col md:flex-row items-center justify-between mt-[36px] sm:mt-[44px] lg:mt-[80px] md:mb-[80px]  text-white sm:px-6">
+                    <div className="flex flex-col md:flex-row items-center justify-between mt-[36px] sm:my-[44px]  lg:my-[70px]  text-white sm:px-6">
                         {/* Right Side Description */}
                         <div className="md:w-[51%] mt-7 md:mt-0 pr-3 lg:pr-0 text-center ">
                             <div className="heading text-center">
@@ -57,6 +57,53 @@ function page({ }: Props) {
                         </div>
                     </div>
                 </Container>
+            </div>
+
+            <div className='h-[800px] lg:h-[400px]  grid grid-cols-1 lg:grid-cols-3'>
+                <div className='relative h-full flex justify-center items-center'
+                    style={{
+                        backgroundImage: "url('/assets/ourcontributions/glass1.jpg')",
+                        backgroundPosition: "top center",
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",    
+                    }}
+                >
+                    <div className=' h-full w-full opacity-[0.34] absolute z-10'></div>
+                    <div className="relative elementor-widget-container tracking-[6.7px] leading-[1.4em] text-center z-30 text-white text-[26px] md:text-[39px]">
+                        $110,000<br />
+                        RAISED
+                    </div>
+                </div>
+                <div className='relative h-full flex justify-center items-center'
+                    style={{
+                        backgroundImage: "url('/assets/ourcontributions/girlpurpledress.jpg')",
+                        backgroundPosition: "top center",
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                    }}
+                >
+                    <div className='bg-[#000000] h-full w-full opacity-[0.34] absolute z-10'></div>
+                    <div className="relative elementor-widget-container tracking-[6.7px] leading-[1.4em] text-center z-30 text-white text-[26px] md:text-[39px]">
+                        20<br />
+                        SPONSORS
+                    </div>
+                </div>
+                <div
+                    className='relative h-full flex justify-center items-center'
+                    style={{
+                        backgroundImage: "url('/assets/ourcontributions/table.jpg')",
+                        backgroundPosition: "top center",
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                    }}
+                >
+                    <div className='bg-[#000000] h-full w-full opacity-[0.34] absolute z-10'></div>
+
+                    <div className="relative elementor-widget-container tracking-[6.7px] leading-[1.4em] text-center z-30 text-white text-[26px] md:text-[39px]">
+                        300+<br />
+                        ATTENDEES
+                    </div>
+                </div>
             </div>
         </section>
     )
