@@ -1,11 +1,13 @@
 import YoutubeVideo from '@/components/Common/YoutubeVideo'
 import Container from '@/components/Containers/Container'
+import SponnsorsCard from '@/components/Contributions/SponnsorsCard'
 import Image from 'next/image'
 import React from 'react'
-
+import data from '../../data/Contributions/data.json'
 type Props = {}
 
 function page({ }: Props) {
+    const { sponsors } = data;
     return (
         <section className='bg-[#F0F2F4]'>
             <div className="w-full h-[260px] sm:h-[320px] md:h-[420px] lg:h-[520px] xl:h-[100vh] mx-auto max-h-[600px] xl:max-h-full mt-[50px] ">
@@ -131,6 +133,35 @@ function page({ }: Props) {
                     </div>
                 </div>
             </Container>
+
+            {/* SPONSORS AND SPEAKERS */}
+            <div className='bg-[#111B1E] py-[40px] flex justify-center md:py-[5%] '>
+                <Container >
+                    <div >
+                        <h2 className='text-white text-[25px] md:text-[39px] leading-[1.4em] text-center tracking-[4.2px] md:tracking-[6.7px]'>SPONSORS AND SPEAKERS</h2>
+                    </div>
+                    {/* Sponsors Card */}
+                    <div className='grid mt-8 md:mt-12 xl:mt-16 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10 lg:gap-y-14 md:px-9'>
+                        {
+                            sponsors.map((data) => (
+                                <SponnsorsCard
+                                    key={data.id}
+                                    imageSrc={`/assets/ourcontributions/${data.image}`}
+                                    altText={data.name}
+                                    description={data.description}
+                                    className="some-custom-class"
+                                />
+                            ))
+                        }
+                    </div>
+
+                    <div className='flex justify-center pt-10 lg:pt-20 pb-8'>
+                        <p className=" font-poppins text-[14px] md:text-[15px] md:leading-[25px] font-[400] text-white mt-5 text-center ">
+                            MULTIPLE SPEAKERS SHARED THEIR PERSONAL EXPEREINCES;<br />DR. SATPREET SINGH, RAGHAV MANCHANDA, AND HENNESSY ESCOBAR
+                        </p>
+                    </div>
+                </Container>
+            </div>
         </section>
     )
 }
