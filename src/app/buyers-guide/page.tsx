@@ -58,7 +58,7 @@ const buyersGuide = (props: Props) => {
         </div>
 
         <div className="heading w-[97%] sm:w-[70%] md:w-[50%] m-auto flex flex-col items-center justify-center gap-4 py-9 text-center">
-              <h2 className="font-poppins text-[35px] md:text-[48px] uppercase leading-[1em] font-[300]"><strong className="font-[600] ">WE’D LOVE</strong>TO MEET YOU!</h2>
+              <h2 className="font-poppins text-[35px] md:text-[48px] uppercase leading-[1em] font-[300]"><strong className="font-[600] ">WE’D LOVE</strong> TO MEET YOU!</h2>
               <p className="text-[#2D2D2D] text-[15px] font-poppins">Whether buying or selling a home, we’ll select one of our experienced agents to make your dream come true based on your lifestyle needs.</p>
               <button className="uppercase font-semibold text-[15px] mt-2 bg-black text-white py-2 px-4"> Contact Us</button>
         </div>
