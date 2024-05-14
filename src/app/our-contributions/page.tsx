@@ -7,7 +7,7 @@ type Props = {}
 
 function page({ }: Props) {
     return (
-        <section>
+        <section className='bg-[#F0F2F4]'>
             <div className="w-full h-[260px] sm:h-[320px] md:h-[420px] lg:h-[520px] xl:h-[100vh] mx-auto max-h-[600px] xl:max-h-full mt-[50px] ">
                 {/* Youtube video */}
                 <YoutubeVideo
@@ -59,13 +59,14 @@ function page({ }: Props) {
                 </Container>
             </div>
 
+            {/* 3 Image Card */}
             <div className='h-[800px] lg:h-[400px]  grid grid-cols-1 lg:grid-cols-3'>
                 <div className='relative h-full flex justify-center items-center'
                     style={{
                         backgroundImage: "url('/assets/ourcontributions/glass1.jpg')",
                         backgroundPosition: "top center",
                         backgroundRepeat: "no-repeat",
-                        backgroundSize: "cover",    
+                        backgroundSize: "cover",
                     }}
                 >
                     <div className=' h-full w-full opacity-[0.34] absolute z-10'></div>
@@ -105,6 +106,31 @@ function page({ }: Props) {
                     </div>
                 </div>
             </div>
+
+            {/* DR. BRIAN RODRIGUES & RUI SHANG. */}
+            <Container className='flex flex-col gap-7 sm:gap-9 justify-center m-auto py-16 xl:py-0 xl:min-h-[864px]'>
+                <div>
+                    <Image
+                        src={`/assets/ourcontributions/DSC00474.jpg`}
+                        height={700}
+                        width={580}
+                        alt="cluture"
+                        layout="responsive"
+                        className="md:block object-cover w-full "
+                    />
+                </div>
+                <div className='sm:px-3 flex flex-col text-center  justify-between w-full'>
+                    <div className="text-[#111B1E] text-[14px] lg:text-[15px] ">DR. BRIAN RODRIGUES & RUI SHANG.</div>
+                    <div>
+                        <div className="text-[#111B1E] text-[12px] lg:text-[15px] leading-[1.3rem] lg:leading-[1.8rem] tracking-[1px] mt-4 ">
+                            OVER 300 INDUSTRY LEADING
+                            PROFESSIONALS GATHERED AT THE ARIA BANQUET
+                            HALL TO ENJOY DELICIOUS FOOD,
+                            DRINK, AND GOOD COMPANY.
+                        </div>
+                    </div>
+                </div>
+            </Container>
         </section>
     )
 }
