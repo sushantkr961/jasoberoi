@@ -16,7 +16,7 @@ function page({ }: Props) {
                     width="100%"
                 />
             </div>
-            {/* Card */}
+            {/* BantingGalaw */}
             <div className='bg-[#111B1E] sm:py-[4%] flex justify-center pb-[10%]'>
                 <Container >
                     <div className="flex flex-col md:flex-row items-center justify-between mt-[36px] sm:mt-[44px] lg:mt-[108px] md:mb-[80px]  text-white sm:px-6">
