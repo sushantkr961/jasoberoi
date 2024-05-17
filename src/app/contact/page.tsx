@@ -94,7 +94,6 @@ const contact = (props: Props) => {
   return (
     <section>
       <PageHeading imageSrc="assets/aboutus.jpg" heading="Contact Us" />
-
       <Container className="flex flex-col justify-center m-auto gap-7">
         <div className="flex flex-col md:flex-row justify-between  my-[80px] mx-[12px] md:mx-[80px]">
           <div className="left w-full md:w-[60%] flex flex-col gap-8">

@@ -11,7 +11,7 @@
       "options": [
         { "href": "/about", "text": "About us" },
         { "href": "/our-culture", "text": "Our Culture" },
-        { "href": "/our-culture", "text": "Our Contributions" }
+        { "href": "/our-contributions", "text": "Our Contributions" }
       ]
     },
     {
@@ -67,7 +67,7 @@
         },
         {
           "name": "Contact us",
-          "url": "/contact-us"
+          "url": "/contact-us"  
         },
         {
           "name": "Privacy Policy",

@@ -1,0 +1,40 @@
+{
+    "sponsors":[
+        {
+            "id":"1",
+            "name":"DR. PETER SENIOR",
+            "image":"DSC00520.jpg",
+            "description":"MEDICAL PROFESSIONALS SUCH AS DR. PETER SENIOR, AND DR. BRIAN RODRIGUES WHO ARE LEADING EXPERTS IN DIABETES RESEARCH TOOK STAGE TO SHARE THEIR KNOWLEGE."
+        },
+        {
+            "id":"2",
+            "name":"DR. BRIAN RODRIGUES",
+            "image":"DSC00469.jpg",
+            "description":"DR. BRIAN RODRIGUES PROFESSOR IN THE FACULTY OF PHARMACEUTICAL SCIENCES AT UBC"
+        },
+        {
+            "id":"3",
+            "name":"DR. PETER SENIOR",
+            "image":"DSC00520.jpg",
+            "description":"DR. PETER SENIOR, ENDOCRINOLOGIST & PROFESSOR OF MEDICINE"
+        },
+        {
+            "id":"4",
+            "name":"DR. SATPREET SINGH, SMILE DENTAL",
+            "image":"DSC00452.jpg",
+            "description":"DR. SATPREET SINGH, SMILE DENTAL"
+        },
+        {
+            "id":"5",
+            "name":"RAGHAV MANCHANDA, 7 LENDING",
+            "image":"DSC00487.jpg",
+            "description":"RAGHAV MANCHANDA, 7 LENDING"
+        },
+        {
+            "id":"6",
+            "name":"RAGHAV MANCHANDA, 7 LENDING",
+            "image":"DSC00506.jpg",
+            "description":"RAGHAV MANCHANDA, 7 LENDING"
+        }
+    ]
+}

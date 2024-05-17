@@ -9,10 +9,10 @@ type Props = {};
 
 const podcast = (props: Props) => {
   return <section>
-    <PageHeading imageSrc="assets/ourculture/asset 1.jpeg" heading="Unplugged With Jas Oberoi Podcast" />
+    <PageHeading imageSrc="assets/ourculture/asset 1.jpeg" heading="Unplugged With Jas Oberoi Podcast" className="md:text-[50px]"/>
 
     {/* Video Container */}
-    <Container className="w-full  h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[700px] mx-auto max-h-[600px] xl:max-h-full my-[50px]">
+    <Container className="w-full sm:w-[95%]  h-[260px] sm:h-[320px] md:h-[420px] lg:h-[520px] xl:h-[740px] mx-auto max-h-[600px] xl:max-h-full my-[50px]">
       <YoutubeVideo
         src="https://www.youtube.com/embed/3GUeLd6EEbs?si=rlr-EVaVcW666uvA"
         height="100%"
@@ -53,7 +53,7 @@ const podcast = (props: Props) => {
         <a 
           href="https://open.spotify.com/show/6cJ4jdYMaKM4CcPXwDOASR?si=b998a1974c75402d" 
           target="_blank"
-        className="bg-white py-3 px-3 flex justify-center items-center w-[300px] text-[22px] font-poppins  rounded-lg uppercase"
+        className="bg-white py-2 md:py-3 px-3 flex justify-center items-center w-[300px] text-[20px] md:text-[22px] font-poppins  rounded-lg uppercase"
         >
             Listen On Spotify						
             <BsSpotify   className="text-green-600 text-[38px] ml-4"/>
