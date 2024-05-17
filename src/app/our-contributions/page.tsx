@@ -1,13 +1,15 @@
 import YoutubeVideo from '@/components/Common/YoutubeVideo'
 import Container from '@/components/Containers/Container'
+import SponnsorsCard from '@/components/Contributions/SponnsorsCard'
 import Image from 'next/image'
 import React from 'react'
-
+import data from '../../data/Contributions/data.json'
 type Props = {}
 
 function page({ }: Props) {
+    const { sponsors } = data;
     return (
-        <section>
+        <section className='bg-[#F0F2F4]'>
             <div className="w-full h-[260px] sm:h-[320px] md:h-[420px] lg:h-[520px] xl:h-[100vh] mx-auto max-h-[600px] xl:max-h-full mt-[50px] ">
                 {/* Youtube video */}
                 <YoutubeVideo
@@ -59,13 +61,14 @@ function page({ }: Props) {
                 </Container>
             </div>
 
+            {/* 3 Image Card */}
             <div className='h-[800px] lg:h-[400px]  grid grid-cols-1 lg:grid-cols-3'>
                 <div className='relative h-full flex justify-center items-center'
                     style={{
                         backgroundImage: "url('/assets/ourcontributions/glass1.jpg')",
                         backgroundPosition: "top center",
                         backgroundRepeat: "no-repeat",
-                        backgroundSize: "cover",    
+                        backgroundSize: "cover",
                     }}
                 >
                     <div className=' h-full w-full opacity-[0.34] absolute z-10'></div>
@@ -104,6 +107,60 @@ function page({ }: Props) {
                         ATTENDEES
                     </div>
                 </div>
+            </div>
+
+            {/* DR. BRIAN RODRIGUES & RUI SHANG. */}
+            <Container className='flex flex-col gap-7 sm:gap-9 justify-center m-auto py-16 xl:py-0 xl:min-h-[864px]'>
+                <div>
+                    <Image
+                        src={`/assets/ourcontributions/DSC00474.jpg`}
+                        height={700}
+                        width={580}
+                        alt="cluture"
+                        layout="responsive"
+                        className="md:block object-cover w-full "
+                    />
+                </div>
+                <div className='sm:px-3 flex flex-col text-center  justify-between w-full'>
+                    <div className="text-[#111B1E] text-[14px] lg:text-[15px] ">DR. BRIAN RODRIGUES & RUI SHANG.</div>
+                    <div>
+                        <div className="text-[#111B1E] text-[12px] lg:text-[15px] leading-[1.3rem] lg:leading-[1.8rem] tracking-[1px] mt-4 ">
+                            OVER 300 INDUSTRY LEADING
+                            PROFESSIONALS GATHERED AT THE ARIA BANQUET
+                            HALL TO ENJOY DELICIOUS FOOD,
+                            DRINK, AND GOOD COMPANY.
+                        </div>
+                    </div>
+                </div>
+            </Container>
+
+            {/* SPONSORS AND SPEAKERS */}
+            <div className='bg-[#111B1E] py-[40px] flex justify-center md:py-[5%] '>
+                <Container >
+                    <div >
+                        <h2 className='text-white text-[25px] md:text-[39px] leading-[1.4em] text-center tracking-[4.2px] md:tracking-[6.7px]'>SPONSORS AND SPEAKERS</h2>
+                    </div>
+                    {/* Sponsors Card */}
+                    <div className='grid mt-8 md:mt-12 xl:mt-16 grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-x-5 gap-y-10 lg:gap-y-14 md:px-9'>
+                        {
+                            sponsors.map((data) => (
+                                <SponnsorsCard
+                                    key={data.id}
+                                    imageSrc={`/assets/ourcontributions/${data.image}`}
+                                    altText={data.name}
+                                    description={data.description}
+                                    className="some-custom-class"
+                                />
+                            ))
+                        }
+                    </div>
+
+                    <div className='flex justify-center pt-10 lg:pt-20 pb-8'>
+                        <p className=" font-poppins text-[14px] md:text-[15px] md:leading-[25px] font-[400] text-white mt-5 text-center ">
+                            MULTIPLE SPEAKERS SHARED THEIR PERSONAL EXPEREINCES;<br />DR. SATPREET SINGH, RAGHAV MANCHANDA, AND HENNESSY ESCOBAR
+                        </p>
+                    </div>
+                </Container>
             </div>
         </section>
     )
