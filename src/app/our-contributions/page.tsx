@@ -13,7 +13,7 @@ function page({ }: Props) {
     const { music, sponsors } = data;
     return (
         <section className="bg-[#F0F2F4]">
-            <div className="w-full h-[260px] sm:h-[320px] md:h-[420px] lg:h-[520px] xl:h-[100vh] mx-auto max-h-[600px] xl:max-h-full mt-[50px] ">
+            <div className="w-full h-[260px] sm:h-[320px] md:h-[420px] lg:h-[520px] xl:h-[100vh] mx-auto max-h-[600px] xl:max-h-full mt-[10px] ">
                 {/* Youtube video */}
                 <YoutubeVideo
                     src="https://www.youtube.com/embed/QN6rR1zuu_k?si=Zi48mup3kGDCDPZs"
@@ -319,6 +319,19 @@ function page({ }: Props) {
 
                 {/* Add Slider in this section */}
                 {/* GALLERY OF THE NIGHT */}
+                <div className="py-[8%]">
+                    <div className="w-full   m-auto flex flex-col justify-center items-center ">
+                        <div className="border-t-4  mb-3 border-white w-full" />
+                        <div className="flex flex-col justify-center items-center gap-5  md:gap-7 text-center">
+                            <h2 className="text-white text-[25px] md:text-[39px] leading-[1.4em] text-center tracking-[4.2px] md:tracking-[6.7px]">
+                            GALLERY OF THE NIGHT
+                            </h2>
+                        </div>
+                        <div className="w-full flex  flex-col gap-16 mt-10">
+                            {/*  GALLERY OF THE NIGHT Slide Here*/}
+                        </div>
+                    </div>
+                </div>
                 
                 {/* Add Slider in this section */}]
                 {/* THANK YOU TO OUR DONORS */}

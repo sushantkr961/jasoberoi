@@ -1,9 +1,11 @@
-import React from "react";
+import React from 'react'
 
-type Props = {};
+type Props = {}
 
-const commercialListing = (props: Props) => {
-  return <div>commercialListing</div>;
-};
+const page = (props: Props) => {
+  return (
+    <div>page</div>
+  )
+}
 
-export default commercialListing;
+export default page
