@@ -4,10 +4,11 @@ import SponnsorsCard from '@/components/Contributions/SponnsorsCard'
 import Image from 'next/image'
 import React from 'react'
 import data from '../../data/Contributions/data.json'
+import MusicCard from '@/components/Contributions/MusicCard'
 type Props = {}
 
 function page({ }: Props) {
-    const { sponsors } = data;
+    const { music, sponsors } = data;
     return (
         <section className='bg-[#F0F2F4]'>
             <div className="w-full h-[260px] sm:h-[320px] md:h-[420px] lg:h-[520px] xl:h-[100vh] mx-auto max-h-[600px] xl:max-h-full mt-[50px] ">
@@ -162,6 +163,137 @@ function page({ }: Props) {
                     </div>
                 </Container>
             </div>
+
+            {/* ANGELINA RAII */}
+            <div className=' sm:py-[2%] flex justify-center pb-[8%]'>
+                <Container >
+                    <div className="flex flex-col md:flex-row items-center gap-5 max-w-[1340px] justify-between mt-[36px] sm:my-[44px]  lg:my-[70px] ">
+                        <div className="w-full md:w-[37%] flex  md:mt-[0px]">
+                            <Image
+                                src={`/assets/ourcontributions/DSC00433.jpg`}
+                                height={700}
+                                width={580}
+                                alt="cluture"
+                                layout="responsive"
+                                className=" object-cover m-auto w-full lg:max-h-[830px] lg:max-w-[471px]  xl:max-w-[471px]"
+                            />
+                        </div>
+                        {/* Right Side Description */}
+                        <div className="md:w-[58%]  h-full mt-2 md:mt-auto  pr-3 lg:pr-0 text-left flex flex-col w">
+                            <div className='md:w-[90%] lg:w-[50%] text-center md:text-left h-full mt-auto'>
+                                <div className="heading ">
+                                    <h2 className='text-[#111B1E]  tracking-[6.7px] leading-[1.3em] text-[27px] font-poppins uppercase'>ANGELINA RAII</h2>
+                                </div>
+                                <div className="flex  flex-col gap-5 mt-7">
+                                    <p className="text-[#111B1E] tracking-[1.2px] leading-[1.6em] font-poppins text-[15px] font-[400]">AS HEARD ON I-HEART-RADIO, MANY SAW
+                                        ANGELINA RAII FOR THE FIRST TIME IN PERSON
+                                        AND OFF-AIR FROM HER APPEARENCE AS MID-DAY
+                                        HOST FOR VIRGIN RADIO AS THE OFFICIAL
+                                        EMCEE FOR THE NIGHT.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </Container>
+            </div>
+
+            {/* MUSIC MEDLEY AND MAGIC */}
+
+            <div className=' py-[40px] flex justify-center md:pb-[5%] '>
+                <Container>
+                    <div>
+                        <h2 className='text-[#111B1E]  text-center tracking-[6.7px] leading-[1.3em] text-[27px] font-poppins uppercase '>MUSIC, MEDLEY, AND MAGIC.</h2>
+                    </div>
+                    <div className=' grid mt-8 md:mt-6 xl:mt-9 grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-x-5 gap-y-5 md:gap-y-10 lg:gap-y-14 md:px-9'>
+                        {
+                            music.map((data) => (
+                                <MusicCard
+                                    key={data.id}
+                                    imageSrc={`/assets/ourcontributions/${data.image}`}
+                                    text={data.text}
+                                    className="some-custom-class"
+                                />
+                            ))
+                        }
+                    </div>
+                </Container>
+
+
+            </div>
+
+            {/* IMPACT */}
+            <div className='bg-[#111B1E] py-16 flex flex-col items-center md:py-[4%] gap-10 sm:gap-9  '>
+                {/* COUNTLESS AMOUNT */}
+                <Container >
+                    <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-y-7 max-w-[1340px] justify-between  sm:my-[44px] lg:px-7 xl:px-0 ">
+                        {/* Left Side Description */}
+                        <div className="lg:mr-14 h-full  md:mt-auto pr-3 lg:pr-0 text-left flex flex-col items-end">
+                            <div className='flex justify-end flex-col md:w-[90%]  xl:w-[70%] text-center lg:text-right h-full mt-auto'>
+                                <div className="flex flex-col gap-5 ">
+                                    <p className="text-white tracking-[1.2px] leading-[1.6em] font-poppins text-[15px] font-[400]">
+                                        COUNTLESS AMOUNT OF AUCTION PRIZES
+                                        WHERE PROCEEDS WILL GO DIRECTLY TO
+                                        DIABETES CANADA.</p>
+                                </div>
+                            </div>
+                        </div>
+                        {/* Right Side Description */}
+                        <div className="w-full flex md:mt-[0px]">
+                            <Image
+                                src={`/assets/ourcontributions/DSC00271.jpg`}
+                                height={700}
+                                width={580}
+                                alt="cluture"
+                                layout="responsive"
+                                className=" object-cover m-auto w-full xl:max-w-[100%]"
+                            />
+                        </div>
+                        <div className='lg:col-span-2 flex justify-center lg:justify-end'>
+                            <p className="text-white  tracking-[1.2px] leading-[1.6em] font-poppins text-[13px] font-[400]">
+                                ITEMS FOR BID AT THE SILENT AUCTION TABLE</p>
+                        </div>
+                    </div>
+
+                </Container>
+
+                {/* COUNTLESS AMOUNT */}
+                <Container className=''>
+                    <div className='w-full md:max-w-[70%] lg:max-w-[68%] m-auto flex flex-col justify-center items-center '>
+                        <div className='flex flex-col justify-center items-center gap-5 md:gap-7 text-center'>
+                            <h2 className='text-white text-[25px] md:text-[39px] leading-[1.4em] text-center tracking-[4.2px] md:tracking-[6.7px]'>IMPACT</h2>
+                            <p className="text-white tracking-[1.2px] leading-[1.6em] font-poppins md:text-[15px] font-[400]">
+                                WHEN WE FIRST DECIDED TO FUNDRAISE FOR DIABETES CANADA, OUR GOAL WAS TO RAISE $100,000.
+                            </p>
+
+                            <p className="text-white tracking-[1.2px] leading-[1.6em] font-poppins text-[15px] font-[400]">
+                                WITH THE LABOUR OF MANY HARDWORKING INDIVIDUALS AND THE GENEROUS SUPPORT OF OUR COMMUNITY WE WERE OVERJOYED TO ANNOUONCED THAT WE RAISED OVER $110,000 FOR DIABETES CANADA.
+                            </p>
+                            <p className="text-white tracking-[1.2px] leading-[1.6em] font-poppins text-[15px] font-[400]">
+                                THE MONEY RAISED TODAY WILL NOT ONLY BE USED FOR RESEARCH IN FINDING A CURE BUT ALSO IN SPREADING AWARENESS ON DIABETES AS MILLIONS OF CANADIANS ARE IMPACTED WITH DIABETES.
+                            </p>
+                        </div>
+                        {/* Sponsors Card */}
+                        <div className='mt-8 md:mt-12 xl:mt-16 w-full'>
+                            {/* Right Side Description */}
+                            <div className="w-full flex md:mt-[0px]">
+                                <Image
+                                    src={`/assets/ourcontributions/DSC06089.jpg`}
+                                    height={700}
+                                    width={580}
+                                    alt="cluture"
+                                    layout="responsive"
+                                    className=" object-cover m-auto w-full sm:max-w-[95%] lg:max-w-[90%] 2xl:w-full "
+                                />
+                            </div>
+                        </div>
+
+                    </div>
+                </Container>
+            </div>
+
+
+
         </section>
     )
 }
