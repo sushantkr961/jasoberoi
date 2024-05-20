@@ -200,7 +200,7 @@ function page({ }: Props) {
 
             {/* MUSIC MEDLEY AND MAGIC */}
 
-            <div className=' py-[40px] flex justify-center md:pb-[5%] '>
+            <div className=' lg:py-[10px] flex justify-center md:pb-[5%] '>
                 <Container>
                     <div>
                         <h2 className='text-[#111B1E]  text-center tracking-[6.7px] leading-[1.3em] text-[27px] font-poppins uppercase '>MUSIC, MEDLEY, AND MAGIC.</h2>
@@ -223,10 +223,10 @@ function page({ }: Props) {
             </div>
 
             {/* IMPACT */}
-            <div className='bg-[#111B1E] py-16 flex flex-col items-center md:py-[4%] gap-10 sm:gap-9  '>
+            <div className='bg-[#111B1E]  py-[44px]  flex flex-col items-center md:py-[4%] gap-10 sm:gap-9  '>
                 {/* COUNTLESS AMOUNT */}
                 <Container >
-                    <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-y-7 max-w-[1340px] justify-between  sm:my-[44px] lg:px-7 xl:px-0 ">
+                    <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-y-7 max-w-[1340px] justify-between  lg:px-7 xl:px-0 ">
                         {/* Left Side Description */}
                         <div className="lg:mr-14 h-full  md:mt-auto pr-3 lg:pr-0 text-left flex flex-col items-end">
                             <div className='flex justify-end flex-col md:w-[90%]  xl:w-[70%] text-center lg:text-right h-full mt-auto'>
