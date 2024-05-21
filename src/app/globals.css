@@ -57,5 +57,13 @@ body {
 }
 
 ::-webkit-scrollbar{
-  /* display: none; */
+  display: none;
 }
+.custom-iframe {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.custom-iframe::-webkit-scrollbar {
+  background: transparent;
+} 

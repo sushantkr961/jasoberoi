@@ -48,9 +48,9 @@ const misSearch = (props: Props) => {
       {/* Render other content only if the script has loaded */}
       <Container className="w-full m-auto flex flex-col items-center px-2">
 
-        <div ref={scriptContainerRef} className="w-full"></div>
+        <div ref={scriptContainerRef} className="w-full mt-8 lg:mt-20"></div>
         {/* Here Come I Fram */}
-        <hr className="py-10 md:py-18 lg:py-20 w-[90%] border-b-2   mb-5" />
+        <hr className="py-10 md:py-18  w-[90%] border-b-2   mb-5" />
         <div className="heading w-[97%] sm:w-[90%] lg:w-[54%] m-auto flex flex-col items-center justify-center gap-4 py-9 text-center">
           <h2 className="font-poppins text-[35px] md:text-[48px] uppercase leading-[1em] font-[300]">
             <strong className="font-[600] ">CHECK OUR EXCLUSIVE </strong>{" "}
@@ -63,8 +63,7 @@ const misSearch = (props: Props) => {
           </p>
           <Link
             href={"/contact"}
-            className="uppercase font-semibold text-[18px] md:text-[20px] mt-2 bg-black text-white py-4 px-8"
-          >
+        className="uppercase font-semibold text-[15px] md:text-[16px] mt-2 bg-black text-white py-3 px-4">
             {" "}
             EXCLUSIVE PROPERTIES
           </Link>
