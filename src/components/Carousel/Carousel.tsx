@@ -7,14 +7,16 @@ function Carousel() {
   const [display, setDisplay] = useState(true);
 
   const settings = {
-    dots: false,
     infinite: true,
-    speed: 500,
+    speed: 300,
     slidesToShow: 8,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     autoplay: true,
     autoplaySpeed: 5000,
     arrows: false,
+    swipe: true,
+    swipeThreshold: 10,
+    swipeToSlide: true,
     responsive: [
       {
         breakpoint: 1024,

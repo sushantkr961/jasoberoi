@@ -80,9 +80,9 @@ const buyersGuide = (props: Props) => {
               experienced agents to make your dream come true based on your
               lifestyle needs.
             </p>
-            <Link 
+            <Link
               href={"/contact"}
-            className="uppercase font-semibold text-[15px] mt-2 bg-black text-white py-2 px-4">
+              className="uppercase font-semibold text-[15px] mt-2 bg-black text-white py-2 px-4">
               {" "}
               Contact Us
             </Link>

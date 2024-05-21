@@ -36,5 +36,27 @@
             "image":"DSC00506.jpg",
             "description":"RAGHAV MANCHANDA, 7 LENDING"
         }
+    ],
+    "music":[
+        {
+            "id":"1",
+            "text":"ANMOL",
+            "image":"DSC00319.jpg"
+        },
+        {
+            "id":"2",
+            "text":"SABAT",
+            "image":"DSC00310.jpg"
+        },
+        {
+            "id":"3",
+            "text":"SAWEN",
+            "image":"DSC00306.jpg"
+        },
+        {
+            "id":"4",
+            "text":"EMILYN",
+            "image":"DSC00602.jpg"
+        }
     ]
 }
