@@ -60,21 +60,30 @@ function NavDesktop({ }: Props) {
             {link.options && (
                 <div
                     className={`absolute z-[10000] bg-black shadow-md min-w-[220px] pt-4  pb-4 transform transition-transform duration-300 ${isVisible === link.text
-                            ? isAnimating
-                                ? "translate-y-[-6px]"
-                                : " translate-y-[-10px]"
-                            : "hidden"
+                        ? isAnimating
+                            ? "translate-y-[-6px]"
+                            : " translate-y-[-10px]"
+                        : "hidden"
                         }`}
                 >
                     <ul className="block text-sm text-white">
                         {link.options.map((subLink) => (
                             <li key={subLink.text}>
-                                <Link
-                                    href={subLink.href}
-                                    className="block py-[15px] px-4 hover:text-[#707070] transition-colors duration-500"
-                                >
-                                    {subLink.text}
-                                </Link>
+                                {subLink.text === "Featured Listings" || subLink.text === "MLS Search" || subLink.text === "Commercial Listing" ? (
+                                    <a
+                                        href={subLink.href}
+                                        className="block py-[15px] px-4 hover:text-[#707070] transition-colors duration-500"
+                                    >
+                                        {subLink.text}
+                                    </a>
+                                ) :
+                                    (<Link
+                                        href={subLink.href}
+                                        className="block py-[15px] px-4 hover:text-[#707070] transition-colors duration-500"
+                                    >
+                                        {subLink.text}
+                                    </Link>
+                                    )}
                             </li>
                         ))}
                     </ul>

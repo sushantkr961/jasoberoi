@@ -6,11 +6,6 @@ import NavDesktop from "./Navbar/NavDesktop";
 import NavMobile from "./Navbar/NavMobile";
 
 type Props = {};
-type NavLink = {
-  href: string;
-  text: string;
-  options?: NavLink[];
-};
 
 const Navbar: React.FC = () => {
   const [isOpen, setOpen] = useState(false);

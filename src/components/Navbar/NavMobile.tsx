@@ -91,26 +91,41 @@ function NavMobile({ setOpen, isOpen }: Props) {
         </button>
         {link.options && (
           <div
-            className={`bg-[#F7F7F7]  min-w-[220px] transition-all duration-300 ${
-              isMenuOpen
+            className={`bg-[#F7F7F7]  min-w-[220px] transition-all duration-300 ${isMenuOpen
                 ? "h-auto opacity-100 pointer-events: auto"
                 : "h-0 overflow-hidden opacity-0 pointer-events: none"
-            }`}
+              }`}
           >
             <ul className="block text-md text-black py-2 ">
               {link.options.map((subLink) => (
                 <li key={subLink.text}>
-                  <Link
-                    href={subLink.href}
-                    className="block py-[15px] hover:bg-black hover:text-white px-4  transition-colors duration-500"
-                    onClick={(e) => {
-                      e.stopPropagation(); // Stop event propagation
-                      handleClick(subLink);
-                      setOpen(false);
-                    }}
-                  >
-                    {subLink.text}
-                  </Link>
+
+                  {subLink.text === "Featured Listings" || subLink.text === "MLS Search" || subLink.text === "Commercial Listing" ? (
+                    <a
+                      href={subLink.href}
+                      className="block py-[15px] hover:bg-black hover:text-white px-4  transition-colors duration-500"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Stop event propagation
+                        handleClick(subLink);
+                        setOpen(false);
+                      }}  
+                    >
+                      {subLink.text}
+                    </a>
+                  ) : (
+                    <Link
+                      href={subLink.href}
+                      className="block py-[15px] hover:bg-black hover:text-white px-4  transition-colors duration-500"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Stop event propagation
+                        handleClick(subLink);
+                        setOpen(false);
+                      }}
+                    >
+                      {subLink.text}
+                    </Link>
+                  )}
+
                 </li>
               ))}
             </ul>
@@ -133,9 +148,8 @@ function NavMobile({ setOpen, isOpen }: Props) {
       )}
       <nav
         ref={navRef}
-        className={`fixed z-50 top-0 ${
-          isOpen ? "left-0" : "-left-[200%]"
-        } overflow-hidden h-[100vh] overflow-y-auto bg-[#F7F7F7] items-center justify-between lg:hidden flex w-auto  transition-all ease-in-out duration-700`}
+        className={`fixed z-50 top-0 ${isOpen ? "left-0" : "-left-[200%]"
+          } overflow-hidden h-[100vh] overflow-y-auto bg-[#F7F7F7] items-center justify-between lg:hidden flex w-auto  transition-all ease-in-out duration-700`}
       >
         <ul className=" flex flex-col h-[100vh] min-w-[300px] max-w-[350px] font-medium ">
           <li className="ml-auto py-4">

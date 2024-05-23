@@ -95,8 +95,6 @@ const sellersGuide = (props: Props) => {
         <p className="text-[#2D2D2D] text-[15px] font-poppins">
           Thinking about selling your home? Receive a free home evaluation to
           learn your property’s worth in today’s market.
-
-
         </p>
         <Link 
           href={"/"}
