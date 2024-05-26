@@ -3,7 +3,12 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Slider from "react-slick";
 
-function Carousel() {
+type Props = {
+  imageUrls: string[];
+  backgroundColor?: string;
+};
+
+function Carousel({ imageUrls, backgroundColor }: Props) {
   const [display, setDisplay] = useState(true);
 
   const settings = {
@@ -28,25 +33,14 @@ function Carousel() {
     ],
   };
 
-  const imageUrls = [
-    "/assets/asset 4.png",
-    "/assets/asset 5.png",
-    "/assets/asset 6.png",
-    "/assets/asset 7.png",
-    "/assets/asset 8.png",
-    "/assets/asset 9.png",
-    "/assets/asset 10.png",
-    "/assets/asset 11.png",
-    "/assets/asset 12.png",
-    "/assets/asset 13.png",
-    "/assets/asset 14.png",
-    "/assets/asset 15.png",
-  ];
+  const sliderContainerClass = `slider-container max-w-[1350px] w-full mx-auto ${
+    backgroundColor ? backgroundColor : "bg-black"
+  }`;
 
   return (
-    <div className="bg-black slider-container max-w-[1350px] w-full mx-auto">
+    <div className={sliderContainerClass}>
       <Slider {...settings}>
-        {imageUrls.map((url, index) => (
+        {imageUrls?.map((url, index) => (
           <div key={index} className="p-2">
             <Image
               src={url}
