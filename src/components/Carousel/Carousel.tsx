@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import Slider from "react-slick";
+import BigCarousel from "./BigCarousel";
 
 type Props = {
   imageUrls: string[];
@@ -9,7 +10,12 @@ type Props = {
 };
 
 function Carousel({ imageUrls, backgroundColor }: Props) {
-  const [display, setDisplay] = useState(true);
+  // const [display, setDisplay] = useState(true);
+  // const [isBigCarouselVisible, setIsBigCarouselVisible] = useState(false);
+
+  // const handleClick = () => {
+  //   setIsBigCarouselVisible(true);
+  // };
 
   const settings = {
     infinite: true,
@@ -19,6 +25,7 @@ function Carousel({ imageUrls, backgroundColor }: Props) {
     autoplay: true,
     autoplaySpeed: 5000,
     arrows: false,
+
     swipe: true,
     swipeThreshold: 10,
     swipeToSlide: true,
@@ -39,9 +46,11 @@ function Carousel({ imageUrls, backgroundColor }: Props) {
 
   return (
     <div className={sliderContainerClass}>
+      {/* {isBigCarouselVisible && <BigCarousel />} */}
       <Slider {...settings}>
         {imageUrls?.map((url, index) => (
-          <div key={index} className="p-2">
+          // <div key={index} className="p-2 focus:outline-none" onClick={() => handleClick()}>
+          <div key={index} className="p-2 focus:outline-none">
             <Image
               src={url}
               alt={`Slide ${index + 1}`}
