@@ -1,7 +1,14 @@
+import { Modal } from "@mui/material";
 import React from "react";
 import Slider from "react-slick";
 
-function BigCarousel() {
+type Props = {
+  imageUrls: string[];
+  startIndex: Number;
+  onClose: any;
+};
+
+function BigCarousel({ imageUrls, startIndex }: Props) {
   const settings = {
     dots: true,
     infinite: true,

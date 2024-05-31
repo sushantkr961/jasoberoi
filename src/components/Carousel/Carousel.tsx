@@ -17,6 +17,14 @@ function Carousel({ imageUrls, backgroundColor }: Props) {
   //   setIsBigCarouselVisible(true);
   // };
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handleClick = (index: number) => {
+    setCurrentImageIndex(index);
+    setModalOpen(true);
+  };
+
   const settings = {
     infinite: true,
     speed: 300,
@@ -46,11 +54,14 @@ function Carousel({ imageUrls, backgroundColor }: Props) {
 
   return (
     <div className={sliderContainerClass}>
-      {/* {isBigCarouselVisible && <BigCarousel />} */}
       <Slider {...settings}>
         {imageUrls?.map((url, index) => (
           // <div key={index} className="p-2 focus:outline-none" onClick={() => handleClick()}>
-          <div key={index} className="p-2 focus:outline-none">
+          <div
+            key={index}
+            className="p-2 focus:outline-none"
+            onClick={() => handleClick(index)}
+          >
             <Image
               src={url}
               alt={`Slide ${index + 1}`}
@@ -62,6 +73,13 @@ function Carousel({ imageUrls, backgroundColor }: Props) {
           </div>
         ))}
       </Slider>
+      {modalOpen && (
+        <BigCarousel
+          imageUrls={imageUrls}
+          startIndex={currentImageIndex}
+          onClose={() => setModalOpen(false)}
+        />
+      )}
     </div>
   );
 }
