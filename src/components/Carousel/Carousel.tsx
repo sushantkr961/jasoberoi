@@ -3,26 +3,26 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Slider from "react-slick";
 import BigCarousel from "./BigCarousel";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 type Props = {
   imageUrls: string[];
   backgroundColor?: string;
+  onClick?: (index: number) => void;
 };
 
-function Carousel({ imageUrls, backgroundColor }: Props) {
-  // const [display, setDisplay] = useState(true);
-  // const [isBigCarouselVisible, setIsBigCarouselVisible] = useState(false);
-
-  // const handleClick = () => {
-  //   setIsBigCarouselVisible(true);
-  // };
-
+function Carousel({ imageUrls, backgroundColor, onClick }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const fullScreenHandle = useFullScreenHandle();
 
   const handleClick = (index: number) => {
-    setCurrentImageIndex(index);
-    setModalOpen(true);
+    if (onClick) {
+      onClick(index);
+    } else {
+      setCurrentImageIndex(index);
+      setModalOpen(true);
+    }
   };
 
   const settings = {
@@ -33,7 +33,6 @@ function Carousel({ imageUrls, backgroundColor }: Props) {
     autoplay: true,
     autoplaySpeed: 5000,
     arrows: false,
-
     swipe: true,
     swipeThreshold: 10,
     swipeToSlide: true,
@@ -56,7 +55,6 @@ function Carousel({ imageUrls, backgroundColor }: Props) {
     <div className={sliderContainerClass}>
       <Slider {...settings}>
         {imageUrls?.map((url, index) => (
-          // <div key={index} className="p-2 focus:outline-none" onClick={() => handleClick()}>
           <div
             key={index}
             className="p-2 focus:outline-none"
@@ -70,6 +68,9 @@ function Carousel({ imageUrls, backgroundColor }: Props) {
               layout="responsive"
               unoptimized
             />
+            <p className="text-white absolute bottom-3 left-5">{`${index + 1}/${
+              imageUrls.length
+            }`}</p>
           </div>
         ))}
       </Slider>
@@ -78,6 +79,8 @@ function Carousel({ imageUrls, backgroundColor }: Props) {
           imageUrls={imageUrls}
           startIndex={currentImageIndex}
           onClose={() => setModalOpen(false)}
+          onZoom={() => {}}
+          onFullScreen={() => fullScreenHandle.enter()}
         />
       )}
     </div>
