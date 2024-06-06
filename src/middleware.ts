@@ -6,14 +6,12 @@ interface MyTokenPayload extends jwt.JwtPayload {
 }
 
 export function middleware(request: NextRequest) {
-  const url = request.nextUrl;
-  const path = url.pathname;
-  //   const token = request.cookies.get("token") || "";
+  const path = request.nextUrl.pathname;
   const token = request.cookies.get("token")?.value || "";
 
   if (path.startsWith("/admin")) {
     if (!token) {
-      return NextResponse.redirect(new URL("/login", url));
+      return NextResponse.redirect(new URL("/login", request.url));
     }
 
     try {
@@ -23,10 +21,10 @@ export function middleware(request: NextRequest) {
       ) as MyTokenPayload;
 
       if (!decoded.isAdmin) {
-        return NextResponse.redirect(new URL("/", url));
+        return NextResponse.redirect(new URL("/", request.url));
       }
     } catch (error) {
-      return NextResponse.redirect(new URL("/login", url));
+      return NextResponse.redirect(new URL("/login", request.url));
     }
   }
 

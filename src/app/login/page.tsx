@@ -25,9 +25,9 @@ const LoginPage: React.FC = () => {
       // console.log("dddd",isAdmin)
 
       if (isAdmin) {
-        toast.success("Login successful");
-        console.log("login success");
+        // toast.success("Login successful");
         router.push("/admin");
+        console.log("login success");
       } else {
         toast.error("You are not authorized to access this page.");
       }
@@ -39,8 +39,6 @@ const LoginPage: React.FC = () => {
       toast.error(
         error.response ? error.response.data.message : "Login failed"
       );
-    } finally {
-      setLoading(false);
     }
   };
 
