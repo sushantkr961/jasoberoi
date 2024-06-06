@@ -16,7 +16,7 @@
     "@s-ui/react-script-loader": "^1.13.0",
     "@uidotdev/usehooks": "^2.4.1",
     "animated-number-react": "^0.1.2",
-    "axios": "^1.6.8",
+    "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",

@@ -100,7 +100,7 @@ const ourCulture = (props: Props) => {
           href={"/contact"}
           className="m-auto flex gap-2 items-center "
         >
-            <div className="text-[29px]">Contact </div>
+            <div className="text-[29px]">Contact Us</div>
             <FaArrowRight className='hidden md:block text-[24px] text-[#D3AA54]' />
         </Link>
       </div>
