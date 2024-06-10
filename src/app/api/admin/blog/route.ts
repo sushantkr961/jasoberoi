@@ -2,6 +2,8 @@ import { connect } from "@/lib/db";
 import Blog from "@/models/blogModel";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
+// import nextConnect from 'next-connect';
+import path from 'path';
 
 connect();
 
