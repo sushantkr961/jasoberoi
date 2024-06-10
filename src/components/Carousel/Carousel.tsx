@@ -12,7 +12,7 @@ type Props = {
   fullScreen: boolean;
 };
 
-function Carousel({ imageUrls, backgroundColor, onClick, fullScreen = false }: Props) {
+function Carousel({ imageUrls, backgroundColor, onClick, fullScreen }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const fullScreenHandle = useFullScreenHandle();

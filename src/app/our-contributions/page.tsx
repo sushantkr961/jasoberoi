@@ -345,7 +345,7 @@ function page({ }: Props) {
                         </div>
                         <div className="w-full flex  flex-col gap-16 mt-10">
                             {/*  GALLERY OF THE NIGHT Slide Here*/}
-                            <Carousel imageUrls={imageUrls} backgroundColor="none" />
+                            <Carousel imageUrls={imageUrls} backgroundColor="none" fullScreen={true} />
                         </div>
                     </div>
                 </div>
