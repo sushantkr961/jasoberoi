@@ -6,8 +6,24 @@ import Image from "next/image";
 import React from "react";
 import data from "../../data/Contributions/data.json";
 import MusicCard from "@/components/Contributions/MusicCard";
-import CarouselSponsors from "@/components/Contributions/CarouselSponsors";
+import Carousel from "@/components/Carousel/Carousel";
+
 type Props = {};
+
+const imageUrls = [
+    "/assets/ourcontributions/asset 178.png",
+    "/assets/ourcontributions/asset 179.png",
+    "/assets/ourcontributions/asset 180.png",
+    "/assets/ourcontributions/asset 181.png",
+    "/assets/ourcontributions/asset 182.png",
+    "/assets/ourcontributions/asset 183.png",
+    "/assets/ourcontributions/asset 184.png",
+    "/assets/ourcontributions/asset 185.png",
+    "/assets/ourcontributions/asset 186.png",
+    "/assets/ourcontributions/asset 187.png",
+    "/assets/ourcontributions/asset 188.png",
+    "/assets/ourcontributions/asset 189.png",
+  ];
 
 function page({ }: Props) {
     const { music, sponsors } = data;
@@ -329,11 +345,12 @@ function page({ }: Props) {
                         </div>
                         <div className="w-full flex  flex-col gap-16 mt-10">
                             {/*  GALLERY OF THE NIGHT Slide Here*/}
+                            <Carousel imageUrls={imageUrls} backgroundColor="none" />
                         </div>
                     </div>
                 </div>
                 
-                {/* Add Slider in this section */}]
+                {/* Add Slider in this section */}
                 {/* THANK YOU TO OUR DONORS */}
                 <div className="">
                     <div className="w-full max-w-[95%] md:max-w-[90%] lg:max-w-[95%]  m-auto flex flex-col justify-center items-center ">
