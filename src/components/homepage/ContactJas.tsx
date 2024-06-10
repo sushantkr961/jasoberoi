@@ -45,7 +45,7 @@ const ContactJas: React.FC<ContactJasProps> = () => {
           </div>
         </div>
         <div className="flex justify-center space-x-2 py-4">
-          <Carousel imageUrls={imageUrls} />
+          <Carousel imageUrls={imageUrls}  fullScreen={false} />
         </div>
       </Container>
     </section>
