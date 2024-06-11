@@ -3,11 +3,14 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
+  console.log("Requested Path:", path);
 
   // Check if the path starts with /admin
   const isAdminPath = path.startsWith("/admin");
+  console.log("Is Admin Path:", isAdminPath);
 
   const token = request.cookies.get("token")?.value || "";
+  console.log("Token:", token);
 
   if (isAdminPath && !token) {
     // If it's an admin path and there's no token, redirect to login

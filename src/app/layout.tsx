@@ -1,5 +1,4 @@
-"use client"
-
+"use client";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -7,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import PrelineScript from "@/components/PrelineScript";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -47,19 +47,16 @@ export default function RootLayout({
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
         />
       </head>
-      {/* <body className={inter.className}> */}
       <body
         className={cn("relative", inter.className, {
           "debug-screens": process.env.NODE_ENV === "development",
         })}
       >
-        {/* <Navbar />
-        <main>{children}</main>
-        <Footer /> */}
-        {!isAdminRoute && <Navbar />} 
+        {!isAdminRoute && <Navbar />}
         <main>{children}</main>
         {!isAdminRoute && <Footer />}
       </body>
+      <PrelineScript />
     </html>
   );
 }
