@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
     const { email, password } = reqBody;
-    // console.log(reqBody);
+    console.log(reqBody);
     //check if user exists
     const user = await User.findOne({ email });
     if (!user) {
@@ -19,19 +19,22 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-    // console.log("user exists");
+    console.log("user exists");
     //check if password is correct
     const validPassword = await bcryptjs.compare(password, user.password);
     if (!validPassword) {
-      return NextResponse.json({ error: "Invalid password" }, { status: 400 });
+      console.log("invalid password");
+      return NextResponse.json(
+        { error: "Invalid Credentials" },
+        { status: 400 }
+      );
     }
-    // console.log(user);
+    console.log(user);
     //create token data
     const tokenData = {
       id: user._id,
       username: user.username,
       email: user.email,
-      isAdmin: user.isAdmin
     };
     //create token
     const token = jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
@@ -48,6 +51,7 @@ export async function POST(request: NextRequest) {
     });
     return response;
   } catch (error: any) {
+    console.error(7777, error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
