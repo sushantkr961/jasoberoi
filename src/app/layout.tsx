@@ -6,7 +6,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
-import PrelineScript from "@/components/PrelineScript";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -56,7 +55,6 @@ export default function RootLayout({
         <main>{children}</main>
         {!isAdminRoute && <Footer />}
       </body>
-      <PrelineScript />
     </html>
   );
 }
