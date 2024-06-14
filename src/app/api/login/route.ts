@@ -6,12 +6,6 @@ import jwt from "jsonwebtoken";
 
 connect();
 
-function getCookie(name: string): string | undefined {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop()?.split(";").shift();
-}
-
 export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();

@@ -14,11 +14,13 @@ export function middleware(request: NextRequest) {
   const isAdminPath = path.startsWith("/admin");
   // console.log("Is Admin Path:", isAdminPath);
 
-  const token = request.cookies.get("token");
+  // const token = request.cookies.get("token");
+  const token = request.cookies.get("token") ?? "";
   // console.log("Token:", token);
 
   // Check token validity (pseudo-code, you'll need a real function to verify tokens)
-  const isValidToken = token && verifyToken(token); // You need to implement verifyToken or similar
+  // const isValidToken = token && verifyToken(token);
+  const isValidToken = typeof token === 'string' && verifyToken(token);
 
   if (isAdminPath && !isValidToken) {
     // If it's an admin path and there's no valid token, redirect to login
