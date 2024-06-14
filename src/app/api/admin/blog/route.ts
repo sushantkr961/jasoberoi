@@ -1,64 +1,43 @@
-import type { NextApiHandler, NextApiRequest } from "next";
-import multer from "multer";
-import fs from "fs";
-import path from "path";
+import { connect } from "@/lib/db";
+import Blog from "@/models/blogModel";
+import User from "@/models/userModel";
+import { NextRequest, NextResponse } from "next/server";
 
-// Extend NextApiRequest to include file and other multer-specific properties
-interface MulterRequest extends NextApiRequest {
-  file: any;
-}
+connect();
 
-// Configure storage for Multer
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const uploadsDir = path.join(process.cwd(), "uploads");
-    if (!fs.existsSync(uploadsDir)) {
-      fs.mkdirSync(uploadsDir);
+export async function POST(request: NextRequest) {
+  try {
+    const reqBody = await request.json();
+    const { title, content } = reqBody;
+    console.log(55555, reqBody);
+
+    try {
+      // const user = await User.findOne({ username: author });
+      // if (!user) {
+      //   return new Response(JSON.stringify({ message: "User not found" }), {
+      //     status: 404,
+      //   });
+      // }
+
+      const newPost = new Blog({
+        title,
+        content,
+        // author: user._id,
+      });
+
+      await newPost.save();
+      return new Response(JSON.stringify(newPost), { status: 201 });
+    } catch (error: any) {
+      console.error("Failed to add blog post:", error);
+      return new Response(
+        JSON.stringify({
+          message: "Failed to add blog post",
+          error: error.message,
+        }),
+        { status: 500 }
+      );
     }
-    cb(null, uploadsDir);
-  },
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
-  },
-});
-
-const upload = multer({ storage: storage }).single("file");
-
-// Post handler
-export const POST: NextApiHandler = (req, res) => {
-  if (req.method === "POST") {
-    upload(req as any, res as any, (err: any) => {
-      if (err instanceof multer.MulterError) {
-        return res.status(500).json({ error: "Multer error: " + err.message });
-      } else if (err) {
-        return res.status(500).json({ error: "Unknown error: " + err });
-      }
-
-      const { title, content } = req.body;
-      const file = (req as MulterRequest).file
-        ? (req as MulterRequest).file.filename
-        : null;
-
-      const newBlogPost = { title, content, coverPhoto: file };
-      res
-        .status(200)
-        .json({
-          message: "Blog post added successfully",
-          blogPost: newBlogPost,
-        });
-    });
-  } else {
-    res.setHeader("Allow", ["POST"]);
-    res.status(405).end("Method Not Allowed");
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
-};
-
-// Config to disable body parsing
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+}

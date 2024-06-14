@@ -10,6 +10,7 @@ export default function SignupPage() {
     email: "",
     password: "",
     username: "",
+    isAdmin: false,
   });
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
@@ -18,12 +19,11 @@ export default function SignupPage() {
     try {
       setLoading(true);
       const response = await axios.post("/api/signup", user);
-      console.log("Signup success", response.data);
-      console.log(88888, router);
-      
-      router.push("/login");
+      // console.log("Signup success", response.data);
+      // console.log(88888, router);
+      // router.push("/login");
     } catch (error: any) {
-      console.log("Signup failed", error.message);
+      // console.log("Signup failed", error.message);
       toast.error(error.message);
     }
   };
@@ -118,7 +118,23 @@ export default function SignupPage() {
                 />
               </div>
             </div>
-
+            <div className="relative flex gap-x-3">
+              <div className="flex h-6 items-center">
+                <input
+                  id="comments"
+                  name="comments"
+                  type="checkbox"
+                  checked={user.isAdmin}
+                  onChange={() => setUser({ ...user, isAdmin: !user.isAdmin })}
+                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                />
+              </div>
+              <div className="text-sm leading-6">
+                <label htmlFor="comments" className="font-medium text-gray-900">
+                  Mark as Admin
+                </label>
+              </div>
+            </div>
             <div>
               <button
                 disabled={loading}
