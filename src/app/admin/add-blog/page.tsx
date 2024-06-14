@@ -2,7 +2,6 @@
 import dynamic from "next/dynamic";
 import React, { useState, ChangeEvent, FormEvent, useRef } from "react";
 import axios from "axios";
-// import JoditEditor from "jodit-react";
 
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
@@ -17,7 +16,6 @@ const AddBlogPost: React.FC = () => {
     title: "",
     content: "",
   });
-  const [file, setFile] = useState<File | null>(null);
   const editor = useRef(null);
   const config = { readonly: false };
 
@@ -31,35 +29,20 @@ const AddBlogPost: React.FC = () => {
     setPostData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : null;
-    setFile(file);
-    console.log("File Selected:", file?.name);
-  };
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     console.log("Form Data:", postData);
-    console.log("File:", file);
 
     const formData = new FormData();
     formData.append("title", postData.title);
     formData.append("content", postData.content);
-    if (file) {
-      formData.append("file", file);
-    }
-    console.log(333, formData);
 
     try {
-      const response = await axios.post("/api/admin/blog", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post("/api/admin/blog", formData);
       console.log("Success:", response.data);
       alert("Blog post added successfully!");
-      setPostData({ title: "", content: "" });
-      setFile(null);
+      // setPostData({ title: "", content: "" });
+      // setFile(null);
     } catch (error) {
       console.error("Error:", error);
       alert("Error adding blog post: " + error);
@@ -67,7 +50,7 @@ const AddBlogPost: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} method="POST">
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -118,7 +101,7 @@ const AddBlogPost: React.FC = () => {
               </div>
             </div>
 
-            <div className="col-span-full">
+            {/* <div className="col-span-full">
               <label
                 htmlFor="cover-photo"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -148,7 +131,7 @@ const AddBlogPost: React.FC = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
