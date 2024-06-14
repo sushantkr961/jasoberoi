@@ -16,7 +16,7 @@ const PropertyCard = (props: Props) => {
         alt={props.imageName}
         width={500}
         height={300}
-        layout="responsive"
+        // layout="responsive"
         objectFit="cover"
         className="hidden lg:block"
       />

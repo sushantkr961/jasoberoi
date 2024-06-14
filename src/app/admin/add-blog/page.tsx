@@ -1,67 +1,49 @@
 "use client";
+
 import dynamic from "next/dynamic";
-import React, { useState, ChangeEvent, FormEvent, useRef } from "react";
+import React, {
+  useState,
+  useRef,
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+} from "react";
 import axios from "axios";
-// import JoditEditor from "jodit-react";
+import { jwtDecode } from "jwt-decode";
 
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 interface BlogPostData {
   title: string;
   content: string;
-  file?: File;
+  // author: string;
 }
 
 const AddBlogPost: React.FC = () => {
   const [postData, setPostData] = useState<BlogPostData>({
     title: "",
     content: "",
+    // author: "",
   });
-  const [file, setFile] = useState<File | null>(null);
   const editor = useRef(null);
-  const config = { readonly: false };
 
-  const handleUpdate = (newContent: string) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setPostData({ ...postData, [name]: value });
+  };
+
+  const handleEditorChange = (newContent: string) => {
     setPostData((prevState) => ({ ...prevState, content: newContent }));
-    console.log("Content Updated:", newContent);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setPostData((prevState) => ({ ...prevState, [name]: value }));
-  };
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : null;
-    setFile(file);
-    console.log("File Selected:", file?.name);
-  };
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    console.log("Form Data:", postData);
-    console.log("File:", file);
-
-    const formData = new FormData();
-    formData.append("title", postData.title);
-    formData.append("content", postData.content);
-    if (file) {
-      formData.append("file", file);
-    }
-    console.log(333, formData);
-
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
     try {
-      const response = await axios.post("/api/admin/blog", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log("Success:", response.data);
+      const response = await axios.post("/api/admin/blog", postData);
       alert("Blog post added successfully!");
-      setPostData({ title: "", content: "" });
-      setFile(null);
+      console.log(response.data);
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error adding blog post:", error);
       alert("Error adding blog post: " + error);
     }
   };
@@ -77,76 +59,43 @@ const AddBlogPost: React.FC = () => {
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-4">
               <label
-                htmlFor="username"
+                htmlFor="title"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Blog Title
               </label>
               <div className="mt-2">
-                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                  <input
-                    type="text"
-                    name="title"
-                    id="username"
-                    autoComplete="username"
-                    className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder=" Add Title"
-                    value={postData.title}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="col-span-full">
-              <label
-                htmlFor="about"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Description
-              </label>
-              <div className="mt-2">
-                <JoditEditor
-                  ref={editor}
-                  value={postData.content}
-                  config={config}
-                  onBlur={handleUpdate}
-                  onChange={(newContent) => {}}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                <input
+                  type="text"
+                  name="title"
+                  id="title"
+                  autoComplete="off"
+                  className="block w-full rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder="Add Title"
+                  value={postData.title}
+                  onChange={handleChange}
+                  required
                 />
               </div>
             </div>
 
             <div className="col-span-full">
               <label
-                htmlFor="cover-photo"
+                htmlFor="content"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Cover photo
+                Content
               </label>
-              <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                <div className="text-center">
-                  <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                    <label
-                      htmlFor="file-upload"
-                      className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                    >
-                      <span>Upload a file</span>
-                      <input
-                        id="file-upload"
-                        name="file-upload"
-                        type="file"
-                        className="sr-only"
-                        onChange={handleFileChange}
-                      />
-                    </label>
-                    <p className="pl-1">or drag and drop</p>
-                  </div>
-                  <p className="text-xs leading-5 text-gray-600">
-                    PNG, JPG, GIF up to 10MB
-                  </p>
-                </div>
+              <div className="mt-2">
+                <JoditEditor
+                  ref={editor}
+                  value={postData.content}
+                  config={{
+                    readonly: false,
+                  }}
+                  onBlur={(newContent) => handleEditorChange(newContent)}
+                  onChange={(newContent) => {}}
+                />
               </div>
             </div>
           </div>
