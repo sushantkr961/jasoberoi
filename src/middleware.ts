@@ -15,7 +15,7 @@ export function middleware(request: NextRequest) {
   // console.log("Is Admin Path:", isAdminPath);
 
   // const token = request.cookies.get("token");
-  const token = request.cookies.get("token") ?? "";
+  const token = request.cookies.get("token");
   // console.log("Token:", token);
 
   // Check token validity (pseudo-code, you'll need a real function to verify tokens)
