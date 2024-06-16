@@ -2,32 +2,32 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  // const path = request.nextUrl.pathname;
-  // console.log("Requested Path:", path);
 
-  // // Check if the path starts with /admin
-  // const isAdminPath = path.startsWith("/admin");
-  // console.log("Is Admin Path:", isAdminPath);
+  const path = request.nextUrl.pathname;
+  const isPublicPath = path === "/login";
 
-  // const token = request.cookies.get("token")?.value || "";
-  // console.log("Token:", token);
+  const token = request.cookies.get("token")?.value || "";
 
-  // if (isAdminPath && !token) {
-  //   // If it's an admin path and there's no token, redirect to login
-  //   return NextResponse.redirect(new URL("/login", request.nextUrl));
-  // } else if (!isAdminPath && token) {
-  //   // If it's not an admin path and there's a token, redirect to the admin dashboard
-  //   return NextResponse.redirect(new URL("/admin", request.nextUrl));
-  // }
+  const isValidToken = typeof token === 'string' && verifyToken(token);
 
-  // If none of the above conditions are met, proceed with the next response
-  return NextResponse.next();
-}
+  if (isPublicPath && isValidToken)  {
+    // if url true an token is true
+    return NextResponse.redirect(new URL('/', request.nextUrl));
+  }
 
-// Adjusting the matcher config to handle all paths for comprehensive coverage
+  if (!isPublicPath && !isValidToken) {
+    return NextResponse.redirect(new URL('/login', request.nextUrl));
+  }
+} 
+
 export const config = {
   matcher: [
-    "/admin/:path*", // Match all admin paths
-    "/:path*", // Match all other paths
-  ],
-};
+    "/admin/:path*", "/:path*"
+  ]
+}
+
+function verifyToken(token: string): boolean {
+  // Implement token verification logic or use shared logic from your app
+  // This should involve decoding the JWT and possibly checking against a database or cache
+  return true; // Placeholder: Replace with actual logic
+}

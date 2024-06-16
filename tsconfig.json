@@ -28,9 +28,10 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/_document.js",
-    "src/models/userModel.js",
-    "src/models/blogModel.js",
-    "src/app/api/upload/route.js"
-, "src/app/api/admin/blog/route.js"  ],
+    "src/models/userModel.ts",
+    "src/models/blogModel.ts",
+    "src/app/api/upload/route.js",
+    "src/app/api/admin/blog/route.js"
+  ],
   "exclude": ["node_modules"]
 }
