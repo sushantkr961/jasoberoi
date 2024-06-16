@@ -29,7 +29,9 @@ const LoginPage: React.FC = () => {
         router.push("/admin");
         console.log("login success");
       } else {
-        toast.error("You are not authorized to access this page.");
+        // toast.error("You are not authorized to access this page.");
+        console.log("You are not authorized to access this page.");
+        router.push("/");
       }
     } catch (error: any) {
       console.error(

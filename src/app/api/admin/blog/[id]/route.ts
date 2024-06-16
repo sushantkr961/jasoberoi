@@ -10,7 +10,6 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id");
   console.log(888, searchParams);
-  
 
   if (!id) {
     return new Response(JSON.stringify({ message: "Blog ID is required" }), {

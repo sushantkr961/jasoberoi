@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const blogPostSchema = new mongoose.Schema(
+const blogSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -13,11 +13,13 @@ const blogPostSchema = new mongoose.Schema(
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
+    },
+    imageUrl: {
+      type: String,
     },
   },
   { timestamps: true }
 );
 
-const Blog = mongoose.models.blog || mongoose.model("blog", blogPostSchema);
-
-export default Blog;
+export default mongoose.models.Blog || mongoose.model("Blog", blogSchema);
