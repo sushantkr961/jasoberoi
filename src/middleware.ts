@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
+
   const path = request.nextUrl.pathname;
   const isPublicPath = path === "/login";
 
@@ -15,14 +16,19 @@ export function middleware(request: NextRequest) {
 
   if (!isPublicPath && !isValidToken) {
     return NextResponse.redirect(new URL("/login", request.nextUrl));
+
   }
 
-  return NextResponse.next();
-}
+  if (!isPublicPath && !isValidToken) {
+    return NextResponse.redirect(new URL('/login', request.nextUrl));
+  }
+} 
 
 export const config = {
-  matcher: ["/admin/:path*", "/:path*"],
-};
+  matcher: [
+    "/admin/:path*", "/:path*"
+  ]
+}
 
 function verifyToken(token: string): boolean {
   return true;
