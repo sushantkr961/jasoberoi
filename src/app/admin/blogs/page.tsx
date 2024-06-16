@@ -37,15 +37,15 @@ const Blog = () => {
             <img
               alt="Blog Image"
               src={post.imageUrl}
-              className="h-56 w-full object-cover"
+              className="h-56 w-full object-cover border-2 rounded"
             />
             <div className="bg-white p-4 sm:p-6">
-              <time
+              {/* <time
                 dateTime="2022-10-10"
                 className="block text-xs text-gray-500"
               >
                 10th Oct 2022
-              </time>
+              </time> */}
               <a href="#">
                 <h3 className="mt-0.5 text-lg text-gray-900">{post.title}</h3>
               </a>

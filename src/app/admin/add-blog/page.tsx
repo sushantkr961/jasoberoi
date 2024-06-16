@@ -89,23 +89,30 @@ const AddBlogPost: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex items-center mb-4">
-              <input
-                type="checkbox"
-                checked={useEditor}
-                onChange={() => setUseEditor(!useEditor)}
-                id="toggleEditor"
-                className="mr-2"
-              />
-              <label
-                htmlFor="toggleEditor"
-                className="text-sm font-medium text-gray-900"
-              >
-                Use Advanced Editor
-              </label>
-            </div>
-
             <div className="col-span-full">
+              <div className="flex items-center mb-4">
+              <label
+                htmlFor="AcceptConditions"
+                className="block text-sm font-medium leading-6 text-gray-900 mr-10"
+              >
+                Use Advance Editor
+              </label>
+                <label
+                  htmlFor="AcceptConditions"
+                  className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-indigo-600"
+                >
+                  <input
+                    type="checkbox"
+                    id="AcceptConditions"
+                    className="peer sr-only"
+                    checked={useEditor}
+                    onChange={() => setUseEditor(!useEditor)}
+                  />
+
+                  <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
+                </label>
+              </div>
+
               <label
                 htmlFor="content"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -125,36 +132,13 @@ const AddBlogPost: React.FC = () => {
                 <textarea
                   id="about"
                   name="content"
-                  rows={3}
+                  rows={8}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                   required
                 />
               )}
-              {/* <div className="mt-2">
-                <JoditEditor
-                  ref={editor}
-                  value={content}
-                  config={{
-                    readonly: false,
-                  }}
-                  onBlur={(newContent) => handleEditorChange(newContent)}
-                  onChange={(newContent) => {}}
-                />
-              </div> */}
-
-              {/* <div className="mt-2">
-                <textarea
-                  id="about"
-                  name="content"
-                  rows={3}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                  required
-                />
-              </div> */}
 
               <div className="col-span-full">
                 <label
