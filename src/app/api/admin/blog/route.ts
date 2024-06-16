@@ -3,16 +3,8 @@ import Blog from "@/models/blogModel";
 import { writeFile } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
 
-
-// export const config = {
-//   api: {
-//     bodyParser: false,
-//   },
-// };
-
+connect();
 export async function POST(request: NextRequest) {
-  connect();
-
   try {
     const data = await request.formData();
     const title = data.get("title");
