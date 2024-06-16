@@ -4,6 +4,8 @@ import { NextRequest } from "next/server";
 export async function GET(req: NextRequest) {
   try {
     const users = await User.find({}, { password: 0 });
+    console.log('users', users);
+    
     return new Response(JSON.stringify(users), { status: 200 });
   } catch (error: any) {
     console.error("Failed to retrieve users", error);

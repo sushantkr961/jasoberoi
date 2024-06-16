@@ -1,11 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import React, {
-  useState,
-  useRef,
-  ChangeEvent,
-} from "react";
+import React, { useState, useRef, ChangeEvent } from "react";
 import axios from "axios";
 
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
@@ -22,6 +18,7 @@ const AddBlogPost: React.FC = () => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
+  const [useEditor, setUseEditor] = useState(false);
 
   const editor = useRef(null);
 
@@ -92,6 +89,22 @@ const AddBlogPost: React.FC = () => {
               </div>
             </div>
 
+            <div className="flex items-center mb-4">
+              <input
+                type="checkbox"
+                checked={useEditor}
+                onChange={() => setUseEditor(!useEditor)}
+                id="toggleEditor"
+                className="mr-2"
+              />
+              <label
+                htmlFor="toggleEditor"
+                className="text-sm font-medium text-gray-900"
+              >
+                Use Advanced Editor
+              </label>
+            </div>
+
             <div className="col-span-full">
               <label
                 htmlFor="content"
@@ -99,7 +112,27 @@ const AddBlogPost: React.FC = () => {
               >
                 Content
               </label>
-              <div className="mt-2">
+
+              {useEditor ? (
+                <JoditEditor
+                  ref={editor}
+                  value={content}
+                  config={{ readonly: false }}
+                  onBlur={(newContent) => handleEditorChange(newContent)}
+                  onChange={() => {}}
+                />
+              ) : (
+                <textarea
+                  id="about"
+                  name="content"
+                  rows={3}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  required
+                />
+              )}
+              {/* <div className="mt-2">
                 <JoditEditor
                   ref={editor}
                   value={content}
@@ -109,7 +142,7 @@ const AddBlogPost: React.FC = () => {
                   onBlur={(newContent) => handleEditorChange(newContent)}
                   onChange={(newContent) => {}}
                 />
-              </div>
+              </div> */}
 
               {/* <div className="mt-2">
                 <textarea
