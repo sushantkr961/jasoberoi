@@ -7,13 +7,15 @@ interface IBlog extends Document {
   imageUrl: string;
 }
 
-const blogSchema: Schema = new Schema({
-  title: { type: String, required: true },
-  content: { type: String, required: true },
-  // author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  imageUrl: { type: String, required: false },
-});
+const blogSchema: Schema = new Schema(
+  {
+    title: { type: String, required: true },
+    content: { type: String, required: true },
+    // author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    imageUrl: { type: String, required: false },
+  },
+  { timestamps: true }
+);
 
-// const Blog = mongoose.model<IBlog>("Blog", blogSchema);
-const Blog = mongoose.models.Blog || mongoose.model('Blog', blogSchema);
+const Blog = mongoose.models.Blog || mongoose.model("Blog", blogSchema);
 export default Blog;

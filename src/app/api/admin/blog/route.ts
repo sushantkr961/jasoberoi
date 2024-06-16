@@ -1,34 +1,98 @@
 import { connect } from "@/lib/db";
 import Blog from "@/models/blogModel";
+import { writeFile } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
 
 connect();
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 export async function POST(request: NextRequest) {
   try {
-    const reqBody = await request.json();
-    console.log(55555, reqBody);
-    const { title, content } = reqBody;
+    const data = await request.formData();
+    const title = data.get("title");
+    const content = data.get("content");
+    const file = data.get("file");
 
+    // console.log(3333, data);
+
+    if (!title || !content) {
+      return new Response(
+        JSON.stringify({
+          message: "Title and content are required",
+          success: false,
+        }),
+        { status: 400 }
+      );
+    }
+
+    if (!(file instanceof File)) {
+      return new NextResponse(
+        JSON.stringify({
+          message: "No valid file uploaded",
+          success: false,
+        }),
+        { status: 400 }
+      );
+    }
+
+    let imageUrl = "";
+    if (file) {
+      const byteData = await file.arrayBuffer();
+      const buffer = Buffer.from(byteData);
+      const fileName = file.name.replace(/\s+/g, "_");
+      const path = `./public/uploads/${fileName}`;
+      await writeFile(path, buffer);
+      imageUrl = `/uploads/${fileName}`;
+    }
     try {
       const newPost = new Blog({
         title,
         content,
+        imageUrl,
       });
 
       await newPost.save();
-      return new Response(JSON.stringify(newPost), { status: 201 });
+      return new NextResponse(
+        JSON.stringify({
+          message: "Blog post added successfully",
+          success: true,
+          post: newPost,
+        }),
+        { status: 201 }
+      );
     } catch (error: any) {
-      console.error("Failed to add blog post:", error);
-      return new Response(
+      return new NextResponse(
         JSON.stringify({
           message: "Failed to add blog post",
           error: error.message,
+          success: false,
         }),
         { status: 500 }
       );
     }
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
+
+export async function GET(req: NextRequest) {
+  try {
+    const blogs = await Blog.find({});
+    // console.log(4444, blogs);
+    return new Response(JSON.stringify(blogs), { status: 200 });
+  } catch (error: any) {
+    console.error("Failed to retrieve blog blogs:", error);
+    return new Response(
+      JSON.stringify({
+        message: "Failed to retrieve blog blogs",
+        error: error.message,
+      }),
+      { status: 500 }
+    );
   }
 }
