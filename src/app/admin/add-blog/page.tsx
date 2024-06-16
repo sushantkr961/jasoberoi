@@ -5,11 +5,8 @@ import React, {
   useState,
   useRef,
   ChangeEvent,
-  FormEvent,
-  useEffect,
 } from "react";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
@@ -17,34 +14,50 @@ interface BlogPostData {
   title: string;
   content: string;
   // author: string;
+  file?: File;
 }
 
 const AddBlogPost: React.FC = () => {
-  const [postData, setPostData] = useState<BlogPostData>({
-    title: "",
-    content: "",
-    // author: "",
-  });
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [image, setImage] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
+
   const editor = useRef(null);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setPostData({ ...postData, [name]: value });
+  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setImage(event.target.files[0]);
+    } else {
+      setImage(null);
+    }
   };
 
   const handleEditorChange = (newContent: string) => {
-    setPostData((prevState) => ({ ...prevState, content: newContent }));
+    setContent(newContent);
   };
 
-  const handleSubmit = async (event: FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", content);
+    if (image) {
+      formData.append("file", image);
+    }
+
     try {
-      const response = await axios.post("/api/admin/blog", postData);
-      alert("Blog post added successfully!");
+      const response = await axios.post("/api/admin/blog", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       console.log(response.data);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error adding blog post:", error);
-      alert("Error adding blog post: " + error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -72,8 +85,8 @@ const AddBlogPost: React.FC = () => {
                   autoComplete="off"
                   className="block w-full rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   placeholder="Add Title"
-                  value={postData.title}
-                  onChange={handleChange}
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                   required
                 />
               </div>
@@ -89,13 +102,58 @@ const AddBlogPost: React.FC = () => {
               <div className="mt-2">
                 <JoditEditor
                   ref={editor}
-                  value={postData.content}
+                  value={content}
                   config={{
                     readonly: false,
                   }}
                   onBlur={(newContent) => handleEditorChange(newContent)}
                   onChange={(newContent) => {}}
                 />
+              </div>
+
+              {/* <div className="mt-2">
+                <textarea
+                  id="about"
+                  name="content"
+                  rows={3}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  required
+                />
+              </div> */}
+
+              <div className="col-span-full">
+                <label
+                  htmlFor="cover-photo"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Blog Cover Image
+                </label>
+                <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                  <div className="text-center">
+                    <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                      <label
+                        htmlFor="file-upload"
+                        className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                      >
+                        <span>Upload a file</span>
+                        <input
+                          id="file-upload"
+                          name="file-upload"
+                          type="file"
+                          className="sr-only"
+                          onChange={handleImageChange}
+                          accept="image/*"
+                        />
+                      </label>
+                      <p className="pl-1">or drag and drop</p>
+                    </div>
+                    <p className="text-xs leading-5 text-gray-600">
+                      PNG, JPG, GIF up to 10MB
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -113,7 +171,7 @@ const AddBlogPost: React.FC = () => {
           type="submit"
           className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-          Save
+          {loading ? "Submitting..." : "Submit"}
         </button>
       </div>
     </form>
