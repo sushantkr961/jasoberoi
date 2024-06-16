@@ -1,12 +1,19 @@
 "use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-type Props = {};
+interface Users {
+  _id: string;
+  title: string;
+  content: string;
+  author: string;
+  createdAt: string;
+  imageUrl: string;
+}
 
-const AdminDashboard = (props: Props) => {
+const AdminDashboard = () => {
   const router = useRouter();
 
   const logout = async () => {
@@ -21,9 +28,7 @@ const AdminDashboard = (props: Props) => {
     }
   };
 
-  return (
-    <section>ADmin dashboard</section>
-  );
+  return <section>ADmin dashboard</section>;
 };
 
 export default AdminDashboard;

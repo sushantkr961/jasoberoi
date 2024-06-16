@@ -3,16 +3,8 @@ import Blog from "@/models/blogModel";
 import { writeFile } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
 
-
-// export const config = {
-//   api: {
-//     bodyParser: false,
-//   },
-// };
-
+connect();
 export async function POST(request: NextRequest) {
-  connect();
-
   try {
     const data = await request.formData();
     const title = data.get("title");
@@ -84,7 +76,7 @@ export async function POST(request: NextRequest) {
 export async function GET(req: NextRequest) {
   try {
     const blogs = await Blog.find({});
-    // console.log(4444, blogs);
+    console.log(4444, blogs);
     return new Response(JSON.stringify(blogs), { status: 200 });
   } catch (error: any) {
     console.error("Failed to retrieve blog blogs:", error);

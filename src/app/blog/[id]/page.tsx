@@ -14,7 +14,7 @@ interface Post {
 
 const Post = () => {
   const router = useRouter();
-  console.log(6666, router);
+  // console.log(6666, router);
   const [visiblePosts, setVisiblePosts] = useState(2);
 
   const [visiblePostsMb, setVisiblePostsMb] = useState(2);
