@@ -7,3 +7,4 @@ const exclusiveProperties = (props: Props) => {
 };
 
 export default exclusiveProperties;
+    

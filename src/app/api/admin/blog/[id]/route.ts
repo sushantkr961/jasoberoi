@@ -1,15 +1,16 @@
 import { connect } from "@/lib/db";
 import Blog from "@/models/blogModel";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 connect();
 
 // Fetch a single blog post by ID
 export async function GET(req: NextRequest) {
+  
   // Parse the ID from the URL query
   const { searchParams } = new URL(req.url);
+  console.log(searchParams.get("id"));
   const id = searchParams.get("id");
-  console.log(888, searchParams);
 
   if (!id) {
     return new Response(JSON.stringify({ message: "Blog ID is required" }), {
