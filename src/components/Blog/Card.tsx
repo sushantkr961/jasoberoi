@@ -27,7 +27,7 @@ const Card = ({
             </div>
             <div className="py-4 lg:py-6 transition-all duration-300 ">
                 <span className="text-[#C1A468] font-medium mb-3 block">{new Date(createdAt).toLocaleDateString()}</span>
-                <h4 className="text-xl text-gray-900 font-medium text-[16px] mb-3">{title}</h4>
+                <h4 className=" text-gray-900 font-medium text-[18px] mb-3">{title}</h4>
                 <p className="text-[#636363] mb-2 text-[15px] " style={{ fontSize: "15px !important" }}>
                     {parsedContent}
                 </p>

@@ -91,7 +91,12 @@ const Post = ({ params }: any) => {
                 </figure>
 
               </div>
-              <div className="text-sm md:text-lg text-gray-800 font-poppins">
+              <div className="text-sm md:text-lg text-gray-800 font-poppins showList"  style={
+                {
+                  listStyle:"initial !important"
+                  
+                }
+              }>
                 {
                   parse(post?.content!)
                 }

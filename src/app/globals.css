@@ -23,6 +23,12 @@ body {
   box-sizing: border-box;
 }
 
+.showList li,.showList ul,.showList ol {
+  list-style: initial !important;
+  margin-left: 20px !important;
+  margin-bottom: 10px !important;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
