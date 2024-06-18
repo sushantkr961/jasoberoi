@@ -34,7 +34,7 @@ const Blog = () => {
   }, []);
 
   return (
-    <div>
+    <section>
       <PageHeading
         heading="Blog"
         imageSrc="assets/ourculture/asset 1.jpeg"
@@ -93,7 +93,7 @@ const Blog = () => {
           </div>
         </div>
       </Container>
-    </div>
+    </section>
   );
 };
 
