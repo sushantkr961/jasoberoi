@@ -29,6 +29,17 @@ const Blog = () => {
     fetchPosts();
   }, []);
 
+  const deletePost = async (id: string) => {
+    console.log(3333, id);
+    
+    try {
+      const response = await axios.delete(`/api/admin/blog/${id}`);
+    //   setPosts((prev) => prev.filter((post) => post._id !== id));
+    } catch (error) {
+      console.error("Failed to delete the post:", error);
+    }
+  };
+
   return (
     <div>
       {posts.map((post) => (
@@ -63,12 +74,12 @@ const Blog = () => {
               >
                 Update
               </a>
-              <a
+              <button
                 className="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-                href="#"
+                onClick={() => deletePost(post._id)}
               >
                 Delete
-              </a>
+              </button>
             </div>
           </article>
         </div>

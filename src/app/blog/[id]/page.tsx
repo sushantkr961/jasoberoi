@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
 import Link from 'next/link';
 
@@ -14,7 +14,8 @@ interface Post {
 
 const Post = () => {
   const router = useRouter();
-  // console.log(6666, router);
+  const {id} = useParams()
+  
   const [visiblePosts, setVisiblePosts] = useState(2);
 
   const [visiblePostsMb, setVisiblePostsMb] = useState(2);
@@ -33,7 +34,9 @@ const Post = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("/api/admin/blog");
+        const response = await axios.get(`/api/admin/blog/${id}`);
+        console.log(444, response);
+        
         setPosts(response.data);
       } catch (error) {
         console.error("Failed to fetch posts:", error);
