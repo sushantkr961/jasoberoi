@@ -6,13 +6,6 @@ import axios from "axios";
 
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
-interface BlogPostData {
-  title: string;
-  content: string;
-  // author: string;
-  file?: File;
-}
-
 const AddBlogPost: React.FC = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -91,12 +84,12 @@ const AddBlogPost: React.FC = () => {
 
             <div className="col-span-full">
               <div className="flex items-center mb-4">
-              <label
-                htmlFor="AcceptConditions"
-                className="block text-sm font-medium leading-6 text-gray-900 mr-10"
-              >
-                Use Advance Editor
-              </label>
+                <label
+                  htmlFor="AcceptConditions"
+                  className="block text-sm font-medium leading-6 text-gray-900 mr-10"
+                >
+                  Use Advance Editor
+                </label>
                 <label
                   htmlFor="AcceptConditions"
                   className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-indigo-600"
