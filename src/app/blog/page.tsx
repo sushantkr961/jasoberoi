@@ -5,6 +5,8 @@ import axios from "axios";
 import Link from "next/link"; // Import Link component
 import PageHeading from "@/components/Common/PageHeading";
 import Container from "@/components/Containers/Container";
+import parse from 'html-react-parser';
+import Card from "@/components/Blog/Card";
 
 interface Post {
   _id: string;
@@ -12,6 +14,7 @@ interface Post {
   content: string;
   author: string;
   createdAt: string;
+  imageUrl:string;
 }
 
 const Blog = () => {
@@ -22,6 +25,7 @@ const Blog = () => {
       try {
         const response = await axios.get("/api/admin/blog");
         setPosts(response.data);
+        
       } catch (error) {
         console.error("Failed to fetch posts:", error);
       }
@@ -30,7 +34,7 @@ const Blog = () => {
   }, []);
 
   return (
-    <div>
+    <section>
       <PageHeading
         heading="Blog"
         imageSrc="assets/ourculture/asset 1.jpeg"
@@ -75,26 +79,21 @@ const Blog = () => {
             ))}
 
             {
-              posts.map((post, index) => (
-                <div key={index} className="group w-full rounded-md overflow-hidden">
-                  <div className="flex items-center  relative z-0  md:min-h-[300px] ">
-                    <img alt="blogs tailwind section" className="bg-gray-500  h-full object-cover w-full rounded-none"  />
-                    <img src="https://pagedone.io/asset/uploads/1696244356.png" alt="blogs tailwind section" className="bg-gray-500  h-full  md:min-h-[300px] object-cover w-full rounded-none" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-30 group-hover:opacity-0 transition-opacity duration-300"></div>
-                  </div>
-                  <div className="py-4 lg:py-6 transition-all duration-300 group-hover:bg-gray-50 px-3">
-                    <span className="text-[#C1A468] font-medium mb-3 block">{new Date(post.createdAt).toLocaleDateString()}</span>
-                    <h4 className="text-xl text-gray-900 font-medium text-[16px] mb-3">{post.title}</h4>
-                    <p className="text-[#636363] mb-2 text-[15px]">{post.content}</p>
-                    <a href={`/blog/${post._id}`} className="cursor-pointer text-[15px] text-[#C1A468] font-semibold  ">Read more..</a>
-                  </div>
-                </div>
+              posts.map((post,index)=>(
+                <Card 
+                  _id={post._id}
+                  content={post.content}
+                  createdAt={post.createdAt}
+                  imageUrl={post.imageUrl}
+                  title={post.title}
+                  key={post._id}
+                />
               ))
             }
           </div>
         </div>
       </Container>
-    </div>
+    </section>
   );
 };
 

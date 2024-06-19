@@ -80,6 +80,7 @@ const Blog = () => {
               >
                 Delete
               </button>
+
             </div>
           </article>
         </div>

@@ -120,6 +120,7 @@ const AddBlogPost: React.FC = () => {
                   config={{ readonly: false }}
                   onBlur={(newContent) => handleEditorChange(newContent)}
                   onChange={() => {}}
+                  className="showList"
                 />
               ) : (
                 <textarea
