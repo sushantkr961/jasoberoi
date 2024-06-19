@@ -25,7 +25,7 @@ interface PropertyData {
     description: string;
   };
   propertyType: string;
-  images: [];
+  images: File[];
   propertyDocuments: {
     name: string;
     url: string;
@@ -38,7 +38,7 @@ const AddProperty = () => {
     propertyId: "",
     title: "",
     price: "",
-    sold: false, // Set a default value for sold
+    sold: false,
     address: {
       fullAddress: "",
       city: "",
@@ -46,12 +46,12 @@ const AddProperty = () => {
       zipOrPostalCode: "",
       country: "",
     },
-    zoning: "", // Use the provided default value
-    areaSize: 0, // Use the provided default value
+    zoning: "",
+    areaSize: 0,
     overview: "",
-    yearBuilt: 0, // Set a default value for yearBuilt
+    yearBuilt: 0,
     potentialHome: {
-      size: "", // Use the provided default value
+      size: "",
       description: "",
     },
     propertyType: "",
@@ -61,35 +61,32 @@ const AddProperty = () => {
     gmapLink: "",
   });
 
-  const [image, setImage] = useState<FileList | null>(null);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setFormData({
+        ...formData,
+        images: Array.from(event.target.files),
+      });
+    }
+  };
 
   const handleSumbit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log(image);
-    console.log(formData);
-    const data = new FormData();
-    const fileData = image;
-    if (fileData) {
-        for (let i = 0; i < fileData.length; i++) {
-          data.append("images[]", fileData[i]);
-        }
-      }
-  
-      try {
-        const response = await axios.post("/admin/property", formData, {
-          headers: {
-            // Add any necessary headers, e.g., authorization token
-            "Content-Type": "multipart/form-data", // Required for file uploads
-          },
-        });
-  
-        // Handle successful response (e.g., reset form, show confirmation)
-        console.log("Property added successfully:", response.data); // Example logging
-  
-      } catch (error) {
-        console.error("Error submitting property:", error); // Handle errors
-      }
+    console.log(4444, formData);
+
+    try {
+      const response = await axios.post("/api/admin/property", formData, {
+        headers: {
+          // Add any necessary headers, e.g., authorization token
+          "Content-Type": "multipart/form-data", // Required for file uploads
+        },
+      });
+
+      console.log("Property added successfully:", response);
+    } catch (error) {
+      console.error("Error submitting property:", error); // Handle errors
+    }
   };
 
   return (
@@ -380,7 +377,7 @@ const AddProperty = () => {
                     className="sr-only"
                     multiple
                     accept="image/*"
-                    onChange={(event) => setImage(event.target.files)}
+                    onChange={handleFileChange}
                   />
                   <svg
                     className="size-10 mx-auto text-gray-400"

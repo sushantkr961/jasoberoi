@@ -51,13 +51,13 @@ const propertySchema: Schema = new Schema(
       zipOrPostalCode: { type: String, required: true },
       country: { type: String, required: true },
     },
-    zoning: { type: String, required: true, default: "Commercial, RF 13 Lots" },
-    areaSize: { type: Number, required: true, default: 105000 },
+    zoning: { type: String, required: true },
+    areaSize: { type: Number, required: true },
     gmapLink: { type: String },
     overview: { type: String, required: true },
     yearBuilt: { type: Number, required: true },
     potentialHome: {
-      size: { type: String, required: true, default: "6,400 Sq.ft" },
+      size: { type: String, required: true },
       description: { type: String, required: true, default: "Multi-level" },
     },
     propertyType: {
@@ -79,6 +79,8 @@ const propertySchema: Schema = new Schema(
   }
 );
 
-const Property = mongoose.model<IProperty>("Property", propertySchema);
+// const Property = mongoose.model<IProperty>("Property", propertySchema);
+const Property =
+  mongoose.models.Property || mongoose.model("Property", propertySchema);
 
 export default Property;

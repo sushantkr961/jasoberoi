@@ -8,10 +8,14 @@ export async function POST(request: NextRequest) {
   try {
     const data = await request.formData();
     console.log(44444, data);
+
+    const propertyId = data.get("propertyId");
+    const title = data.get("title");
+    const price = data.get("price");
+    const images = data.get("images");
+
+    console.log(title, propertyId, price, images);
     
-    // const title = data.get("title");
-    // const content = data.get("content");
-    // const file = data.get("file");
 
     // if (!title || !content) {
     //   return new Response(
