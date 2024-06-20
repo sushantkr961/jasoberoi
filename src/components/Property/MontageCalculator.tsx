@@ -8,9 +8,9 @@ const MontageCalculator = (props: Props) => {
         <div className='flex  items-center'>
 
             <div className='left basis-[50%]'>
-            <div className='h-[170px] flex justify-center items-center'>
+                <div className='h-[170px] flex justify-center items-center'>
 
-                
+
                     <PieChart
                         lineWidth={20}
                         data={[
@@ -18,7 +18,7 @@ const MontageCalculator = (props: Props) => {
                             { title: 'Two', value: 15, color: '#9AD0F5' },
                             { title: 'Three', value: 20, color: '#FFE6AA' },
                         ]}
-                        
+
                     />
                     <div className='absolute flex items-center justify-center w-full h-full'>
                         <div className='text-center'>
