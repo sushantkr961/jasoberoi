@@ -26,60 +26,58 @@ interface IProperty extends Document {
   sold: boolean;
   address: IAddress;
   zoning: string;
-  areaSize: number;
+  areaSize: string;
   gmapLink?: string; // Optional field
   overview: string;
   yearBuilt: number;
   potentialHome: IPotentialHome;
-  propertyType: "Residential" | "Commercial" | "Industrial" | "Land";
+  propertyType: string;
   propertyDocuments: IPropertyDocument[];
+  singleImage: string;
   images: string[];
   description: string;
 }
 
 const propertySchema: Schema = new Schema(
   {
-    propertyId: { type: String, required: true, unique: true },
-    title: { type: String, required: true },
-    price: { type: String, required: true },
-    // propertyStatus: { type: Boolean, required: true },
-    sold: { type: Boolean, required: true },
+    propertyId: { type: String, unique: true },
+    title: { type: String },
+    price: { type: String },
+    sold: { type: Boolean },
     address: {
-      fullAddress: { type: String, required: true },
-      city: { type: String, required: true },
-      state: { type: String, required: true },
-      zipOrPostalCode: { type: String, required: true },
-      country: { type: String, required: true },
+      fullAddress: { type: String },
+      city: { type: String },
+      state: { type: String },
+      zipOrPostalCode: { type: String },
+      country: { type: String },
     },
-    zoning: { type: String, required: true },
-    areaSize: { type: Number, required: true },
+    zoning: { type: String },
+    areaSize: { type: Number },
     gmapLink: { type: String },
-    overview: { type: String, required: true },
-    yearBuilt: { type: Number, required: true },
+    overview: { type: String },
+    yearBuilt: { type: Number },
     potentialHome: {
-      size: { type: String, required: true },
-      description: { type: String, required: true, default: "Multi-level" },
+      size: { type: String },
+      description: { type: String },
     },
     propertyType: {
       type: String,
-      required: true,
-      enum: ["Residential", "Commercial", "Industrial", "Land"],
     },
     propertyDocuments: [
       {
-        name: { type: String, required: true },
+        name: { type: String },
         url: { type: String },
       },
     ],
+    singleImage: { type: String },
     images: [{ type: String }],
-    description: { type: String, required: true },
+    description: { type: String },
   },
   {
     timestamps: true,
   }
 );
 
-// const Property = mongoose.model<IProperty>("Property", propertySchema);
 const Property =
   mongoose.models.Property || mongoose.model("Property", propertySchema);
 
