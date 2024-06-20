@@ -75,8 +75,30 @@ export async function POST(request: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
-    const blogs = await Blog.find({});
-    return new Response(JSON.stringify(blogs), { status: 200 });
+    const { searchParams } = new URL(req.url);
+    const page = parseInt(searchParams.get('page')!) || 1; // Default to page 1 if not provided
+    const limit = parseInt(searchParams.get('limit')!) || undefined; // Default to 10 items per page if not provided
+
+    const skip = limit ? (page - 1) * limit : 0; // Calculate skip based on limit if limit is defined
+
+    let blogsQuery = Blog.find({});
+
+    if (limit) {
+      blogsQuery = blogsQuery.skip(skip).limit(limit);
+    }
+
+    const blogs = await blogsQuery.exec();
+    const totalCount = await Blog.countDocuments(); // Total count of all documents
+
+
+    return NextResponse.json({
+      blogs,
+      totalCount,
+      currentPage: page,
+      totalPages: limit ? Math.ceil(totalCount / limit) : 1, 
+    }, { status: 200 });
+
+
   } catch (error: any) {
     console.error("Failed to retrieve blog blogs:", error);
     return new Response(
