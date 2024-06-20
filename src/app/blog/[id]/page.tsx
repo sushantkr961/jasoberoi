@@ -44,9 +44,8 @@ const Post = ({ params }: any) => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(`/api/admin/blog/${id}`);
-        console.log(444, response);
-        
+        const response = await axios.get(`/api/admin/blog`);
+
         setPosts(response.data);
       } catch (error) {
         console.error("Failed to fetch posts:", error);
@@ -94,10 +93,10 @@ const Post = ({ params }: any) => {
                 </figure>
 
               </div>
-              <div className="text-sm md:text-lg text-gray-800 font-poppins showList"  style={
+              <div className="text-sm md:text-lg text-gray-800 font-poppins showList" style={
                 {
-                  listStyle:"initial !important"
-                  
+                  listStyle: "initial !important"
+
                 }
               }>
                 {
@@ -108,9 +107,6 @@ const Post = ({ params }: any) => {
               <div className="  lg:flex lg:justify-between lg:items-center gap-y-5 lg:gap-y-0">
 
                 <div className="flex justify-end items-center gap-x-1.5">
-
-
-
                   <div className="hs-dropdown relative inline-flex">
                     <button
 
@@ -281,28 +277,28 @@ const Post = ({ params }: any) => {
         <div className=" hidden lg:block lg:col-span-1 lg:w-full lg:h-full lg:bg-gradient-to-r lg:from-gray-50 lg:via-transparent lg:to-transparent ">
           <div className="sticky top-0 start-0 py-8 lg:ps-8">
             <div className="group flex items-center gap-x-3 border-b border-gray-200 pb-6 mb-5 ">
-                <h5 className="group-hover:text-gray-600 text-lg font-semibold text-gray-800 ">
-                  Recent Post
-                </h5>
+              <h5 className="group-hover:text-gray-600 text-lg font-semibold text-gray-800 ">
+                Recent Post
+              </h5>
             </div>
 
 
             <div className="space-y-6">
               {
                 posts.sort((a: Post, b: Post) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) // Sort posts by createdAt in descending order
-                .slice(0, 5).map((post,index) => (
-                  <a key={post._id} className="group flex items-center gap-x-6" href={`/blog/${post._id}`}>
-                    <div className="grow">
-                      <span className="text-sm font-bold group-hover:text-[#C1A468]  text-black  ">
-                        {post?.title}
-                      </span>
-                    </div>
-                    <div className="flex-shrink-0 relative rounded-lg overflow-hidden size-20">
-                      <img className="size-full absolute top-0 start-0 object-cover  rounded-lg" src={post?.imageUrl} alt="Image Description" />
-                    </div>
-                  </a>
+                  .slice(0, 5).map((post, index) => (
+                    <a key={post._id} className="group flex items-center gap-x-6" href={`/blog/${post._id}`}>
+                      <div className="grow">
+                        <span className="text-sm font-bold group-hover:text-[#C1A468]  text-black  ">
+                          {post?.title}
+                        </span>
+                      </div>
+                      <div className="flex-shrink-0 relative rounded-lg overflow-hidden size-20">
+                        <img className="size-full absolute top-0 start-0 object-cover  rounded-lg" src={post?.imageUrl} alt="Image Description" />
+                      </div>
+                    </a>
 
-                ))
+                  ))
               }
 
             </div>
