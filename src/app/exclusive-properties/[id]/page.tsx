@@ -1,23 +1,29 @@
 "use client"
-import Container from '@/components/Containers/Container'
-import Breadcrumb from '@/components/Property/Breadcrumb'
-import React from 'react'
+import Container from '@/components/Containers/Container';
+import Breadcrumb from '@/components/Property/Breadcrumb';
 import { CiHeart } from "react-icons/ci";
+import { FaMap, FaRegCalendarAlt } from "react-icons/fa";
 import { FiShare2 } from "react-icons/fi";
-import { MdOutlineLocalPrintshop } from "react-icons/md";
-import { FaRegHeart } from "react-icons/fa";
 import { IoLocationOutline } from "react-icons/io5";
-import { CiMap } from "react-icons/ci";
-import { FaMap } from "react-icons/fa";
-import { FaRegCalendarAlt } from "react-icons/fa";
+import { MdOutlineLocalPrintshop } from "react-icons/md";
 
+import { useKeenSlider } from "keen-slider/react"
+import "keen-slider/keen-slider.min.css"
+import Slider from '@/components/Property/Slider';
+import MontageCalculator from '@/components/Property/MontageCalculator';
 
 type Props = {}
 
 const page = (props: Props) => {
+
     return (
         <Container className='mx-auto px-11 '>
             <div className='lg:max-w-[95%] xl:max-w-[88%] mx-auto'>
+                {/* Slider Here */}
+                <section>
+                    <Slider />
+                </section>
+
                 {/* Heading  */}
                 <div className='flex justify-end sm:justify-between py-4'>
                     <div className='hidden sm:block '>
@@ -47,9 +53,9 @@ const page = (props: Props) => {
                             <h2 className='text-[14px] lg:text-[20px] xl:text-[30px] font-poppins text-[#2D2D2D]  font-semibold'>Contact Listing Agent</h2>
                         </div>
                         <div className='flex gap-3'>
-                            
-                        <span className='bg-[#000000A6] mt-1 max-w-max text-white py-1 px-2 text-[12px] hidden xl:inline-block'>FOR SALE</span>
-                        <span className='bg-[#000000A6] mt-1 max-w-max text-white py-1 px-2 text-[12px] hidden xl:inline-block'>HOT SALE</span>
+
+                            <span className='bg-[#000000A6] mt-1 max-w-max text-white py-1 px-2 text-[12px] hidden xl:inline-block'>FOR SALE</span>
+                            <span className='bg-[#000000A6] mt-1 max-w-max text-white py-1 px-2 text-[12px] hidden xl:inline-block'>HOT SALE</span>
                         </div>
                         <div className='text-[#636363] mt-1 text-[14px] xl:text-[16px] flex items-center gap-2 py-2'>
                             <div><IoLocationOutline fontSize={20} /></div>
@@ -71,10 +77,10 @@ const page = (props: Props) => {
                                 </figure>
 
                             </div>
-                        
+
                             <div className='my-6'>
-                            <p className="text-[#636363] mb-2 text-[15px]">At preline, our mission has always been focused on bringing openness and transparency to the design process. We've always believed that by providing a space where designers can share ongoing work not only empowers them to make better products, it also helps them grow.</p>
-                            <p className="text-[#636363] mb-2 text-[15px]">We're proud to be a part of creating a more open culture and to continue building a product that supports this vision.</p>
+                                <p className="text-[#636363] mb-2 text-[15px]">At preline, our mission has always been focused on bringing openness and transparency to the design process. We've always believed that by providing a space where designers can share ongoing work not only empowers them to make better products, it also helps them grow.</p>
+                                <p className="text-[#636363] mb-2 text-[15px]">We're proud to be a part of creating a more open culture and to continue building a product that supports this vision.</p>
 
                             </div>
                             <div className="text-center">
@@ -204,12 +210,15 @@ const page = (props: Props) => {
 
 
                 <section className='my-5 font-poppins'>
-                    <div>
+                    <div className='mb-[25px]'>
                         <div className='mb-[25px] flex justify-between '>
                             <h1 className='text-[18px] text-[#2D2D2D] '>Mortgage Calculator</h1>
-
                         </div>
                         <div className='border-[1px] border-b-gray-50 '></div>
+                    </div>
+                    <div>
+                        
+                    <MontageCalculator />
                     </div>
                 </section>
             </div >
