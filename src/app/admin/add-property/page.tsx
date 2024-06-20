@@ -1,7 +1,11 @@
 "use client";
 
 import axios from "axios";
-import React, { useState } from "react";
+import dynamic from "next/dynamic";
+import React, { useRef, useState } from "react";
+import { IoAddCircleOutline } from "react-icons/io5";
+
+const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 interface PropertyData {
   propertyId: string;
@@ -16,7 +20,7 @@ interface PropertyData {
     country: string;
   };
   zoning: string;
-  areaSize: number;
+  areaSize: string;
   gmapLink?: string; // Optional
   overview: string;
   yearBuilt: number;
@@ -26,6 +30,7 @@ interface PropertyData {
   };
   propertyType: string;
   images: File[];
+  singleImage: File | null;
   propertyDocuments: {
     name: string;
     url: string;
@@ -34,6 +39,8 @@ interface PropertyData {
 }
 
 const AddProperty = () => {
+  const editor = useRef(null);
+  const [useEditor, setUseEditor] = useState(false);
   const [formData, setFormData] = useState<PropertyData>({
     propertyId: "",
     title: "",
@@ -47,7 +54,7 @@ const AddProperty = () => {
       country: "",
     },
     zoning: "",
-    areaSize: 0,
+    areaSize: "",
     overview: "",
     yearBuilt: 0,
     potentialHome: {
@@ -56,12 +63,35 @@ const AddProperty = () => {
     },
     propertyType: "",
     propertyDocuments: [],
+    singleImage: null,
     images: [],
     description: "",
     gmapLink: "",
   });
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEditorChange = (newContent: string) => {
+    setFormData({ ...formData, description: newContent });
+  };
+
+  const handleSingleImageChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setFormData({
+        ...formData,
+        singleImage: event.target.files[0],
+      });
+    } else {
+      setFormData({
+        ...formData,
+        singleImage: null,
+      });
+    }
+  };
+
+  const handleMultipleFileChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (event.target.files) {
       setFormData({
         ...formData,
@@ -78,550 +108,632 @@ const AddProperty = () => {
     try {
       const response = await axios.post("/api/admin/property", formData, {
         headers: {
-          // Add any necessary headers, e.g., authorization token
-          "Content-Type": "multipart/form-data", // Required for file uploads
+          "Content-Type": "multipart/form-data",
         },
       });
 
       console.log("Property added successfully:", response);
     } catch (error) {
-      console.error("Error submitting property:", error); // Handle errors
+      console.error("Error submitting property:", error);
     }
   };
 
   return (
     <div className="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
       <form onSubmit={handleSumbit}>
-        <div className="bg-white rounded-xl shadow">
-          <div className="pt-0 p-4 sm:pt-0 sm:p-7">
-            <div className="space-y-4 sm:space-y-6">
+        {/* Property Details Start Here Here */}
+        <section
+          id="propertydetails"
+          className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent"
+        >
+          <div className="sm:col-span-12">
+            <h2 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
+              Property Details
+            </h2>
+          </div>
 
+          {/* Property ID */}
+          <div className="sm:col-span-3">
+            <label
+              htmlFor="af-submit-application-full-name"
+              className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+            >
+              Property ID
+            </label>
+          </div>
+          <div className="sm:col-span-9">
+            <div className="sm:flex">
+              <input
+                id="af-submit-application-full-name"
+                placeholder="Enter Your Property ID"
+                type="text"
+                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                value={formData.propertyId}
+                onChange={(e) =>
+                  setFormData({ ...formData, propertyId: e.target.value })
+                }
+              />
+            </div>
+          </div>
 
-              {/* Details and Additional Details */}
-              <div>
-                <div className="text-xl py-2 mt-10">
-                  Details
-                </div>
+          {/* Property Name */}
+          <div className="sm:col-span-3">
+            <label
+              htmlFor="af-submit-application-email"
+              className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+            >
+              Property Name
+            </label>
+          </div>
+          <div className="sm:col-span-9">
+            <input
+              id="af-submit-application-email"
+              type="text"
+              placeholder="Enter Your Property Name"
+              className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              value={formData.title}
+              onChange={(e) =>
+                setFormData({ ...formData, title: e.target.value })
+              }
+            />
+          </div>
 
+          {/* Property Price */}
+          <div className="sm:col-span-3">
+            <div className="inline-block">
+              <label
+                htmlFor="af-submit-application-phone"
+                className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+              >
+                Property Price
+              </label>
+            </div>
+          </div>
+          <div className="sm:col-span-9">
+            <input
+              id="af-submit-application-phone"
+              type="number"
+              className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              placeholder="Enter Property Price"
+              value={formData.price}
+              onChange={(e) =>
+                setFormData({ ...formData, price: e.target.value })
+              }
+            />
+          </div>
 
-                <div className="space-y-2">
-                  <label
-                    htmlFor="af-submit-app-project-name"
-                    className="inline-block text-sm font-medium text-gray-800 mt-2.5"
-                  >
-                    Property ID
-                  </label>
-                  <input
-                    id="af-submit-app-project-name"
-                    type="text"
-                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                    placeholder="Enter project name"
-                    value={formData.propertyId}
-                    onChange={(e) =>
-                      setFormData({ ...formData, propertyId: e.target.value })
-                    }
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="af-submit-app-project-name"
-                    className="inline-block text-sm font-medium text-gray-800 mt-2.5"
-                  >
-                    Property name
-                  </label>
-                  <input
-                    id="af-submit-app-project-name"
-                    type="text"
-                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                    placeholder="Enter project name"
-                    value={formData.title}
-                    onChange={(e) =>
-                      setFormData({ ...formData, title: e.target.value })
-                    }
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="af-submit-app-project-name"
-                    className="inline-block text-sm font-medium text-gray-800 mt-2.5"
-                  >
-                    Property price
-                  </label>
-                  <input
-                    id="af-submit-app-project-name"
-                    type="number"
-                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                    placeholder="Enter project price"
-                    value={formData.price}
-                    onChange={(e) =>
-                      setFormData({ ...formData, price: e.target.value })
-                    }
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="af-submit-app-project-name"
-                    className="inline-block text-sm font-medium text-gray-800 mt-2.5"
-                  >
-                    Property status (Sold)
-                  </label>
-                  <label
-                    htmlFor="AcceptConditions"
-                    className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-green-500"
-                  >
-                    <input
-                      type="checkbox"
-                      id="AcceptConditions"
-                      className="peer sr-only [&:checked_+_span_svg[data-checked-icon]]:block [&:checked_+_span_svg[data-unchecked-icon]]:hidden"
-                      checked={formData.sold}
-                      onChange={(e) =>
-                        setFormData({ ...formData, sold: !formData.sold })
-                      }
-                    />
-
-                    <span className="absolute inset-y-0 start-0 z-10 m-1 inline-flex size-6 items-center justify-center rounded-full bg-white text-gray-400 transition-all peer-checked:start-6 peer-checked:text-green-600">
-                      <svg
-                        data-unchecked-icon
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-
-                      <svg
-                        data-checked-icon
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="hidden h-4 w-4"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </span>
-                  </label>
-                </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="af-submit-app-project-name"
-                    className="inline-block text-sm font-medium text-gray-800 mt-2.5"
-                  >
-                    Property LandArea
-                  </label>
-                  <input
-                    id="af-submit-app-project-name"
-                    type="text"
-                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                    placeholder="Enter project name"
-                  />
-                </div>
-
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="af-submit-app-project-name"
-                    className="inline-block text-sm font-medium text-gray-800 mt-2.5"
-                  >
-                    Property Area Size:
-                  </label>
-                  <input
-                    id="af-submit-app-project-name"
-                    type="text"
-                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                    placeholder="Enter project name"
-                  />
-                </div>
-
-                <p>Here Give One Add More Field Option </p>
+          {/* Property Area Size */}
+          <div className="sm:col-span-3">
+            <div className="inline-block">
+              <label
+                htmlFor="af-submit-application-phone"
+                className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+              >
+                Property Area Size
+              </label>
+            </div>
+          </div>
+          <div className="sm:col-span-9">
+            <input
+              id="af-submit-application-phone"
+              type="number"
+              className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              placeholder="Enter Property Area Size"
+              value={formData.areaSize}
+              onChange={(e) =>
+                setFormData({ ...formData, areaSize: e.target.value })
+              }
+            />
+          </div>
+          {/* Add More Fields */}
+          <div className="col-span-12 ">
+            <fieldset className="border flex flex-col gap-4 border-gray-300 rounded-md p-4">
+              <legend className="text-sm font-medium text-gray-500 px-2">
+                Extra Fields for Property
+              </legend>
+              <p>
+                You can add Your Extra Details Here for example Bedrooms,room...
+              </p>
+              <div className="mt-3  flex justify-end  rounded-sm">
+                <button className="inline-flex bg-blue-600 rounded-md text-white py-2 px-4 items-center gap-x-1 text-sm decoration-2 hover:underline font-medium ">
+                  <IoAddCircleOutline />
+                  Add More Field
+                </button>
               </div>
 
-              <div>
-                <div className="text-xl py-2 mt-10">
-                  Addetional Details (Optional)
-                </div>
-                <p>
-                  Give Add More Field Option
-                </p>
-              </div>
-
-
-
-              <div>
-
-                <div className="text-xl py-2 mt-10">
-                  Address
-                </div>
-
-                {/* Adddress Section */}
-                <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
-
-                  <div className="h-32 rounded-lg">
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="af-submit-project-url"
-                        className="inline-block text-sm font-medium text-gray-800 mt-2.5"
-                      >
-                        Address
-                      </label>
-
-                      <input
-                        id="af-submit-project-url"
-                        type="text"
-                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                        placeholder="https://example.so"
-                        value={formData.address.fullAddress}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            address: {
-                              ...formData.address,
-                              fullAddress: e.target.value,
-                            },
-                          })
-                        }
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="af-submit-project-url"
-                        className="inline-block text-sm font-medium text-gray-800 mt-2.5"
-                      >
-                        Country
-                      </label>
-
-                      <input
-                        id="af-submit-project-url"
-                        type="text"
-                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                        placeholder="https://example.so"
-                        value={formData.address.country}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            address: {
-                              ...formData.address,
-                              country: e.target.value,
-                            },
-                          })
-                        }
-                      />
-                    </div>
-                  </div>
-                  <div className="h-32 rounded-lg">
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="af-submit-project-url"
-                        className="inline-block text-sm font-medium text-gray-800 mt-2.5"
-                      >
-                        City
-                      </label>
-
-                      <input
-                        id="af-submit-project-url"
-                        type="text"
-                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                        placeholder="https://example.so"
-                        value={formData.address.city}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            address: {
-                              ...formData.address,
-                              city: e.target.value,
-                            },
-                          })
-                        }
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="af-submit-project-url"
-                        className="inline-block text-sm font-medium text-gray-800 mt-2.5"
-                      >
-                        Zip or Postal Code
-                      </label>
-
-                      <input
-                        id="af-submit-project-url"
-                        type="text"
-                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                        placeholder="https://example.so"
-                        value={formData.address.zipOrPostalCode}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            address: {
-                              ...formData.address,
-                              zipOrPostalCode: e.target.value,
-                            },
-                          })
-                        }
-                      />
-                    </div>
-                  </div>
-                  <div className="h-32 rounded-lg">
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="af-submit-project-url"
-                        className="inline-block text-sm font-medium text-gray-800 mt-2.5"
-                      >
-                        State
-                      </label>
-
-                      <input
-                        id="af-submit-project-url"
-                        type="text"
-                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                        placeholder="https://example.so"
-                        value={formData.address.state}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            address: {
-                              ...formData.address,
-                              state: e.target.value,
-                            },
-                          })
-                        }
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="af-submit-project-url"
-                        className="inline-block text-sm font-medium text-gray-800 mt-2.5"
-                      >
-                        Property Map Location URL
-                      </label>
-
-                      <input
-                        id="af-submit-project-url"
-                        type="text"
-                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                        placeholder="https://example.so"
-                        value={formData.gmapLink}
-                        onChange={(e) =>
-                          setFormData({ ...formData, gmapLink: e.target.value })
-                        }
-                      />
-                    </div>
-                  </div>
+              <div className="sm:col-span-9">
+                <div className="sm:flex">
+                  <input
+                    id="af-submit-application-full-name"
+                    placeholder="Bedrooms"
+                    type="text"
+                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Enter Value Name"
+                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                  />
                 </div>
               </div>
-
-              <div className="font-bold flex-col gap-4">
-                <div className="text-xl py-2 mt-10">
-                  Description
-                </div>
-                <div>
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="af-submit-app-upload-images"
-                      className="inline-block text-sm font-medium text-gray-800 mt-2.5"
-                    >
-                      Single Image Required
-                    </label>
-
-                    <label
-                      htmlFor="af-submit-app-upload-images"
-                      className="group p-4 sm:p-7 block cursor-pointer text-center border-2 border-dashed border-gray-200 rounded-lg focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2"
-                    >
-                      <input
-                        id="af-submit-app-upload-images"
-                        name="af-submit-app-upload-images"
-                        type="file"
-                        className="sr-only"
-                        multiple
-                        accept="image/*"
-                        onChange={handleFileChange}
-                      />
-                      <svg
-                        className="size-10 mx-auto text-gray-400"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2z"
-                        />
-                        <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
-                      </svg>
-                      <span className="mt-2 block text-sm text-gray-800">
-                        Browse your device or{" "}
-                        <span className="group-hover:text-blue-700 text-blue-600">
-                          drag 'n drop'
-                        </span>
-                      </span>
-                      <span className="mt-1 block text-xs text-gray-500">
-                        Maximum file size is 2 MB
-                      </span>
-                    </label>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="af-submit-app-description"
-                    className="inline-block text-sm font-medium text-gray-800 mt-2.5"
-                  >
-                    Description/RTE Same as blog give option
-                  </label>
-
-                  <textarea
-                    id="af-submit-app-description"
-                    className="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                    rows={6}
-                    placeholder="A detailed summary will better explain your products to the audiences. Our users will see this in your dedicated product page."
-                    value={formData.description}
-                    onChange={(e) =>
-                      setFormData({ ...formData, description: e.target.value })
-                    }
-                  ></textarea>
-
-                  {/*  */}
-                  <div>
-                    <label
-                      htmlFor="af-submit-app-description"
-                      className="inline-block text-sm font-medium text-gray-800 mt-2.5"
-                    >
-                      MultiImage Image Give Radio Button for multi image
-                    </label>
-                    <div>
-                      <input
-                        name="af-submit-app-upload-images"
-                        type="file"
-                        accept="image/*"
-                        onChange={handleFileChange}
-                      />
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="font-bold flex-col gap-4">
-                <div className="text-xl py-2 mt-10">
-                  Mortgage Calculator
-                </div>
-
-                <div className="space-y-2">
+            </fieldset>
+          </div>
+        </section>
+        {/* Property Details End Here */}
+        {/* Address  Section Start Here */}
+        <section className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
+          <div className="sm:col-span-12">
+            <h2 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
+              Address
+            </h2>
+          </div>
+          {/* Address  */}
+          <div className="col-span-12 ">
+            <div className="sm:col-span-9">
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-5">
+                {/* Address */}
+                <div className="w-full">
                   <label
                     htmlFor="af-submit-project-url"
-                    className="inline-block text-sm font-medium text-gray-800 mt-2.5"
+                    className="inline-block text-sm font-medium mb-2 text-gray-800 mt-2.5"
                   >
-                    Principal & Interest
+                    Address
                   </label>
-
                   <input
-                    id="af-submit-project-url"
+                    id="af-submit-application-phone"
                     type="text"
-                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                    placeholder="https://example.so"
+                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    placeholder="Enter Full Address"
+                    value={formData.address.fullAddress}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        address: {
+                          ...formData.address,
+                          fullAddress: e.target.value,
+                        },
+                      })
+                    }
                   />
                 </div>
-                <div className="space-y-2">
+
+                {/* State */}
+                <div className="w-full">
                   <label
                     htmlFor="af-submit-project-url"
-                    className="inline-block text-sm font-medium text-gray-800 mt-2.5"
+                    className="inline-block text-sm mb-2 font-medium text-gray-800 mt-2.5"
+                  >
+                    State
+                  </label>
+                  <input
+                    id="af-submit-application-phone"
+                    type="text"
+                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    placeholder="Enter State"
+                    value={formData.address.state}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        address: {
+                          ...formData.address,
+                          state: e.target.value,
+                        },
+                      })
+                    }
+                  />
+                </div>
+
+                {/* City */}
+                <div className="w-full">
+                  <label
+                    htmlFor="af-submit-project-url"
+                    className="inline-block text-sm mb-2 font-medium text-gray-800 mt-2.5"
+                  >
+                    City
+                  </label>
+                  <input
+                    id="af-submit-application-phone"
+                    type="text"
+                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    placeholder="Enter City"
+                    value={formData.address.city}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        address: {
+                          ...formData.address,
+                          city: e.target.value,
+                        },
+                      })
+                    }
+                  />
+                </div>
+
+                {/* Country */}
+                <div className="w-full">
+                  <label
+                    htmlFor="af-submit-project-url"
+                    className="inline-block text-sm mb-2 font-medium text-gray-800 mt-2.5"
+                  >
+                    Country
+                  </label>
+                  <input
+                    id="af-submit-application-phone"
+                    type="text"
+                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    placeholder="Enter Country"
+                    value={formData.address.country}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        address: {
+                          ...formData.address,
+                          country: e.target.value,
+                        },
+                      })
+                    }
+                  />
+                </div>
+
+                {/* Zip or Postal Code */}
+                <div className="w-full">
+                  <label
+                    htmlFor="af-submit-project-url"
+                    className="inline-block text-sm mb-2 font-medium text-gray-800 mt-2.5"
+                  >
+                    Zip or Postal Code
+                  </label>
+                  <input
+                    id="af-submit-application-phone"
+                    type="text"
+                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    placeholder="Enter Zip or Postal Code"
+                    value={formData.address.zipOrPostalCode}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        address: {
+                          ...formData.address,
+                          zipOrPostalCode: e.target.value,
+                        },
+                      })
+                    }
+                  />
+                </div>
+
+                {/* Property Map Location URL */}
+                <div className="w-full">
+                  <label
+                    htmlFor="af-submit-project-url"
+                    className="inline-block text-sm mb-2 font-medium text-gray-800 mt-2.5"
+                  >
+                    Property Map Location URL
+                  </label>
+                  <input
+                    id="af-submit-application-phone"
+                    type="text"
+                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    placeholder="Enter Map Location URL"
+                    value={formData.gmapLink}
+                    onChange={(e) =>
+                      setFormData({ ...formData, gmapLink: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* Address section End Here */}
+        {/* Description Section Start Here */}
+        <div className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
+          <div className="sm:col-span-12">
+            <h2 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
+              Description
+            </h2>
+          </div>
+
+          {/* Hero Image */}
+          <div className="sm:col-span-3">
+            <label
+              htmlFor="af-submit-application-resume-cv"
+              className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+            >
+              Hero Image /Signle Image
+            </label>
+          </div>
+          <div className="sm:col-span-9">
+            <label
+              htmlFor="af-submit-application-resume-cv"
+              className="sr-only"
+            >
+              Choose file
+            </label>
+            <input
+              type="file"
+              name="af-submit-application-resume-cv"
+              id="af-submit-application-resume-cv"
+              className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
+              accept="image/*"
+              // onChange={handleSingleImageChange}
+            />
+          </div>
+          {/* Here Come Rte */}
+
+          <div className="col-span-full">
+            <div className="flex items-center mb-4">
+              <label
+                htmlFor="AcceptConditions"
+                className="block text-sm font-medium leading-6 text-gray-900 mr-10"
+              >
+                Use Advance Editor
+              </label>
+              <label
+                htmlFor="AcceptConditions"
+                className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-indigo-600"
+              >
+                <input
+                  type="checkbox"
+                  id="AcceptConditions"
+                  className="peer sr-only"
+                  checked={useEditor}
+                  onChange={() => setUseEditor(!useEditor)}
+                />
+
+                <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
+              </label>
+            </div>
+
+            <label
+              htmlFor="content"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Content
+            </label>
+
+            {useEditor ? (
+              <JoditEditor
+                ref={editor}
+                value={formData.description}
+                config={{ readonly: false }}
+                onBlur={(newContent) => handleEditorChange(newContent)}
+                onChange={() => {}}
+                className="showList "
+              />
+            ) : (
+              <textarea
+                id="about"
+                name="content"
+                rows={8}
+                cols={20}
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                value={formData.description}
+                onChange={(e) =>
+                  setFormData({ ...formData, description: e.target.value })
+                }
+              />
+            )}
+          </div>
+          {/* Here Decription is over */}
+          <div className="sm:col-span-3">
+            <label
+              htmlFor="af-submit-application-resume-cv"
+              className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+            >
+              Multi Image
+            </label>
+          </div>
+          <div className="sm:col-span-9">
+            <label
+              htmlFor="af-submit-application-resume-cv"
+              className="sr-only"
+            >
+              Choose file
+            </label>
+            <input
+              type="file"
+              multiple
+              name="af-submit-application-resume-cv"
+              id="af-submit-application-resume-cv"
+              className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
+              accept="image/*"
+              onChange={handleMultipleFileChange}
+            />
+          </div>
+        </div>
+        {/* Description Section End Here */}
+        {/* Slider Section Start Here */}
+        <section className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
+          {/* <div className="sm:col-span-12">
+            <h2 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
+              Slider With Toggle{" "}
+            </h2>
+          </div> */}
+
+          {/* <div className="col-span-full">
+            <div className="flex items-center mb-4">
+              <label
+                htmlFor="AcceptConditions"
+                className="block text-sm font-medium leading-6 text-gray-900 mr-10"
+              >
+                Do You Went Slider?
+              </label>
+              <label
+                htmlFor="AcceptConditions"
+                className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-indigo-600"
+              >
+                <input
+                  type="checkbox"
+                  id="AcceptConditions"
+                  className="peer sr-only"
+                  // checked={useEditor}
+                  // onChange={() => setUseEditor(!useEditor)}
+                />
+
+                <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
+              </label>
+            </div>
+          </div> */}
+          {/* Slider Imaged */}
+          {/* <div className="sm:col-span-3">
+            <label
+              htmlFor="af-submit-application-resume-cv"
+              className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+            >
+              Slider Images
+            </label>
+          </div>
+          <div className="sm:col-span-9">
+            <label
+              htmlFor="af-submit-application-resume-cv"
+              className="sr-only"
+            >
+              Choose file
+            </label>
+            <input
+              type="file"
+              multiple
+              name="af-submit-application-resume-cv"
+              id="af-submit-application-resume-cv"
+              className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
+            />
+          </div> */}
+        </section>
+        {/* Slider Section End Here */}
+        {/* Mortgage Calculator Start Here */}
+        <section className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
+          <div className="sm:col-span-12">
+            <h2 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
+              Mortgage Calculator{" "}
+            </h2>
+          </div>
+          {/* Mortgage Calculator  */}
+          <div className="col-span-12 ">
+            <div className="sm:col-span-9">
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-5">
+                {/* Total Amount */}
+                <div className="w-full">
+                  <label
+                    htmlFor="af-submit-project-url"
+                    className="inline-block text-sm font-medium mb-2 text-gray-800 mt-2.5"
+                  >
+                    Total Amount
+                  </label>
+                  <input
+                    id="af-submit-application-phone"
+                    type="text"
+                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    placeholder="$1"
+                  />
+                </div>
+
+                {/* Down Payment*/}
+                <div className="w-full">
+                  <label
+                    htmlFor="af-submit-project-url"
+                    className="inline-block text-sm mb-2 font-medium text-gray-800 mt-2.5"
+                  >
+                    Down Payment
+                  </label>
+                  <input
+                    id="af-submit-application-phone"
+                    type="text"
+                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    placeholder="$1"
+                  />
+                </div>
+
+                {/* Interest Rate */}
+                <div className="w-full">
+                  <label
+                    htmlFor="af-submit-project-url"
+                    className="inline-block text-sm mb-2 font-medium text-gray-800 mt-2.5"
+                  >
+                    Interest Rate
+                  </label>
+                  <input
+                    id="af-submit-application-phone"
+                    type="text"
+                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    placeholder="%"
+                  />
+                </div>
+
+                {/* Loan Terms (Years) */}
+                <div className="w-full">
+                  <label
+                    htmlFor="af-submit-project-url"
+                    className="inline-block text-sm mb-2 font-medium text-gray-800 mt-2.5"
+                  >
+                    Loan Terms (Years)
+                  </label>
+                  <input
+                    id="af-submit-application-phone"
+                    type="text"
+                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    placeholder="1 year"
+                  />
+                </div>
+
+                {/* Property Tax */}
+                <div className="w-full">
+                  <label
+                    htmlFor="af-submit-project-url"
+                    className="inline-block text-sm mb-2 font-medium text-gray-800 mt-2.5"
                   >
                     Property Tax
                   </label>
-
                   <input
-                    id="af-submit-project-url"
+                    id="af-submit-application-phone"
                     type="text"
-                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                    placeholder="https://example.so"
+                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    placeholder="$1"
                   />
                 </div>
-                <div className="space-y-2">
+
+                {/* Home Insurance */}
+                <div className="w-full">
                   <label
                     htmlFor="af-submit-project-url"
-                    className="inline-block text-sm font-medium text-gray-800 mt-2.5"
+                    className="inline-block text-sm mb-2 font-medium text-gray-800 mt-2.5"
                   >
                     Home Insurance
                   </label>
-
                   <input
-                    id="af-submit-project-url"
+                    id="af-submit-application-phone"
                     type="text"
-                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                    placeholder="https://example.so"
+                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    placeholder="$1"
                   />
                 </div>
-                <div className="space-y-2">
+
+                {/* PMI */}
+                <div className="w-full">
                   <label
                     htmlFor="af-submit-project-url"
-                    className="inline-block text-sm font-medium text-gray-800 mt-2.5"
+                    className="inline-block text-sm mb-2 font-medium text-gray-800 mt-2.5"
                   >
                     PMI
                   </label>
-
                   <input
-                    id="af-submit-project-url"
+                    id="af-submit-application-phone"
                     type="text"
-                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                    placeholder="https://example.so"
+                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    placeholder="$1"
                   />
                 </div>
               </div>
-
-              <div className="font-bold flex-col gap-4">
-                <div className="text-xl py-2 mt-10">
-                  Slider (Give Radio Button)
-                </div>
-
-                <div className="space-y-2">
-                  {/*  */}
-                  <div>
-                    <label
-                      htmlFor="af-submit-app-description"
-                      className="inline-block text-sm font-medium text-gray-800 mt-2.5"
-                    >
-                      MultiImage Image For Slider
-                    </label>
-                    <div>
-                      <input
-                        name="af-submit-app-upload-images"
-                        type="file"
-                        accept="image/*"
-                        onChange={handleFileChange}
-                      />
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-
-            </div>
-
-            <div className="mt-5 flex justify-center gap-x-2">
-              <button
-                type="submit"
-                className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-              >
-                Submit your project
-              </button>
             </div>
           </div>
+        </section>
+        {/* Mortgage Calculator End Here */}
+        <div className="mt-5 flex justify-center gap-x-2">
+          <button
+            type="submit"
+            className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+          >
+            Submit your project
+          </button>
         </div>
       </form>
     </div>
