@@ -9,7 +9,7 @@ import { MdOutlineLocalPrintshop } from "react-icons/md";
 
 import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
-import Slider from '@/components/Property/Slider';
+import Slider from '@/components/Property/Slider';  
 import MontageCalculator from '@/components/Property/MontageCalculator';
 
 type Props = {}

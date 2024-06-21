@@ -90,6 +90,8 @@ export async function GET(req: NextRequest) {
     const blogs = await blogsQuery.exec();
     const totalCount = await Blog.countDocuments(); // Total count of all documents
 
+    console.log(blogs);
+    
 
     return NextResponse.json({
       blogs,

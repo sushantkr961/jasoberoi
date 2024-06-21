@@ -7,11 +7,12 @@ import React from "react";
 import data from "../../data/Contributions/data.json";
 import MusicCard from "@/components/Contributions/MusicCard";
 import Carousel from "@/components/Carousel/Carousel";
+import GalleryCarousel from "@/components/Carousel/GalleryCarsouel";
 
 type Props = {};
 
 const imageUrls = [
-    "/assets/ourcontributions/asset 178.png",
+    "/assets/   /asset 178.png",
     "/assets/ourcontributions/asset 179.png",
     "/assets/ourcontributions/asset 180.png",
     "/assets/ourcontributions/asset 181.png",
@@ -23,7 +24,7 @@ const imageUrls = [
     "/assets/ourcontributions/asset 187.png",
     "/assets/ourcontributions/asset 188.png",
     "/assets/ourcontributions/asset 189.png",
-  ];
+];
 
 function page({ }: Props) {
     const { music, sponsors } = data;
@@ -335,21 +336,22 @@ function page({ }: Props) {
 
                 {/* Add Slider in this section */}
                 {/* GALLERY OF THE NIGHT */}
-                <div className="py-[8%]">
+                <div className="py-[8%] overflow-hidden">
                     <div className="w-full   m-auto flex flex-col justify-center items-center ">
                         <div className="border-t-4  mb-3 border-white w-full" />
                         <div className="flex flex-col justify-center items-center gap-5  md:gap-7 text-center">
                             <h2 className="text-white text-[25px] md:text-[39px] leading-[1.4em] text-center tracking-[4.2px] md:tracking-[6.7px]">
-                            GALLERY OF THE NIGHT
+                                GALLERY OF THE NIGHT
                             </h2>
                         </div>
-                        <div className="w-full flex  flex-col gap-16 mt-10">
+                        <div className="flex justify-center space-x-2 py-4">
                             {/*  GALLERY OF THE NIGHT Slide Here*/}
-                            <Carousel imageUrls={imageUrls} backgroundColor="none" fullScreen={true} />
+                            {/* <Carousel imageUrls={imageUrls} backgroundColor="none" fullScreen={false} className={"h-150 object-cover"} /> */}
+                            <GalleryCarousel />
                         </div>
                     </div>
                 </div>
-                
+
                 {/* Add Slider in this section */}
                 {/* THANK YOU TO OUR DONORS */}
                 <div className="">
@@ -440,12 +442,26 @@ function page({ }: Props) {
                                     }
                                 </div>
 
+                                {/* <div className="grid md:hidden  grid-cols-2  place-items-center gap-4 justify-between">
+                                    {
+                                        [182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195].map((data) => (
+                                            <Image
+                                                src={`/assets/ourcontributions/asset ${data}.png`}
+                                                height={700}
+                                                width={580}
+                                                alt="cluture"
+                                                layout="responsive"
+                                                className="object-cover w-[200px]"
+                                            />
+                                        ))
+                                    }
+                                </div> */}
                                 {/* Sponse Two Carousel right left */}
-                                {/* <Container>
+                                <Container>
                                     <div className="flex justify-center space-x-2 py-4 overflow-hidden">
-                                        <CarouselSponsors />
+                                        {/* <Carousel imageUrls={imageUrls} backgroundColor="none" fullScreen={false} className={"h-150 object-cover"} /> */}
                                     </div>
-                                </Container> */}
+                                </Container>
                             </div>
                         </div>
                     </div>

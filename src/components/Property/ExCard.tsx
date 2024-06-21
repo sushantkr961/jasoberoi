@@ -20,19 +20,19 @@ const ExCard = ({
     imageUrl
 }: Props) => {
     
-    const [liked, setLiked] = useState(() => {
-        return JSON.parse(localStorage.getItem('liked')!) || false;
-    });
+    // const [liked, setLiked] = useState(() => {
+    //     return JSON.parse(localStorage.getItem('liked')!) || false;
+    // });
 
-    // Effect to update local storage whenever the liked state changes
-    useEffect(() => {
-        localStorage.setItem('liked', JSON.stringify(liked));
-    }, [liked]);
+    // // Effect to update local storage whenever the liked state changes
+    // useEffect(() => {setLiked
+    //     localStorage.setItem('liked', JSON.stringify(liked));
+    // }, [liked]);
 
     // Toggle the liked state
-    const toggleLike = () => {
-        setLiked((prevLiked:boolean) => !prevLiked);
-    };
+    // const toggleLike = () => {
+    //     setLiked((prevLiked:boolean) => !prevLiked);
+    // };
 
     return (
         <div className=" max-w-[600px] group w-full rounded-md overflow-hidden">
@@ -49,8 +49,8 @@ const ExCard = ({
                     <button className='' style={{ backgroundColor: "rgba(0, 0, 0, 0.35)" }}>
                         <AiOutlineFullscreen></AiOutlineFullscreen>
                     </button>
-                    <button className='' style={{ backgroundColor: "rgba(0, 0, 0, 0.35)" }} onClick={toggleLike}>
-                        {liked ? <CiHeart /> : <CiHeart className='text-red-900'/>}
+                    <button className='' style={{ backgroundColor: "rgba(0, 0, 0, 0.35)" }} >
+                        {/* {liked ? <CiHeart /> : <CiHeart className='text-red-900'/>} */}
                     </button>
                 </div>
             </div>
