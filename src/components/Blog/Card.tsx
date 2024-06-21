@@ -1,5 +1,6 @@
-import truncate  from 'html-truncate';
 import parse from 'html-react-parser';
+import truncate from 'html-truncate';
+import Link from 'next/link';
 
 type Props = {
     _id: string;
@@ -18,7 +19,7 @@ const Card = ({
 }: Props) => {
     const truncatedContent = truncate(content, 100);
     const parsedContent = parse(truncatedContent);
-
+    
     return (
         <div key={_id} className="group w-full rounded-md overflow-hidden">
             <div className="flex items-center relative z-0 md:min-h-[250px]">
@@ -31,7 +32,7 @@ const Card = ({
                 <p className="text-[#636363] mb-2 text-[15px] " style={{ fontSize: "15px !important" }}>
                     {parsedContent}
                 </p>
-                <a href={`/blog/${_id}`} className="cursor-pointer text-[15px] text-[#C1A468] font-semibold">Read more..</a>
+                <Link href={`/blog/${_id}`} className="cursor-pointer text-[15px] text-[#C1A468] font-semibold">Read more..</Link>
             </div>
         </div>
     );

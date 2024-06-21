@@ -5,6 +5,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import truncate from 'html-truncate';
 import parse from 'html-react-parser';
+import Loader from '@/components/Loader/Loader';
 
 interface Post {
   _id: string;
@@ -41,29 +42,40 @@ const Post = ({ params }: any) => {
     author: "",
     createdAt: "",
   });
-  useEffect(() => {
+
+  const [loader, setLoader] = useState<boolean>();
+
+  useEffect(() => { 
+    setLoader(true);
     const fetchPosts = async () => {
       try {
         const response = await axios.get(`/api/admin/blog`);
-
-        setPosts(response.data);
+        setPosts(response.data.blogs);
+        setLoader(false);
       } catch (error) {
         console.error("Failed to fetch posts:", error);
+        setLoader(false);
       }
     };
     const fetchSinglePost = async () => {
       try {
         const response = await axios.get(`/api/admin/blog/as?id=${params.id}`);
         setPost(response.data);
+        setLoader(false);
 
       } catch (error) {
         console.error("Failed to fetch posts:", error);
+        setLoader(false);
       }
     }
 
 
     Promise.all([fetchPosts(), fetchSinglePost()]);
   }, [params]);
+
+  if (loader) {
+    return <Loader />
+  }
 
   return (
 
@@ -72,10 +84,10 @@ const Post = ({ params }: any) => {
         <div className="lg:col-span-2">
           <div className="py-8 lg:pe-8">
             <div className="space-y-5 lg:space-y-8">
-              <a className="inline-flex items-center gap-x-1.5 text-sm text-[#C1a468] decoration-2 hover:underline " href="/blog">
+              <Link className="inline-flex items-center gap-x-1.5 text-sm text-[#C1a468] decoration-2 hover:underline " href="/blog" >
                 <svg className="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
                 Back to Blog
-              </a>
+              </Link>
 
               <h2 className="text-2xl font- lg:text-4xl font-poppins  lg:leading-10 ">{post?.title}</h2>
 
@@ -287,7 +299,7 @@ const Post = ({ params }: any) => {
               {
                 posts.sort((a: Post, b: Post) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) // Sort posts by createdAt in descending order
                   .slice(0, 5).map((post, index) => (
-                    <a key={post._id} className="group flex items-center gap-x-6" href={`/blog/${post._id}`}>
+                    <Link key={post._id} className="group flex items-center gap-x-6" href={`/blog/${post._id}`}>
                       <div className="grow">
                         <span className="text-sm font-bold group-hover:text-[#C1A468]  text-black  ">
                           {post?.title}
@@ -296,7 +308,7 @@ const Post = ({ params }: any) => {
                       <div className="flex-shrink-0 relative rounded-lg overflow-hidden size-20">
                         <img className="size-full absolute top-0 start-0 object-cover  rounded-lg" src={post?.imageUrl} alt="Image Description" />
                       </div>
-                    </a>
+                    </Link>
 
                   ))
               }
