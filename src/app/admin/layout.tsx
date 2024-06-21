@@ -49,7 +49,7 @@ export default function DashboardLayout({
               </button>
             </div>
             <div
-                  className="py-2 text-xl font-bold  block w-full border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                className="py-2 text-xl font-bold  block w-full border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
             
             >
 
@@ -239,7 +239,7 @@ dark:bg-neutral-800 dark:border-neutral-700
                   <li>
                     <Link
                       className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
-                      href="/admin/signup"
+                      href="/admin/add-users"
                     >
                       Add Users
                     </Link>
