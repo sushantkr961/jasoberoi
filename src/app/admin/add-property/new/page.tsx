@@ -73,33 +73,7 @@ const page = () => {
     setContent(newContent);
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      setFormData({
-        ...formData,
-        images: Array.from(event.target.files),
-      });
-    }
-  };
-
-  const handleSumbit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    console.log(4444, formData);
-
-    try {
-      const response = await axios.post("/api/admin/property", formData, {
-        headers: {
-          // Add any necessary headers, e.g., authorization token
-          "Content-Type": "multipart/form-data", // Required for file uploads
-        },
-      });
-
-      console.log("Property added successfully:", response);
-    } catch (error) {
-      console.error("Error submitting property:", error); // Handle errors
-    }
-  };
+  
 
   return (
     <div className="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
