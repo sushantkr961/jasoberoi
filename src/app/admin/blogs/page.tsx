@@ -22,6 +22,7 @@ const Blog = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [open, setOpen] = useState<boolean>(false);
   const [deletePostId, setDeletePostId] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const postsPerPage = 5;
 
@@ -65,6 +66,12 @@ const Blog = () => {
   };
 
 
+  // Filter users based on search query
+  const filteredUsers = posts.filter(posts =>
+    posts.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    posts.author.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div>
 
@@ -87,6 +94,42 @@ const Blog = () => {
 
                   <div>
                     <div className="inline-flex gap-x-2">
+
+                      <div className="hidden sm:block">
+                        <label htmlFor="icon" className="sr-only">
+                          Search
+                        </label>
+                        <div className="relative min-w-72 md:min-w-80">
+                          <div className="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4">
+                            <svg
+                              className="flex-shrink-0 size-4 text-gray-400 dark:text-neutral-400"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <circle cx="11" cy="11" r="8" />
+                              <path d="m21 21-4.3-4.3" />
+                            </svg>
+                          </div>
+                          <input
+                            type="text"
+                            id="icon"
+                            name="icon"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="py-2 px-4 ps-11 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                            placeholder="Search"
+                          />
+                        </div>
+                      </div>
+
+
                       <div className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
                         Blog
                       </div>
@@ -121,18 +164,7 @@ const Blog = () => {
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
                   <thead className="bg-gray-50 dark:bg-neutral-800">
                     <tr>
-                      <th scope="col" className="ps-6 py-3 text-start">
-                        <label htmlFor="hs-at-with-checkboxes-main" className="flex">
-                          <input
-                            type="checkbox"
-                            className="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                            id="hs-at-with-checkboxes-main"
-                          />
-                          <span className="sr-only">Checkbox</span>
-                        </label>
-                      </th>
-
-                      <th scope="col" className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3 text-start">
+                      <th scope="col" className="ps-6 pe-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
                             Name
@@ -151,26 +183,18 @@ const Blog = () => {
 
                       <th scope="col" className="px-6 py-3 text-end"></th>
                       <th scope="col" className="px-6 py-3 text-end"></th>
+                      <th scope="col" className="px-6 py-3 text-end"></th>
                     </tr>
                   </thead>
 
                   <tbody className="divide-y divide-gray-200 dark:divide-neutral-700">
-                    {posts.map((post) => (
+                    {filteredUsers.map((post) => (
                       <tr key={post._id}>
+
+
+
                         <td className="size-px whitespace-nowrap">
-                          <div className="ps-6 py-3">
-                            <label htmlFor={`post-${post._id}`} className="flex">
-                              <input
-                                type="checkbox"
-                                id={`post-${post._id}`}
-                                className="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                              />
-                              <span className="sr-only">Checkbox</span>
-                            </label>
-                          </div>
-                        </td>
-                        <td className="size-px whitespace-nowrap">
-                          <div className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                          <div className="ps-6  py-3">
                             <div className="flex items-center gap-x-3">
                               <img
                                 className="inline-block size-[38px] rounded-full"
@@ -203,16 +227,17 @@ const Blog = () => {
                         </td>
 
                         <td className="size-px whitespace-nowrap">
-                          <div className="flex items-center gap-x-2">
+                          <div className="px-6 py-1.5">
+                            <Link className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500" href="#">
+                              Edit
+                            </Link>
+                          </div>
+                        </td>
+
+                        <td className="size-px whitespace-nowrap">
+                          <div className="px-6 py-1.5">
                             <button
-                              type="button"
-                              className="py-1 px-2 rounded text-sm text-white bg-blue-600"
-                            >
-                              Update
-                            </button>
-                            <button
-                              type="button"
-                              className="py-1 px-2 rounded text-sm text-white bg-red-500"
+                              className="inline-flex items-center gap-x-1 text-sm text-red-600 decoration-2 hover:underline font-medium dark:text-blue-500"
                               onClick={() => {
                                 setDeletePostId(post._id);
                                 setOpen(true);
