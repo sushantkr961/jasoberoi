@@ -41,6 +41,8 @@ interface PropertyData {
 const AddProperty = () => {
   const editor = useRef(null);
   const [useEditor, setUseEditor] = useState(false);
+  const [toggleSlider, setToggleSlider] = useState(false);
+  const [content, setContent] = useState("");
   const [formData, setFormData] = useState<PropertyData>({
     propertyId: "",
     title: "",
@@ -455,7 +457,7 @@ const AddProperty = () => {
               id="af-submit-application-resume-cv"
               className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
               accept="image/*"
-              // onChange={handleSingleImageChange}
+            // onChange={handleSingleImageChange}
             />
           </div>
           {/* Here Come Rte */}
@@ -494,26 +496,27 @@ const AddProperty = () => {
             {useEditor ? (
               <JoditEditor
                 ref={editor}
-                value={formData.description}
+                value={content}
                 config={{ readonly: false }}
                 onBlur={(newContent) => handleEditorChange(newContent)}
-                onChange={() => {}}
-                className="showList "
+                onChange={() => { }}
+                className="showList"
               />
             ) : (
               <textarea
                 id="about"
                 name="content"
                 rows={8}
-                cols={20}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                value={formData.description}
-                onChange={(e) =>
-                  setFormData({ ...formData, description: e.target.value })
-                }
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                required
               />
             )}
+
           </div>
+
+
           {/* Here Decription is over */}
           <div className="sm:col-span-3">
             <label
@@ -543,14 +546,15 @@ const AddProperty = () => {
         </div>
         {/* Description Section End Here */}
         {/* Slider Section Start Here */}
+
         <section className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
-          {/* <div className="sm:col-span-12">
+          <div className="sm:col-span-12">
             <h2 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
               Slider With Toggle{" "}
             </h2>
-          </div> */}
+          </div>
 
-          {/* <div className="col-span-full">
+          <div className="col-span-full">
             <div className="flex items-center mb-4">
               <label
                 htmlFor="AcceptConditions"
@@ -559,47 +563,57 @@ const AddProperty = () => {
                 Do You Went Slider?
               </label>
               <label
-                htmlFor="AcceptConditions"
+                htmlFor="SliderToggle"
                 className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-indigo-600"
               >
                 <input
                   type="checkbox"
-                  id="AcceptConditions"
+                  id="SliderToggle"
                   className="peer sr-only"
-                  // checked={useEditor}
-                  // onChange={() => setUseEditor(!useEditor)}
+                  checked={toggleSlider}
+                  onChange={() => setToggleSlider(!toggleSlider)}
                 />
 
                 <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
               </label>
             </div>
-          </div> */}
-          {/* Slider Imaged */}
-          {/* <div className="sm:col-span-3">
-            <label
-              htmlFor="af-submit-application-resume-cv"
-              className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
-            >
-              Slider Images
-            </label>
           </div>
-          <div className="sm:col-span-9">
-            <label
-              htmlFor="af-submit-application-resume-cv"
-              className="sr-only"
-            >
-              Choose file
-            </label>
-            <input
-              type="file"
-              multiple
-              name="af-submit-application-resume-cv"
-              id="af-submit-application-resume-cv"
-              className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
-            />
-          </div> */}
+          {/* Slider Imaged */}
+          {
+            toggleSlider && (
+              <>
+
+                <div className="sm:col-span-3">
+                  <label
+                    htmlFor="af-submit-application-resume-cv"
+                    className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+                  >
+                    Slider Images
+                  </label>
+                </div>
+                <div className="sm:col-span-9">
+                  <label
+                    htmlFor="af-submit-application-resume-cv"
+                    className="sr-only"
+                  >
+                    Choose file
+                  </label>
+                  <input
+                    type="file"
+                    multiple
+                    name="af-submit-application-resume-cv"
+                    id="af-submit-application-resume-cv"
+                    className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
+                  />
+                </div>
+              </>
+            )
+
+          }
         </section>
         {/* Slider Section End Here */}
+
+
         {/* Mortgage Calculator Start Here */}
         <section className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
           <div className="sm:col-span-12">

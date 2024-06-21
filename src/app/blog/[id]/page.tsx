@@ -43,34 +43,32 @@ const Post = ({ params }: any) => {
     createdAt: "",
   });
 
-  const [loader, setLoader] = useState<boolean>();
+  const [loader, setLoader] = useState<boolean>(true);
 
-  useEffect(() => { 
+  useEffect(() => {
     setLoader(true);
     const fetchPosts = async () => {
       try {
         const response = await axios.get(`/api/admin/blog`);
         setPosts(response.data.blogs);
-        setLoader(false);
       } catch (error) {
         console.error("Failed to fetch posts:", error);
-        setLoader(false);
       }
     };
     const fetchSinglePost = async () => {
       try {
         const response = await axios.get(`/api/admin/blog/as?id=${params.id}`);
         setPost(response.data);
-        setLoader(false);
 
       } catch (error) {
         console.error("Failed to fetch posts:", error);
-        setLoader(false);
       }
     }
 
 
-    Promise.all([fetchPosts(), fetchSinglePost()]);
+    Promise.all([fetchPosts(), fetchSinglePost()]).then(() => {
+      setLoader(false);
+    });
   }, [params]);
 
   if (loader) {
