@@ -577,6 +577,8 @@ const AddProperty = () => {
                 <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
               </label>
             </div>
+
+
           </div>
           {/* Slider Imaged */}
           {
@@ -606,6 +608,32 @@ const AddProperty = () => {
                     className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
                   />
                 </div>
+
+                <div className="sm:col-span-3">
+                  <label
+                    htmlFor="af-submit-application-resume-cv"
+                    className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+                  >
+                    Map Image (Optional)
+                  </label>
+                </div>
+                <div className="sm:col-span-9">
+                  <label
+                    htmlFor="af-submit-application-resume-cv"
+                    className="sr-only"
+                  >
+                    Choose file
+                  </label>
+                  <input
+                    type="file"
+                    name="af-submit-application-resume-cv"
+                    id="af-submit-application-resume-cv"
+                    className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
+                    accept="image/*"
+                  // onChange={handleSingleImageChange}
+                  />
+                </div>
+
               </>
             )
 

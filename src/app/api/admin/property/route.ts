@@ -97,23 +97,40 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Handles GET requests to retrieve all blog posts
 export async function GET(req: NextRequest) {
   try {
-    const property = await Property.find({});
-    // console.log(property);
-    return new Response(JSON.stringify(property), {
-      status: 200,
-    });
+    const { searchParams } = new URL(req.url);
+    const page = parseInt(searchParams.get('page')!) || 1; // Default to page 1 if not provided
+    const limit = parseInt(searchParams.get('limit')!) || undefined; // Default to 10 items per page if not provided
+
+    const skip = limit ? (page - 1) * limit : 0; // Calculate skip based on limit if limit is defined
+
+    let propertyQuery = Property.find({});
+
+    if (limit) {
+      propertyQuery = propertyQuery.skip(skip).limit(limit);
+    }
+
+    const propertys = await propertyQuery.exec();
+    const totalCount = await Property.countDocuments(); // Total count of all documents
+
+    console.log(propertys);
+    return NextResponse.json({
+      propertys,
+      totalCount,
+      currentPage: page,
+      totalPages: limit ? Math.ceil(totalCount / limit) : 1, 
+    }, { status: 200 });
+
+    
   } catch (error: any) {
+    console.error("Failed to retrieve property:", error);
     return new Response(
       JSON.stringify({
-        message: "Failed to retrieve blog posts",
+        message: "Failed to retrieve property",
         error: error.message,
       }),
-      {
-        status: 500,
-      }
+      { status: 500 }
     );
   }
 }

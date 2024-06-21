@@ -36,7 +36,9 @@ const Blog = () => {
   }, []);
 
   if (loader) {
-    return <Loader />
+    return <div className="overflow-hidden">
+      <Loader />
+    </div>
   }
   return (
     <section>
