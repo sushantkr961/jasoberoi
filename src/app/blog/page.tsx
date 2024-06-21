@@ -35,7 +35,7 @@ const Blog = () => {
     fetchPosts();
   }, []);
 
-  if (!loader) {
+  if (loader) {
     return <div className="overflow-hidden">
       <Loader />
     </div>
