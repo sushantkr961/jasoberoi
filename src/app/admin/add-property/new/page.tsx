@@ -1,9 +1,11 @@
 "use client";
 
 import axios from "axios";
-import JoditEditor from "jodit-react";
 import React, { useRef, useState } from "react";
 import { IoAddCircleOutline } from "react-icons/io5";
+import dynamic from 'next/dynamic';
+
+const JoditEditor = dynamic(() => import('jodit-react'), { ssr: false });
 
 interface PropertyData {
   propertyId: string;
