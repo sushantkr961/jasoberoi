@@ -1,11 +1,10 @@
 "use client"
-import React, { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import axios from 'axios';
-import Link from 'next/link';
-import truncate from 'html-truncate';
-import parse from 'html-react-parser';
 import Loader from '@/components/Loader/Loader';
+import axios from 'axios';
+import parse from 'html-react-parser';
+import truncate from 'html-truncate';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 interface Post {
   _id: string;
@@ -162,7 +161,7 @@ const Post = ({ params }: any) => {
                   <div className="sm:hidden space-y-6">
 
                     {
-                      posts.slice(0, visiblePostsMb).map((post, index) => (
+                      posts?.slice(0, visiblePostsMb).map((post, index) => (
                         <Link className="group flex items-center gap-x-6" href="#" key={post._id}>
                           <div className="flex flex-col grow">
                             <span className="text-sm font-bold group-hover:text-[#C1A468]  text-black  ">
@@ -173,7 +172,7 @@ const Post = ({ params }: any) => {
                             </span> */}
                           </div>
                           <div className="flex-shrink-0 relative rounded-lg overflow-hidden size-20">
-                            <img className="size-full absolute top-0 start-0 object-cover rounded-lg" src="https://images.unsplash.com/photo-1567016526105-22da7c13161a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80" alt="Image Description" />
+                            <img className="size-full absolute top-0 start-0 object-cover rounded-lg" src={post.imageUrl} alt="Image Description" />
                           </div>
                         </Link>
                       ))
@@ -198,12 +197,12 @@ const Post = ({ params }: any) => {
                 <div className="hidden sm:grid  sm:grid-cols-2  md:grid-cols-3  gap-y-8 lg:gap-y-8  lg:justify-between gap-4">
 
                   {
-                    posts.slice(0, visiblePosts).map((post, index) => (
+                    posts?.slice(0, visiblePosts).map((post, index) => (
                       <Link href={`/blog/${post._id}`} className="cursor-pointer text-[12px] md:text-[15px] text-[#C1A468] font-semibold  " key={index}>
                         <div className="group w-full rounded-md cursor-pointer  overflow-hidden">
                           <div className="flex items-center  relative z-0   ">
                             {/* <img alt="blogs tailwind section" className="bg-gray-500  h-full object-cover w-full rounded-none" /> */}
-                            <img src="https://pagedone.io/asset/uploads/1696244356.png" alt="blogs tailwind section" className="bg-gray-500  h-full   object-cover w-full rounded-none" />
+                            <img src={post.imageUrl} alt="blogs tailwind section" className="bg-gray-500  h-full   object-cover w-full rounded-none" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-30 group-hover:opacity-0 transition-opacity duration-300"></div>
                           </div>
                           <div className="py-4 lg:py-6 transition-all duration-300 cursor-pointer px-3">
