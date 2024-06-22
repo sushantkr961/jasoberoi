@@ -31,6 +31,7 @@ export async function POST(request: NextRequest) {
     const propertyType = data.get("propertyType");
     const description = data.get("description");
     const gmapLink = data.get("gmapLink");
+    const slider = data.get("slider");
 
     let additionalDetails = [];
     let index = 0;
@@ -70,15 +71,16 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    let singleImage = "";
-    const singleImageFile = data.get("singleImage");
+    let singleImage = [];
+    const singleImageFile = data.get("singleImage[]");
     if (singleImageFile instanceof File) {
       const byteData = await singleImageFile.arrayBuffer();
       const buffer = Buffer.from(byteData);
       const fileName = singleImageFile.name.replace(/\s+/g, "_");
       const path = `./public/uploads/${fileName}`;
       await writeFile(path, buffer);
-      singleImage = `/uploads/${fileName}`;
+      // singleImage = `/uploads/${fileName}`;
+      singleImage.push(`/uploads/${fileName}`);
     }
 
     // Create a new Property instance and save to database
@@ -87,6 +89,7 @@ export async function POST(request: NextRequest) {
       title,
       price,
       sold,
+      slider,
       address: {
         fullAddress,
         city,
@@ -168,7 +171,7 @@ export async function GET(req: NextRequest) {
 
     const skip = limit ? (page - 1) * limit : 0; // Calculate skip based on limit if limit is defined
 
-    let propertyQuery = Property.find({}).select('-sliderImage');
+    let propertyQuery = Property.find({}).select("-sliderImage");
 
     if (limit) {
       propertyQuery = propertyQuery.skip(skip).limit(limit);
@@ -177,7 +180,7 @@ export async function GET(req: NextRequest) {
     const propertys = await propertyQuery.exec();
     const totalCount = await Property.countDocuments(); // Total count of all documents
 
-    console.log(propertys);
+    // console.log(propertys);
     return NextResponse.json(
       {
         propertys,
@@ -192,6 +195,51 @@ export async function GET(req: NextRequest) {
     return new Response(
       JSON.stringify({
         message: "Failed to retrieve property",
+        error: error.message,
+      }),
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const url = new URL(req.url);
+    const id = url.searchParams.get("id");
+    // console.log(4444, id);
+
+    if (!id) {
+      return new NextResponse(
+        JSON.stringify({
+          message: "Property ID is required",
+        }),
+        { status: 400 }
+      );
+    }
+
+    const deletedProperty = await Property.findByIdAndDelete(id);
+
+    if (!deletedProperty) {
+      return new NextResponse(
+        JSON.stringify({
+          message: "Property not found",
+        }),
+        { status: 404 }
+      );
+    }
+
+    return new NextResponse(
+      JSON.stringify({
+        message: "Property deleted successfully",
+        // deletedProperty,
+      }),
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error("Failed to delete property:", error);
+    return new NextResponse(
+      JSON.stringify({
+        message: "Failed to delete property",
         error: error.message,
       }),
       { status: 500 }
