@@ -3,7 +3,7 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 interface IBlog extends Document {
   title: string;
   content: string;
-  author: mongoose.Types.ObjectId;
+  // author: mongoose.Types.ObjectId;
   imageUrl: string;
 }
 

@@ -38,6 +38,8 @@ const page = () => {
         `/api/admin/property?page=${currentPage}&limit=${postsPerPage}`
       );
       const { propertys, totalPages, totalCount } = response.data;
+      console.log(55555, response);
+      
       setproperty(propertys);
       setTotalPages(totalPages);
       setTotalCount(totalCount);
@@ -153,7 +155,7 @@ const page = () => {
                       </div>
 
                       <Link
-                        href="/admin/add-blog"
+                        href="/admin/add-property"
                         className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
                       >
                         <svg
@@ -236,7 +238,7 @@ const page = () => {
                             <div className="flex items-center gap-x-3">
                               <img
                                 className="inline-block size-[50px] rounded-full"
-                                src={property.singleImage}
+                                src={property.singleImage[0]}
                                 alt="Author Image"
                               />
                               <div className="grow">
