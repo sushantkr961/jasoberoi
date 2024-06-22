@@ -4,7 +4,7 @@ import { unlink, writeFile } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
-import { handleFileUpload } from "../../upload/route";
+import { handleFileUpload } from "../../../../helpers/fileUpload";
 
 connect();
 
