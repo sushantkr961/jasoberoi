@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useRef, useState } from "react";
 import { IoAddCircleOutline } from "react-icons/io5";
 import dynamic from 'next/dynamic';
+import AddDetails from "@/components/Admin/AddDetails";
 
 const JoditEditor = dynamic(() => import('jodit-react'), { ssr: false });
 
@@ -194,7 +195,7 @@ const page = () => {
               />
             </div>
             {/* Add More Fields */}
-            <div className="col-span-12 ">
+            {/* <div className="col-span-12 ">
               <fieldset className="border flex flex-col gap-4 border-gray-300 rounded-md p-4">
                 <legend className="text-sm font-medium text-gray-500 px-2">
                   Extra Fields for Property
@@ -226,7 +227,8 @@ const page = () => {
                   </div>
                 </div>
               </fieldset>
-            </div>
+            </div> */}
+            {/* <AddDetails /> */}
           </section>
           {/* Property Details End Here */}
 

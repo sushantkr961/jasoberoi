@@ -10,7 +10,6 @@ export async function POST(request: NextRequest) {
     const data = await request.formData();
     console.log("FormData:", data);
 
-    // Extract specific properties
     const propertyId = data.get("propertyId");
     const title = data.get("title");
     const price = data.get("price");
@@ -20,15 +19,29 @@ export async function POST(request: NextRequest) {
     const state = data.get("address[state]");
     const zipOrPostalCode = data.get("address[zipOrPostalCode]");
     const country = data.get("address[country]");
-    const zoning = data.get("zoning");
+    const totalAmount = data.get("mortgage[totalAmount]");
+    const downPayment = data.get("mortgage[downPayment]");
+    const interestRate = data.get("mortgage[interestRate]");
+    const loanYears = data.get("mortgage[loanYears]");
+    const propertyTax = data.get("mortgage[propertyTax]");
+    const insurance = data.get("mortgage[insurance]");
+    const pmi = data.get("mortgage[pmi]");
     const areaSize = data.get("areaSize");
-    const overview = data.get("overview");
     const yearBuilt = data.get("yearBuilt");
-    const potentialHomeSize = data.get("potentialHome[size]");
-    const potentialHomeDescription = data.get("potentialHome[description]");
     const propertyType = data.get("propertyType");
     const description = data.get("description");
     const gmapLink = data.get("gmapLink");
+
+    let additionalDetails = [];
+    let index = 0;
+    while (data.has(`additionalDetails[${index}][key]`)) {
+      const key = data.get(`additionalDetails[${index}][key]`);
+      const value = data.get(`additionalDetails[${index}][value]`);
+      if (key && value) {
+        additionalDetails.push({ key, value });
+      }
+      index++;
+    }
 
     // Handle file uploads
     let images = [];
@@ -44,6 +57,30 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    let mapImage = [];
+    const maps = data.getAll("mapImages[]");
+    for (let file of maps) {
+      if (file instanceof File) {
+        const byteData = await file.arrayBuffer();
+        const buffer = Buffer.from(byteData);
+        const fileName = file.name.replace(/\s+/g, "_");
+        const path = `./public/uploads/${fileName}`;
+        await writeFile(path, buffer);
+        mapImage.push(`/uploads/${fileName}`);
+      }
+    }
+
+    let singleImage = "";
+    const singleImageFile = data.get("singleImage");
+    if (singleImageFile instanceof File) {
+      const byteData = await singleImageFile.arrayBuffer();
+      const buffer = Buffer.from(byteData);
+      const fileName = singleImageFile.name.replace(/\s+/g, "_");
+      const path = `./public/uploads/${fileName}`;
+      await writeFile(path, buffer);
+      singleImage = `/uploads/${fileName}`;
+    }
+
     // Create a new Property instance and save to database
     const newPost = new Property({
       propertyId,
@@ -57,18 +94,24 @@ export async function POST(request: NextRequest) {
         zipOrPostalCode,
         country,
       },
-      zoning,
-      areaSize,
-      overview,
-      yearBuilt,
-      potentialHome: {
-        size: potentialHomeSize,
-        description: potentialHomeDescription,
+      mortgage: {
+        totalAmount,
+        downPayment,
+        interestRate,
+        loanYears,
+        propertyTax,
+        insurance,
+        pmi,
       },
+      areaSize,
+      yearBuilt,
       propertyType,
       description,
       gmapLink,
       images,
+      mapImage,
+      singleImage,
+      additionalDetails,
     });
     try {
       await newPost.save();
@@ -100,12 +143,12 @@ export async function POST(request: NextRequest) {
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const page = parseInt(searchParams.get('page')!) || 1; // Default to page 1 if not provided
-    const limit = parseInt(searchParams.get('limit')!) || undefined; // Default to 10 items per page if not provided
+    const page = parseInt(searchParams.get("page")!) || 1; // Default to page 1 if not provided
+    const limit = parseInt(searchParams.get("limit")!) || undefined; // Default to 10 items per page if not provided
 
     const skip = limit ? (page - 1) * limit : 0; // Calculate skip based on limit if limit is defined
 
-    let propertyQuery = Property.find({});
+    let propertyQuery = Property.find({}).select('-sliderImage');
 
     if (limit) {
       propertyQuery = propertyQuery.skip(skip).limit(limit);
@@ -115,14 +158,15 @@ export async function GET(req: NextRequest) {
     const totalCount = await Property.countDocuments(); // Total count of all documents
 
     console.log(propertys);
-    return NextResponse.json({
-      propertys,
-      totalCount,
-      currentPage: page,
-      totalPages: limit ? Math.ceil(totalCount / limit) : 1, 
-    }, { status: 200 });
-
-    
+    return NextResponse.json(
+      {
+        propertys,
+        totalCount,
+        currentPage: page,
+        totalPages: limit ? Math.ceil(totalCount / limit) : 1,
+      },
+      { status: 200 }
+    );
   } catch (error: any) {
     console.error("Failed to retrieve property:", error);
     return new Response(
