@@ -8,7 +8,7 @@ connect();
 export async function POST(request: NextRequest) {
   try {
     const data = await request.formData();
-    console.log("FormData:", data);
+    // console.log("FormData:", data);
 
     const propertyId = data.get("propertyId");
     const title = data.get("title");
@@ -143,26 +143,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// export async function GET(req: NextRequest) {
-//   try {
-//     const propertyData = await Property.find({}).select("-sliderImage");
-//     console.log(6666666, propertyData);
-
-//     return new NextResponse(JSON.stringify(propertyData), {
-//       status: 200,
-//     });
-//   } catch (error: any) {
-//     console.error("Failed to retrieve properties:", error);
-//     return new NextResponse(
-//       JSON.stringify({
-//         message: "Failed to retrieve properties",
-//         error: error.message,
-//       }),
-//       { status: 500 }
-//     );
-//   }
-// }
-
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -240,6 +220,53 @@ export async function DELETE(req: NextRequest) {
     return new NextResponse(
       JSON.stringify({
         message: "Failed to delete property",
+        error: error.message,
+      }),
+      { status: 500 }
+    );
+  }
+}
+
+export async function PATCH(req: NextRequest) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+    // console.log(5555, id);
+    const { sold } = await req.json();
+    // console.log(5555, sold);
+
+    if (!id) {
+      return new NextResponse(
+        JSON.stringify({ message: "Property ID is required" }),
+        { status: 400 }
+      );
+    }
+
+    const updatedProperty = await Property.findByIdAndUpdate(
+      id,
+      { sold },
+      { new: true }
+    );
+
+    if (!updatedProperty) {
+      return new NextResponse(
+        JSON.stringify({ message: "Property not found" }),
+        { status: 404 }
+      );
+    }
+
+    return new NextResponse(
+      JSON.stringify({
+        message: "Property updated successfully",
+        // property: updatedProperty,
+      }),
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error("Failed to update property:", error);
+    return new NextResponse(
+      JSON.stringify({
+        message: "Failed to update property",
         error: error.message,
       }),
       { status: 500 }

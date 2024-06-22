@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
     const { email, password } = reqBody;
-    console.log(reqBody);
+    // console.log(reqBody);
     //check if user exists
     const user = await User.findOne({ email });
     if (!user) {
@@ -19,17 +19,17 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-    console.log("user exists");
+    // console.log("user exists");
     //check if password is correct
     const validPassword = await bcryptjs.compare(password, user.password);
     if (!validPassword) {
-      console.log("invalid password");
+      // console.log("invalid password");
       return NextResponse.json(
         { error: "Invalid Credentials" },
         { status: 400 }
       );
     }
-    console.log(user);
+    // console.log(user);
     //create token data
     const tokenData = {
       id: user._id,

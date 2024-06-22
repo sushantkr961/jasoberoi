@@ -30,7 +30,7 @@ const page = () => {
 
   useEffect(() => {
     fetchPosts();
-  }, [currentPage]); //
+  }, [currentPage]);
 
   const fetchPosts = async () => {
     try {
@@ -65,11 +65,24 @@ const page = () => {
         `/api/admin/property?id=${propertyId}`
       );
       // alert("Property deleted successfully");
-      console.log(response.data);
+      // console.log(response.data);
       fetchPosts();
     } catch (error) {
       console.error("Error deleting property:", error);
       alert("Failed to delete property");
+    }
+  };
+
+  const handleSoldStatusChange = async (propertyId: string, sold: boolean) => {
+    try {
+      const response = await axios.patch(
+        `/api/admin/property?id=${propertyId}`,
+        { sold }
+      );
+      // console.log("Property updated successfully:", response.data);
+      fetchPosts();
+    } catch (error) {
+      console.error("Error updating property:", error);
     }
   };
 
@@ -198,20 +211,32 @@ const page = () => {
                           </span>
                         </div>
                       </th>
-                      <th scope="col" className="px-6 py-3 text-end"></th>
-                      <th scope="col" className="px-6 py-3 text-end"></th>
+                      <th scope="col" className="px-6 py-3 text-start">
+                        <div className="flex items-center gap-x-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
+                            Action
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-start">
+                        <div className="flex items-center gap-x-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
+                            Mark as sold
+                          </span>
+                        </div>
+                      </th>
                     </tr>
                   </thead>
 
                   <tbody className="divide-y divide-gray-200 dark:divide-neutral-700">
-                    {filteredUsers.map((property) => (
+                    {filteredUsers?.map((property) => (
                       <tr key={property._id}>
                         <td className="size-px whitespace-nowrap">
                           <div className="ps-6 pe-6 py-3">
                             <div className="flex items-center gap-x-3">
                               <img
-                                className="inline-block size-[38px] rounded-full"
-                                src={property.imageUrl}
+                                className="inline-block size-[50px] rounded-full"
+                                src={property.singleImage}
                                 alt="Author Image"
                               />
                               <div className="grow">
@@ -243,7 +268,7 @@ const page = () => {
                           </div>
                         </td>
 
-                        {property.sold == true ? (
+                        {property.sold === false ? (
                           <td className="size-px whitespace-nowrap">
                             <div className="px-6 py-3">
                               <span className="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
@@ -300,6 +325,23 @@ const page = () => {
                             >
                               Delete
                             </button>
+                          </div>
+                        </td>
+                        {/* mark as sold unsold */}
+                        <td className="size-px whitespace-nowrap">
+                          <div className="px-6 py-1.5">
+                            <input
+                              type="checkbox"
+                              className="size-4 rounded border-gray-300"
+                              id="markassold"
+                              checked={property.sold}
+                              onChange={(e) =>
+                                handleSoldStatusChange(
+                                  property._id,
+                                  e.target.checked
+                                )
+                              }
+                            />
                           </div>
                         </td>
                       </tr>
