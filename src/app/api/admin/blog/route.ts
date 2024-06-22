@@ -2,6 +2,7 @@ import { connect } from "@/lib/db";
 import Blog from "@/models/blogModel";
 import { writeFile } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
+import { v4 as uuidv4 } from "uuid";
 
 connect();
 export async function POST(request: NextRequest) {
@@ -33,11 +34,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // let imageUrl = "";
+    // if (file) {
+    //   const byteData = await file.arrayBuffer();
+    //   const buffer = Buffer.from(byteData);
+    //   const fileName = file.name.replace(/\s+/g, "_");
+    //   const path = `./public/uploads/${fileName}`;
+    //   await writeFile(path, buffer);
+    //   imageUrl = `/uploads/${fileName}`;
+    // }
     let imageUrl = "";
     if (file) {
       const byteData = await file.arrayBuffer();
       const buffer = Buffer.from(byteData);
-      const fileName = file.name.replace(/\s+/g, "_");
+      const extension = file.name.split(".").pop(); // Extracting the file extension
+      const fileName = `${uuidv4()}.${extension}`; // Generating a unique file name using UUID
       const path = `./public/uploads/${fileName}`;
       await writeFile(path, buffer);
       imageUrl = `/uploads/${fileName}`;

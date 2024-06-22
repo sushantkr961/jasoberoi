@@ -38,6 +38,8 @@ const page = () => {
         `/api/admin/property?page=${currentPage}&limit=${postsPerPage}`
       );
       const { propertys, totalPages, totalCount } = response.data;
+      console.log(55555, response);
+      
       setproperty(propertys);
       setTotalPages(totalPages);
       setTotalCount(totalCount);
@@ -236,7 +238,7 @@ const page = () => {
                             <div className="flex items-center gap-x-3">
                               <img
                                 className="inline-block size-[50px] rounded-full"
-                                src={property.singleImage}
+                                src={property.singleImage[0]}
                                 alt="Author Image"
                               />
                               <div className="grow">

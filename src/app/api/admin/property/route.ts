@@ -2,6 +2,9 @@ import { connect } from "@/lib/db";
 import Property from "@/models/propertyModel";
 import { writeFile } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
+import path from "path";
+import { v4 as uuidv4 } from "uuid";
+import { handleFileUpload } from "../../upload/route";
 
 connect();
 
@@ -45,43 +48,77 @@ export async function POST(request: NextRequest) {
     }
 
     // Handle file uploads
-    let images = [];
-    const files = data.getAll("images[]");
-    for (let file of files) {
-      if (file instanceof File) {
-        const byteData = await file.arrayBuffer();
-        const buffer = Buffer.from(byteData);
-        const fileName = file.name.replace(/\s+/g, "_");
-        const path = `./public/uploads/${fileName}`;
-        await writeFile(path, buffer);
-        images.push(`/uploads/${fileName}`);
-      }
-    }
+    const images = await handleFileUpload(data.getAll("images[]"), "./public/uploads");
+    const mapImage = await handleFileUpload(data.getAll("mapImages[]"), "./public/uploads");
+    const singleImage = await handleFileUpload(
+      data.getAll("singleImage[]"),
+      "./public/uploads"
+    );
 
-    let mapImage = [];
-    const maps = data.getAll("mapImages[]");
-    for (let file of maps) {
-      if (file instanceof File) {
-        const byteData = await file.arrayBuffer();
-        const buffer = Buffer.from(byteData);
-        const fileName = file.name.replace(/\s+/g, "_");
-        const path = `./public/uploads/${fileName}`;
-        await writeFile(path, buffer);
-        mapImage.push(`/uploads/${fileName}`);
-      }
-    }
+    // const handleFileUpload = async (files: any, directory: string) => {
+    //   let filePaths = [];
+    //   for (let file of files) {
+    //     if (file instanceof File) {
+    //       const byteData = await file.arrayBuffer();
+    //       const buffer = Buffer.from(byteData);
+    //       const ext = path.extname(file.name);
+    //       const fileName = `${uuidv4()}${ext}`;
+    //       const filePath = path.join("/tmp", fileName);
+    //       await writeFile(filePath, buffer);
+    //       filePaths.push(`/uploads/${fileName}`);
+    //     }
+    //   }
+    //   return filePaths;
+    // };
 
-    let singleImage = [];
-    const singleImageFile = data.get("singleImage[]");
-    if (singleImageFile instanceof File) {
-      const byteData = await singleImageFile.arrayBuffer();
-      const buffer = Buffer.from(byteData);
-      const fileName = singleImageFile.name.replace(/\s+/g, "_");
-      const path = `./public/uploads/${fileName}`;
-      await writeFile(path, buffer);
-      // singleImage = `/uploads/${fileName}`;
-      singleImage.push(`/uploads/${fileName}`);
-    }
+    // const images = await handleFileUpload(data.getAll("images[]"), "uploads");
+    // const mapImage = await handleFileUpload(
+    //   data.getAll("mapImages[]"),
+    //   "uploads"
+    // );
+    // const singleImageFile = data.get("singleImage[]");
+    // const singleImage =
+    //   singleImageFile instanceof File
+    //     ? await handleFileUpload([singleImageFile], "uploads")
+    //     : [];
+
+    // let images = [];
+    // const files = data.getAll("images[]");
+    // for (let file of files) {
+    //   if (file instanceof File) {
+    //     const byteData = await file.arrayBuffer();
+    //     const buffer = Buffer.from(byteData);
+    //     const fileName = file.name.replace(/\s+/g, "_");
+    //     const path = `./public/uploads/${fileName}`;
+    //     await writeFile(path, buffer);
+    //     images.push(`/uploads/${fileName}`);
+    //   }
+    // }
+
+    // let mapImage = [];
+    // const maps = data.getAll("mapImages[]");
+    // for (let file of maps) {
+    //   if (file instanceof File) {
+    //     const byteData = await file.arrayBuffer();
+    //     const buffer = Buffer.from(byteData);
+    //     const fileName = file.name.replace(/\s+/g, "_");
+    //     const path = `./public/uploads/${fileName}`;
+    //     await writeFile(path, buffer);
+    //     mapImage.push(`/uploads/${fileName}`);
+    //   }
+    // }
+
+    // let singleImage = [];
+    // const singleImageFile = data.get("singleImage[]");
+    // if (singleImageFile instanceof File) {
+    //   const byteData = await singleImageFile.arrayBuffer();
+    //   const buffer = Buffer.from(byteData);
+    //   const fileName = singleImageFile.name.replace(/\s+/g, "_");
+    //   const path = `./public/uploads/${fileName}`;
+    //   await writeFile(path, buffer);
+    //   // singleImage = `/uploads/${fileName}`;
+    //   singleImage.push(`/uploads/${fileName}`);
+    // }
 
     // Create a new Property instance and save to database
     const newPost = new Property({
