@@ -35,6 +35,7 @@ interface IProperty extends Document {
   title: string;
   price: string;
   sold: boolean;
+  slider: boolean;
   address: IAddress;
   mortgage?: IMortgage;
   areaSize?: string;
@@ -42,7 +43,7 @@ interface IProperty extends Document {
   yearBuilt?: string;
   propertyType: string;
   propertyDocuments: IPropertyDocument[];
-  singleImage?: string;
+  singleImage: string[];
   images: string[];
   mapImage?: string[];
   description: string;
@@ -56,6 +57,7 @@ const propertySchema: Schema<IProperty> = new Schema(
     title: { type: String, required: true },
     price: { type: String, required: true },
     sold: { type: Boolean, required: true },
+    slider: { type: Boolean, required: true },
     address: {
       fullAddress: { type: String, required: true },
       city: { type: String, required: true },
@@ -90,7 +92,7 @@ const propertySchema: Schema<IProperty> = new Schema(
         },
       },
     ],
-    singleImage: { type: String },
+    singleImage: [{ type: String }],
     images: [{ type: String }],
     mapImage: [{ type: String }],
     description: { type: String },
