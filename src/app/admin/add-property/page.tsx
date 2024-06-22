@@ -100,6 +100,13 @@ const AddProperty = () => {
     }));
   };
 
+  const removeAdditionalDetails = (index: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      additionalDetails: (prev.additionalDetails || []).filter((_, i) => i !== index),
+    }));
+  };
+
   const handleAddField = () => {
     if (currentField.key && currentField.value) {
       setFormData((prevData) => ({
@@ -312,14 +319,28 @@ const AddProperty = () => {
             />
             <div className="mt-4">
               <h2 className="text-sm font-medium">Added Fields</h2>
-              <ul>
-                {formData.additionalDetails?.map((attr, index) => (
-                  <li key={index} className="flex justify-items-start">
-                    <span className="mr-2">{attr.key}</span>:{" "}
-                    <span className="ml-2">{attr.value}</span>
-                  </li>
-                ))}
-              </ul>
+              <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+                <tbody className="divide-y divide-gray-200">
+                  {formData.additionalDetails?.map((attr, index) => (
+                    <tr key={index}>
+                      <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                        {attr.key}
+                      </td>
+                      <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                        {attr.value}
+                      </td>
+                      <td className="whitespace-nowrap px-4 py-2">
+                        <button
+                          onClick={() => removeAdditionalDetails(index)}
+                          className="inline-block rounded bg-red-600 px-4 py-2 text-xs font-medium text-white hover:bg-red-700"
+                        >
+                          Remove
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
