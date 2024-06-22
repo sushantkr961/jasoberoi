@@ -182,8 +182,13 @@ const page = () => {
                           </span>
                         </div>
                       </th>
-                      <th scope="col" className="px-6 py-3 text-end"></th>
-                      <th scope="col" className="px-6 py-3 text-end"></th>
+                      <th scope="col" className="px-6 py-3 text-start">
+                        <div className="flex items-center gap-x-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
+                            Action
+                          </span>
+                        </div>
+                      </th>
                     </tr>
                   </thead>
 
@@ -218,7 +223,7 @@ const page = () => {
                             </div>
                           </div>
                         </td>
-                        <td className="size-px whitespace-nowrap">
+                        {/* <td className="size-px whitespace-nowrap">
                           <div className="px-6 py-1.5">
                             <Link
                               className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500"
@@ -227,7 +232,7 @@ const page = () => {
                               Edit
                             </Link>
                           </div>
-                        </td>
+                        </td> */}
 
                         <td className="size-px whitespace-nowrap">
                           <div className="px-6 py-1.5">
