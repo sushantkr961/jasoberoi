@@ -13,6 +13,8 @@ interface PropertyData {
   title: string;
   price: string;
   sold: boolean;
+  slider: boolean;
+  contactListingAgent: boolean;
   address: {
     fullAddress: string;
     city: string;
@@ -58,6 +60,8 @@ const AddProperty = () => {
     title: "",
     price: "",
     sold: false,
+    slider: false,
+    contactListingAgent: false,
     address: {
       fullAddress: "",
       city: "",
@@ -90,6 +94,22 @@ const AddProperty = () => {
     value: "",
   });
 
+  const handleContactListingAgentToggle = () => {
+    setFormData((prevData) => ({
+      ...prevData,
+      contactListingAgent: !prevData.contactListingAgent,
+      price: !prevData.contactListingAgent ? "Contact Listing Agent" : "", // Set price based on checkbox state
+    }));
+  };
+
+  const handleSliderToggle = () => {
+    setToggleSlider(!toggleSlider);
+    setFormData((prevData) => ({
+      ...prevData,
+      slider: !toggleSlider,
+    }));
+  };
+
   const handleAdditionalDetailChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -103,7 +123,9 @@ const AddProperty = () => {
   const removeAdditionalDetails = (index: number) => {
     setFormData((prev) => ({
       ...prev,
-      additionalDetails: (prev.additionalDetails || []).filter((_, i) => i !== index),
+      additionalDetails: (prev.additionalDetails || []).filter(
+        (_, i) => i !== index
+      ),
     }));
   };
 
@@ -240,22 +262,53 @@ const AddProperty = () => {
                 htmlFor="af-submit-application-phone"
                 className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
               >
-                Property Price
+                Manual Property Price
               </label>
             </div>
           </div>
           <div className="sm:col-span-9">
-            <input
-              id="af-submit-application-phone"
-              type="number"
-              className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-              placeholder="Enter Property Price"
-              required
-              value={formData.price}
-              onChange={(e) =>
-                setFormData({ ...formData, price: e.target.value })
-              }
-            />
+            {!formData.contactListingAgent ? (
+              <input
+                id="listagent"
+                type="number"
+                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                placeholder="Enter Property Price"
+                required
+                value={formData.price}
+                onChange={(e) =>
+                  setFormData({ ...formData, price: e.target.value })
+                }
+              />
+            ) : (
+              <div className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm text-gray-500">
+                Contact Listing Agent
+              </div>
+            )}
+          </div>
+
+          <div className="col-span-full">
+            <div className="flex items-center mb-4">
+              <label
+                htmlFor="listagent"
+                className="leading-6 mr-12 inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+              >
+                Contact Listing Agent
+              </label>
+              <label
+                htmlFor="SliderToggle"
+                className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-indigo-600"
+              >
+                <input
+                  type="checkbox"
+                  id="listagent"
+                  className="peer sr-only"
+                  checked={formData.contactListingAgent}
+                  onChange={handleContactListingAgentToggle}
+                />
+
+                <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
+              </label>
+            </div>
           </div>
 
           {/* Property Area Size */}
@@ -569,7 +622,6 @@ const AddProperty = () => {
                   className="peer sr-only"
                   checked={useEditor}
                   onChange={() => setUseEditor(!useEditor)}
-                  // required
                 />
 
                 <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
@@ -606,33 +658,6 @@ const AddProperty = () => {
               />
             )}
           </div>
-
-          {/* Here Decription is over */}
-          {/* <div className="sm:col-span-3">
-            <label
-              htmlFor="af-submit-application-resume-cv"
-              className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
-            >
-              Multi Image
-            </label>
-          </div>
-          <div className="sm:col-span-9">
-            <label
-              htmlFor="af-submit-application-resume-cv"
-              className="sr-only"
-            >
-              Choose file
-            </label>
-            <input
-              type="file"
-              multiple
-              name="af-submit-application-resume-cv"
-              id="af-submit-application-resume-cv"
-              className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
-              accept="image/*"
-              onChange={handleMultipleFileChange}
-            />
-          </div> */}
         </div>
         {/* Description Section End Here */}
         {/* Slider Section Start Here */}
@@ -647,10 +672,10 @@ const AddProperty = () => {
           <div className="col-span-full">
             <div className="flex items-center mb-4">
               <label
-                htmlFor="AcceptConditions"
+                htmlFor="SliderToggle"
                 className="block text-sm font-medium leading-6 text-gray-900 mr-10"
               >
-                Do You Went Slider?
+                Do You Want Slider?
               </label>
               <label
                 htmlFor="SliderToggle"
@@ -661,7 +686,7 @@ const AddProperty = () => {
                   id="SliderToggle"
                   className="peer sr-only"
                   checked={toggleSlider}
-                  onChange={() => setToggleSlider(!toggleSlider)}
+                  onChange={handleSliderToggle}
                 />
 
                 <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
@@ -669,60 +694,60 @@ const AddProperty = () => {
             </div>
           </div>
           {/* Slider Imaged */}
-          {toggleSlider && (
-            <>
-              <div className="sm:col-span-3">
-                <label
-                  htmlFor="af-submit-application-resume-cv"
-                  className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
-                >
-                  Slider Images
-                </label>
-              </div>
-              <div className="sm:col-span-9">
-                <label
-                  htmlFor="af-submit-application-resume-cv"
-                  className="sr-only"
-                >
-                  Choose file
-                </label>
-                <input
-                  type="file"
-                  multiple
-                  name="af-submit-application-resume-cv"
-                  id="af-submit-application-resume-cv"
-                  className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
-                  accept="image/*"
-                  onChange={handleMultipleFileChange}
-                />
-              </div>
+          {/* {toggleSlider && ( */}
+          <>
+            <div className="sm:col-span-3">
+              <label
+                htmlFor="af-submit-application-resume-cv"
+                className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+              >
+                Slider Images
+              </label>
+            </div>
+            <div className="sm:col-span-9">
+              <label
+                htmlFor="af-submit-application-resume-cv"
+                className="sr-only"
+              >
+                Choose file
+              </label>
+              <input
+                type="file"
+                multiple
+                name="af-submit-application-resume-cv"
+                id="af-submit-application-resume-cv"
+                className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
+                accept="image/*"
+                onChange={handleMultipleFileChange}
+              />
+            </div>
 
-              <div className="sm:col-span-3">
-                <label
-                  htmlFor="af-submit-application-resume-cv"
-                  className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
-                >
-                  Map Image (Optional)
-                </label>
-              </div>
-              <div className="sm:col-span-9">
-                <label
-                  htmlFor="af-submit-application-resume-cv"
-                  className="sr-only"
-                >
-                  Choose file
-                </label>
-                <input
-                  type="file"
-                  name="af-submit-application-resume-cv"
-                  id="af-submit-application-resume-cv"
-                  className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
-                  accept="image/*"
-                  onChange={handleMapImage}
-                />
-              </div>
-            </>
-          )}
+            <div className="sm:col-span-3">
+              <label
+                htmlFor="af-submit-application-resume-cv"
+                className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+              >
+                Map Image (Optional)
+              </label>
+            </div>
+            <div className="sm:col-span-9">
+              <label
+                htmlFor="af-submit-application-resume-cv"
+                className="sr-only"
+              >
+                Choose file
+              </label>
+              <input
+                type="file"
+                name="af-submit-application-resume-cv"
+                id="af-submit-application-resume-cv"
+                className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
+                accept="image/*"
+                onChange={handleMapImage}
+              />
+            </div>
+          </>
+          {/* )} */}
         </section>
         {/* Slider Section End Here */}
 
