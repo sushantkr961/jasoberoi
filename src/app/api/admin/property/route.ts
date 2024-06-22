@@ -140,6 +140,26 @@ export async function POST(request: NextRequest) {
   }
 }
 
+// export async function GET(req: NextRequest) {
+//   try {
+//     const propertyData = await Property.find({}).select("-sliderImage");
+//     console.log(6666666, propertyData);
+
+//     return new NextResponse(JSON.stringify(propertyData), {
+//       status: 200,
+//     });
+//   } catch (error: any) {
+//     console.error("Failed to retrieve properties:", error);
+//     return new NextResponse(
+//       JSON.stringify({
+//         message: "Failed to retrieve properties",
+//         error: error.message,
+//       }),
+//       { status: 500 }
+//     );
+//   }
+// }
+
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
