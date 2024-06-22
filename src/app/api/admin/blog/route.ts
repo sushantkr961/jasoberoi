@@ -1,6 +1,6 @@
 import { connect } from "@/lib/db";
 import Blog from "@/models/blogModel";
-import { writeFile } from "fs/promises";
+import { writeFile, unlink } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 
@@ -128,7 +128,6 @@ export async function DELETE(req: NextRequest) {
   try {
     const url = new URL(req.url);
     const id = url.searchParams.get("id");
-    // console.log(4444, id);
 
     if (!id) {
       return new NextResponse(
@@ -139,9 +138,9 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    const deletedProperty = await Blog.findByIdAndDelete(id);
-
-    if (!deletedProperty) {
+    // First, find the blog by ID to get the image path
+    const blogToDelete = await Blog.findById(id);
+    if (!blogToDelete) {
       return new NextResponse(
         JSON.stringify({
           message: "Blog not found",
@@ -150,10 +149,29 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
+    // If the blog has an associated image, delete it from the filesystem
+    if (blogToDelete.imageUrl) {
+      await unlink(`./public${blogToDelete.imageUrl}`).catch((error) => {
+        console.error("Failed to delete image:", error);
+        // Consider how to handle errors; perhaps don't throw if the image delete fails
+        throw new Error("Failed to delete associated image");
+      });
+    }
+
+    // Proceed to delete the blog from the database
+    const deletedProperty = await Blog.findByIdAndDelete(id);
+    if (!deletedProperty) {
+      return new NextResponse(
+        JSON.stringify({
+          message: "Failed to delete blog post after image deletion",
+        }),
+        { status: 500 }
+      );
+    }
+
     return new NextResponse(
       JSON.stringify({
         message: "Blog deleted successfully",
-        // deletedProperty,
       }),
       { status: 200 }
     );
@@ -168,3 +186,48 @@ export async function DELETE(req: NextRequest) {
     );
   }
 }
+
+// export async function DELETE(req: NextRequest) {
+//   try {
+//     const url = new URL(req.url);
+//     const id = url.searchParams.get("id");
+//     // console.log(4444, id);
+
+//     if (!id) {
+//       return new NextResponse(
+//         JSON.stringify({
+//           message: "Blog ID is required",
+//         }),
+//         { status: 400 }
+//       );
+//     }
+
+//     const deletedProperty = await Blog.findByIdAndDelete(id);
+
+//     if (!deletedProperty) {
+//       return new NextResponse(
+//         JSON.stringify({
+//           message: "Blog not found",
+//         }),
+//         { status: 404 }
+//       );
+//     }
+
+//     return new NextResponse(
+//       JSON.stringify({
+//         message: "Blog deleted successfully",
+//         // deletedProperty,
+//       }),
+//       { status: 200 }
+//     );
+//   } catch (error: any) {
+//     console.error("Failed to delete blog:", error);
+//     return new NextResponse(
+//       JSON.stringify({
+//         message: "Failed to delete blog",
+//         error: error.message,
+//       }),
+//       { status: 500 }
+//     );
+//   }
+// }
