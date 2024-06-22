@@ -27,7 +27,7 @@ const LoginPage: React.FC = () => {
       if (isAdmin) {
         // toast.success("Login successful");
         router.push("/admin");
-        console.log("login success");
+        // console.log("login success");
       } else {
         // toast.error("You are not authorized to access this page.");
         console.log("You are not authorized to access this page.");

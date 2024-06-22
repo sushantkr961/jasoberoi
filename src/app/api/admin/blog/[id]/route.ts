@@ -8,7 +8,7 @@ connect();
 export async function GET(req: NextRequest) {
   // Parse the ID from the URL query
   const { searchParams } = new URL(req.url);
-  console.log(searchParams.get("id"));
+  // console.log(searchParams.get("id"));
   const id = searchParams.get("id");
 
   if (!id) {
@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
 // Fetch a single blog post by ID
 export async function DELETE(req: NextRequest) {
 
-  console.log("called");
+  // console.log("called");
   
   const { searchParams } = new URL(req.url); // Parse URL parameters
   const id = searchParams.get("id");

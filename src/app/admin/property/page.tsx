@@ -30,7 +30,7 @@ const page = () => {
 
   useEffect(() => {
     fetchPosts();
-  }, [currentPage]); //
+  }, [currentPage]);
 
   const fetchPosts = async () => {
     try {
@@ -65,7 +65,7 @@ const page = () => {
         `/api/admin/property?id=${propertyId}`
       );
       // alert("Property deleted successfully");
-      console.log(response.data);
+      // console.log(response.data);
       fetchPosts();
     } catch (error) {
       console.error("Error deleting property:", error);

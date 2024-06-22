@@ -8,7 +8,7 @@ connect();
 export async function POST(request: NextRequest) {
   try {
     const data = await request.formData();
-    console.log("FormData:", data);
+    // console.log("FormData:", data);
 
     const propertyId = data.get("propertyId");
     const title = data.get("title");
