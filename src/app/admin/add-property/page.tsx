@@ -1,5 +1,6 @@
 "use client";
 
+import AddDetails from "@/components/Admin/AddDetails";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import React, { useRef, useState } from "react";
@@ -19,23 +20,32 @@ interface PropertyData {
     zipOrPostalCode: string;
     country: string;
   };
-  zoning: string;
-  areaSize: string;
-  gmapLink?: string; // Optional
-  overview: string;
-  yearBuilt: number;
-  potentialHome: {
-    size: string;
-    description: string;
+  mortgage: {
+    totalAmount: string;
+    downPayment: string;
+    interestRate: string;
+    loanYears: string;
+    propertyTax: string;
+    insurance: string;
+    pmi: string;
   };
-  propertyType: string;
+  areaSize: string;
+  gmapLink?: string;
+  yearBuilt: string;
   images: File[];
-  singleImage: File | null;
+  singleImage: File[];
+  mapImages: File[];
   propertyDocuments: {
     name: string;
     url: string;
   }[];
   description: string;
+  additionalDetails?: Attribute[];
+}
+
+interface Attribute {
+  key: string;
+  value: string;
 }
 
 const AddProperty = () => {
@@ -55,38 +65,72 @@ const AddProperty = () => {
       zipOrPostalCode: "",
       country: "",
     },
-    zoning: "",
-    areaSize: "",
-    overview: "",
-    yearBuilt: 0,
-    potentialHome: {
-      size: "",
-      description: "",
+    mortgage: {
+      totalAmount: "",
+      downPayment: "",
+      interestRate: "",
+      loanYears: "",
+      propertyTax: "",
+      insurance: "",
+      pmi: "",
     },
-    propertyType: "",
+    areaSize: "",
+    yearBuilt: "",
     propertyDocuments: [],
-    singleImage: null,
+    singleImage: [],
+    mapImages: [],
     images: [],
     description: "",
     gmapLink: "",
+    additionalDetails: [],
   });
+
+  const [currentField, setCurrentField] = useState<Attribute>({
+    key: "",
+    value: "",
+  });
+
+  const handleAdditionalDetailChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = e.target;
+    setCurrentField((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleAddField = () => {
+    if (currentField.key && currentField.value) {
+      setFormData((prevData) => ({
+        ...prevData,
+        additionalDetails: [
+          ...(prevData.additionalDetails || []),
+          currentField,
+        ],
+      }));
+      setCurrentField({ key: "", value: "" });
+    }
+  };
 
   const handleEditorChange = (newContent: string) => {
     setFormData({ ...formData, description: newContent });
   };
 
-  const handleSingleImageChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (event.target.files && event.target.files.length > 0) {
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
       setFormData({
         ...formData,
-        singleImage: event.target.files[0],
+        singleImage: Array.from(event.target.files),
       });
-    } else {
+    }
+  };
+
+  const handleMapImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
       setFormData({
         ...formData,
-        singleImage: null,
+        mapImages: Array.from(event.target.files),
       });
     }
   };
@@ -150,6 +194,7 @@ const AddProperty = () => {
                 placeholder="Enter Your Property ID"
                 type="text"
                 className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                required
                 value={formData.propertyId}
                 onChange={(e) =>
                   setFormData({ ...formData, propertyId: e.target.value })
@@ -173,6 +218,7 @@ const AddProperty = () => {
               type="text"
               placeholder="Enter Your Property Name"
               className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              required
               value={formData.title}
               onChange={(e) =>
                 setFormData({ ...formData, title: e.target.value })
@@ -197,6 +243,7 @@ const AddProperty = () => {
               type="number"
               className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
               placeholder="Enter Property Price"
+              required
               value={formData.price}
               onChange={(e) =>
                 setFormData({ ...formData, price: e.target.value })
@@ -227,38 +274,53 @@ const AddProperty = () => {
               }
             />
           </div>
+          {/* built year */}
+          <div className="sm:col-span-3">
+            <div className="inline-block">
+              <label
+                htmlFor="af-submit-application-phone"
+                className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+              >
+                Property Built Year
+              </label>
+            </div>
+          </div>
+          <div className="sm:col-span-9">
+            <input
+              id="af-submit-application-phone"
+              type="number"
+              className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              placeholder="Enter Property Built Year"
+              value={formData.yearBuilt}
+              onChange={(e) =>
+                setFormData({ ...formData, yearBuilt: e.target.value })
+              }
+            />
+          </div>
           {/* Add More Fields */}
           <div className="col-span-12 ">
-            <fieldset className="border flex flex-col gap-4 border-gray-300 rounded-md p-4">
-              <legend className="text-sm font-medium text-gray-500 px-2">
-                Extra Fields for Property
-              </legend>
-              <p>
-                You can add Your Extra Details Here for example Bedrooms,room...
-              </p>
-              <div className="mt-3  flex justify-end  rounded-sm">
-                <button className="inline-flex bg-blue-600 rounded-md text-white py-2 px-4 items-center gap-x-1 text-sm decoration-2 hover:underline font-medium ">
-                  <IoAddCircleOutline />
-                  Add More Field
-                </button>
-              </div>
-
-              <div className="sm:col-span-9">
-                <div className="sm:flex">
-                  <input
-                    id="af-submit-application-full-name"
-                    placeholder="Bedrooms"
-                    type="text"
-                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Enter Value Name"
-                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                  />
-                </div>
-              </div>
-            </fieldset>
+            <label
+              htmlFor="af-submit-project-url"
+              className="inline-block text-sm font-medium mb-2 text-gray-800 mt-2.5"
+            >
+              Extra Fields Property
+            </label>
+            <AddDetails
+              currentField={currentField}
+              handleFieldChange={handleAdditionalDetailChange}
+              handleAddField={handleAddField}
+            />
+            <div className="mt-4">
+              <h2 className="text-sm font-medium">Added Fields</h2>
+              <ul>
+                {formData.additionalDetails?.map((attr, index) => (
+                  <li key={index} className="flex justify-items-start">
+                    <span className="mr-2">{attr.key}</span>:{" "}
+                    <span className="ml-2">{attr.value}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </section>
         {/* Property Details End Here */}
@@ -286,6 +348,7 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="Enter Full Address"
+                    required
                     value={formData.address.fullAddress}
                     onChange={(e) =>
                       setFormData({
@@ -312,6 +375,7 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="Enter State"
+                    required
                     value={formData.address.state}
                     onChange={(e) =>
                       setFormData({
@@ -338,6 +402,7 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="Enter City"
+                    required
                     value={formData.address.city}
                     onChange={(e) =>
                       setFormData({
@@ -364,6 +429,7 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="Enter Country"
+                    required
                     value={formData.address.country}
                     onChange={(e) =>
                       setFormData({
@@ -390,6 +456,7 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="Enter Zip or Postal Code"
+                    required
                     value={formData.address.zipOrPostalCode}
                     onChange={(e) =>
                       setFormData({
@@ -457,7 +524,8 @@ const AddProperty = () => {
               id="af-submit-application-resume-cv"
               className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
               accept="image/*"
-            // onChange={handleSingleImageChange}
+              required
+              onChange={handleImageChange}
             />
           </div>
           {/* Here Come Rte */}
@@ -480,6 +548,7 @@ const AddProperty = () => {
                   className="peer sr-only"
                   checked={useEditor}
                   onChange={() => setUseEditor(!useEditor)}
+                  // required
                 />
 
                 <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
@@ -499,7 +568,7 @@ const AddProperty = () => {
                 value={content}
                 config={{ readonly: false }}
                 onBlur={(newContent) => handleEditorChange(newContent)}
-                onChange={() => { }}
+                onChange={() => {}}
                 className="showList"
               />
             ) : (
@@ -508,17 +577,17 @@ const AddProperty = () => {
                 name="content"
                 rows={8}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
+                value={formData.description}
+                onChange={(e) =>
+                  setFormData({ ...formData, description: e.target.value })
+                }
                 required
               />
             )}
-
           </div>
 
-
           {/* Here Decription is over */}
-          <div className="sm:col-span-3">
+          {/* <div className="sm:col-span-3">
             <label
               htmlFor="af-submit-application-resume-cv"
               className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
@@ -542,7 +611,7 @@ const AddProperty = () => {
               accept="image/*"
               onChange={handleMultipleFileChange}
             />
-          </div>
+          </div> */}
         </div>
         {/* Description Section End Here */}
         {/* Slider Section Start Here */}
@@ -577,70 +646,64 @@ const AddProperty = () => {
                 <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
               </label>
             </div>
-
-
           </div>
           {/* Slider Imaged */}
-          {
-            toggleSlider && (
-              <>
+          {toggleSlider && (
+            <>
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="af-submit-application-resume-cv"
+                  className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+                >
+                  Slider Images
+                </label>
+              </div>
+              <div className="sm:col-span-9">
+                <label
+                  htmlFor="af-submit-application-resume-cv"
+                  className="sr-only"
+                >
+                  Choose file
+                </label>
+                <input
+                  type="file"
+                  multiple
+                  name="af-submit-application-resume-cv"
+                  id="af-submit-application-resume-cv"
+                  className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
+                  accept="image/*"
+                  onChange={handleMultipleFileChange}
+                />
+              </div>
 
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="af-submit-application-resume-cv"
-                    className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
-                  >
-                    Slider Images
-                  </label>
-                </div>
-                <div className="sm:col-span-9">
-                  <label
-                    htmlFor="af-submit-application-resume-cv"
-                    className="sr-only"
-                  >
-                    Choose file
-                  </label>
-                  <input
-                    type="file"
-                    multiple
-                    name="af-submit-application-resume-cv"
-                    id="af-submit-application-resume-cv"
-                    className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
-                  />
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="af-submit-application-resume-cv"
-                    className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
-                  >
-                    Map Image (Optional)
-                  </label>
-                </div>
-                <div className="sm:col-span-9">
-                  <label
-                    htmlFor="af-submit-application-resume-cv"
-                    className="sr-only"
-                  >
-                    Choose file
-                  </label>
-                  <input
-                    type="file"
-                    name="af-submit-application-resume-cv"
-                    id="af-submit-application-resume-cv"
-                    className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
-                    accept="image/*"
-                  // onChange={handleSingleImageChange}
-                  />
-                </div>
-
-              </>
-            )
-
-          }
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="af-submit-application-resume-cv"
+                  className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+                >
+                  Map Image (Optional)
+                </label>
+              </div>
+              <div className="sm:col-span-9">
+                <label
+                  htmlFor="af-submit-application-resume-cv"
+                  className="sr-only"
+                >
+                  Choose file
+                </label>
+                <input
+                  type="file"
+                  name="af-submit-application-resume-cv"
+                  id="af-submit-application-resume-cv"
+                  className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
+                  accept="image/*"
+                  onChange={handleMapImage}
+                />
+              </div>
+            </>
+          )}
         </section>
         {/* Slider Section End Here */}
-
 
         {/* Mortgage Calculator Start Here */}
         <section className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
@@ -666,6 +729,16 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="$1"
+                    value={formData.mortgage.totalAmount}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        mortgage: {
+                          ...formData.mortgage,
+                          totalAmount: e.target.value,
+                        },
+                      })
+                    }
                   />
                 </div>
 
@@ -682,6 +755,16 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="$1"
+                    value={formData.mortgage.downPayment}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        mortgage: {
+                          ...formData.mortgage,
+                          downPayment: e.target.value,
+                        },
+                      })
+                    }
                   />
                 </div>
 
@@ -698,6 +781,16 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="%"
+                    value={formData.mortgage.interestRate}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        mortgage: {
+                          ...formData.mortgage,
+                          interestRate: e.target.value,
+                        },
+                      })
+                    }
                   />
                 </div>
 
@@ -714,6 +807,16 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="1 year"
+                    value={formData.mortgage.loanYears}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        mortgage: {
+                          ...formData.mortgage,
+                          loanYears: e.target.value,
+                        },
+                      })
+                    }
                   />
                 </div>
 
@@ -730,6 +833,16 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="$1"
+                    value={formData.mortgage.propertyTax}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        mortgage: {
+                          ...formData.mortgage,
+                          propertyTax: e.target.value,
+                        },
+                      })
+                    }
                   />
                 </div>
 
@@ -746,6 +859,16 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="$1"
+                    value={formData.mortgage.insurance}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        mortgage: {
+                          ...formData.mortgage,
+                          insurance: e.target.value,
+                        },
+                      })
+                    }
                   />
                 </div>
 
@@ -762,6 +885,16 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="$1"
+                    value={formData.mortgage.pmi}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        mortgage: {
+                          ...formData.mortgage,
+                          pmi: e.target.value,
+                        },
+                      })
+                    }
                   />
                 </div>
               </div>

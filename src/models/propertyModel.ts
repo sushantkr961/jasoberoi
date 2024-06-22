@@ -1,84 +1,114 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, Model } from "mongoose";
 
+// Define interfaces for the nested documents
 interface IAddress {
-  addressLine: string;
+  fullAddress: string;
   city: string;
-  stateOrCounty: string;
+  state: string;
   zipOrPostalCode: string;
   country: string;
 }
 
-interface IPotentialHome {
-  size: string;
-  description: string;
-}
-
 interface IPropertyDocument {
   name: string;
-  url?: string; // Optional field
+  url?: string;
 }
 
+interface IMortgage {
+  totalAmount?: string;
+  downPayment?: string;
+  interestRate?: string;
+  loanYears?: string;
+  propertyTax?: string;
+  insurance?: string;
+  pmi?: string;
+}
+
+interface IAdditionalDetail {
+  key: string;
+  value: string;
+}
+
+// Define the main interface extending Document
 interface IProperty extends Document {
   propertyId: string;
   title: string;
   price: string;
-  propertyStatus: boolean;
   sold: boolean;
   address: IAddress;
-  zoning: string;
-  areaSize: string;
-  gmapLink?: string; // Optional field
-  overview: string;
-  yearBuilt: number;
-  potentialHome: IPotentialHome;
+  mortgage?: IMortgage;
+  areaSize?: string;
+  gmapLink?: string;
+  yearBuilt?: string;
   propertyType: string;
   propertyDocuments: IPropertyDocument[];
-  singleImage: string;
+  singleImage?: string;
   images: string[];
+  mapImage?: string[];
   description: string;
+  additionalDetails?: IAdditionalDetail[];
 }
 
-const propertySchema: Schema = new Schema(
+// Define the schema
+const propertySchema: Schema<IProperty> = new Schema(
   {
-    propertyId: { type: String, unique: true },
-    title: { type: String },
-    price: { type: String },
-    sold: { type: Boolean },
+    propertyId: { type: String, unique: true, required: true },
+    title: { type: String, required: true },
+    price: { type: String, required: true },
+    sold: { type: Boolean, required: true },
     address: {
-      fullAddress: { type: String },
-      city: { type: String },
-      state: { type: String },
-      zipOrPostalCode: { type: String },
-      country: { type: String },
+      fullAddress: { type: String, required: true },
+      city: { type: String, required: true },
+      state: { type: String, required: true },
+      zipOrPostalCode: { type: String, required: true },
+      country: { type: String, required: true },
     },
-    zoning: { type: String },
-    areaSize: { type: Number },
+    mortgage: {
+      totalAmount: { type: String },
+      downPayment: { type: String },
+      interestRate: { type: String },
+      loanYears: { type: String },
+      propertyTax: { type: String },
+      insurance: { type: String },
+      pmi: { type: String },
+    },
+    areaSize: { type: String },
     gmapLink: { type: String },
-    overview: { type: String },
-    yearBuilt: { type: Number },
-    potentialHome: {
-      size: { type: String },
-      description: { type: String },
-    },
-    propertyType: {
-      type: String,
-    },
+    yearBuilt: { type: String },
+    propertyType: { type: String },
     propertyDocuments: [
       {
         name: { type: String },
-        url: { type: String },
+        url: {
+          type: String,
+          validate: {
+            validator: function (v: string) {
+              return /\.pdf$/i.test(v);
+            },
+            message: (props: any) => `${props.value} is not a valid PDF URL!`,
+          },
+        },
       },
     ],
     singleImage: { type: String },
     images: [{ type: String }],
+    mapImage: [{ type: String }],
     description: { type: String },
+    additionalDetails: [
+      {
+        key: { type: String },
+        value: { type: String },
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
 
-const Property =
-  mongoose.models.Property || mongoose.model("Property", propertySchema);
+// Create the model
+const Property: Model<IProperty> =
+  mongoose.models.Property ||
+  mongoose.model<IProperty>("Property", propertySchema);
 
 export default Property;
