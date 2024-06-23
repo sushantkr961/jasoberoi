@@ -34,21 +34,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // let imageUrl = "";
-    // if (file) {
-    //   const byteData = await file.arrayBuffer();
-    //   const buffer = Buffer.from(byteData);
-    //   const fileName = file.name.replace(/\s+/g, "_");
-    //   const path = `./public/uploads/${fileName}`;
-    //   await writeFile(path, buffer);
-    //   imageUrl = `/uploads/${fileName}`;
-    // }
     let imageUrl = "";
     if (file) {
       const byteData = await file.arrayBuffer();
       const buffer = Buffer.from(byteData);
-      const extension = file.name.split(".").pop(); // Extracting the file extension
-      const fileName = `${uuidv4()}.${extension}`; // Generating a unique file name using UUID
+      const extension = file.name.split(".").pop();
+      const fileName = `${uuidv4()}.${extension}`;
       const path = `./public/uploads/${fileName}`;
       await writeFile(path, buffer);
       imageUrl = `/uploads/${fileName}`;
@@ -186,48 +177,3 @@ export async function DELETE(req: NextRequest) {
     );
   }
 }
-
-// export async function DELETE(req: NextRequest) {
-//   try {
-//     const url = new URL(req.url);
-//     const id = url.searchParams.get("id");
-//     // console.log(4444, id);
-
-//     if (!id) {
-//       return new NextResponse(
-//         JSON.stringify({
-//           message: "Blog ID is required",
-//         }),
-//         { status: 400 }
-//       );
-//     }
-
-//     const deletedProperty = await Blog.findByIdAndDelete(id);
-
-//     if (!deletedProperty) {
-//       return new NextResponse(
-//         JSON.stringify({
-//           message: "Blog not found",
-//         }),
-//         { status: 404 }
-//       );
-//     }
-
-//     return new NextResponse(
-//       JSON.stringify({
-//         message: "Blog deleted successfully",
-//         // deletedProperty,
-//       }),
-//       { status: 200 }
-//     );
-//   } catch (error: any) {
-//     console.error("Failed to delete blog:", error);
-//     return new NextResponse(
-//       JSON.stringify({
-//         message: "Failed to delete blog",
-//         error: error.message,
-//       }),
-//       { status: 500 }
-//     );
-//   }
-// }
