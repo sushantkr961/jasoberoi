@@ -61,41 +61,41 @@ export async function POST(request: NextRequest) {
 
 export async function GET(req: NextRequest) {
     try {
-      const { searchParams } = new URL(req.url);
-      const page = parseInt(searchParams.get("page")!) || 1;
-      const limit = parseInt(searchParams.get("limit")!) || undefined;
-  
-      const skip = limit ? (page - 1) * limit : 0;
-  
-      let contactsQuery = Contact.find({});
-  
-      if (limit) {
-        contactsQuery = contactsQuery.skip(skip).limit(limit);
-      }
-  
-      const contacts = await contactsQuery.exec();
-      const totalCount = await Contact.countDocuments();
-  
-      return NextResponse.json(
-        {
-          contacts,
-          totalCount,
-          currentPage: page,
-          totalPages: limit ? Math.ceil(totalCount / limit) : 1,
-        },
-        { status: 200 }
-      );
+        const { searchParams } = new URL(req.url);
+        const page = parseInt(searchParams.get("page")!) || 1;
+        const limit = parseInt(searchParams.get("limit")!) || undefined;
+
+        const skip = limit ? (page - 1) * limit : 0;
+
+        let contactsQuery = Contact.find({});
+
+        if (limit) {
+            contactsQuery = contactsQuery.skip(skip).limit(limit);
+        }
+
+        const contacts = await contactsQuery.exec();
+        const totalCount = await Contact.countDocuments();
+
+        return NextResponse.json(
+            {
+                contacts,
+                totalCount,
+                currentPage: page,
+                totalPages: limit ? Math.ceil(totalCount / limit) : 1,
+            },
+            { status: 200 }
+        );
     } catch (error: any) {
-      console.error("Failed to retrieve contacts:", error);
-      return new Response(
-        JSON.stringify({
-          message: "Failed to retrieve contacts",
-          error: error.message,
-        }),
-        { status: 500 }
-      );
+        console.error("Failed to retrieve contacts:", error);
+        return new Response(
+            JSON.stringify({
+                message: "Failed to retrieve contacts",
+                error: error.message,
+            }),
+            { status: 500 }
+        );
     }
-  }
+}
 
 export async function DELETE(req: NextRequest) {
     try {
