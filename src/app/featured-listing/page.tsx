@@ -6,6 +6,8 @@ import Link from "next/link";
 import { CiMail } from "react-icons/ci";
 import { FaMobileAlt } from "react-icons/fa";
 
+import link from '../../data/link.json'
+import Loader from "@/components/Loader/Loader";
 type Props = {};
 
 const FeaturedListing = (props: Props) => {
@@ -49,14 +51,14 @@ const FeaturedListing = (props: Props) => {
     <section>
       <PageHeading
         imageSrc="assets/ourculture/asset 1.jpeg"
-        heading="MLS Listing"
+        heading="Featured Listing"
       />
 
       {/* Render other content only if the script has loaded */}
       <Container className="w-full m-auto flex flex-col items-center px-2">
 
         <div ref={scriptContainerRef} className="w-full mt-8 lg:mt-20">
-
+       
         </div>
         {/* Here Come I Fram */}
         <hr className="py-10 md:py-18 w-[90%] border-b-2   mb-5" />
@@ -70,21 +72,21 @@ const FeaturedListing = (props: Props) => {
             experienced agents to make your dream come true based on your
             lifestyle needs.
           </p>
-        <Link 
-          href={"/"}
-        className="uppercase font-semibold text-[15px] md:text-[16px] mt-2 bg-black text-white py-3 px-4">
-          {" "}
-          EXCLUSIVE PROPERTIES
-        </Link>
+          <Link
+            href={"/exclusive-properties"}
+            className="uppercase font-semibold text-[15px] md:text-[16px] mt-2 bg-black text-white py-3 px-4">
+            {" "}
+            EXCLUSIVE PROPERTIES
+          </Link>
         </div>
         <div className="flex justify-between flex-col md:flex-row gap-4 items-center md:gap-9 mb-[70px] text-[20px] sm:text-[28px]">
           <div className="flex gap-2 items-center ">
             <FaMobileAlt />
-            <a href="tel:7789947450">778.994.7450</a>
+            <a href={`tel:${link.phone}`}>{link.phone}</a>
           </div>
           <div className="flex gap-2 items-center ">
             <CiMail />
-            <a href="mailto:jo@jasoberoi.ca">jo@jasoberoi.ca</a>
+            <a href={`mailto:${link.email}`}>{link.email}</a>
           </div>
         </div>
 

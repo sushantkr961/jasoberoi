@@ -194,7 +194,7 @@ const AddProperty = () => {
   const handleSumbit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // console.log(4444, formData);
+    console.log(4444, formData);
 
     try {
       const response = await axios.post("/api/admin/property", formData, {
@@ -203,12 +203,13 @@ const AddProperty = () => {
         },
       });
 
+      console.log(response);
       if (response.data.message && response.data.success == true) {
         toast.success(response?.data?.message)
       } else {
         toast.error(response?.data?.message)
       }
-      router.push("/admin/property");
+      // router.push("/admin/property");
     } catch (error: any) {
       toast.error(error?.response.data.message);
       console.error("Error submitting property:", error);

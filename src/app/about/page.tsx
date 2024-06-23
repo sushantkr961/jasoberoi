@@ -6,11 +6,14 @@ import Data from "../../data/AboutUs/data.json";
 import { FaInstagramSquare, FaYoutubeSquare, FaFacebookSquare, FaMobileAlt } from "react-icons/fa";
 import { CiMail } from "react-icons/ci";
 import TeamCard from "@/components/Missons/TeamCard";
+
+import link from '../../data/link.json'
+import Link from "next/link";
 type Props = {};
 
 const About = (props: Props) => {
   const { JASOBEROI, TEAM } = Data;
-  
+
   return (
     <section >
       <PageHeading
@@ -56,26 +59,35 @@ const About = (props: Props) => {
               <div className="grid grid-cols-1 gap-3  place-items-center lg:place-items-start md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 ">
                 <div className="flex gap-2 items-center">
                   <FaMobileAlt />
-                  <a href="tel:7789947450">
-                    778.994.7450
+                  <a href={`tel:${link.phone}`}>
+                    {link.phone}
                   </a>
                 </div>
                 <div className="flex gap-2 items-center">
                   <CiMail />
-                  <a href="mailto:jo@jasoberoi.ca">
-                    jo@jasoberoi.ca
+                  <a href={`mailto:${link.email}`}>
+                    {link.email}
                   </a>
                 </div>
                 <div className="flex gap-2 items-center text-[2rem] " >
-                  <FaInstagramSquare />
-                  <FaYoutubeSquare />
-                  <FaFacebookSquare />
+                  <a href={link.instagram} target="_black">
+                    <FaInstagramSquare />
+
+                  </a>
+                  <a href={link.youtube} target="_black">
+
+                    <FaYoutubeSquare />
+                  </a>
+                  <a href={link.facebook} target="_black">
+
+                    <FaFacebookSquare />
+                  </a>
                 </div>
                 <div className="mt-5 xl:mt-0 flex justify-between lg:col-span-3 2xl:col-auto m-auto">
                   {/* featured-listing/ */}
-                  <button className="py-2 bg-[#D3AA54] text-white font-bold px-2">
+                  <Link href={"/featured-listing"} className="py-2 bg-[#D3AA54] text-white font-bold px-2">
                     VIEW PROPERTIES
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -88,7 +100,7 @@ const About = (props: Props) => {
             <p className="text-[#D3AA54] text-[19px] md:text-[16px] font-poppins font-[500] mb-1">It’s our people who make the difference</p>
             <h2 className="font-poppins text-[18px] md:text-[44px] uppercase leading-[1.1em] text-[#002244] font-[700] ">MEET OUR TEAM</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-6 lg:grid-cols-4 items-center justify-center w-full m-auto mt-[35px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-6 items-center justify-center w-full m-auto mt-[35px]">
             {/* Here Come Four Card */}
             {
               TEAM.map((data) => (
@@ -99,9 +111,9 @@ const About = (props: Props) => {
               ))
             }
           </div>
-            <div className="p-[50px] mb-[18px] flex">
-              <button className="bg-black m-auto uppercase text-[14px] py-[12px] px-[24px] text-center text-white  font-bold">View All Properties</button>
-            </div>
+          <div className="p-[50px] mb-[18px] flex">
+            <Link href={"/featured-listing"} className="bg-black m-auto uppercase text-[14px] py-[12px] px-[24px] text-center text-white  font-bold">View All Properties</Link>
+          </div>
         </div>
       </ Container >
     </section>

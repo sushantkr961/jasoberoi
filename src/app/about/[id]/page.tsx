@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import Data from "../../../data/AboutUs/data.json";
 import { CiMail } from "react-icons/ci";
+import Link from "next/link";
 type Props = {
     params: {
         id: string
@@ -56,9 +57,9 @@ const page = ({ params }: Props) => {
                                 </a>
                             </div>
                             <div>
-                                <button className="py-2 bg-[#D3AA54] text-white text-[15px] font-semibold px-2">
+                                <Link href={"/featured-listing"} className="py-2 bg-[#D3AA54] text-white text-[15px] font-semibold px-2">
                                     VIEW ALL PROPERTIES
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

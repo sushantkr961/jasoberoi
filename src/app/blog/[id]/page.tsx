@@ -4,6 +4,7 @@ import axios from 'axios';
 import parse from 'html-react-parser';
 import truncate from 'html-truncate';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 interface Post {
@@ -43,13 +44,14 @@ const Post = ({ params }: any) => {
   });
 
   const [loader, setLoader] = useState<boolean>(true);
-
+  const router = useRouter();
   useEffect(() => {
     setLoader(true);
     const fetchPosts = async () => {
       try {
         const response = await axios.get(`/api/admin/blog`);
-        setPosts(response.data.blogs);
+        const filteredPropertys = response.data.blogs.filter((blogs: Post) => blogs._id !== params.id);
+        setPosts(filteredPropertys);
       } catch (error) {
         console.error("Failed to fetch posts:", error);
       }
@@ -65,7 +67,7 @@ const Post = ({ params }: any) => {
     }
 
 
-    Promise.all([fetchPosts(), fetchSinglePost()]).then(() => {
+    Promise.all([fetchPosts(), fetchSinglePost()]).catch(() => router.back()).finally(() => {
       setLoader(false);
     });
   }, [params]);
@@ -227,9 +229,6 @@ const Post = ({ params }: any) => {
                       >
                         Show more
                       </button>
-
-
-
                     </div>
                   )}
 

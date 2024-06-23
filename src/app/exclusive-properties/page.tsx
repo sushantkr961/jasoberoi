@@ -56,8 +56,10 @@ type Property = {
 type Props = {};
 
 const exclusiveProperties = (props: Props) => {
-  const [property, setProperty] = useState<Property[]>([]);
+  const [properties, setProperties] = useState<Property[]>([]);
   const [loader, setLoader] = useState<boolean>();
+  const [page, setPage] = useState<number>(1);
+  const itemsPerPage = 8;
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -66,7 +68,7 @@ const exclusiveProperties = (props: Props) => {
         const response = await axios.get("/api/admin/property");
         console.log(response);
 
-        setProperty(response.data.propertys);
+        setProperties(response.data.propertys);
 
 
         setLoader(false);
@@ -78,12 +80,22 @@ const exclusiveProperties = (props: Props) => {
     fetchPosts();
   }, []);
 
+  const handleLoadMore = () => {
+    setPage(prevPage => prevPage + 1);
+  };
+
+  const displayedProperties = properties.slice(0, page * itemsPerPage);
+
+
   if (loader) {
     return <div className="overflow-hidden">
       <Loader />
     </div>
   }
 
+  if (loader) {
+    return <Loader />
+  }
   return <section>
 
     <PageHeading
@@ -93,19 +105,34 @@ const exclusiveProperties = (props: Props) => {
     <Container className="m-auto flex flex-col items-center  py-14 md:py-24 ">
       <div className="grid md:grid-cols-2 max-w-[1340px]  w-full md:gap-8 lg:gap-10 xl:gap-2 gap-y-8 lg:gap-y-8  lg:justify-between place-content-center place-items-center">
         {
-          property?.map((property) => (
+          displayedProperties?.map((property) => (
             <ExCard
               _id={property?._id}
               title={property?.title}
               address={property?.address?.fullAddress}
               pricing={property?.price}
               imageUrl={property?.singleImage}
+              sale={true}
+              featured={true}
+              hotOffer={true}
             />
           ))
         }
 
-
       </div>
+
+      {properties.length > displayedProperties.length && (
+
+        <div className="w-full flex justify-center ">
+          <button
+            className="mt-8 py-2 px-4   border  rounded-md bg-black text-white hover:bg-gray-800"
+            onClick={handleLoadMore}
+          >
+            Load More
+          </button>
+        </div>
+
+      )}
     </Container>
   </section>;
 };

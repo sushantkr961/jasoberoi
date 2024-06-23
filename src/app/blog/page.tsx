@@ -19,7 +19,8 @@ interface Post {
 const Blog = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loader, setLoader] = useState<boolean>();
-
+  const [page, setPage] = useState<number>(1);
+  const itemsPerPage = 8;
   useEffect(() => {
     const fetchPosts = async () => {
       setLoader(true);
@@ -34,6 +35,11 @@ const Blog = () => {
     };
     fetchPosts();
   }, []);
+  const handleLoadMore = () => {
+    setPage(prevPage => prevPage + 1);
+  };
+
+  const displayedProperties = posts.slice(0, page * itemsPerPage);
 
   if (loader) {
     return <div className="overflow-hidden">
@@ -51,7 +57,7 @@ const Blog = () => {
         <div className="mx-auto -4 sm:px-6 lg:px-8 font-poppins">
           <div className="grid md:grid-cols-2 lg:grid-cols-3   gap-y-8 lg:gap-y-8  lg:justify-between gap-4">
             {
-              posts?.map((post, index) => (
+              displayedProperties?.map((post, index) => (
                 <Card
                   _id={post._id}
                   content={post.content}
@@ -63,6 +69,17 @@ const Blog = () => {
               ))
             }
           </div>
+
+          {posts.length > displayedProperties.length && (
+            <div className="w-full flex justify-center ">
+              <button
+                className="mt-8 py-2 px-4   border  rounded-md bg-black text-white hover:bg-gray-800"
+                onClick={handleLoadMore}
+              >
+                Load More
+              </button>
+            </div>
+          )}
         </div>
       </Container>
     </section>
