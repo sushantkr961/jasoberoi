@@ -6,11 +6,12 @@ type Props = {
   imgUrl: string;
   imageName: string;
   title: string;
+  index: number;
 };
 
 const PropertyCard = (props: Props) => {
   return (
-    <div className="relative w-full md:px-5">
+    <div key={props.index} className="relative w-full md:px-5">
       <Image
         src={props.imgUrl}
         alt={props.imageName}
