@@ -110,7 +110,7 @@ const page = ({ params }: Props) => {
                 <div className='flex justify-end sm:justify-between py-4'>
                     <div className='hidden sm:block '>
                         <Breadcrumb
-                            title={property?.title}
+                            title={property?.title!}
                         />
                     </div>
                     <div className='flex justify-end text-[1rem]  gap-3 items-center '>
