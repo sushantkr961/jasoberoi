@@ -175,7 +175,7 @@ const MontageCalculator = ({ value }: Props) => {
                         >
                             Total Amount <span className="text-red-600 text-lg">*</span>
                         </label>
-                        <div className='flex'>
+                        <div className='flex'>  
                             <div className='flex justify-center items-center text-[20px]  bg-grey-lighter text-gray-500  border border-gray-500 border-r-0 rounded-r-none rounded py-3   px-4 mb-3 '>
                                 <IoLogoUsd />
                             </div>
@@ -183,7 +183,7 @@ const MontageCalculator = ({ value }: Props) => {
                                 className="transition-all duration-200 outline-none focus:outline-none appearance-none rounded-l-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3   px-4 mb-3 focus:border-gray-500"
                                 id="grid-first-name"
                                 type="number"
-                                placeholder="$2,000,000.00"
+                                placeholder="Total Amount"
                                 required
                                 value={totalAmount}
                                 onChange={(e) => setTotalAmount(e.target.value)}
@@ -198,7 +198,7 @@ const MontageCalculator = ({ value }: Props) => {
                         style={{ transition: "border-color 0.3s ease" }}
                     >
                         <label
-                            className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+                            className="block uppercase tracking-wide text-grey-darker text-sm font-bold mb-2"
                             htmlFor="grid-first-name"
                         >
                             Down Payment <span className="text-red-600 text-lg">*</span>
@@ -211,7 +211,7 @@ const MontageCalculator = ({ value }: Props) => {
                                 className="transition-all duration-200 outline-none focus:outline-none appearance-none rounded-l-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3   px-4 mb-3 focus:border-gray-500"
                                 id="grid-first-name"
                                 type="number"
-                                placeholder="$2,000,000.00"
+                                placeholder="Down Payment"
                                 required
                                 value={downPayment}
                                 onChange={(e) => setDownPayment(e.target.value)}
@@ -225,7 +225,7 @@ const MontageCalculator = ({ value }: Props) => {
                         style={{ transition: "border-color 0.3s ease" }}
                     >
                         <label
-                            className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+                            className="block uppercase tracking-wide text-grey-darker text-sm font-bold mb-2"
                             htmlFor="grid-first-name"
                         >
                             Interest Rate <span className="text-red-600 text-lg">*</span>
@@ -238,7 +238,7 @@ const MontageCalculator = ({ value }: Props) => {
                                 className="transition-all duration-200 outline-none focus:outline-none appearance-none rounded-l-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3   px-4 mb-3 focus:border-gray-500"
                                 id="grid-first-name"
                                 type="number"
-                                placeholder="$2,000,000.00"
+                                placeholder="Interest Rate"
                                 required
                                 value={interestRate}
                                 onChange={(e) => setInterestRate(e.target.value)}
@@ -252,7 +252,7 @@ const MontageCalculator = ({ value }: Props) => {
                         style={{ transition: "border-color 0.3s ease" }}
                     >
                         <label
-                            className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+                            className="block uppercase tracking-wide text-grey-darker text-sm font-bold mb-2"
                             htmlFor="grid-first-name"
                         >
                             Loan Terms (Years) <span className="text-red-600 text-lg">*</span>
@@ -265,7 +265,7 @@ const MontageCalculator = ({ value }: Props) => {
                                 className="transition-all duration-200 outline-none focus:outline-none appearance-none rounded-l-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3   px-4 mb-3 focus:border-gray-500"
                                 id="grid-first-name"
                                 type="number"
-                                placeholder="$2,000,000.00"
+                                placeholder="Loan Terms"
                                 required
                                 value={years}
                                 onChange={(e) => setYears(e.target.value)}
@@ -279,7 +279,7 @@ const MontageCalculator = ({ value }: Props) => {
                         style={{ transition: "border-color 0.3s ease" }}
                     >
                         <label
-                            className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+                            className="block uppercase tracking-wide text-grey-darker text-sm font-bold mb-2"
                             htmlFor="grid-first-name"
                         >
                             Property Tax <span className="text-red-600 text-lg">*</span>
@@ -292,7 +292,7 @@ const MontageCalculator = ({ value }: Props) => {
                                 className="transition-all duration-200 outline-none focus:outline-none appearance-none rounded-l-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3   px-4 mb-3 focus:border-gray-500"
                                 id="grid-first-name"
                                 type="number"
-                                placeholder="$2,000,000.00"
+                                placeholder="Property Tax"
                                 required
                                 value={propertyTax}
                                 onChange={(e) => setPropertyTax(e.target.value)}
@@ -306,7 +306,7 @@ const MontageCalculator = ({ value }: Props) => {
                         style={{ transition: "border-color 0.3s ease" }}
                     >
                         <label
-                            className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+                            className="block uppercase tracking-wide text-grey-darker text-sm font-bold mb-2"
                             htmlFor="grid-first-name"
                         >
                             Home Insurance <span className="text-red-600 text-lg">*</span>
@@ -319,7 +319,7 @@ const MontageCalculator = ({ value }: Props) => {
                                 className="transition-all duration-200 outline-none focus:outline-none appearance-none rounded-l-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3   px-4 mb-3 focus:border-gray-500"
                                 id="grid-first-name"
                                 type="number"
-                                placeholder="$2,000,000.00"
+                                placeholder="Home Insurance"
                                 required
                                 value={homeInsurance}
                                 onChange={(e) => setHomeInsurance(e.target.value)}
@@ -335,7 +335,7 @@ const MontageCalculator = ({ value }: Props) => {
                         style={{ transition: "border-color 0.3s ease" }}
                     >
                         <label
-                            className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+                            className="block uppercase tracking-wide text-grey-darker text-sm font-bold mb-2"
                             htmlFor="grid-first-name"
                         >
                             PMI <span className="text-red-600 text-lg">*</span>
@@ -348,7 +348,7 @@ const MontageCalculator = ({ value }: Props) => {
                                 className="transition-all duration-200 outline-none focus:outline-none appearance-none rounded-l-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3   px-4 mb-3 focus:border-gray-500"
                                 id="grid-first-name"
                                 type="number"
-                                placeholder="$2,000,000.00"
+                                placeholder="PMI"
                                 required
                                 value={pMI}
                                 onChange={(e) => setPMI(e.target.value)}

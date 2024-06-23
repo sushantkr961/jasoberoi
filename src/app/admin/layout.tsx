@@ -477,7 +477,7 @@ dark:bg-neutral-800 dark:border-neutral-700
                   <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
                   <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
                 </svg>
-                Projects
+                Sold-Stories
                 <svg
                   className="hs-accordion-active:block ms-auto hidden size-4"
                   xmlns="http://www.w3.org/2000/svg"
@@ -514,33 +514,33 @@ dark:bg-neutral-800 dark:border-neutral-700
               >
                 <ul className="pt-2 ps-2">
                   <li>
-                    <a
+                    <Link
                       className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
-                      href="#"
+                      href="/admin/add-sold-stories"
                     >
-                      Link 1
-                    </a>
+                      Add Sold-Stories
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
-                      href="#"
+                      href="/admin/sold-stories"
                     >
-                      Link 2
-                    </a>
+                      Sold-Stories
+                    </Link>
                   </li>
-                  <li>
-                    <a
-                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
-                      href="#"
-                    >
-                      Link 3
-                    </a>
-                  </li>
+                 
                 </ul>
               </div>
             </li>
-
+            <li>
+                    <Link
+                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
+                      href="/admin/contactlist"
+                    >
+                       Contact List
+                    </Link>
+                  </li>
             {/* <li>
               <a
                 className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300"
