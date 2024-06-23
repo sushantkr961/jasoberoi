@@ -47,6 +47,9 @@ interface IProperty extends Document {
   images: string[];
   mapImage?: string[];
   description: string;
+  featured:boolean
+  hotOffer:boolean
+  sale:boolean
   additionalDetails?: IAdditionalDetail[];
 }
 
@@ -58,6 +61,9 @@ const propertySchema: Schema<IProperty> = new Schema(
     price: { type: String, required: true },
     sold: { type: Boolean, required: true },
     slider: { type: Boolean, required: true },
+    featured:{ type: Boolean, default:false },
+    hotOffer:{ type: Boolean, default:false },
+    sale:{ type: Boolean, default:false },
     address: {
       fullAddress: { type: String, required: true },
       city: { type: String, required: true },

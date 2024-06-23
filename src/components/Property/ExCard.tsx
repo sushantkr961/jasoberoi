@@ -19,14 +19,12 @@ const ExCard = ({
     pricing,
     imageUrl
 }: Props) => {
-
-
     return (
-        <div className=" max-w-[600px] group w-full rounded-md overflow-hidden">
+        <Link href={`/exclusive-properties/${_id}`} className=" max-w-[600px] group w-full rounded-md overflow-hidden">
             <div className=" flex items-center bg-black relative z-0 ">
-                <img src="https://jasoberoi.ca/wp-content/uploads/2024/02/1-2-592x444.jpg" alt="blogs tailwind section" className="bg-gray-500  h-full  object-cover w-full rounded-none" />
+                <img src={imageUrl} alt="blogs tailwind section" className="bg-gray-500  min-h-[450px] h-full  object-cover w-full rounded-none" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-30 group-hover:opacity-0 transition-opacity duration-300"></div>
-                <div className='absolute left-5 text-lg bottom-5 text-white font-bold '>{Number(pricing) == 0 ? 0 : pricing}</div>
+                <div className='absolute left-5 text-lg bottom-5 text-white font-bold '>{pricing}</div>
                 <div className='absolute top-4 right-3 flex gap-3'>
                     <div className='text-black uppercase text-[10px] bg-white px-2 py-[2px] font-bold rounded-xl'>for sale</div>
                     <div className='text-black uppercase text-[10px] bg-white px-2 py-[2px] font-bold rounded-xl'>hot sale</div>
@@ -41,13 +39,13 @@ const ExCard = ({
                     </button>
                 </div>
             </div>
-            <Link href={`/exclusive-properties/as`}>
+            <Link href={`/exclusive-properties/${_id}`}>
                 <div className="py-4 lg:py-6 transition-all duration-300 group-hover:bg-gray-50 px-3">
                     <h4 className=" text-gray-900 font-medium text-[16px] mb-2">{title}</h4>
                     <p className="text-[#636363] mb-2 text-[15px]">{address}</p>
                 </div>
             </Link>
-        </div>
+        </Link>
     )
 }
 

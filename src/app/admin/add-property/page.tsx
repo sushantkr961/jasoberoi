@@ -3,8 +3,9 @@
 import AddDetails from "@/components/Admin/AddDetails";
 import axios from "axios";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
-import { IoAddCircleOutline } from "react-icons/io5";
+import toast from "react-hot-toast";
 
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
@@ -55,6 +56,7 @@ interface Attribute {
 
 const AddProperty = () => {
   const editor = useRef(null);
+  const router = useRouter();
   const [useEditor, setUseEditor] = useState(false);
   const [toggleSlider, setToggleSlider] = useState(false);
   const [content, setContent] = useState("");
@@ -201,8 +203,14 @@ const AddProperty = () => {
         },
       });
 
-      console.log("Property added successfully:", response);
-    } catch (error) {
+      if (response.data.message && response.data.success == true) {
+        toast.success(response?.data?.message)
+      } else {
+        toast.error(response?.data?.message)
+      }
+      router.push("/admin/property");
+    } catch (error: any) {
+      toast.error(error?.response.data.message);
       console.error("Error submitting property:", error);
     }
   };
@@ -593,7 +601,6 @@ const AddProperty = () => {
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="Enter Map Location URL"
                     value={formData.gmapLink}
-                    multiple
                     onChange={(e) =>
                       setFormData({ ...formData, gmapLink: e.target.value })
                     }

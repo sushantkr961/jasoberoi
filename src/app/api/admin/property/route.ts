@@ -1,16 +1,39 @@
 import { connect } from "@/lib/db";
 import Property from "@/models/propertyModel";
-import { writeFile } from "fs/promises";
+import { unlink, writeFile } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
+import path from "path";
+import { v4 as uuidv4 } from "uuid";
+import { handleFileUpload } from "../../../../helpers/fileUpload";
 
 connect();
 
 export async function POST(request: NextRequest) {
   try {
+    
     const data = await request.formData();
     // console.log("FormData:", data);
-
+    
     const propertyId = data.get("propertyId");
+    // Check if propertyId already exists
+    const existingProperty = await Property.findOne({ propertyId });
+    if (existingProperty) {
+      
+      return new NextResponse(
+        JSON.stringify({
+          message: "Property Id Must Uniq",
+          success: false,
+        }),
+        {
+          status: 400,
+        }
+      );
+    }
+
+    const featured =  data.get("featured");
+    const hotOffer =  data.get("hotOffer");
+    const sale =  data.get("sale");
+
     const title = data.get("title");
     const price = data.get("price");
     const sold = data.get("sold");
@@ -45,51 +68,28 @@ export async function POST(request: NextRequest) {
     }
 
     // Handle file uploads
-    let images = [];
-    const files = data.getAll("images[]");
-    for (let file of files) {
-      if (file instanceof File) {
-        const byteData = await file.arrayBuffer();
-        const buffer = Buffer.from(byteData);
-        const fileName = file.name.replace(/\s+/g, "_");
-        const path = `./public/uploads/${fileName}`;
-        await writeFile(path, buffer);
-        images.push(`/uploads/${fileName}`);
-      }
-    }
+    const images = await handleFileUpload(
+      data.getAll("images[]"),
+      "./public/uploads"
+    );
+    const mapImage = await handleFileUpload(
+      data.getAll("mapImages[]"),
+      "./public/uploads"
+    );
+    const singleImage = await handleFileUpload(
+      data.getAll("singleImage[]"),
+      "./public/uploads"
+    );
 
-    let mapImage = [];
-    const maps = data.getAll("mapImages[]");
-    for (let file of maps) {
-      if (file instanceof File) {
-        const byteData = await file.arrayBuffer();
-        const buffer = Buffer.from(byteData);
-        const fileName = file.name.replace(/\s+/g, "_");
-        const path = `./public/uploads/${fileName}`;
-        await writeFile(path, buffer);
-        mapImage.push(`/uploads/${fileName}`);
-      }
-    }
-
-    let singleImage = [];
-    const singleImageFile = data.get("singleImage[]");
-    if (singleImageFile instanceof File) {
-      const byteData = await singleImageFile.arrayBuffer();
-      const buffer = Buffer.from(byteData);
-      const fileName = singleImageFile.name.replace(/\s+/g, "_");
-      const path = `./public/uploads/${fileName}`;
-      await writeFile(path, buffer);
-      // singleImage = `/uploads/${fileName}`;
-      singleImage.push(`/uploads/${fileName}`);
-    }
-
-    // Create a new Property instance and save to database
     const newPost = new Property({
       propertyId,
       title,
       price,
       sold,
       slider,
+      featured,
+      hotOffer,
+      sale,
       address: {
         fullAddress,
         city,
@@ -196,6 +196,34 @@ export async function DELETE(req: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Retrieve the property to get image URLs
+    const propertyToDelete = await Property.findById(id);
+    if (!propertyToDelete) {
+      return new NextResponse(
+        JSON.stringify({
+          message: "Property not found",
+        }),
+        { status: 404 }
+      );
+    }
+
+    // Delete all associated images
+    const imagePaths = [
+      ...propertyToDelete.singleImage,
+      ...propertyToDelete.images,
+      ...(propertyToDelete.mapImage || []),
+    ];
+
+    // Use Promise.all to handle multiple asynchronous operations
+    await Promise.all(
+      imagePaths.map((imagePath) =>
+        unlink(`./public${imagePath}`).catch((error) => {
+          console.error(`Failed to delete image at ${imagePath}:`, error);
+          // Optionally handle image deletion errors here, e.g., logging or continuing without throwing
+        })
+      )
+    );
 
     const deletedProperty = await Property.findByIdAndDelete(id);
 

@@ -20,7 +20,7 @@ const MontageCalculator = (props: Props) => {
                         ]}
 
                     />
-                    <div className='absolute flex items-center justify-center w-full h-full'>
+                    <div className='absolute flex items-center justify-center w-full'>
                         <div className='text-center'>
                             <span className='text-lg font-bold'>Centered Text</span>
                         </div>

@@ -3,7 +3,7 @@ import React from "react";
 import Container from "../Containers/Container";
 import Carousel from "../Carousel/Carousel";
 
-interface ContactJasProps {}
+interface ContactJasProps { }
 
 const imageUrls = [
   "/assets/asset 4.png",
@@ -45,7 +45,7 @@ const ContactJas: React.FC<ContactJasProps> = () => {
           </div>
         </div>
         <div className="flex justify-center space-x-2 py-4">
-          <Carousel imageUrls={imageUrls}  fullScreen={false} />
+          <Carousel imageUrls={imageUrls} fullScreen={false} />
         </div>
       </Container>
     </section>

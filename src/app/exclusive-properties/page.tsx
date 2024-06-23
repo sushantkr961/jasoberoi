@@ -64,6 +64,7 @@ const exclusiveProperties = (props: Props) => {
       setLoader(true);
       try {
         const response = await axios.get("/api/admin/property");
+        console.log(response);
 
         setProperty(response.data.propertys);
 

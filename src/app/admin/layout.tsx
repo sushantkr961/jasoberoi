@@ -1,5 +1,6 @@
 import PrelineScript from "@/components/PrelineScript";
 import Link from "next/link";
+import { Toaster } from "react-hot-toast";
 
 export default function DashboardLayout({
   children,
@@ -8,6 +9,12 @@ export default function DashboardLayout({
 }) {
   return (
     <>
+
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
+
       <header className="sticky top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 sm:py-4 lg:ps-64 dark:bg-neutral-800 dark:border-neutral-700">
         <nav
           className="flex basis-full items-center w-full mx-auto px-4 sm:px-6"
@@ -49,8 +56,8 @@ export default function DashboardLayout({
               </button>
             </div>
             <div
-                className="py-2 text-xl font-bold  block w-full border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-            
+              className="py-2 text-xl font-bold  block w-full border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+
             >
 
               Admin Panel

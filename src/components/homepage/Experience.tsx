@@ -63,19 +63,19 @@ const Experience = (props: Props) => {
                             </div>
                             <div className="flex flex-col justify-center items-center  lg:p-[30px]">
                                 <div className="text-[58px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
-                                    <AnimatedNumber value={35} formatValue={(value: number) => Math.round(value).toLocaleString()} />M+
+                                    <AnimatedNumber value={35} formatValue={(value: number) => Math.round(value).toLocaleString()} />+
                                 </div>
                                 <p className="text-[19px] lg:[1rem] xl:text-[1.2rem] font-poppins">Real Estate Awards</p>
                             </div>
                             <div className="flex flex-col justify-center items-center  lg:p-[30px]">
                                 <div className="text-[58px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
-                                    <AnimatedNumber value={8} formatValue={(value: number) => Math.round(value).toLocaleString()} />M+
+                                    <AnimatedNumber value={8} formatValue={(value: number) => Math.round(value).toLocaleString()} />+
                                 </div>
                                 <p className="text-[19px] lg:[1rem] xl:text-[1.2rem] font-poppins">Year of Experience</p>
                             </div>
                             <div className="flex flex-col justify-center items-center  lg:p-[30px]">
                                 <div className="text-[58px]  lg:text-[5rem] 2xl:text-[6.5rem] tracking-tighter leading-[70px] lg:leading-[110px] font-crimson font-[500]">
-                                    <AnimatedNumber value={1} formatValue={(value: number) => Math.round(value).toLocaleString()} />M+
+                                    <AnimatedNumber value={1} formatValue={(value: number) => Math.round(value).toLocaleString()} />K+
                                 </div>
                                 <p className="text-[19px] lg:[1rem] xl:text-[1.2rem] font-poppins">Total Sales Volume</p>
                             </div>
