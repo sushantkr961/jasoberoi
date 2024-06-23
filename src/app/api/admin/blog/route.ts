@@ -76,8 +76,8 @@ export async function POST(request: NextRequest) {
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const page = parseInt(searchParams.get('page')!) || 1; // Default to page 1 if not provided
-    const limit = parseInt(searchParams.get('limit')!) || undefined; // Default to 10 items per page if not provided
+    const page = parseInt(searchParams.get("page")!) || 1; // Default to page 1 if not provided
+    const limit = parseInt(searchParams.get("limit")!) || undefined; // Default to 10 items per page if not provided
 
     const skip = limit ? (page - 1) * limit : 0; // Calculate skip based on limit if limit is defined
 
@@ -90,17 +90,17 @@ export async function GET(req: NextRequest) {
     const blogs = await blogsQuery.exec();
     const totalCount = await Blog.countDocuments(); // Total count of all documents
 
-    console.log(blogs);
-    
+    // console.log(blogs);
 
-    return NextResponse.json({
-      blogs,
-      totalCount,
-      currentPage: page,
-      totalPages: limit ? Math.ceil(totalCount / limit) : 1, 
-    }, { status: 200 });
-
-
+    return NextResponse.json(
+      {
+        blogs,
+        totalCount,
+        currentPage: page,
+        totalPages: limit ? Math.ceil(totalCount / limit) : 1,
+      },
+      { status: 200 }
+    );
   } catch (error: any) {
     console.error("Failed to retrieve blog blogs:", error);
     return new Response(
@@ -113,4 +113,47 @@ export async function GET(req: NextRequest) {
   }
 }
 
+export async function DELETE(req: NextRequest) {
+  try {
+    const url = new URL(req.url);
+    const id = url.searchParams.get("id");
+    // console.log(4444, id);
 
+    if (!id) {
+      return new NextResponse(
+        JSON.stringify({
+          message: "Blog ID is required",
+        }),
+        { status: 400 }
+      );
+    }
+
+    const deletedProperty = await Blog.findByIdAndDelete(id);
+
+    if (!deletedProperty) {
+      return new NextResponse(
+        JSON.stringify({
+          message: "Blog not found",
+        }),
+        { status: 404 }
+      );
+    }
+
+    return new NextResponse(
+      JSON.stringify({
+        message: "Blog deleted successfully",
+        // deletedProperty,
+      }),
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error("Failed to delete blog:", error);
+    return new NextResponse(
+      JSON.stringify({
+        message: "Failed to delete blog",
+        error: error.message,
+      }),
+      { status: 500 }
+    );
+  }
+}

@@ -104,7 +104,7 @@ const AddProperty = () => {
     setFormData((prevData) => ({
       ...prevData,
       contactListingAgent: !prevData.contactListingAgent,
-      price: !prevData.contactListingAgent ? "Contact Listing Agent" : "", // Set price based on checkbox state
+      price: !prevData.contactListingAgent ? "Contact Listing Agent" : "",
     }));
   };
 
@@ -192,7 +192,7 @@ const AddProperty = () => {
   const handleSumbit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log(4444, formData);
+    // console.log(4444, formData);
 
     try {
       const response = await axios.post("/api/admin/property", formData, {
@@ -283,7 +283,7 @@ const AddProperty = () => {
           <div className="sm:col-span-9">
             {!formData.contactListingAgent ? (
               <input
-                id="listagent"
+                id="listsagent"
                 type="number"
                 className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                 placeholder="Enter Property Price"
@@ -330,7 +330,7 @@ const AddProperty = () => {
                 Contact Listing Agent
               </label>
               <label
-                htmlFor="SliderToggle"
+                htmlFor="listagent"
                 className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-indigo-600"
               >
                 <input
@@ -593,6 +593,7 @@ const AddProperty = () => {
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="Enter Map Location URL"
                     value={formData.gmapLink}
+                    multiple
                     onChange={(e) =>
                       setFormData({ ...formData, gmapLink: e.target.value })
                     }

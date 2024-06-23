@@ -57,9 +57,10 @@ const Blog = () => {
 
   const deletePost = async (postId: any) => {
     try {
-      alert(postId);
-      const response = await axios.delete(`/api/admin/blog/${postId}`);
-      console.log("Post deleted successfully:", response.data);
+      // alert(postId);
+      const response = await axios.delete(`/api/admin/blog?id=${postId}`);
+      // console.log("Post deleted successfully:", response.data);
+      fetchPosts();
     } catch (error) {
       console.error("Failed to delete the post:", error);
     }

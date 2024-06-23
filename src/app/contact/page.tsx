@@ -82,7 +82,7 @@ const contact = (props: Props) => {
       return;
     }
 
-    console.log("Form submitted:", formData);
+    // console.log("Form submitted:", formData);
     setSubmitted(true);
     localStorage.setItem("formData", JSON.stringify(formData));
     setTimeout(() => {
