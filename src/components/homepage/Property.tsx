@@ -25,11 +25,12 @@ const Property = () => {
       <div className="bg-[url('https://jasoberoi.ca/wp-content/uploads/2023/11/jas-cities.jpg')]  lg:h-[12rem] xl:h-80 w-full bg-cover hidden md:block"></div>
 
       <Container className="lg:absolute lg:top-[50%] lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 grid grid-cols-1 lg:grid-cols-3 gap-4 w-full">
-        {categories.map((category, index) => (
+        {categories?.map((category, index) => (
           <PropertyCard
             imgUrl={category.image}
             imageName={category.name}
             title={category.name}
+            index={index}
           />
         ))}
       </Container>

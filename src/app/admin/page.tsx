@@ -15,6 +15,13 @@ interface Users {
 
 const AdminDashboard = () => {
   const router = useRouter();
+  const [data, setData] = useState("nothing");
+
+  const getAdminDetails = async () => {
+    const res = await axios.get("/api/admin");
+    console.log(res.data);
+    setData(res.data.data._id);
+  };
 
   const logout = async () => {
     try {
@@ -28,7 +35,17 @@ const AdminDashboard = () => {
     }
   };
 
-  return <section>ADmin dashboard</section>;
+  return (
+    <section>
+      ADmin dashboard {data}
+      <button
+        onClick={getAdminDetails}
+        className="bg-green-800 mt-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        GetUser Details
+      </button>
+    </section>
+  );
 };
 
 export default AdminDashboard;
