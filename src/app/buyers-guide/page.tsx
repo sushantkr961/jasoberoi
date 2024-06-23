@@ -6,6 +6,8 @@ import data from '../../data/BuyerGuide/data.json'
 import { FaMobileAlt } from "react-icons/fa";
 import { CiMail } from "react-icons/ci";
 import Link from "next/link";
+
+import link from '../../data/link.json'
 type Props = {};
 
 const buyersGuide = (props: Props) => {
@@ -90,11 +92,11 @@ const buyersGuide = (props: Props) => {
           <div className="flex justify-between gap-9 mb-[70px] text-[16px] sm:text-[20px]">
             <div className="flex gap-2 items-center ">
               <FaMobileAlt />
-              <a href="tel:7789947450">778.994.7450</a>
+              <a href={`tel:${link.phone}`}>{link.phone}</a>
             </div>
             <div className="flex gap-2 items-center ">
               <CiMail />
-              <a href="mailto:jo@jasoberoi.ca">jo@jasoberoi.ca</a>
+              <a href={`mailto:${link.email}`}>{link.email}</a>
             </div>
           </div>
         </Container>

@@ -1,9 +1,7 @@
 import PageHeading from "@/components/Common/PageHeading";
 import YoutubeVideo from "@/components/Common/YoutubeVideo";
 import Container from "@/components/Containers/Container";
-import React from "react";
 import { BsSpotify } from "react-icons/bs";
-import { FaSpotify } from "react-icons/fa";
 
 type Props = {};
 

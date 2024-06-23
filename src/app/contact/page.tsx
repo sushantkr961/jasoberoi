@@ -10,7 +10,7 @@ import {
   FaSquareInstagram,
   FaSquareYoutube,
 } from "react-icons/fa6";
-
+import link from '../../data/link.json'
 type Props = {};
 interface FormData {
   firstName: string;
@@ -294,31 +294,30 @@ const contact = (props: Props) => {
               </h5>
               <div>
                 <h2 className="text-[14px] uppercase font-poppins">CALL</h2>
-                <a className="text-[#caa468]" href="tel:7789947450">
-                  778-994-7450
+                <a className="text-[#caa468]" href={`tel:${link.phone}`}>
+                  {link.phone}
                 </a>
               </div>
               <div>
                 <h2 className="text-[14px] uppercase font-poppins">EMAIL</h2>
-                <a className="text-[#caa468]" href="tel:7789947450">
-                  778-994-7450
+                <a className="text-[#caa468]" href={`mailto:${link.email}`}>
+                {link.email}
                 </a>
               </div>
               <div>
                 <h2 className="text-[14px] uppercase font-poppins">ADDRESS</h2>
                 <p className="text-[#caa468]">
                   {" "}
-                  #306 - 1493 foster Street,
-                  <br />
-                  white rock, BC , Canada
+                  {link.address}
                 </p>
               </div>
             </div>
             <div className="flex gap-4 text-[40px] text-white ">
-              <FaSquareInstagram />
-              <FaSquareFacebook />
-              <FaSquareYoutube />
-              <FaLinkedin />
+              
+              <a href={link.facebook} target="_blank"><FaSquareFacebook /></a>
+              <a href={link.instagram} target="_blank"><FaSquareInstagram /></a>
+              <a href={link.youtube} target="_blank">  <FaSquareYoutube /></a>
+              <a href={link.linkdin} target="_blank"><FaLinkedin /></a>
             </div>
           </div>
         </div>

@@ -33,8 +33,9 @@ const misSearch = (props: Props) => {
 
     // Cleanup function to remove the script when the component unmounts
     return () => {
+      // Cleanup function: remove the script when component unmounts
       if (scriptContainerRef.current) {
-        scriptContainerRef.current.removeChild(script);
+        scriptContainerRef.current.innerHTML = ""; // Clear script content
       }
     };
   }, []);
