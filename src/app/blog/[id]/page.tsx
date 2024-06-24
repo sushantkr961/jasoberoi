@@ -162,7 +162,7 @@ const Post = ({ params }: any) => {
 
                     {
                       posts?.slice(0, visiblePostsMb).map((post, index) => (
-                        <Link className="group flex items-center gap-x-6" href="#" key={post._id}>
+                        <Link className="group flex items-center gap-x-6" {`/blog/${post._id}`} key={post._id}>
                           <div className="flex flex-col grow">
                             <span className="text-sm font-bold group-hover:text-[#C1A468]  text-black  ">
                               {post.title}
