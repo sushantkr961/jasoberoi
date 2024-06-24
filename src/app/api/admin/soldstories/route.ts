@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
             "./public/uploads"
         );
         console.log(data);
-        
+
 
         const singleImage = await handleFileUpload(
             data.getAll("singleImage[]"),
@@ -103,6 +103,128 @@ export async function GET(req: NextRequest) {
         );
     }
 }
+
+async function deleteImages(imagePaths: string[]) {
+    try {
+        await Promise.all(
+            imagePaths.map(async (imagePath) => {
+                try {
+                    await unlink(`./public${imagePath}`);
+                } catch (error) {
+                    console.error(`Failed to delete image at ${imagePath}:`, error);
+                }
+            })
+        );
+    } catch (error) {
+        console.error('Error deleting images:', error);
+    }
+}
+
+
+export async function PUT(request: NextRequest) {
+    try {
+        const data = await request.formData();
+        const id = data.get("id") as string;
+        const title = data.get("title") as string;
+        const content = data.get("content") as string;
+        const newSingleImageFiles = data.getAll("singleImage") as File[];
+        const newImageFiles = data.getAll("images") as File[];
+
+        // Validate required fields
+        if (!id || !title || !content) {
+            return new NextResponse(
+                JSON.stringify({
+                    message: "ID, title, and content are required",
+                    success: false,
+                }),
+                { status: 400 }
+            );
+        }
+
+        // Find existing SoldStories
+        const existingStory = await SoldStories.findById(id);
+        if (!existingStory) {
+            return new NextResponse(
+                JSON.stringify({
+                    message: "Sold Story not found",
+                    success: false,
+                }),
+                { status: 404 }
+            );
+        }
+
+        // Array to hold all promises for image operations
+        const promises: Promise<any>[] = [];
+
+        // Handle single image update
+        if (newSingleImageFiles.length > 0) {
+            // Delete old single image if exists
+            if (existingStory.singleImage) {
+                promises.push(unlink(`./public${existingStory.singleImage}`));
+            }
+            // Upload new single image
+            promises.push(
+                handleFileUpload(newSingleImageFiles, "./public/uploads")
+                    .then((uploadedSingleImages) => {
+                        existingStory.singleImage = uploadedSingleImages[0]; // Assuming only one image is expected
+                    })
+            );
+        }
+
+        // Handle multiple images update
+        if (newImageFiles.length > 0) {
+            // Delete old images if exist
+            if (existingStory.images.length > 0) {
+                promises.push(
+                    ...existingStory.images.map((imagePath) =>
+                        unlink(`./public${imagePath}`).catch((error) => {
+                            console.error(`Failed to delete image at ${imagePath}:`, error);
+                        })
+                    )
+                );
+            }
+            // Upload new images
+            promises.push(
+                handleFileUpload(newImageFiles, "./public/uploads")
+                    .then((uploadedImages) => {
+                        existingStory.images = uploadedImages;
+                    })
+            );
+        }
+
+        // Wait for all promises to complete
+        await Promise.all(promises);
+
+        // Update other fields of SoldStories
+        existingStory.title = title;
+        existingStory.content = content;
+
+        // Save updated SoldStories document
+        await existingStory.save();
+
+        return new NextResponse(
+            JSON.stringify({
+                message: "Sold Story updated successfully",
+                success: true,
+                post: existingStory,
+            }),
+            { status: 200 }
+        );
+    } catch (error: any) {
+        console.error("Error updating Sold Story:", error);
+        return new NextResponse(
+            JSON.stringify({
+                message: "Failed to update Sold Story",
+                error: error.message,
+                success: false,
+            }),
+            { status: 500 }
+        );
+    }
+}
+
+
+
 
 export async function DELETE(req: NextRequest) {
     try {

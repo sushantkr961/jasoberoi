@@ -1,5 +1,8 @@
+
+
+
 import { connect } from "@/lib/db";
-import Blog from "@/models/blogModel";
+import SoldStories from "@/models/soldStories";
 import { NextRequest } from "next/server";
 
 connect();
@@ -12,24 +15,24 @@ export async function GET(req: NextRequest) {
     const id = searchParams.get("id");
 
     if (!id) {
-        return new Response(JSON.stringify({ message: "Blog ID is required" }), {
+        return new Response(JSON.stringify({ message: "SoldStories ID is required" }), {
             status: 400,
         });
     }
 
     try {
-        const post = await Blog.findById(id);
+        const post = await SoldStories.findById(id);    
         if (!post) {
-            return new Response(JSON.stringify({ message: "Blog not found" }), {
+            return new Response(JSON.stringify({ message: "SoldStories not found" }), {
                 status: 404,
             });
         }
         return new Response(JSON.stringify(post), { status: 200 });
     } catch (error) {
-        console.error("Failed to retrieve the Blog post:", error);
+        console.error("Failed to retrieve the soldStories post:", error);
         return new Response(
             JSON.stringify({
-                message: "Failed to retrieve the Blog post",
+                message: "Failed to retrieve the soldStories post",
                 error: error,
             }),
             { status: 500 }

@@ -28,7 +28,7 @@ const ExCard = ({
     return (
         <Link href={`/exclusive-properties/${_id}`} className=" max-w-[600px] group w-full rounded-md overflow-hidden">
             <div className=" flex items-center bg-black relative z-0 ">
-                <img src={imageUrl} alt="blogs tailwind section" className="bg-gray-500  min-h-[450px] h-full  object-cover w-full rounded-none" />
+                <img src={imageUrl} alt="blogs tailwind section" className="bg-gray-500  md:min-h-[450px] h-full  object-cover w-full rounded-none" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-30 group-hover:opacity-0 transition-opacity duration-300"></div>
                 <div className='absolute left-5 text-lg bottom-5 text-white font-bold '>{pricing}</div>
                 <div className='absolute top-4 left-3 flex gap-3'>

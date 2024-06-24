@@ -92,7 +92,7 @@ const page = ({ params }: Props) => {
         setLoader(true);
         const fetchSinglePost = async () => {
             try {
-                const response = await axios.get(`/api/admin/property/as?id=${params.id}`);
+                const response = await axios.get(`/api/admin/property/single?id=${params.id}`);
                 const propertyData: Property = await response.data;
                 console.log(response);
                 

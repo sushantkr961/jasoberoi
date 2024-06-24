@@ -60,7 +60,7 @@ const SoldStories = ({ params }: any) => {
         };
         const fetchSinglePost = async () => {
             try {
-                const response = await axios.get(`/api/admin/soldstories/as?id=${params.id}`);
+                const response = await axios.get(`/api/admin/soldstories/single?id=${params.id}`);
                 setPost(response.data);
 
             } catch (error) {
