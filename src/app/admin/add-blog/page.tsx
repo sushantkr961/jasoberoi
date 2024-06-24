@@ -3,6 +3,8 @@
 import dynamic from "next/dynamic";
 import React, { useState, useRef, ChangeEvent } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
@@ -12,7 +14,7 @@ const AddBlogPost: React.FC = () => {
   const [image, setImage] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [useEditor, setUseEditor] = useState(false);
-
+  const rourer = useRouter();
   const editor = useRef(null);
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -44,6 +46,11 @@ const AddBlogPost: React.FC = () => {
         },
       });
       // console.log(response.data);
+      toast.success(response.data.message);
+      // setTitle("");
+      // setContent("");
+      // setImage(null);
+      rourer.push("/admin/blogs");
     } catch (error: any) {
       console.error("Error adding blog post:", error);
     } finally {
@@ -119,7 +126,7 @@ const AddBlogPost: React.FC = () => {
                   value={content}
                   config={{ readonly: false }}
                   onBlur={(newContent) => handleEditorChange(newContent)}
-                  onChange={() => {}}
+                  onChange={() => { }}
                   className="showList"
                 />
               ) : (
@@ -134,36 +141,28 @@ const AddBlogPost: React.FC = () => {
                 />
               )}
 
-              <div className="col-span-full">
+              <div className=" col-span-full mt-4 ">
                 <label
                   htmlFor="cover-photo"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Blog Cover Image
                 </label>
-                <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                  <div className="text-center">
-                    <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                      <label
-                        htmlFor="file-upload"
-                        className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                      >
-                        <span>Upload a file</span>
-                        <input
-                          id="file-upload"
-                          name="file-upload"
-                          type="file"
-                          className="sr-only"
-                          onChange={handleImageChange}
-                          accept="image/*"
-                        />
-                      </label>
-                      <p className="pl-1">or drag and drop</p>
-                    </div>
-                    <p className="text-xs leading-5 text-gray-600">
-                      PNG, JPG, GIF up to 10MB
-                    </p>
-                  </div>
+                <div className="sm:col-span-9">
+                  <label
+                    htmlFor="af-submit-application-resume-cv"
+                    className="sr-only"
+                  >
+                    Blog Cover Image
+                  </label>
+                  <input
+                    type="file"
+                    id="af-submit-application-resume-cv"
+                    className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    name="file-upload"
+                  />
                 </div>
               </div>
             </div>

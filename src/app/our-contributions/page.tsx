@@ -8,6 +8,7 @@ import data from "../../data/Contributions/data.json";
 import MusicCard from "@/components/Contributions/MusicCard";
 import Carousel from "@/components/Carousel/Carousel";
 import GalleryCarousel from "@/components/Carousel/GalleryCarsouel";
+import CarouselSponsors from "@/components/Contributions/CarouselSponsors";
 
 type Props = {};
 
@@ -26,7 +27,7 @@ const imageUrls = [
   "/assets/ourcontributions/asset 189.png",
 ];
 
-function page({}: Props) {
+function page({ }: Props) {
   const { music, sponsors } = data;
   return (
     <section className="bg-[#F0F2F4]">
@@ -335,7 +336,7 @@ function page({}: Props) {
 
         {/* Add Slider in this section */}
         {/* GALLERY OF THE NIGHT */}
-        <div className="py-[8%] overflow-hidden">
+        <div className="pt-[5%] md:pb-[2%] overflow-hidden">
           <div className="w-full m-auto flex flex-col justify-center items-center">
             <div className="border-t-4 mb-3 border-white w-full" />
             <div className="flex flex-col justify-center items-center gap-5 md:gap-7 text-center">
@@ -343,7 +344,7 @@ function page({}: Props) {
                 GALLERY OF THE NIGHT
               </h2>
             </div>
-            <div className="flex justify-center space-x-2 py-4">
+            <div className="flex justify-center space-x-2 pt-4">
               {/*  GALLERY OF THE NIGHT Slide Here*/}
               {/* <Carousel imageUrls={imageUrls} backgroundColor="none" fullScreen={false} className={"h-150 object-cover"} /> */}
               <GalleryCarousel />
@@ -447,26 +448,22 @@ function page({}: Props) {
                   ))}
                 </div>
 
-                {/* <div className="grid md:hidden  grid-cols-2  place-items-center gap-4 justify-between">
-                                    {
-                                        [182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195].map((data) => (
-                                            <Image
-                                                src={`/assets/ourcontributions/asset ${data}.png`}
-                                                height={700}
-                                                width={580}
-                                                alt="cluture"
-                                                layout="responsive"
-                                                className="object-cover w-[200px]"
-                                            />
-                                        ))
-                                    }
-                                </div> */}
+                <div style={{flexWrap:"wrap"}} className="flex md:hidden flex-wrap  grid-cols-2  place-items-center gap-4 justify-between">
+                  {
+                    [182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195].map((data) => (
+                      <Image
+                        src={`/assets/ourcontributions/asset ${data}.png`}
+                        height={700}
+                        width={580}
+                        alt="cluture"
+                        layout="responsive"
+                        className=" max-w-[130px] object-contain w-[200px]"
+                      />
+                    ))
+                  }
+                </div>
                 {/* Sponse Two Carousel right left */}
-                <Container>
-                  <div className="flex justify-center space-x-2 py-4 overflow-hidden">
-                    {/* <Carousel imageUrls={imageUrls} backgroundColor="none" fullScreen={false} className={"h-150 object-cover"} /> */}
-                  </div>
-                </Container>
+
               </div>
             </div>
           </div>

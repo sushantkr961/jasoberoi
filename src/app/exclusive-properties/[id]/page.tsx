@@ -1,24 +1,23 @@
 "use client"
 import Container from '@/components/Containers/Container';
 import Breadcrumb from '@/components/Property/Breadcrumb';
-import { CiHeart } from "react-icons/ci";
+import MontageCalculator from '@/components/Property/MontageCalculator';
+import axios from 'axios';
+import parse from 'html-react-parser';
+import "keen-slider/keen-slider.min.css";
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { FaMap, FaRegCalendarAlt } from "react-icons/fa";
 import { FiShare2 } from "react-icons/fi";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineLocalPrintshop } from "react-icons/md";
 
-import MontageCalculator from '@/components/Property/MontageCalculator';
-import axios from 'axios';
-import "keen-slider/keen-slider.min.css";
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-
+import Loader from '@/components/Loader/Loader';
 import Card from '@/components/Property/Card';
 import ImageGalleryC from '@/components/Property/ImageGalleryC';
-import "react-image-gallery/styles/css/image-gallery.css";
-import Link from 'next/link';
-import Loader from '@/components/Loader/Loader';
 import Navbar from '@/components/Property/Navbar';
+import Link from 'next/link';
+import "react-image-gallery/styles/css/image-gallery.css";
 // import Gallery from 'react-image-video-gallery';
 
 type AdditionalDetail = {
@@ -95,10 +94,12 @@ const page = ({ params }: Props) => {
             try {
                 const response = await axios.get(`/api/admin/property/as?id=${params.id}`);
                 const propertyData: Property = await response.data;
+                console.log(response);
+                
                 setProperty(propertyData);
 
             } catch (error) {
-                router.push("/exclusive-properties");
+                
                 console.error("Failed to fetch posts:", error);
             }
         }
@@ -107,17 +108,18 @@ const page = ({ params }: Props) => {
             setLoader(true);
             try {
                 const response = await axios.get("/api/admin/property");
-                const filteredPropertys = response.data.propertys.filter((property: Property) => property._id !== params.id).sort((a: any, b: any) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+                const filteredPropertys = response.data.propertys.sort((a: any, b: any) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
                 setPropertys(filteredPropertys);
             } catch (error) {
                 console.error("Failed to fetch posts:", error);
             }
         };
 
-        Promise.all([fetchPosts(), fetchSinglePost()]).catch(() => router.back()).finally(() => {
+        Promise.all([fetchPosts(), fetchSinglePost()])
+        .catch(() => {router.push("/exclusive-properties")}).finally(() => {
             setLoader(false);
         });
-    }, [params]);
+    }, []);
     const handleLoadMore = () => {
         setCurrentPage(prevPage => prevPage + 1);
     };
@@ -222,7 +224,7 @@ const page = ({ params }: Props) => {
                                     <p
                                         style={{ fontFamily: "Poppins !important" }}
                                         className="text-[#636363] mb-2 text-[15px]"
-                                    >{property?.description}</p>
+                                    >{property?.description&&parse(property?.description!)}</p>
 
                                 </div>
                                 <div className="text-center">

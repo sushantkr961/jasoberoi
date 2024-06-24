@@ -1,5 +1,6 @@
 "use client"
 import Loader from '@/components/Loader/Loader';
+import ImageGalleryC from '@/components/Property/ImageGalleryC';
 import axios from 'axios';
 import parse from 'html-react-parser';
 import truncate from 'html-truncate';
@@ -13,6 +14,7 @@ interface SoldStories {
     content: string;
     author: string;
     singleImage: string;
+    images:string[];
     createdAt: string;
 }
 
@@ -40,6 +42,7 @@ const SoldStories = ({ params }: any) => {
         title: "",
         content: "",
         author: "",
+        images:[],
         createdAt: "",
     });
 
@@ -50,8 +53,7 @@ const SoldStories = ({ params }: any) => {
         const fetchPosts = async () => {
             try {
                 const response = await axios.get(`/api/admin/soldstories`);
-                const filteredPropertys = response.data.blogs.filter((blogs: SoldStories) => blogs._id !== params.id);
-                setPosts(filteredPropertys);
+                setPosts(response.data.soldStories);
             } catch (error) {
                 console.error("Failed to fetch posts:", error);
             }
@@ -79,8 +81,8 @@ const SoldStories = ({ params }: any) => {
     return (
 
         <div className="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto font-poppins">
-            <div className="grid lg:grid-cols-3 gap-y-8 lg:gap-y-0 lg:gap-x-6">
-                <div className="lg:col-span-2">
+            <div className="grid lg:grid-cols-[2.9fr,1fr]  gap-y-8 lg:gap-y-0 lg:gap-x-6">
+                <div className="lg:csol-span-2">
                     <div className="py-8 lg:pe-8">
                         <div className="space-y-5 lg:space-y-8">
                             <Link className="inline-flex items-center gap-x-1.5 text-sm text-[#C1a468] decoration-2 hover:underline " href="/sold-stories" >
@@ -114,7 +116,14 @@ const SoldStories = ({ params }: any) => {
                                     parse(post?.content!)
                                 }
                             </div>
+                            <div className="text-center">
+                                    {
+                                        post?.images.length > 0 && (
+                                            <ImageGalleryC images={post?.images} ></ImageGalleryC>
+                                        )
+                                    }
 
+                                </div>
                             <div className="  lg:flex lg:justify-between lg:items-center gap-y-5 lg:gap-y-0">
 
                                 <div className="flex justify-end items-center gap-x-1.5">
