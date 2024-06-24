@@ -34,6 +34,8 @@ const Blog = () => {
     try {
       const response = await axios.get(`/api/admin/blog?page=${currentPage}&limit=${postsPerPage}`);
       const { blogs, totalPages, totalCount } = response.data;
+      console.log(blogs);
+
       setPosts(blogs);
       setTotalPages(totalPages);
       setTotalCount(totalCount);
@@ -206,9 +208,7 @@ const Blog = () => {
                                 <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">
                                   {post.title}
                                 </span>
-                                <span className="block text-sm text-gray-500 dark:text-neutral-500">
-                                  {post.author}
-                                </span>
+                              
                               </div>
                             </div>
                           </div>

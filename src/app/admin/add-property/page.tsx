@@ -151,7 +151,7 @@ const AddProperty = () => {
   };
 
   const handleEditorChange = (newContent: string) => {
-    setFormData({ ...formData, description: newContent });
+    setContent(newContent);
   };
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
         const lookingFor = data.get("lookingFor");
         const additionalInfo = data.get("additionalInfo");
 
-        if (!firstName || !lastName || !email || !phone || lookingFor || additionalInfo) {
+        if (!firstName || !lastName || !email || !phone || !lookingFor || !additionalInfo) {
             return new Response(
                 JSON.stringify({
                     message: "all are required",

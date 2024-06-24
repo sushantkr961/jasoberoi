@@ -25,7 +25,8 @@ export async function POST(request: NextRequest) {
             data.getAll("images[]"),
             "./public/uploads"
         );
-
+        console.log(data);
+        
 
         const singleImage = await handleFileUpload(
             data.getAll("singleImage[]"),

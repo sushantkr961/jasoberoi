@@ -56,12 +56,12 @@ export async function GET(req: NextRequest) {
             commentsQuery = commentsQuery.skip(skip).limit(limit);
         }
 
-        const contacts = await commentsQuery.exec();
+        const comments = await commentsQuery.exec();
         const totalCount = await Comment.countDocuments();
 
         return NextResponse.json(
             {
-                contacts,
+                comments,
                 totalCount,
                 currentPage: page,
                 totalPages: limit ? Math.ceil(totalCount / limit) : 1,
