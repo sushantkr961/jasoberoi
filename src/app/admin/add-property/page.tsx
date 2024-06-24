@@ -3,8 +3,9 @@
 import AddDetails from "@/components/Admin/AddDetails";
 import axios from "axios";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
-import { IoAddCircleOutline } from "react-icons/io5";
+import toast from "react-hot-toast";
 
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
@@ -15,6 +16,9 @@ interface PropertyData {
   sold: boolean;
   slider: boolean;
   contactListingAgent: boolean;
+  featured: boolean;
+  hotOffer: boolean;
+  sale: boolean;
   address: {
     fullAddress: string;
     city: string;
@@ -52,6 +56,7 @@ interface Attribute {
 
 const AddProperty = () => {
   const editor = useRef(null);
+  const router = useRouter();
   const [useEditor, setUseEditor] = useState(false);
   const [toggleSlider, setToggleSlider] = useState(false);
   const [content, setContent] = useState("");
@@ -62,6 +67,9 @@ const AddProperty = () => {
     sold: false,
     slider: false,
     contactListingAgent: false,
+    featured: false,
+    hotOffer: false,
+    sale: false,
     address: {
       fullAddress: "",
       city: "",
@@ -143,7 +151,7 @@ const AddProperty = () => {
   };
 
   const handleEditorChange = (newContent: string) => {
-    setFormData({ ...formData, description: newContent });
+    setContent(newContent);
   };
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -175,20 +183,35 @@ const AddProperty = () => {
     }
   };
 
+  //handle checkbox 
+  const handleCheckboxToggle = (name: keyof PropertyData) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: !prevData[name],
+    }));
+  };
+
   const handleSumbit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // console.log(4444, formData);
+    console.log(4444, formData);
 
     try {
-      const response = await axios.post("/api/admin/property", formData, {
+      const response = await axios.post("/api/admin/property", {...formData,description:content}, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
 
-      console.log("Property added successfully:", response);
-    } catch (error) {
+      console.log(response);
+      if (response.data.message && response.data.success == true) {
+        toast.success(response?.data?.message)
+      } else {
+        toast.error(response?.data?.message)
+      }
+      // router.push("/admin/property");
+    } catch (error: any) {
+      toast.error(error?.response.data.message);
       console.error("Error submitting property:", error);
     }
   };
@@ -285,6 +308,27 @@ const AddProperty = () => {
               </div>
             )}
           </div>
+
+
+          <div className="sm:col-span-full">
+            <div className="sm:flex">
+              <label htmlFor="hs-default-checkbox1" className="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                <input checked={formData.featured} onChange={() => handleCheckboxToggle("featured")} type="checkbox" name="af-account-gender-checkbox" className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-default-checkbox1" />
+                <span className="text-sm text-gray-500 ms-3 dark:text-neutral-400">Featured</span>
+              </label>
+
+              <label htmlFor="hs-default-checkbox2" className="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                <input checked={formData.hotOffer} onChange={() => handleCheckboxToggle("hotOffer")} type="checkbox" name="af-account-gender-checkbox" className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-default-checkbox2" />
+                <span className="text-sm text-gray-500 ms-3 dark:text-neutral-400">Hot Offer</span>
+              </label>
+
+              <label htmlFor="hs-default-checkbox3" className="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                <input checked={formData.sale} onChange={() => handleCheckboxToggle("sale")} type="checkbox" name="af-account-gender-checkbox" className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-default-checkbox3" />
+                <span className="text-sm text-gray-500 ms-3 dark:text-neutral-400">Sale</span>
+              </label>
+            </div>
+          </div>
+
 
           <div className="col-span-full">
             <div className="flex items-center mb-4">
@@ -641,7 +685,7 @@ const AddProperty = () => {
                 value={content}
                 config={{ readonly: false }}
                 onBlur={(newContent) => handleEditorChange(newContent)}
-                onChange={() => {}}
+                onChange={() => { }}
                 className="showList"
               />
             ) : (
@@ -650,9 +694,9 @@ const AddProperty = () => {
                 name="content"
                 rows={8}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                value={formData.description}
+                value={content}
                 onChange={(e) =>
-                  setFormData({ ...formData, description: e.target.value })
+                  setContent(e.target.value)
                 }
                 required
               />

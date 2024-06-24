@@ -10,7 +10,9 @@ import {
   FaSquareInstagram,
   FaSquareYoutube,
 } from "react-icons/fa6";
-
+import link from '../../data/link.json'
+import axios from "axios";
+import toast from "react-hot-toast";
 type Props = {};
 interface FormData {
   firstName: string;
@@ -30,7 +32,6 @@ interface FormErrors {
 }
 
 const contact = (props: Props) => {
-  const navigate = useRouter();
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
@@ -47,6 +48,8 @@ const contact = (props: Props) => {
     lookingFor: false,
     additionalInfo: false,
   });
+
+  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
 
   const handleChange = (
@@ -65,9 +68,8 @@ const contact = (props: Props) => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault(); // Preve
     const newErrors = {
       firstName: !formData.firstName,
       lastName: !formData.lastName,
@@ -76,19 +78,40 @@ const contact = (props: Props) => {
       lookingFor: !formData.lookingFor,
       additionalInfo: !formData.additionalInfo,
     };
-
     setFormErrors(newErrors);
     if (Object.values(newErrors).some((isError) => isError)) {
       return;
     }
+    setLoading(true);
 
-    // console.log("Form submitted:", formData);
-    setSubmitted(true);
-    localStorage.setItem("formData", JSON.stringify(formData));
-    setTimeout(() => {
-      setSubmitted(false);
-      navigate.push("/");
-    }, 2000);
+    try {
+      const response = await axios.post("/api/admin/contact", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      setSubmitted(true);
+
+      // Reset form after successful submission
+      setFormData({
+        firstName: "",
+        lastName: "",
+        phone: "",
+        email: "",
+        lookingFor: "",
+        additionalInfo: "",
+      });
+
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 2000);
+
+    } catch (error: any) {
+      console.error("Error adding blog post:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -107,7 +130,7 @@ const contact = (props: Props) => {
                 questions.
               </p>
             </div>
-            <form action="" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
               <div className="-mx-3 md:flex mb-2">
                 <div
                   className="md:w-1/2 px-3 mb-6 md:mb-0"
@@ -272,11 +295,14 @@ const contact = (props: Props) => {
                   )}
                 </div>
               </div>
+
+
               <button
                 type="submit"
+                disabled={loading}
                 className="bg-black py-2 px-10  font-poppins text-white"
               >
-                Submit
+                {loading ? "Loading" : "Submit"}
               </button>
             </form>
             {submitted && (
@@ -294,31 +320,30 @@ const contact = (props: Props) => {
               </h5>
               <div>
                 <h2 className="text-[14px] uppercase font-poppins">CALL</h2>
-                <a className="text-[#caa468]" href="tel:7789947450">
-                  778-994-7450
+                <a className="text-[#caa468]" href={`tel:${link.phone}`}>
+                  {link.phone}
                 </a>
               </div>
               <div>
                 <h2 className="text-[14px] uppercase font-poppins">EMAIL</h2>
-                <a className="text-[#caa468]" href="tel:7789947450">
-                  778-994-7450
+                <a className="text-[#caa468]" href={`mailto:${link.email}`}>
+                  {link.email}
                 </a>
               </div>
               <div>
                 <h2 className="text-[14px] uppercase font-poppins">ADDRESS</h2>
                 <p className="text-[#caa468]">
                   {" "}
-                  #306 - 1493 foster Street,
-                  <br />
-                  white rock, BC , Canada
+                  {link.address}
                 </p>
               </div>
             </div>
             <div className="flex gap-4 text-[40px] text-white ">
-              <FaSquareInstagram />
-              <FaSquareFacebook />
-              <FaSquareYoutube />
-              <FaLinkedin />
+
+              <a href={link.facebook} target="_blank"><FaSquareFacebook /></a>
+              <a href={link.instagram} target="_blank"><FaSquareInstagram /></a>
+              <a href={link.youtube} target="_blank">  <FaSquareYoutube /></a>
+              <a href={link.linkdin} target="_blank"><FaLinkedin /></a>
             </div>
           </div>
         </div>

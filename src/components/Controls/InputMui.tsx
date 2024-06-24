@@ -14,8 +14,6 @@ type propsType = {
 
 const InputMui = React.forwardRef(({ className, title, type, error, errorMessage, ...props }: propsType, ref: any) => {
     return (
-      
-      
         <TextField
             variant='outlined'
             size="small"

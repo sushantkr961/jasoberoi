@@ -10,10 +10,30 @@ connect();
 
 export async function POST(request: NextRequest) {
   try {
+    
     const data = await request.formData();
     // console.log("FormData:", data);
-
+    
     const propertyId = data.get("propertyId");
+    // Check if propertyId already exists
+    const existingProperty = await Property.findOne({ propertyId });
+    if (existingProperty) {
+      
+      return new NextResponse(
+        JSON.stringify({
+          message: "Property Id Must Uniq",
+          success: false,
+        }),
+        {
+          status: 400,
+        }
+      );
+    }
+
+    const featured =  data.get("featured");
+    const hotOffer =  data.get("hotOffer");
+    const sale =  data.get("sale");
+
     const title = data.get("title");
     const price = data.get("price");
     const sold = data.get("sold");
@@ -67,6 +87,9 @@ export async function POST(request: NextRequest) {
       price,
       sold,
       slider,
+      featured,
+      hotOffer,
+      sale,
       address: {
         fullAddress,
         city,

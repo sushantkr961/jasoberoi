@@ -27,21 +27,25 @@ function CarouselSponsors() {
     const imageUrls = [182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195];
 
     return (
-        <div className="bg-black slider-container  max-w-[1250px] w-full mx-auto">
+        <div className="slider-container max-w-[1350px] w-full mx-auto bg-none">
             <Slider {...settings}>
                 {imageUrls.map((url, index) => (
-                    <div key={index} className="p-2 flex items-center justify-center">
+                    <div
+                        key={index}
+                        className="p-2 focus:outline-none"
+                    >
                         <Image
                             src={`/assets/ourcontributions/asset ${url}.png`}
                             alt={`Slide ${index + 1}`}
-                            width={600}
-                            height={300}
-                            layout="responsive"
-                            className="max-h-[120px] object-contain"
+                            height={100}
+                            width={100}
                             unoptimized
+                            className="h-[100px] w-[100px] md:h-[150px] md:w-[150px]  object-cover object-top"
                         />
                     </div>
                 ))}
+
+
             </Slider>
         </div>
     );

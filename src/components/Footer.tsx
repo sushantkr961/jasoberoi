@@ -11,7 +11,7 @@ import footerData from "../data/data.json";
 import { FaFacebookF, FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa";
 import Container from "./Containers/Container";
 import { FaAddressCard } from "react-icons/fa";
-
+import link from '../data/link.json'
 type Props = {};
 
 function Footer(props: Props) {
@@ -81,29 +81,29 @@ function Footer(props: Props) {
                 <ul role="list" className="mt-3 md:mt-6 space-y-1 md:space-y-4">
                   <li>
                     <a
-                      href="#"
+                      href={`tel:${link.phone}`}
                       className="text-[15px] leading-6 text-white hover:text-slate-200 duration-300 flex items-center font-[300] min-w-[160px] w-auto justify-center md:justify-start"
                     >
                       <MdPhoneIphone size={20} className="mr-2 hidden md:block " />
-                      {contactUs.phone}
+                      {link.phone}
                     </a>
                   </li>
                   <li>
                     <a
-                      href="#"
+                      href={`mailto:${link.email}`}
                       className="text-[15px] leading-6 text-white hover:text-slate-200 duration-300 flex items-center font-[300] min-w-[160px] w-auto justify-center md:justify-start"
                     >
                       <MdMailOutline size={20} className="mr-2 hidden md:block " />
-                      {contactUs.email}
+                      {link.email}
                     </a>
                   </li>
                   <li className="max-w-[60px] md:max-w-full">
                     <a
-                      href="#"
+                      href=""
                       className="text-[15px] leading-6 text-wrap text-white hover:text-slate-300 duration-300 flex items-center font-[300] min-w-[160px] w-auto text-center md:text-left"
                     >
                       <FaAddressCard size={20} className="mr-2  hidden md:block  " />
-                      {contactUs.address}
+                      {link.address}
                     </a>
                   </li>
                 </ul>
@@ -117,16 +117,16 @@ function Footer(props: Props) {
                   {socialMedia.title}
                 </h3>
                 <div className="flex space-x-6">
-                  <a href="#" className="text-white hover:text-slate-300 duration-300">
+                  <a href={link.instagram} className="text-white hover:text-slate-300 duration-300">
                     <FaInstagram size={30} />
                   </a>
-                  <a href="#" className="text-white hover:text-slate-300 duration-300">
+                  <a href={link.tiktok} className="text-white hover:text-slate-300 duration-300">
                     <FaTiktok size={25} />
                   </a>
-                  <a href="#" className="text-white hover:text-blue-4 hover:text-slate-300 duration-300">
+                  <a href={link.youtube} className="text-white hover:text-blue-4 hover:text-slate-300 duration-300">
                     <FaYoutube size={30} />
                   </a>
-                  <a href="#" className="text-white hover:text-slate-300 duration-300">
+                  <a href={link.facebook} className="text-white hover:text-slate-300 duration-300">
                     <FaFacebookF size={25} />
                   </a>
                 </div>

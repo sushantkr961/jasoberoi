@@ -97,7 +97,7 @@ const sellersGuide = (props: Props) => {
           learn your property’s worth in today’s market.
         </p>
         <Link 
-          href={"/"}
+          href={"/exclusive-properties"}
         className="uppercase font-semibold text-[15px] mt-2 bg-black text-white py-2 px-4">
           {" "}
           Get Evaluation

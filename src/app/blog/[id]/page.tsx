@@ -4,6 +4,7 @@ import axios from 'axios';
 import parse from 'html-react-parser';
 import truncate from 'html-truncate';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 interface Post {
@@ -20,7 +21,6 @@ const Post = ({ params }: any) => {
   const [visiblePosts, setVisiblePosts] = useState(2);
   const [copied, setCopied] = useState(false);
   const [visiblePostsMb, setVisiblePostsMb] = useState(2);
-
 
   // Function to handle the "Show more" button click
   const handleShowMore = () => {
@@ -43,7 +43,7 @@ const Post = ({ params }: any) => {
   });
 
   const [loader, setLoader] = useState<boolean>(true);
-
+  const router = useRouter();
   useEffect(() => {
     setLoader(true);
     const fetchPosts = async () => {
@@ -56,7 +56,7 @@ const Post = ({ params }: any) => {
     };
     const fetchSinglePost = async () => {
       try {
-        const response = await axios.get(`/api/admin/blog/as?id=${params.id}`);
+        const response = await axios.get(`/api/admin/blog/single?id=${params.id}`);
         setPost(response.data);
 
       } catch (error) {
@@ -65,7 +65,7 @@ const Post = ({ params }: any) => {
     }
 
 
-    Promise.all([fetchPosts(), fetchSinglePost()]).then(() => {
+    Promise.all([fetchPosts(), fetchSinglePost()]).catch(() => router.back()).finally(() => {
       setLoader(false);
     });
   }, [params]);
@@ -77,8 +77,8 @@ const Post = ({ params }: any) => {
   return (
 
     <div className="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto font-poppins">
-      <div className="grid lg:grid-cols-3 gap-y-8 lg:gap-y-0 lg:gap-x-6">
-        <div className="lg:col-span-2">
+      <div className="grid lg:grid-cols-[2.9fr,1fr] gap-y-8 lg:gap-y-0 lg:gap-x-6">
+        <div className="g:col-span-4l">
           <div className="py-8 lg:pe-8">
             <div className="space-y-5 lg:space-y-8">
               <Link className="inline-flex items-center gap-x-1.5 text-sm text-[#C1a468] decoration-2 hover:underline " href="/blog" >
@@ -162,7 +162,7 @@ const Post = ({ params }: any) => {
 
                     {
                       posts?.slice(0, visiblePostsMb).map((post, index) => (
-                        <Link className="group flex items-center gap-x-6" href="#" key={post._id}>
+                        <Link className="group flex items-center gap-x-6" href={`/blog/${post._id}`} key={post._id}>
                           <div className="flex flex-col grow">
                             <span className="text-sm font-bold group-hover:text-[#C1A468]  text-black  ">
                               {post.title}
@@ -227,9 +227,6 @@ const Post = ({ params }: any) => {
                       >
                         Show more
                       </button>
-
-
-
                     </div>
                   )}
 
@@ -242,7 +239,7 @@ const Post = ({ params }: any) => {
                 <div>
                   <h5 className="font-medium text-2xl leading-8 text-gray-900 mb-4 md:mb-6">Join The Discussion</h5>
 
-                  <form action="" className='flex flex-col gap-4'>
+                  <form className='flex flex-col gap-4'>
                     <div className="reply bg-gray-100 rounded-md p-5 border border-solid border-gray-300 w-full">
                       <div className="flex items-center gap-x-9 gap-y-4 flex-col sm:flex-row mb-5">
 
@@ -250,6 +247,7 @@ const Post = ({ params }: any) => {
                           className="font-medium text-md border-none focus:ring-0 outline-none focus:shadow-none active:outline-none focus:outline-none focus:border-none  active:border-none md:text-lg leading-8 placeholder:text-gray-500 text-gray-900 bg-transparent outline-0 w-full md:h-28"
                           placeholder="Join The Discussion"
                           style={{ border: 'none !important', outline: 'none !important' }} // Ensur
+                          
                         ></textarea>
                       </div>
                     </div>

@@ -45,6 +45,26 @@ export default function RootLayout({
           type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
         />
+
+        <title>Jas Oberoi | Best Realtor Surrey | White Rock | South Surrey</title>
+        <link rel="icon" href="/assets/favicon.ico" />
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="description" content="We are one of the best realtors in Surrey. we work to deliver the best experience with Real Estate. Doing more than just finding real estate." />
+        <link rel="canonical" href="https://jasoberoi.ca/" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Home" />
+        <meta property="og:description" content="We are one of the best realtors in Surrey. we work to deliver the best experience with Real Estate. Doing more than just finding real estate." />
+        <meta property="og:url" content="https://jasoberoi.ca/" />
+        <meta property="og:site_name" content="Jas Oberoi Group" />
+        <meta property="article:publisher" content="https://www.facebook.com/j.o.grouprealestate" />
+        <meta property="article:modified_time" content="2023-12-13T20:41:04+00:00" />
+        <meta property="og:image" content="https://jasoberoi.ca/wp-content/uploads/2023/09/Belleza-White-.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+
+      
       </head>
       <body
         className={cn("relative", inter.className, {

@@ -5,6 +5,7 @@ import Container from "@/components/Containers/Container";
 import Link from "next/link";
 import { CiMail } from "react-icons/ci";
 import { FaMobileAlt } from "react-icons/fa";
+import link from '../../data/link.json'
 
 type Props = {};
 
@@ -32,8 +33,9 @@ const misSearch = (props: Props) => {
 
     // Cleanup function to remove the script when the component unmounts
     return () => {
+      // Cleanup function: remove the script when component unmounts
       if (scriptContainerRef.current) {
-        scriptContainerRef.current.removeChild(script);
+        scriptContainerRef.current.innerHTML = ""; // Clear script content
       }
     };
   }, []);
@@ -42,7 +44,7 @@ const misSearch = (props: Props) => {
     <section>
       <PageHeading
         imageSrc="assets/ourculture/asset 1.jpeg"
-        heading="Featured Listing"
+        heading="MLS Search"
       />
 
       {/* Render other content only if the script has loaded */}
@@ -62,8 +64,8 @@ const misSearch = (props: Props) => {
             lifestyle needs.
           </p>
           <Link
-            href={"/contact"}
-        className="uppercase font-semibold text-[15px] md:text-[16px] mt-2 bg-black text-white py-3 px-4">
+            href={"/exclusive-properties"}
+            className="uppercase font-semibold text-[15px] md:text-[16px] mt-2 bg-black text-white py-3 px-4">
             {" "}
             EXCLUSIVE PROPERTIES
           </Link>
@@ -71,11 +73,11 @@ const misSearch = (props: Props) => {
         <div className="flex justify-between flex-col md:flex-row gap-4 items-center md:gap-9 mb-[70px] text-[20px] sm:text-[28px]">
           <div className="flex gap-2 items-center ">
             <FaMobileAlt />
-            <a href="tel:7789947450">778.994.7450</a>
+            <a href={`tel:${link.phone}`}>{link.phone}</a>
           </div>
           <div className="flex gap-2 items-center ">
             <CiMail />
-            <a href="mailto:jo@jasoberoi.ca">jo@jasoberoi.ca</a>
+            <a href={`mailto:${link.email}`}>{link.email}</a>
           </div>
         </div>
       </Container>

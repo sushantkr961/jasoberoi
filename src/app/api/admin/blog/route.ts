@@ -91,7 +91,7 @@ export async function GET(req: NextRequest) {
 
     const blogs = await blogsQuery.exec();
     const totalCount = await Blog.countDocuments(); // Total count of all documents
-
+    
     // console.log(blogs);
 
     return NextResponse.json(
@@ -109,6 +109,82 @@ export async function GET(req: NextRequest) {
       JSON.stringify({
         message: "Failed to retrieve blog blogs",
         error: error.message,
+      }),
+      { status: 500 }
+    );
+  }
+}
+
+export async function PUT(request: NextRequest) {
+  try {
+    const data = await request.formData();
+    const id = data.get("id");
+    const title = data.get("title");
+    const content = data.get("content");
+    const file = data.get("file");
+
+    if (!id || !title || !content) {
+      return new NextResponse(
+        JSON.stringify({
+          message: "ID, title, and content are required",
+          success: false,
+        }),
+        { status: 400 }
+      );
+    }
+
+    const existingPost = await Blog.findById(id);
+    if (!existingPost) {
+      return new NextResponse(
+        JSON.stringify({
+          message: "Blog post not found",
+          success: false,
+        }),
+        { status: 404 }
+      );
+    }
+
+    let imageUrl = existingPost.imageUrl;
+
+    if (file instanceof File) {
+      // Delete existing image if it exists
+      if (existingPost.imageUrl) {
+        await unlink(`./public${existingPost.imageUrl}`).catch((error) => {
+          console.error("Failed to delete image:", error);
+          throw new Error("Failed to delete associated image");
+        });
+      }
+
+      // Upload new image
+      const byteData = await file.arrayBuffer();
+      const buffer = Buffer.from(byteData);
+      const extension = file.name.split(".").pop();
+      const fileName = `${uuidv4()}.${extension}`;
+      const path = `./public/uploads/${fileName}`;
+      await writeFile(path, buffer);
+      imageUrl = `/uploads/${fileName}`;
+    }
+    existingPost.title = title as string;
+    existingPost.content = content as string;
+    existingPost.imageUrl = imageUrl;
+
+    await existingPost.save();
+
+    return new NextResponse(
+      JSON.stringify({
+        message: "Blog post updated successfully",
+        success: true,
+        post: existingPost,
+      }),
+      { status: 200 } 
+    );
+  } catch (error: any) {
+    console.error("Error updating blog post:", error);
+    return new NextResponse(
+      JSON.stringify({
+        message: "Failed to update blog post",
+        error: error.message,
+        success: false,
       }),
       { status: 500 }
     );

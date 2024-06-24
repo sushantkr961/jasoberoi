@@ -34,9 +34,7 @@ const page = () => {
 
   const fetchPosts = async () => {
     try {
-      const response = await axios.get(
-        `/api/admin/property?page=${currentPage}&limit=${postsPerPage}`
-      );
+      const response = await axios.get(`/api/admin/property?page=${currentPage}&limit=${postsPerPage}`);
       const { propertys, totalPages, totalCount } = response.data;
       console.log(55555, response);
       

@@ -25,23 +25,7 @@
         "benefits": "Save time for yourself, seize financial efficiency, and work with Jas Oberoi."
     },
     "TEAM": [
-        {
-            "id":1,
-            "name": "Manpreet Sidhu",
-            "image": "asset-3.jpeg",
-            "role": "Office Manager & Real Estate Advisor",
-            "email": "manpreet@jasoberoi.ca",
-            "descriptions": [
-                {
-                    "title": "description_1",
-                    "content": "Manpreet, a Penticton native with strong ties to the Sikh community, transitioned from Vancouver studies to a successful career as an executive assistant in her hometown, drawing on her extensive customer service experience. Her passion for real estate, inspired by her parents’ property ownership, has led her to collaborate with various real estate teams in the Okanagan and engage in real estate marketing."
-                },
-                {
-                    "title": "description_2",
-                    "content": "As a new homeowner, she intimately understands the process of buying your first home. Beyond work, Manpreet enjoys exploring the Okanagan’s offerings, unwinding with TV series and podcasts, and cherishing scenic sunsets over Skaha or Okanagan Lake in the place she proudly calls home."
-                }
-            ]
-        },
+
         {
             "id":2,
             "name": "Maria Hussain",
