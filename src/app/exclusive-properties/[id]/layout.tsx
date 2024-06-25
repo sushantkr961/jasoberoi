@@ -1,10 +1,9 @@
 import axios from "axios";
-import { stripHtml } from "string-strip-html";
-import parse from 'html-react-parser';
 import truncate from 'html-truncate';
+import { stripHtml } from "string-strip-html";
 
 
-export async function fetchPropertyData(id: string) {
+async function fetchPropertyData(id: string) {
     try {
         const response = await axios.get(`http://localhost:3000/api/admin/property/single?id=${id}`);
         console.log(response);
