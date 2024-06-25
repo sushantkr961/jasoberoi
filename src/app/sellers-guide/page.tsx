@@ -1,12 +1,29 @@
+"use client"
 import YoutubeVideo from "@/components/Common/YoutubeVideo";
 import Container from "@/components/Containers/Container";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 type Props = {};
 
 const sellersGuide = (props: Props) => {
+
+  const controls = useAnimation();
+  const [ref, inView] = useInView();
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView]);
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 0 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1 } },
+  };
+
   return <section>
     <div
       className="w-full h-full"
@@ -17,20 +34,30 @@ const sellersGuide = (props: Props) => {
         backgroundSize: "cover",
       }}
     >
-      <Container className="m-auto flex flex-col items-center px-2">
-        <div className="heading flex flex-col items-center justify-center pt-10 sm:pt-14 md:pt-20 sm:px-20 lg:px-24  lg:gap-0  lg:max-w-full" >
-          <h3 className="font-poppins text-[24px] md:text-[29px] font-bold tracking-[3.1px] text-[#D3AA54]">JAS OBEROI GROUP</h3>
-          <h2 className="font-poppins text-[35px] md:text-[48px] uppercase leading-[1.3em] font-[300] text-center"><strong className="font-[600] ">WHY LIST</strong> WITH US</h2>
-        </div>
+      <motion.div
 
-        <div className="w-full sm:w-[95%]  h-[260px] sm:h-[320px] md:h-[420px] lg:h-[520px] xl:h-[740px] mx-auto max-h-[600px] xl:max-h-full mt-[50px]">
-          <YoutubeVideo
-            src="https://www.youtube.com/embed/BBZuL3X6OAo?si=UO4cAX90sBniiULj"
-            height="100%"
-            width="100%"
-          />
-        </div>
-      </Container>
+        ref={ref}
+        initial="hidden"
+        animate={controls}
+        variants={containerVariants}
+      >
+
+        <Container className="m-auto flex flex-col items-center px-2">
+          <div className="heading flex flex-col items-center justify-center pt-10 sm:pt-14 md:pt-20 sm:px-20 lg:px-24  lg:gap-0  lg:max-w-full" >
+            <h3 className="font-poppins text-[24px] md:text-[29px] font-bold tracking-[3.1px] text-[#D3AA54]">JAS OBEROI GROUP</h3>
+            <h2 className="font-poppins text-[35px] md:text-[48px] uppercase leading-[1.3em] font-[300] text-center"><strong className="font-[600] ">WHY LIST</strong> WITH US</h2>
+          </div>
+
+          <div className="w-full sm:w-[95%]  h-[260px] sm:h-[320px] md:h-[420px] lg:h-[520px] xl:h-[740px] mx-auto max-h-[600px] xl:max-h-full mt-[50px]">
+            <YoutubeVideo
+              src="https://www.youtube.com/embed/BBZuL3X6OAo?si=UO4cAX90sBniiULj"
+              height="100%"
+              width="100%"
+            />
+          </div>
+        </Container>
+
+      </motion.div>
       {/* Seller Guide */}
       <div className="bg-white w-full flex justify-center py-[50px] md:py-[80px]">
         <Container className="m-auto">
@@ -73,7 +100,7 @@ const sellersGuide = (props: Props) => {
             <Link
 
               href={"/contact"}
-          className="uppercase font-semibold text-[15px] font-poppins mx-auto w-[150px] text-center lg:mx-0 mt-2 bg-black text-white py-2 px-4">Contact Jas</Link>          
+              className="uppercase font-semibold text-[15px] font-poppins mx-auto w-[150px] text-center lg:mx-0 mt-2 bg-black text-white py-2 px-4">Contact Jas</Link>
             <div className="w-full h-full mt-4">
               <Image
                 src={`/assets/realstateinside/Logos.png`}
@@ -96,9 +123,9 @@ const sellersGuide = (props: Props) => {
           Thinking about selling your home? Receive a free home evaluation to
           learn your property’s worth in today’s market.
         </p>
-        <Link 
+        <Link
           href={"/exclusive-properties"}
-        className="uppercase font-semibold text-[15px] mt-2 bg-black text-white py-2 px-4">
+          className="uppercase font-semibold text-[15px] mt-2 bg-black text-white py-2 px-4">
           {" "}
           Get Evaluation
         </Link>

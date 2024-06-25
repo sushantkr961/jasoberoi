@@ -1,17 +1,32 @@
+"use client"
 import PageHeading from "@/components/Common/PageHeading";
 import Container from "@/components/Containers/Container";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import data from '../../data/BuyerGuide/data.json'
 import { FaMobileAlt } from "react-icons/fa";
 import { CiMail } from "react-icons/ci";
 import Link from "next/link";
 
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import link from '../../data/link.json'
 type Props = {};
 
 const buyersGuide = (props: Props) => {
 
+  const controls = useAnimation();
+  const [ref, inView] = useInView();
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView]);
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 0 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1 } },
+  };
   const { guide } = data;
   return (
     <section>
@@ -20,7 +35,10 @@ const buyersGuide = (props: Props) => {
         heading="
         Buyer's Guide"
       />
-      <div
+
+
+
+      <motion.div
         className="w-full h-full"
         style={{
           backgroundImage: "url('/assets/realstateinside/buy-guide.jpg')",
@@ -29,6 +47,7 @@ const buyersGuide = (props: Props) => {
           backgroundSize: "cover",
         }}
       >
+
         <Container className="m-auto flex flex-col items-center px-2">
           <div className="heading flex flex-col items-center justify-center py-10 md:py-20 sm:px-20 lg:px-24 gap-3 md:gap-8 lg:gap-10  lg:max-w-full">
             <h2 className="font-poppins text-[25px] md:text-[46px] uppercase leading-[1.3em] font-[300] text-center">
@@ -100,7 +119,7 @@ const buyersGuide = (props: Props) => {
             </div>
           </div>
         </Container>
-      </div>{" "}
+      </motion.div>{" "}
     </section>
   );
 };

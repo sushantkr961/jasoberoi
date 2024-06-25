@@ -3,12 +3,14 @@ import YoutubeVideo from "@/components/Common/YoutubeVideo";
 import Container from "@/components/Containers/Container";
 import SponnsorsCard from "@/components/Contributions/SponnsorsCard";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import data from "../../data/Contributions/data.json";
 import MusicCard from "@/components/Contributions/MusicCard";
 import Carousel from "@/components/Carousel/Carousel";
 import GalleryCarousel from "@/components/Carousel/GalleryCarsouel";
 import CarouselSponsors from "@/components/Contributions/CarouselSponsors";
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 type Props = {};
 
@@ -29,16 +31,42 @@ const imageUrls = [
 
 function page({ }: Props) {
   const { music, sponsors } = data;
+
+
+  const controls = useAnimation();
+  const controls2 = useAnimation();
+  const [ref, inView] = useInView();
+  const [ref2, inView2] = useInView();
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+    if(inView2){
+      controls2.start('visible');
+    }
+
+  }, [controls, inView,inView2,ref2]);
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 0 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1 } },
+  };
+
+
   return (
     <section className="bg-[#F0F2F4]">
-      <div className="w-full h-[260px] sm:h-[320px] md:h-[420px] lg:h-[520px] xl:h-[100vh] mx-auto max-h-[600px] xl:max-h-full mt-[10px] ">
+      <motion.div
+        initial="hidden"
+        animate='visible'
+        variants={containerVariants}
+        className="w-full h-[260px] sm:h-[320px] md:h-[420px] lg:h-[520px] xl:h-[100vh] mx-auto max-h-[600px] xl:max-h-full mt-[10px] ">
         {/* Youtube video */}
         <YoutubeVideo
           src="https://www.youtube.com/embed/QN6rR1zuu_k?si=Zi48mup3kGDCDPZs"
           height="100%"
           width="100%"
         />
-      </div>
+      </motion.div>
       {/* BantingGalaw */}
       <div className="bg-[#111B1E] sm:py-[3%] flex justify-center pb-[10%] ">
         <Container>
@@ -147,30 +175,38 @@ function page({ }: Props) {
       </div>
 
       {/* DR. BRIAN RODRIGUES & RUI SHANG. */}
-      <Container className="flex flex-col gap-7 sm:gap-9 justify-center m-auto py-16 xl:py-0 xl:min-h-[864px]">
-        <div>
-          <Image
-            src={`/assets/ourcontributions/DSC00474.jpg`}
-            height={700}
-            width={580}
-            alt="cluture"
-            layout="responsive"
-            className="md:block object-cover w-full "
-          />
-        </div>
-        <div className="sm:px-3 flex flex-col text-center  justify-between w-full">
-          <div className="text-[#111B1E] text-[14px] lg:text-[15px] ">
-            DR. BRIAN RODRIGUES & RUI SHANG.
-          </div>
+
+      <motion.div
+        ref={ref2}
+        initial="hidden"
+        animate={controls2}
+        variants={containerVariants}
+      >
+        <Container className="flex flex-col gap-7 sm:gap-9 justify-center m-auto py-16 xl:py-0 xl:min-h-[864px]">
           <div>
-            <div className="text-[#111B1E] text-[12px] lg:text-[15px] leading-[1.3rem] lg:leading-[1.8rem] tracking-[1px] mt-4 ">
-              OVER 300 INDUSTRY LEADING PROFESSIONALS GATHERED AT THE ARIA
-              BANQUET HALL TO ENJOY DELICIOUS FOOD, DRINK, AND GOOD COMPANY.
+            <Image
+              src={`/assets/ourcontributions/DSC00474.jpg`}
+              height={700}
+              width={580}
+              alt="cluture"
+              layout="responsive"
+              className="md:block object-cover w-full "
+            />
+          </div>
+          <div className="sm:px-3 flex flex-col text-center  justify-between w-full">
+            <div className="text-[#111B1E] text-[14px] lg:text-[15px] ">
+              DR. BRIAN RODRIGUES & RUI SHANG.
+            </div>
+            <div>
+              <div className="text-[#111B1E] text-[12px] lg:text-[15px] leading-[1.3rem] lg:leading-[1.8rem] tracking-[1px] mt-4 ">
+                OVER 300 INDUSTRY LEADING PROFESSIONALS GATHERED AT THE ARIA
+                BANQUET HALL TO ENJOY DELICIOUS FOOD, DRINK, AND GOOD COMPANY.
+              </div>
             </div>
           </div>
-        </div>
-      </Container>
+        </Container>
 
+      </motion.div>
       {/* SPONSORS AND SPEAKERS */}
       <div className="bg-[#111B1E] py-[40px] flex justify-center md:py-[5%] ">
         <Container>
@@ -203,7 +239,13 @@ function page({ }: Props) {
       </div>
 
       {/* ANGELINA RAII */}
-      <div className=" sm:py-[2%] flex justify-center pb-[8%]">
+      <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={controls}
+      variants={containerVariants}
+  
+      className=" sm:py-[2%] flex justify-center pb-[8%]">
         <Container>
           <div className="flex flex-col md:flex-row items-center gap-5 max-w-[1340px] justify-between mt-[36px] sm:my-[44px]  lg:my-[70px] ">
             <div className="w-full md:w-[37%] flex  md:mt-[0px]">
@@ -236,7 +278,7 @@ function page({ }: Props) {
             </div>
           </div>
         </Container>
-      </div>
+      </motion.div>
 
       {/* MUSIC MEDLEY AND MAGIC */}
       <div className=" lg:py-[10px] flex justify-center md:pb-[5%] ">
@@ -448,7 +490,7 @@ function page({ }: Props) {
                   ))}
                 </div>
 
-                <div style={{flexWrap:"wrap"}} className="flex md:hidden flex-wrap  grid-cols-2  place-items-center gap-4 justify-between">
+                <div style={{ flexWrap: "wrap" }} className="flex md:hidden flex-wrap  grid-cols-2  place-items-center gap-4 justify-between">
                   {
                     [182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195].map((data) => (
                       <Image
