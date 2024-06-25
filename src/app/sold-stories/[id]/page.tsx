@@ -57,6 +57,7 @@ const SoldStories = ({ params }: any) => {
                 setPosts(response.data.soldStories);
             } catch (error) {
                 console.error("Failed to fetch posts:", error);
+                router.push("/sold-stories");
             }
         };
         const fetchSinglePost = async () => {
@@ -66,13 +67,13 @@ const SoldStories = ({ params }: any) => {
 
             } catch (error) {
                 console.error("Failed to fetch posts:", error);
+                router.push("/sold-stories");
             }
         }
 
-
-        Promise.all([fetchPosts(), fetchSinglePost()]).catch(() => router.back()).finally(() => {
-            setLoader(false);
-        });
+        Promise.all([fetchPosts(), fetchSinglePost()]).finally(() => {
+                setLoader(false);
+            });
     }, [params]);
 
     if (loader) {

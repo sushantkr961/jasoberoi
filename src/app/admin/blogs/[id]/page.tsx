@@ -17,6 +17,7 @@ interface Post {
 }
 
 const UpdateBlog: React.FC<{ params: any }> = ({ params }) => {
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState<File | null>(null);
@@ -47,6 +48,8 @@ const UpdateBlog: React.FC<{ params: any }> = ({ params }) => {
         setImageUrl(postData.imageUrl);
         // Assuming other fields like author, createdAt need to be set if required
       } catch (error) {
+
+        router.push("/admin/blogs");
         console.error("Failed to fetch post:", error);
       }
     };
@@ -74,7 +77,7 @@ const UpdateBlog: React.FC<{ params: any }> = ({ params }) => {
     event.preventDefault();
     setLoading(true);
 
-    if(content){
+    if (content) {
       toast.error("All Field Required");
       return;
     }

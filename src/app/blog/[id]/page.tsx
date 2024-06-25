@@ -52,6 +52,7 @@ const Post = ({ params }: any) => {
         setPosts(response.data.blogs);
       } catch (error) {
         console.error("Failed to fetch posts:", error);
+        router.push("/blog");
       }
     };
     const fetchSinglePost = async () => {
@@ -61,6 +62,7 @@ const Post = ({ params }: any) => {
 
       } catch (error) {
         console.error("Failed to fetch posts:", error);
+        router.push("/blog");
       }
     }
 

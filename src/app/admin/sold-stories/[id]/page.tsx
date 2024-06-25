@@ -17,7 +17,7 @@ interface SoldStoriesData {
 
 const UpdateSoldStoriesData = () => {
     const editor = useRef(null);
-     const [singleImageName, setSingleImageName] = useState<string>("");
+    const [singleImageName, setSingleImageName] = useState<string>("");
     const [galleryImageNames, setGalleryImageNames] = useState<string[]>([]);
 
     const router = useRouter();
@@ -35,20 +35,21 @@ const UpdateSoldStoriesData = () => {
         const fetchSoldStory = async () => {
             try {
                 const response = await axios.get(`/api/admin/soldstories/single?id=${id}`);
+
                 setSingleImageName(response.data.singleImage);
-                setGalleryImageNames(response.data.singleImage);
-                const data = response.data;                
+                setGalleryImageNames(response.data.images);
+
+                const data = response.data;
                 setFormData({
                     title: data.title,
                     singleImage: [],
                     images: [],
                     content: data.content,
                 });
-
-                
                 console.log(formData);
                 setContent(data.content);
             } catch (error) {
+                router.push("/admin/sold-stories");
                 console.error("Error fetching sold story data:", error);
             }
         };
@@ -62,6 +63,10 @@ const UpdateSoldStoriesData = () => {
 
     const handleMultipleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
+            const fileNames = Array.from(event.target.files).map(file => file.name);
+
+            // Set file names to galleryImageNames state
+            setGalleryImageNames(fileNames);
             setFormData({
                 ...formData,
                 images: Array.from(event.target.files),
@@ -71,6 +76,9 @@ const UpdateSoldStoriesData = () => {
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
+
+            setSingleImageName(event.target.files[0].name);
+
             setFormData({
                 ...formData,
                 singleImage: Array.from(event.target.files),
@@ -172,13 +180,15 @@ const UpdateSoldStoriesData = () => {
                             accept="image/*"
                             onChange={handleImageChange}
                         />
-                        {formData.singleImage.length > 0 && (
+
+                    </div>
+                    <div className="col-span-full">
+                        {singleImageName && (
                             <p className="mt-2 text-sm text-gray-500">
-                                Selected file: {formData.singleImage[0].name}
+                                Selected file: {String(singleImageName).replace('/uploads/', '')}
                             </p>
                         )}
                     </div>
-
                     <div className="col-span-full">
                         <div className="flex items-center mb-4">
                             <label
@@ -254,10 +264,12 @@ const UpdateSoldStoriesData = () => {
                             accept="image/*"
                             onChange={handleMultipleFileChange}
                         />
-                        {formData.images.length > 0 && (
+                    </div>
+                    <div className="col-span-full">
+                        {galleryImageNames.length > 0 && (
                             <ul className="mt-2 text-sm text-gray-500">
-                                {formData.images.map((image, index) => (
-                                    <li key={index}>{image.name}</li>
+                                {galleryImageNames.map((singleImageName, index) => (
+                                    <li key={index}>Selected file:  {String(singleImageName).replace('/uploads/', '')}</li>
                                 ))}
                             </ul>
                         )}

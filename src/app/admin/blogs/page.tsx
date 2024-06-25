@@ -229,7 +229,7 @@ const Blog = () => {
 
                         <td className="size-px whitespace-nowrap">
                           <div className="px-6 py-1.5">
-                            <Link className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500" href={`/admin/updateblog/${post._id}`}>
+                            <Link className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500" href={`/admin/blogs/${post._id}`}>
                               Edit
                             </Link>
                           </div>
