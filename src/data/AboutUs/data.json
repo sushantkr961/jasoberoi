@@ -27,7 +27,7 @@
     "TEAM": [
 
         {
-            "id":2,
+            "id":1,
             "name": "Maria Hussain",
             "image": "asset-4.jpeg",
             "role": "Real Estate Professional",
@@ -57,7 +57,7 @@
         },
         {
             
-            "id":3,
+            "id":2,
             "name": "Claudia",
             "image": "asset-5.jpeg",
             "role": "Marketing Manager",
@@ -82,9 +82,9 @@
             ]
         },
         {
-            "id":4,
+            "id":3,
             "name": "Emmanuel Gatica",
-            "image": "asset-6.jpeg",
+            "image": "asset-5.jpeg",
             "role": "Media Director",
             "email": "info@jasoberoi.ca",
             "descriptions": [

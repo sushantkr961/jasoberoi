@@ -1,4 +1,5 @@
 import PrelineScript from "@/components/PrelineScript";
+import Head from "next/head";
 import Link from "next/link";
 import { Toaster } from "react-hot-toast";
 
@@ -9,7 +10,7 @@ export default function DashboardLayout({
 }) {
   return (
     <>
-
+      
       <Toaster
         position="top-center"
         reverseOrder={false}
@@ -529,27 +530,27 @@ dark:bg-neutral-800 dark:border-neutral-700
                       Sold-Stories
                     </Link>
                   </li>
-                 
+
                 </ul>
               </div>
             </li>
             <li>
-                    <Link
-                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
-                      href="/admin/contactlist"
-                    >
-                       Contact List
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
-                      href="/admin/commentlist"
-                    >
-                       Comments
-                    </Link>
-                  </li>
-            
+              <Link
+                className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
+                href="/admin/contactlist"
+              >
+                Contact List
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
+                href="/admin/commentlist"
+              >
+                Comments
+              </Link>
+            </li>
+
           </ul>
         </nav>
       </div>

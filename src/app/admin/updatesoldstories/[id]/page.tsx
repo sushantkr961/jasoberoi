@@ -17,6 +17,9 @@ interface SoldStoriesData {
 
 const UpdateSoldStoriesData = () => {
     const editor = useRef(null);
+     const [singleImageName, setSingleImageName] = useState<string>("");
+    const [galleryImageNames, setGalleryImageNames] = useState<string[]>([]);
+
     const router = useRouter();
     const { id } = useParams(); // Assuming you have the id parameter in your route
     const [useEditor, setUseEditor] = useState(false);
@@ -32,13 +35,18 @@ const UpdateSoldStoriesData = () => {
         const fetchSoldStory = async () => {
             try {
                 const response = await axios.get(`/api/admin/soldstories/single?id=${id}`);
-                const data = response.data;
+                setSingleImageName(response.data.singleImage);
+                setGalleryImageNames(response.data.singleImage);
+                const data = response.data;                
                 setFormData({
                     title: data.title,
                     singleImage: [],
                     images: [],
                     content: data.content,
                 });
+
+                
+                console.log(formData);
                 setContent(data.content);
             } catch (error) {
                 console.error("Error fetching sold story data:", error);
@@ -164,6 +172,11 @@ const UpdateSoldStoriesData = () => {
                             accept="image/*"
                             onChange={handleImageChange}
                         />
+                        {formData.singleImage.length > 0 && (
+                            <p className="mt-2 text-sm text-gray-500">
+                                Selected file: {formData.singleImage[0].name}
+                            </p>
+                        )}
                     </div>
 
                     <div className="col-span-full">
@@ -241,6 +254,13 @@ const UpdateSoldStoriesData = () => {
                             accept="image/*"
                             onChange={handleMultipleFileChange}
                         />
+                        {formData.images.length > 0 && (
+                            <ul className="mt-2 text-sm text-gray-500">
+                                {formData.images.map((image, index) => (
+                                    <li key={index}>{image.name}</li>
+                                ))}
+                            </ul>
+                        )}
                     </div>
                 </section>
 

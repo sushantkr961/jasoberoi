@@ -16,6 +16,7 @@ const About = (props: Props) => {
 
   return (
     <section >
+
       <PageHeading
         imageSrc="assets/aboutus/asset 16.jpeg"
         heading="About Us"
