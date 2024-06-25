@@ -55,6 +55,7 @@ interface Attribute {
 }
 
 const page = ({ params }: any) => {
+    const propertyId = params.id;
     const editor = useRef(null);
     const router = useRouter();
     const [useEditor, setUseEditor] = useState(false);
