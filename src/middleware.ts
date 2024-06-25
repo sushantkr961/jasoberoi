@@ -1,29 +1,44 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { jwtVerify } from 'jose';
+import { NextRequest, NextResponse } from 'next/server';
 
-export function middleware(request: NextRequest) {
-  const path = request.nextUrl.pathname;
+export async function middleware(request: NextRequest) {
+    const path = request.nextUrl.pathname;
+    const isPublicPath = path === "/login";
+    const isAdminPath = path.startsWith("/admin");
+     const isMasterPath = path === "/admin/add-users" || path === "/admin/users";
+    const token = request.cookies.get("token")?.value || "";
 
-  const isPublicPath = path === "/login";
-  const isAdminPath = path.startsWith("/admin");
+    try {
+        if (token) {
+            const { payload } = await jwtVerify(token, new TextEncoder().encode(process.env.TOKEN_SECRET!));
 
-  const token = request.cookies.get("token")?.value || "";
-  // console.log(6666, token);
+            if(isMasterPath && !payload.role){
+              return NextResponse.redirect(new URL("/", request.nextUrl));
+            }            
+            if (isPublicPath) {
+                return NextResponse.redirect(new URL("/", request.nextUrl));
+            }
+            // Add logic to handle admin path
+            if (isAdminPath && !payload.userId) {
+                return NextResponse.redirect(new URL("/login", request.nextUrl));
+            }
 
-  // If trying to access the login page while logged in, redirect to home
-  if (isPublicPath && token) {
-    return NextResponse.redirect(new URL("/", request.nextUrl));
-  }
+        } else {
+            // If trying to access a protected path without a token, redirect to login
+            if (!isPublicPath) {
+                return NextResponse.redirect(new URL("/login", request.nextUrl));
+            }
+        }
+    } catch (error) {
+        // If token verification fails, redirect to login if accessing a protected path
+        if (!isPublicPath) {
+            return NextResponse.redirect(new URL("/login", request.nextUrl));
+        }
+    }
 
-  // If trying to access the admin path without a token, redirect to login
-  if (isAdminPath && !token) {
-    return NextResponse.redirect(new URL("/login", request.nextUrl));
-  }
-
-  // No redirection needed, allow access
-  return NextResponse.next();
+    return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/login", "/admin/:path*"],
+    matcher: ["/login", "/admin/:path*"],
 };

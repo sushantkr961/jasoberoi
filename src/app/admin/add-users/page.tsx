@@ -134,7 +134,7 @@ export default function SignupPage() {
               </div>
               <div className="text-sm leading-6">
                 <label htmlFor="comments" className="font-medium text-gray-900">
-                  Mark as Admin
+                  Mark as MasterAdmin (Give Permission For Add User)
                 </label>
               </div>
             </div>

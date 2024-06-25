@@ -13,27 +13,28 @@ interface User {
 const LoginPage: React.FC = () => {
   const [user, setUser] = useState<User>({ email: "", password: "" });
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState();
   const router = useRouter();
 
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
     setLoading(true);
-
     try {
       const response = await axios.post("/api/login", user);
-      const { isAdmin } = response.data;
-      // console.log("dddd",isAdmin)
+      const { success } = response.data;
 
-      if (isAdmin) {
-        // toast.success("Login successful");
+      if (success) {
         router.push("/admin");
-        // console.log("login success");
+        toast.success(response.data.message);
       } else {
-        // toast.error("You are not authorized to access this page.");
-        console.log("You are not authorized to access this page.");
-        router.push("/");
+        setError(response.data.message)
+        toast.error(response.data.message)
+        // router.push("/");
       }
+      setLoading(false);
     } catch (error: any) {
+
+
       console.error(
         "Login failed",
         error.response ? error.response.data.message : error.message
@@ -41,6 +42,7 @@ const LoginPage: React.FC = () => {
       toast.error(
         error.response ? error.response.data.message : "Login failed"
       );
+      setLoading(false);
     }
   };
 
@@ -100,14 +102,15 @@ const LoginPage: React.FC = () => {
                 />
               </div>
             </div>
-
             <div>
               <button
                 disabled={loading}
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign in
+                {
+                  loading ? "Loading" : "Sign in"
+                }
               </button>
             </div>
           </form>

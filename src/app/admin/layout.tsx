@@ -1,16 +1,41 @@
+"use client"
 import PrelineScript from "@/components/PrelineScript";
-import Head from "next/head";
+import axios from "axios";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
+interface User {
+  _id: string;
+  username: string;
+  email: string;
+  isAdmin: boolean;
+}
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
+  const [user, setUser] = useState<User | null>(null);
+
+  const getAdminDetails = async () => {
+    try {
+      const res = await axios.get("/api/admin");
+      setUser(res.data.data);
+    } catch (error) {
+      console.error("Error fetching admin details:", error);
+    }
+  };
+
+  useEffect(() => {
+    getAdminDetails();
+  }, []);
+
+
   return (
     <>
-      
+
       <Toaster
         position="top-center"
         reverseOrder={false}
@@ -178,7 +203,7 @@ dark:bg-neutral-800 dark:border-neutral-700
                 Dashboard
               </Link>
             </li>
-
+{user?.isAdmin &&(
             <li className="hs-accordion" id="account-accordion">
               <button
                 type="button"
@@ -270,8 +295,8 @@ dark:bg-neutral-800 dark:border-neutral-700
                   </li> */}
                 </ul>
               </div>
-            </li>
-
+            </li>)
+}
             <li className="hs-accordion" id="account-accordion">
               <button
                 type="button"

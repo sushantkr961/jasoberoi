@@ -28,13 +28,7 @@ const AdminDashboard: React.FC = () => {
   useEffect(() => {
     getAdminDetails();
   }, []);
-
-  useEffect(() => {
-    if (user && !user.isAdmin) {
-      logout();
-    }
-  }, [user]);
-
+  
   const logout = async () => {
     try {
       await axios.get("/api/logout");

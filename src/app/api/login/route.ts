@@ -3,6 +3,7 @@ import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { SignJWT } from "jose";
 
 connect();
 
@@ -10,13 +11,20 @@ export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
     const { email, password } = reqBody;
+
+    if (!email || !password) {
+      return NextResponse.json(
+        { message: "email and password required" },
+        { status: 400 }
+      );
+    }
     // console.log(reqBody);
     //check if user exists
     const user = await User.findOne({ email });
     if (!user) {
       return NextResponse.json(
-        { error: "User does not exist" },
-        { status: 400 }
+        { message: "User does not exist" },
+        { status: 200 }
       );
     }
     // console.log("user exists");
@@ -25,24 +33,22 @@ export async function POST(request: NextRequest) {
     if (!validPassword) {
       // console.log("invalid password");
       return NextResponse.json(
-        { error: "Invalid Credentials" },
-        { status: 400 }
+        { message: "Invalid Credentials" },
+        { status: 200 }
       );
     }
-    // console.log(user);
+
     //create token data
-    const tokenData = {
-      id: user._id,
-      username: user.username,
-      email: user.email,
-    };
-    //create token
-    const token = jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
-      expiresIn: "1d",
-    });
+    const userId = user._id;
+    const token = await new SignJWT({ userId,role:user.isAdmin })
+      .setProtectedHeader({ alg: 'HS256' }) // Set the protected header
+      .setIssuedAt()
+      .setExpirationTime('1d')
+      .sign(new TextEncoder().encode(process.env.TOKEN_SECRET!));
+
     const response = NextResponse.json({
       message: "Login successful",
-      success: true,
+      success: true,    
       token: token,
       isAdmin: user.isAdmin,
     });

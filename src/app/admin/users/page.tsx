@@ -218,7 +218,7 @@ const page = () => {
                           <div className="ps-6 py-3">
                             <div className="flex items-center gap-x-3">
                               <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">
-                                {user.isAdmin ? "Admin" : "User"}
+                                {user.isAdmin ? "Master" : "Admin"}
                               </span>
                             </div>
                           </div>
