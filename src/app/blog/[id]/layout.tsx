@@ -1,10 +1,9 @@
 import axios from "axios";
-import { stripHtml } from "string-strip-html";
-import parse from 'html-react-parser';
 import truncate from 'html-truncate';
+import { stripHtml } from "string-strip-html";
 
 
-export async function fetchPostData(id: string) {
+async function fetchPostData(id: string) {
     try {
         const response = await axios.get(`http://localhost:3000/api/admin/blog/single?id=${id}`);
         console.log(response);
