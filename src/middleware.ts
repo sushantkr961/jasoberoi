@@ -5,15 +5,15 @@ export async function middleware(request: NextRequest) {
     const path = request.nextUrl.pathname;
     const isPublicPath = path === "/login";
     const isAdminPath = path.startsWith("/admin");
-     const isMasterPath = path === "/admin/add-users" || path === "/admin/users";
+    const isMasterPath = path === "/admin/add-users" || path === "/admin/users";
     const token = request.cookies.get("token")?.value || "";
-
+    
     try {
         if (token) {
             const { payload } = await jwtVerify(token, new TextEncoder().encode(process.env.TOKEN_SECRET!));
 
             if(isMasterPath && !payload.role){
-              return NextResponse.redirect(new URL("/", request.nextUrl));
+                return NextResponse.redirect(new URL("/", request.nextUrl));
             }            
             if (isPublicPath) {
                 return NextResponse.redirect(new URL("/", request.nextUrl));
@@ -24,7 +24,6 @@ export async function middleware(request: NextRequest) {
             }
 
         } else {
-            // If trying to access a protected path without a token, redirect to login
             if (!isPublicPath) {
                 return NextResponse.redirect(new URL("/login", request.nextUrl));
             }
