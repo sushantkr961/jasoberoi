@@ -54,7 +54,7 @@ interface Attribute {
     value: string;
 }
 
-const UpdateProperty = ({ propertyId }: { propertyId: string }) => {
+const page = ({ params }: any) => {
     const editor = useRef(null);
     const router = useRouter();
     const [useEditor, setUseEditor] = useState(false);
@@ -1014,4 +1014,4 @@ const UpdateProperty = ({ propertyId }: { propertyId: string }) => {
     );
 };
 
-export default UpdateProperty;
+export default page;

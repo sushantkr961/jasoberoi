@@ -16,7 +16,7 @@ interface Post {
   createdAt: string;
 }
 
-const UpdateBlog: React.FC<{ params: any }> = ({ params }) => {
+const page = ({ params }: any) => {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -235,4 +235,4 @@ const UpdateBlog: React.FC<{ params: any }> = ({ params }) => {
   );
 };
 
-export default UpdateBlog;
+export default page;

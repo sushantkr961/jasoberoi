@@ -15,13 +15,13 @@ interface SoldStoriesData {
     content: string;
 }
 
-const UpdateSoldStoriesData = () => {
+const page = ({ params }: any) => {
     const editor = useRef(null);
     const [singleImageName, setSingleImageName] = useState<string>("");
     const [galleryImageNames, setGalleryImageNames] = useState<string[]>([]);
 
     const router = useRouter();
-    const { id } = useParams(); // Assuming you have the id parameter in your route
+    const { id } = useParams(); 
     const [useEditor, setUseEditor] = useState(false);
     const [content, setContent] = useState("");
     const [formData, setFormData] = useState<SoldStoriesData>({
@@ -289,4 +289,4 @@ const UpdateSoldStoriesData = () => {
     );
 };
 
-export default UpdateSoldStoriesData;
+export default page;
