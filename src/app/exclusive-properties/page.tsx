@@ -113,6 +113,7 @@ const exclusiveProperties = (props: Props) => {
               pricing={property?.price}
               imageUrl={property?.singleImage}
               sale={true}
+              areaSize={property.areaSize}
               featured={true}
               hotOffer={true}
             />

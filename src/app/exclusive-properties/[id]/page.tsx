@@ -95,11 +95,11 @@ const page = ({ params }: Props) => {
                 const response = await axios.get(`/api/admin/property/single?id=${params.id}`);
                 const propertyData: Property = await response.data;
                 console.log(response);
-                
+
                 setProperty(propertyData);
 
             } catch (error) {
-                
+
                 console.error("Failed to fetch posts:", error);
             }
         }
@@ -116,9 +116,9 @@ const page = ({ params }: Props) => {
         };
 
         Promise.all([fetchPosts(), fetchSinglePost()])
-        .catch(() => {router.push("/exclusive-properties")}).finally(() => {
-            setLoader(false);
-        });
+            .catch(() => { router.push("/exclusive-properties") }).finally(() => {
+                setLoader(false);
+            });
     }, []);
     const handleLoadMore = () => {
         setCurrentPage(prevPage => prevPage + 1);
@@ -147,7 +147,7 @@ const page = ({ params }: Props) => {
                             />
                         </div>
                         <div className='flex justify-end text-[1rem]  gap-3 items-center '>
-                        
+
                             <button
                                 onClick={() => {
                                     navigator.clipboard.writeText(window.location.href);
@@ -165,7 +165,7 @@ const page = ({ params }: Props) => {
                                     Link copied!
                                 </p>
                             )}
-                            <button  onClick={handlePrint} className='border-[1px] border-black p-[5px]  rounded-[3px]  hover:bg-black hover:text-white'>
+                            <button onClick={handlePrint} className='border-[1px] border-black p-[5px]  rounded-[3px]  hover:bg-black hover:text-white'>
                                 <MdOutlineLocalPrintshop />
                             </button>
                         </div>
@@ -177,7 +177,7 @@ const page = ({ params }: Props) => {
                             </div>
                             <div className='mt-2 xl:mt-0 flex flex-col gap-2  xl:flex-row justify-between'>
                                 <h1 className='text-[20px] lg:text-[26px] xl:text-[30px] font-poppins text-[#2D2D2D] font-[400]'>{property?.title}</h1>
-                                <h2 className='text-[14px] lg:text-[20px] xl:text-[30px] font-poppins text-[#2D2D2D]  font-semibold'>{property?.price}</h2>
+                                <h2 className='text-[14px] lg:text-[20px] xl:text-[30px] font-poppins text-[#2D2D2D]  font-semibold'>{property?.price == "Contact Listing Agent" ? "Contact Listing Agent" : `$ ${property?.price}`}</h2>
                             </div>
                             <div className='flex gap-3'>
 
@@ -224,7 +224,7 @@ const page = ({ params }: Props) => {
                                     <p
                                         style={{ fontFamily: "Poppins !important" }}
                                         className="text-[#636363] mb-2 text-[15px]"
-                                    >{property?.description&&parse(property?.description!)}</p>
+                                    >{property?.description && parse(property?.description!)}</p>
 
                                 </div>
                                 <div className="text-center">
@@ -244,7 +244,7 @@ const page = ({ params }: Props) => {
 
 
                     {/* Address */}
-                    <section className='my-5 font-poppins' id='Address'> 
+                    <section className='my-5 font-poppins' id='Address'>
                         <div>
                             <div className='mb-[25px] flex justify-between items-center'>
                                 <h1 className='text-[18px] text-[#2D2D2D] '>Address</h1>
@@ -329,7 +329,7 @@ const page = ({ params }: Props) => {
                             <li className=''>
                                 <div className='py-[10px] flex justify-between '>
                                     <div className='text-[15px] text-[#2D2D2D] font-semibold '>Price</div>
-                                    <div className='text-[15px] text-[#2D2D2D]'>{property?.price}</div>
+                                    <div className='text-[15px] text-[#2D2D2D]'>{property?.price == "Contact Listing Agent" ? "Contact Listing Agent" : `$ ${property?.price}`}</div>
                                 </div>
                                 <div className='border-[1px] border-b-gray-50 '></div>
                             </li>
@@ -352,7 +352,7 @@ const page = ({ params }: Props) => {
                             <li className=''>
                                 <div className='py-[10px] flex justify-between '>
                                     <div className='text-[15px] text-[#2D2D2D] font-semibold '>AreaSize(sq)</div>
-                                    <div className='text-[15px] text-[#2D2D2D]'>{property?.areaSize}</div>
+                                    <div className='text-[15px] text-[#2D2D2D]'>{property?.areaSize} Sq.ft Lot</div>
                                 </div>
                                 <div className='border-[1px] border-b-gray-50 '></div>
                             </li>

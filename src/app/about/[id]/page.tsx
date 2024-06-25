@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Metadata } from "next";
 import React from "react";
 import Data from "../../../data/AboutUs/data.json";
-import metaData from "../../../data/AboutUs/metadata.json";
 import { CiMail } from "react-icons/ci";
 import Link from "next/link";
 type Props = {

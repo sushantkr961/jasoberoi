@@ -2,8 +2,10 @@
 
 import PageHeading from "@/components/Common/PageHeading";
 import Container from "@/components/Containers/Container";
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaLinkedin } from "react-icons/fa";
 import {
   FaSquareFacebook,
@@ -48,7 +50,19 @@ const contact = (props: Props) => {
     lookingFor: false,
     additionalInfo: false,
   });
+  const controls = useAnimation();
+  const [ref, inView] = useInView();
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView]);
 
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 0 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1 } },
+  };
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
 
@@ -117,8 +131,14 @@ const contact = (props: Props) => {
   return (
     <section>
       <PageHeading imageSrc="assets/aboutus.jpg" heading="Contact Us" />
+
+
       <Container className="flex flex-col justify-center m-auto gap-7">
-        <div className="flex flex-col md:flex-row justify-between  my-[80px] mx-[12px] md:mx-[80px]">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+          className="flex flex-col md:flex-row justify-between  my-[80px] mx-[12px] md:mx-[80px]">
           <div className="left w-full md:w-[60%] flex flex-col gap-8">
             <div className="heading">
               <h2 className="font-poppins text-[30px] md:text-[46px] uppercase leading-[50px]">
@@ -346,8 +366,15 @@ const contact = (props: Props) => {
               <a href={link.linkdin} target="_blank"><FaLinkedin /></a>
             </div>
           </div>
-        </div>
-        <div className="map">
+        </motion.div>
+        <motion.div
+
+          ref={ref}
+          initial="hidden"
+          animate={controls}
+          variants={containerVariants}
+
+          className="map">
           <iframe
             title="Google Maps"
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d20928.000849465756!2d-122.804293!3d49.029605000000004!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5485c4bb0fb1f7e1%3A0xaa1e9aa1056c9966!2sJas%20Oberoi%20Group!5e0!3m2!1sen!2sus!4v1715508303712!5m2!1sen!2sus"
@@ -372,8 +399,9 @@ const contact = (props: Props) => {
               </a>
             </p>
           </div>
-        </div>
+        </motion.div>
       </Container>
+
     </section>
   );
 };
