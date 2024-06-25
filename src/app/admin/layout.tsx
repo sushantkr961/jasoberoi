@@ -203,8 +203,7 @@ dark:bg-neutral-800 dark:border-neutral-700
                 Dashboard
               </Link>
             </li>
-{user?.isAdmin &&(
-            <li className="hs-accordion" id="account-accordion">
+            <li className={`hs-accordion ${user?.isAdmin == true ?"":"hidden"}`}  id="account-accordion">
               <button
                 type="button"
                 className="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 dark:hs-accordion-active:text-white"
@@ -295,8 +294,7 @@ dark:bg-neutral-800 dark:border-neutral-700
                   </li> */}
                 </ul>
               </div>
-            </li>)
-}
+            </li>
             <li className="hs-accordion" id="account-accordion">
               <button
                 type="button"
