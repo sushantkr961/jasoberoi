@@ -6,12 +6,14 @@ import Link from "next/link";
 import { CiMail } from "react-icons/ci";
 import { FaMobileAlt } from "react-icons/fa";
 import link from '../../data/link.json'
+import { usePathname } from "next/navigation";
 
 type Props = {};
 
 const misSearch = (props: Props) => {
   const [scriptLoaded, setScriptLoaded] = useState(false);
 
+  const pathname = usePathname();
   const scriptContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     // Create a script element
@@ -22,7 +24,7 @@ const misSearch = (props: Props) => {
     script.async = true;
 
     // Append the script to the container element
-    if (scriptContainerRef.current) {
+    if (scriptContainerRef.current && pathname.startsWith("/mls-search")) {
       scriptContainerRef.current.appendChild(script);
     }
 

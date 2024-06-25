@@ -6,13 +6,14 @@ import Link from "next/link";
 import { CiMail } from "react-icons/ci";
 import { FaMobileAlt } from "react-icons/fa";
 import link from '../../data/link.json'
+import { usePathname } from "next/navigation";
 
 type Props = {}
 
 const commerciallisting = (props: Props) => {
 
   const [scriptLoaded, setScriptLoaded] = useState(false);
-
+  const pathname = usePathname();
   const scriptContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     // Create a script element
@@ -30,7 +31,7 @@ const commerciallisting = (props: Props) => {
     }
 
     // Append the script to the container element
-    if (scriptContainerRef.current) {
+    if (scriptContainerRef.current && pathname.startsWith("/commercial-listing")) {
       scriptContainerRef.current.appendChild(script);
     }
 

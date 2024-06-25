@@ -8,38 +8,45 @@ import { FaMobileAlt } from "react-icons/fa";
 
 import link from '../../data/link.json'
 import Loader from "@/components/Loader/Loader";
+import { usePathname } from "next/navigation";
 type Props = {};
 
 const FeaturedListing = (props: Props) => {
   const [scriptLoaded, setScriptLoaded] = useState(false);
 
+  const pathname = usePathname();
+
+  
   const scriptContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
+    // Create a script element
     const script = document.createElement("script");
     script.id = "mrpscript";
     script.type = "text/javascript";
     script.src = "https://idx.myrealpage.com/wps/rest/63169/l/idx2/mylistings/tmpl~v2,noframe~true/-/mylistings.def/in.js";
     script.async = true;
 
+    // Check if the script already exists
     const existingScript = document.getElementById("mrpscript");
     if (existingScript) {
+      // If the script already exists, remove it before appending the new one
       existingScript.remove();
     }
 
-    const scriptContainer = scriptContainerRef.current;
-    if (scriptContainer) {
-      scriptContainer.appendChild(script);
+    // Append the script to the container element
+    if (scriptContainerRef.current && pathname.startsWith("/featured-listing")) {
+      scriptContainerRef.current.appendChild(script);
     }
 
-    const handleLoad = () => {
+    // When script is loaded, set scriptLoaded to true
+    script.onload = () => {
       setScriptLoaded(true);
     };
 
-    script.onload = handleLoad;
-
     return () => {
-      if (scriptContainer) {
-        scriptContainer.removeChild(script);
+      // Cleanup function: remove the script when component unmounts
+      if (scriptContainerRef.current) {
+        scriptContainerRef.current.innerHTML = ""; // Clear script content
       }
     };
   }, []);
@@ -55,7 +62,7 @@ const FeaturedListing = (props: Props) => {
       <Container className="w-full m-auto flex flex-col items-center px-2">
 
         <div ref={scriptContainerRef} className="w-full mt-8 lg:mt-20">
-
+       
         </div>
         {/* Here Come I Fram */}
         <hr className="py-10 md:py-18 w-[90%] border-b-2   mb-5" />
