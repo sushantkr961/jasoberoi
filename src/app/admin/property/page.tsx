@@ -26,7 +26,8 @@ const page = () => {
   const [totalPages, setTotalPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState("");
-  const postsPerPage = 5;
+
+  const postsPerPage = Number(process.env.TABLE_ROW_PAGE!);
 
   useEffect(() => {
     fetchPosts();
@@ -69,7 +70,6 @@ const page = () => {
       fetchPosts();
     } catch (error) {
       console.error("Error deleting property:", error);
-      alert("Failed to delete property");
     }
   };
 

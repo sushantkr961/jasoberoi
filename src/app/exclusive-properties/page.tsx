@@ -49,6 +49,9 @@ type Property = {
   additionalDetails: AdditionalDetail[];
   propertyDocuments: any[];
   createdAt: string;
+  featured: boolean;
+  hotOffer: boolean;
+  sale: boolean;
   updatedAt: string;
   __v: number;
 };
@@ -66,8 +69,7 @@ const exclusiveProperties = (props: Props) => {
       setLoader(true);
       try {
         const response = await axios.get("/api/admin/property");
-        console.log(response);
-
+        console.log(response.data);
         setProperties(response.data.propertys);
 
 
@@ -84,7 +86,7 @@ const exclusiveProperties = (props: Props) => {
     setPage(prevPage => prevPage + 1);
   };
 
-  const displayedProperties = properties.slice(0, page * itemsPerPage);
+  const displayedProperties = properties.slice(0, page * itemsPerPage).reverse();;
 
 
   if (loader) {
@@ -112,10 +114,10 @@ const exclusiveProperties = (props: Props) => {
               address={property?.address?.fullAddress}
               pricing={property?.price}
               imageUrl={property?.singleImage}
-              sale={true}
+              sale={property.sale}
               areaSize={property.areaSize}
-              featured={true}
-              hotOffer={true}
+              featured={property.featured}
+              hotOffer={property.hotOffer}
             />
           ))
         }

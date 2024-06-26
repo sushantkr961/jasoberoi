@@ -6,7 +6,7 @@ import { stripHtml } from "string-strip-html";
 
 async function fetchPostData(id: string) {
     try {
-        const response = await axios.get(`http://localhost:3000/api/admin/soldstories/single?id=${id}`);
+        const response = await axios.get(`${process.env.BASE_URL}/api/admin/soldstories/single?id=${id}`);
         console.log(response);
         return response.data;
     } catch (error) {
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: any) {
 
 
     const truncatedContent = truncate(post.content, 300);
-    const parsedContent = stripHtml(truncatedContent).result; 
+    const parsedContent = stripHtml(truncatedContent).result;
 
     return {
         title: `${post.title}`,

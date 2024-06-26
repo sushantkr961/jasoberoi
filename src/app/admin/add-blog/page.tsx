@@ -13,7 +13,7 @@ const AddBlogPost: React.FC = () => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
-  const [useEditor, setUseEditor] = useState(false);
+  const [useEditor, setUseEditor] = useState(true);
   const rourer = useRouter();
   const editor = useRef(null);
 
@@ -90,7 +90,7 @@ const AddBlogPost: React.FC = () => {
             </div>
 
             <div className="col-span-full">
-              <div className="flex items-center mb-4">
+              {/* <div className="flex items-center mb-4">
                 <label
                   htmlFor="AcceptConditions"
                   className="block text-sm font-medium leading-6 text-gray-900 mr-10"
@@ -111,7 +111,7 @@ const AddBlogPost: React.FC = () => {
 
                   <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
                 </label>
-              </div>
+              </div> */}
 
               <label
                 htmlFor="content"

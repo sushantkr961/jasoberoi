@@ -22,7 +22,7 @@ const Card = ({
     
     return (
         <Link  href={`/blog/${_id}`} key={_id} className="group w-full rounded-md overflow-hidden">
-            <div className="flex items-center relative z-0 md:min-h-[250px]">
+            <div className="flex items-center relative z-0 md:min-h-[250px] md:max-h-[260px] overflow-hidden">
                 <img alt="blogs tailwind section" className="bg-gray-500 h-full object-cover w-full rounded-none" src={imageUrl} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-30 group-hover:opacity-0 transition-opacity duration-300"></div>
             </div>

@@ -24,7 +24,7 @@ const Blog = () => {
   const [deletePostId, setDeletePostId] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const postsPerPage = 5;
+  const postsPerPage = Number(process.env.TABLE_ROW_PAGE!);
 
   useEffect(() => {
     fetchPosts();

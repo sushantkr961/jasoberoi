@@ -1,4 +1,5 @@
 "use client"
+import Comment from '@/components/Blog/Comment';
 import Loader from '@/components/Loader/Loader';
 import axios from 'axios';
 import parse from 'html-react-parser';
@@ -6,7 +7,6 @@ import truncate from 'html-truncate';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-
 interface Post {
   _id: string;
   title: string;
@@ -202,7 +202,7 @@ const Post = ({ params }: any) => {
                     posts?.slice(0, visiblePosts).map((post, index) => (
                       <Link href={`/blog/${post._id}`} className="cursor-pointer text-[12px] md:text-[15px] text-[#C1A468] font-semibold  " key={index}>
                         <div className="group w-full rounded-md cursor-pointer  overflow-hidden">
-                          <div className="flex items-center  relative z-0   ">
+                          <div className="flex items-center  relative z-0   max-h-[160px] overflow-hidden  ">
                             {/* <img alt="blogs tailwind section" className="bg-gray-500  h-full object-cover w-full rounded-none" /> */}
                             <img src={post.imageUrl} alt="blogs tailwind section" className="bg-gray-500  h-full   object-cover w-full rounded-none" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-30 group-hover:opacity-0 transition-opacity duration-300"></div>
@@ -236,46 +236,16 @@ const Post = ({ params }: any) => {
               </div>
 
 
-              {/* comment  */}
-              <div>
-                <div>
-                  <h5 className="font-medium text-2xl leading-8 text-gray-900 mb-4 md:mb-6">Join The Discussion</h5>
+              {/* <div>
+                <CommentDisplay 
+                blogId={params.id}
+                
+                />
+              </div> */}
+              <Comment
+                blogId={params.id}
+              />
 
-                  <form className='flex flex-col gap-4'>
-                    <div className="reply bg-gray-100 rounded-md p-5 border border-solid border-gray-300 w-full">
-                      <div className="flex items-center gap-x-9 gap-y-4 flex-col sm:flex-row mb-5">
-
-                        <textarea
-                          className="font-medium text-md border-none focus:ring-0 outline-none focus:shadow-none active:outline-none focus:outline-none focus:border-none  active:border-none md:text-lg leading-8 placeholder:text-gray-500 text-gray-900 bg-transparent outline-0 w-full md:h-28"
-                          placeholder="Join The Discussion"
-                          style={{ border: 'none !important', outline: 'none !important' }} // Ensur
-                          
-                        ></textarea>
-                      </div>
-                    </div>
-
-                    <div className='flex gap-2 flex-col md:flex-row  '>
-                      <input
-                        className=" bg-gray-100 rounded-md py-1 px-2 border border-solid border-gray-300 font-medium text-sm md:text-md leading-8 placeholder:text-gray-500 text-gray-900 bg-transparent outline-0 w-full "
-                        placeholder="Join The Discussion" />
-
-                      <input
-                        className=" bg-gray-100 rounded-md py-1 px-2 border border-solid border-gray-300 font-medium text-sm md:text-md leading-8 placeholder:text-gray-500 text-gray-900 bg-transparent outline-0 w-full "
-                        placeholder="Join The Discussion" />
-
-                    </div>
-
-
-                    <button
-                      type="submit"
-                      className="bg-black md:max-w-[160px] rounded-md py-2 px-10  font-poppins text-white"
-                    >
-                      Join
-                    </button>
-                  </form>
-                </div>
-
-              </div>
 
             </div>
           </div>

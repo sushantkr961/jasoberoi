@@ -5,7 +5,7 @@ import { stripHtml } from "string-strip-html";
 
 async function fetchPropertyData(id: string) {
     try {
-        const response = await axios.get(`http://localhost:3000/api/admin/property/single?id=${id}`);
+        const response = await axios.get(`${process.env.BASE_URL}/api/admin/property/single?id=${id}`);
         console.log(response);
         return response.data;
     } catch (error) {

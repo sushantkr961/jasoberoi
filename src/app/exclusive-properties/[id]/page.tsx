@@ -266,42 +266,51 @@ const page = ({ params }: Props) => {
 
                         {/* Depth */}
                         <ul className='grid lg:grid-cols-2 gap-x-6 gap-y-2 px-3 sm:px-4'>
-                            <li className=''>
-                                <div className='py-[10px] flex justify-between '>
-                                    <div className='text-[15px] text-[#2D2D2D] font-semibold '>Address</div>
-                                    <div className='text-[15px] text-[#2D2D2D]'>{property?.address?.fullAddress}</div>
-                                </div>
-                                <div className='border-[1px] border-b-gray-50 '></div>
-                            </li>
-                            <li className=''>
-                                <div className='py-[10px] flex justify-between '>
-                                    <div className='text-[15px] text-[#2D2D2D] font-semibold '>City</div>
-                                    <div className='text-[15px] text-[#2D2D2D]'>{property?.address?.city}</div>
-                                </div>
-                                <div className='border-[1px] border-b-gray-50 '></div>
-                            </li>
-                            <li className=''>
-                                <div className='py-[10px] flex justify-between '>
-                                    <div className='text-[15px] text-[#2D2D2D] font-semibold '>State</div>
-                                    <div className='text-[15px] text-[#2D2D2D]'>{property?.address?.state}</div>
-                                </div>
-                                <div className='border-[1px] border-b-gray-50 '></div>
-                            </li>
-
-                            <li className=''>
-                                <div className='py-[10px] flex justify-between '>
-                                    <div className='text-[15px] text-[#2D2D2D] font-semibold '>Country</div>
-                                    <div className='text-[15px] text-[#2D2D2D]'>{property?.address?.country}</div>
-                                </div>
-                                <div className='border-[1px] border-b-gray-50 '></div>
-                            </li>
-                            <li className=''>
-                                <div className='py-[10px] flex justify-between '>
-                                    <div className='text-[15px] text-[#2D2D2D] font-semibold '>Zip/Postal Code</div>
-                                    <div className='text-[15px] text-[#2D2D2D]'>{property?.address?.zipOrPostalCode}</div>
-                                </div>
-                                <div className='border-[1px] border-b-gray-50 '></div>
-                            </li>
+                            {property?.address?.fullAddress && (
+                                <li className=''>
+                                    <div className='py-[10px] flex justify-between '>
+                                        <div className='text-[15px] text-[#2D2D2D] font-semibold '>Address</div>
+                                        <div className='text-[15px] text-[#2D2D2D]'>{property?.address?.fullAddress}</div>
+                                    </div>
+                                    <div className='border-[1px] border-b-gray-50 '></div>
+                                </li>
+                            )}
+                            {property?.address?.city && (
+                                <li className=''>
+                                    <div className='py-[10px] flex justify-between '>
+                                        <div className='text-[15px] text-[#2D2D2D] font-semibold '>City</div>
+                                        <div className='text-[15px] text-[#2D2D2D]'>{property?.address?.city}</div>
+                                    </div>
+                                    <div className='border-[1px] border-b-gray-50 '></div>
+                                </li>
+                            )}
+                            {property?.address?.state && (
+                                <li className=''>
+                                    <div className='py-[10px] flex justify-between '>
+                                        <div className='text-[15px] text-[#2D2D2D] font-semibold '>State</div>
+                                        <div className='text-[15px] text-[#2D2D2D]'>{property?.address?.state}</div>
+                                    </div>
+                                    <div className='border-[1px] border-b-gray-50 '></div>
+                                </li>
+                            )}
+                            {property?.address?.country && (
+                                <li className=''>
+                                    <div className='py-[10px] flex justify-between '>
+                                        <div className='text-[15px] text-[#2D2D2D] font-semibold '>Country</div>
+                                        <div className='text-[15px] text-[#2D2D2D]'>{property?.address?.country}</div>
+                                    </div>
+                                    <div className='border-[1px] border-b-gray-50 '></div>
+                                </li>
+                            )}
+                            {property?.address?.zipOrPostalCode && (
+                                <li className=''>
+                                    <div className='py-[10px] flex justify-between '>
+                                        <div className='text-[15px] text-[#2D2D2D] font-semibold '>Zip/Postal Code</div>
+                                        <div className='text-[15px] text-[#2D2D2D]'>{property?.address?.zipOrPostalCode}</div>
+                                    </div>
+                                    <div className='border-[1px] border-b-gray-50 '></div>
+                                </li>
+                            )}
                         </ul>
                     </section>
 
@@ -326,36 +335,42 @@ const page = ({ params }: Props) => {
                         <ul className='grid lg:grid-cols-2 gap-x-6 gap-y-2  bg-[#E5F7FF] border-2 border-[#C8AF7C] rounded-md  my-7 p-4 sm:p-9 '  >
 
 
-                            <li className=''>
-                                <div className='py-[10px] flex justify-between '>
-                                    <div className='text-[15px] text-[#2D2D2D] font-semibold '>Price</div>
-                                    <div className='text-[15px] text-[#2D2D2D]'>{property?.price == "Contact Listing Agent" ? "Contact Listing Agent" : `$ ${property?.price}`}</div>
-                                </div>
-                                <div className='border-[1px] border-b-gray-50 '></div>
-                            </li>
-
-                            <li className=''>
-                                <div className='py-[10px] flex justify-between '>
-                                    <div className='text-[15px] text-[#2D2D2D] font-semibold '>Property Id</div>
-                                    <div className='text-[15px] text-[#2D2D2D]'>{property?.propertyId}</div>
-                                </div>
-                                <div className='border-[1px] border-b-gray-50 '></div>
-                            </li>
-                            <li className=''>
-                                <div className='py-[10px] flex justify-between '>
-                                    <div className='text-[15px] text-[#2D2D2D] font-semibold '>Year Build</div>
-                                    <div className='text-[15px] text-[#2D2D2D]'>{property?.yearBuilt}</div>
-                                </div>
-                                <div className='border-[1px] border-b-gray-50 '></div>
-                            </li>
-
-                            <li className=''>
-                                <div className='py-[10px] flex justify-between '>
-                                    <div className='text-[15px] text-[#2D2D2D] font-semibold '>AreaSize(sq)</div>
-                                    <div className='text-[15px] text-[#2D2D2D]'>{property?.areaSize} Sq.ft Lot</div>
-                                </div>
-                                <div className='border-[1px] border-b-gray-50 '></div>
-                            </li>
+                            {property?.price && (
+                                <li className=''>
+                                    <div className='py-[10px] flex justify-between '>
+                                        <div className='text-[15px] text-[#2D2D2D] font-semibold '>Price</div>
+                                        <div className='text-[15px] text-[#2D2D2D]'>{property?.price == "Contact Listing Agent" ? "Contact Listing Agent" : `$ ${property?.price}`}</div>
+                                    </div>
+                                    <div className='border-[1px] border-b-gray-50 '></div>
+                                </li>
+                            )}
+                            {property?.propertyId && (
+                                <li className=''>
+                                    <div className='py-[10px] flex justify-between '>
+                                        <div className='text-[15px] text-[#2D2D2D] font-semibold '>Property Id</div>
+                                        <div className='text-[15px] text-[#2D2D2D]'>{property?.propertyId}</div>
+                                    </div>
+                                    <div className='border-[1px] border-b-gray-50 '></div>
+                                </li>
+                            )}
+                            {property?.yearBuilt && (
+                                <li className=''>
+                                    <div className='py-[10px] flex justify-between '>
+                                        <div className='text-[15px] text-[#2D2D2D] font-semibold '>Year Build</div>
+                                        <div className='text-[15px] text-[#2D2D2D]'>{property?.yearBuilt}</div>
+                                    </div>
+                                    <div className='border-[1px] border-b-gray-50 '></div>
+                                </li>
+                            )}
+                            {property?.areaSize && (
+                                <li className=''>
+                                    <div className='py-[10px] flex justify-between '>
+                                        <div className='text-[15px] text-[#2D2D2D] font-semibold '>AreaSize(sq)</div>
+                                        <div className='text-[15px] text-[#2D2D2D]'>{property?.areaSize} Sq.ft Lot</div>
+                                    </div>
+                                    <div className='border-[1px] border-b-gray-50 '></div>
+                                </li>
+                            )}
                             {
                                 property?.additionalDetails.map((propertydetail) => (
                                     <li key={propertydetail._id}>

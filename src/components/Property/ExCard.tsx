@@ -15,7 +15,7 @@ type Props = {
     sale: boolean;
     hotOffer: boolean;
     featured: boolean;
-    areaSize:string;
+    areaSize: string;
 }
 
 const ExCard = ({
@@ -55,15 +55,17 @@ const ExCard = ({
             <Link href={`/exclusive-properties/${_id}`} className='flex items-center justify-between'>
                 <div className="py-4 lg:py-4 transition-all duration-300 group-hover:bg-gray-50 px-2">
                     <h4 className=" text-gray-900 font-medium text-[16px] mb-1">{title}</h4>
-                    <p className="text-[#636363]  text-[15px]">{address}</p>
+                    {
+                        address && <p className="text-[#636363]  text-[15px]">{address}</p>
+                    }
                 </div>
 
-                <div className='flex  items-center'>
-                <div className='text-[20px]'>
-                <MdOutlineSquareFoot />
-                </div>
+                <div className={`flex  items-center ${areaSize == "0" ? "hidden" : ""}`}>
+                    <div className="text-[20px] ">
+                        <MdOutlineSquareFoot />
+                    </div>
                     <h4 className=" text-gray-900 font-medium text-[16px]">{areaSize}</h4>
-                
+
                 </div>
             </Link>
         </Link>

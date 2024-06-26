@@ -57,7 +57,7 @@ interface Attribute {
 const AddProperty = () => {
   const editor = useRef(null);
   const router = useRouter();
-  const [useEditor, setUseEditor] = useState(false);
+  const [useEditor, setUseEditor] = useState(true);
   const [toggleSlider, setToggleSlider] = useState(false);
   const [content, setContent] = useState("");
   const [formData, setFormData] = useState<PropertyData>({
@@ -197,7 +197,7 @@ const AddProperty = () => {
     console.log(4444, formData);
 
     try {
-      const response = await axios.post("/api/admin/property", {...formData,description:content}, {
+      const response = await axios.post("/api/admin/property", { ...formData, description: content }, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -649,7 +649,7 @@ const AddProperty = () => {
           {/* Here Come Rte */}
 
           <div className="col-span-full">
-            <div className="flex items-center mb-4">
+            {/* <div className="flex items-center mb-4">
               <label
                 htmlFor="AcceptConditions"
                 className="block text-sm font-medium leading-6 text-gray-900 mr-10"
@@ -670,7 +670,7 @@ const AddProperty = () => {
 
                 <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
               </label>
-            </div>
+            </div> */}
 
             <label
               htmlFor="content"
