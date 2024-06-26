@@ -58,7 +58,7 @@ const page = ({ params }: any) => {
     const propertyId = params.id;
     const editor = useRef(null);
     const router = useRouter();
-    const [useEditor, setUseEditor] = useState(false);
+    const [useEditor, setUseEditor] = useState(true);
     const [toggleSlider, setToggleSlider] = useState(false);
     const [content, setContent] = useState("");
     const [formData, setFormData] = useState<PropertyData>({
@@ -98,6 +98,8 @@ const page = ({ params }: any) => {
         additionalDetails: [],
     });
 
+    const [singleImageName, setSingleImageName] = useState<string>("");
+    const [galleryImageNames, setGalleryImageNames] = useState<string[]>([]);
     const [currentField, setCurrentField] = useState<Attribute>({
         key: "",
         value: "",
@@ -106,8 +108,11 @@ const page = ({ params }: any) => {
     useEffect(() => {
         const fetchPropertyData = async () => {
             try {
-                const response = await axios.get(`/api/admin/property/${propertyId}`);
+                const response = await axios.get(`/api/admin/property/single?id=${propertyId}`);
+
                 setFormData(response.data);
+                setSingleImageName(response.data.singleImage);
+                setGalleryImageNames(response.data.images);
                 setContent(response.data.description);
             } catch (error) {
                 console.error("Error fetching property data:", error);
@@ -125,13 +130,13 @@ const page = ({ params }: any) => {
         }));
     };
 
-    const handleSliderToggle = () => {
-        setToggleSlider(!toggleSlider);
-        setFormData((prevData) => ({
-            ...prevData,
-            slider: !toggleSlider,
-        }));
-    };
+    // const handleSliderToggle = () => {
+    //     setToggleSlider(!toggleSlider);
+    //     setFormData((prevData) => ({
+    //         ...prevData,
+    //         slider: !toggleSlider,
+    //     }));
+    // };
 
     const handleAdditionalDetailChange = (
         e: React.ChangeEvent<HTMLInputElement>
@@ -152,7 +157,8 @@ const page = ({ params }: any) => {
         }));
     };
 
-    const handleAddField = () => {
+    const handleAddField = (e?: any) => {
+        e.preventDefault();
         if (currentField.key && currentField.value) {
             setFormData((prevData) => ({
                 ...prevData,
@@ -171,6 +177,8 @@ const page = ({ params }: any) => {
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
+
+            setSingleImageName(event.target.files[0].name);
             setFormData({
                 ...formData,
                 singleImage: Array.from(event.target.files),
@@ -191,6 +199,9 @@ const page = ({ params }: any) => {
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
         if (event.target.files) {
+            const fileNames = Array.from(event.target.files).map(file => file.name);
+            setGalleryImageNames(fileNames);
+
             setFormData({
                 ...formData,
                 images: Array.from(event.target.files),
@@ -207,9 +218,54 @@ const page = ({ params }: any) => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        const updatedData = new FormData();
+
+        // Append the non-file fields to the FormData
+        updatedData.append('propertyId', formData.propertyId);
+        updatedData.append('title', formData.title);
+        updatedData.append('price', formData.price);
+        updatedData.append('sold', formData.sold.toString());
+        updatedData.append('slider', formData.slider.toString());
+        // updatedData.append('contactListingAgent', formData.contactListingAgent.toString());
+        updatedData.append('featured', formData.featured.toString());
+        updatedData.append('hotOffer', formData.hotOffer.toString());
+        updatedData.append('sale', formData.sale.toString());
+        updatedData.append('address[fullAddress]', formData.address.fullAddress);
+        updatedData.append('address[city]', formData.address.city);
+        updatedData.append('address[state]', formData.address.state);
+        updatedData.append('address[zipOrPostalCode]', formData.address.zipOrPostalCode);
+        updatedData.append('address[country]', formData.address.country);
+        updatedData.append('mortgage[totalAmount]', formData.mortgage.totalAmount);
+        updatedData.append('mortgage[downPayment]', formData.mortgage.downPayment);
+        updatedData.append('mortgage[interestRate]', formData.mortgage.interestRate);
+        updatedData.append('mortgage[loanYears]', formData.mortgage.loanYears);
+        updatedData.append('mortgage[propertyTax]', formData.mortgage.propertyTax);
+        updatedData.append('mortgage[insurance]', formData.mortgage.insurance);
+        updatedData.append('mortgage[pmi]', formData.mortgage.pmi);
+        updatedData.append('areaSize', formData.areaSize);
+        updatedData.append('yearBuilt', formData.yearBuilt);
+        updatedData.append('gmapLink', formData.gmapLink || '');
+        updatedData.append('description', content);
+        updatedData.append('id', params.id);
+
+        (formData.additionalDetails || []).forEach((detail, index) => {
+            updatedData.append(`additionalDetails[${index}][key]`, detail.key);
+            updatedData.append(`additionalDetails[${index}][value]`, detail.value);
+        });
+        
+        // Append the file fields to the FormData only if they exist
+        if (formData.singleImage.length > 0) {
+            updatedData.append('singleImage', formData.singleImage[0]);
+        }
+        if (formData.images.length > 0) {
+            formData.images.forEach((image, index) => {
+                updatedData.append(`images[${index}][file]`, image);
+            });
+        }
+
 
         try {
-            const response = await axios.put(`/api/admin/property/${propertyId}`, { ...formData, description: content }, {
+            const response = await axios.put(`/api/admin/property?id=${propertyId}`, updatedData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -652,35 +708,18 @@ const page = ({ params }: any) => {
                             id="af-submit-application-resume-cv"
                             className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
                             accept="image/*"
-                            required
                             onChange={handleImageChange}
                         />
                     </div>
                     {/* Here Come Rte */}
-
                     <div className="col-span-full">
-                        <div className="flex items-center mb-4">
-                            <label
-                                htmlFor="AcceptConditions"
-                                className="block text-sm font-medium leading-6 text-gray-900 mr-10"
-                            >
-                                Use Advance Editor
-                            </label>
-                            <label
-                                htmlFor="AcceptConditions"
-                                className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-indigo-600"
-                            >
-                                <input
-                                    type="checkbox"
-                                    id="AcceptConditions"
-                                    className="peer sr-only"
-                                    checked={useEditor}
-                                    onChange={() => setUseEditor(!useEditor)}
-                                />
-
-                                <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
-                            </label>
-                        </div>
+                        {singleImageName && (
+                            <p className="mt-2 text-sm text-gray-500">
+                                Selected file: {String(singleImageName).replace('/uploads/', '')}
+                            </p>
+                        )}
+                    </div>
+                    <div className="col-span-full">
 
                         <label
                             htmlFor="content"
@@ -689,28 +728,15 @@ const page = ({ params }: any) => {
                             Content
                         </label>
 
-                        {useEditor ? (
-                            <JoditEditor
-                                ref={editor}
-                                value={content}
-                                config={{ readonly: false }}
-                                onBlur={(newContent) => handleEditorChange(newContent)}
-                                onChange={() => { }}
-                                className="showList"
-                            />
-                        ) : (
-                            <textarea
-                                id="about"
-                                name="content"
-                                rows={8}
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                value={content}
-                                onChange={(e) =>
-                                    setContent(e.target.value)
-                                }
-                                required
-                            />
-                        )}
+                        <JoditEditor
+                            ref={editor}
+                            value={content}
+                            config={{ readonly: false }}
+                            onBlur={(newContent) => handleEditorChange(newContent)}
+                            onChange={() => { }}
+                            className="showList"
+                        />
+
                     </div>
                 </div>
                 {/* Description Section End Here */}
@@ -723,7 +749,7 @@ const page = ({ params }: any) => {
                         </h2>
                     </div>
 
-                    <div className="col-span-full">
+                    {/* <div className="col-span-full">
                         <div className="flex items-center mb-4">
                             <label
                                 htmlFor="SliderToggle"
@@ -746,7 +772,7 @@ const page = ({ params }: any) => {
                                 <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
                             </label>
                         </div>
-                    </div>
+                    </div> */}
                     {/* Slider Imaged */}
                     {/* {toggleSlider && ( */}
                     <>
@@ -776,29 +802,14 @@ const page = ({ params }: any) => {
                             />
                         </div>
 
-                        <div className="sm:col-span-3">
-                            <label
-                                htmlFor="af-submit-application-resume-cv"
-                                className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
-                            >
-                                Map Image (Optional)
-                            </label>
-                        </div>
-                        <div className="sm:col-span-9">
-                            <label
-                                htmlFor="af-submit-application-resume-cv"
-                                className="sr-only"
-                            >
-                                Choose file
-                            </label>
-                            <input
-                                type="file"
-                                name="af-submit-application-resume-cv"
-                                id="af-submit-application-resume-cv"
-                                className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
-                                accept="image/*"
-                                onChange={handleMapImage}
-                            />
+                        <div className="col-span-full">
+                            {galleryImageNames.length > 0 && (
+                                <ul className="mt-2 text-sm text-gray-500">
+                                    {galleryImageNames.map((singleImageName, index) => (
+                                        <li key={index}>Selected file:  {String(singleImageName).replace('/uploads/', '')}</li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
                     </>
                     {/* )} */}
@@ -1007,7 +1018,7 @@ const page = ({ params }: any) => {
                         type="submit"
                         className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
                     >
-                        Submit your project
+                        Update Your Property
                     </button>
                 </div>
             </form>

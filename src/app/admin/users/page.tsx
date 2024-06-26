@@ -21,7 +21,7 @@ const page = () => {
   const [totalCount, setTotalCount] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const postsPerPage = 5;
+  const postsPerPage = 10;
 
   useEffect(() => {
     fetchPosts();

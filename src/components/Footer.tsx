@@ -55,84 +55,84 @@ function Footer(props: Props) {
               </a>
             </div>
           </div>
-            {/* Quick Link */}
-              <div>
-                <h3 className="text-[17px]  text-center md:text-left font-poppins font-semibold leading-6 text-white uppercase">
-                  {quickLinks.title}
-                </h3>
-                <ul role="list" className="mt-3 md:mt-6 space-y-1 md:space-y-4 ">
-                  {quickLinks.links.map((link, index) => (
-                    <Link
-                      key={index}
-                      Icon={MdKeyboardArrowRight}
-                      text={link.name}
-                      url={link.url}
-                      
-                    />
-                  ))}
-                </ul>
-              </div>
+          {/* Quick Link */}
+          <div>
+            <h3 className="text-[17px]  text-center md:text-left font-poppins font-semibold leading-6 text-white uppercase">
+              {quickLinks.title}
+            </h3>
+            <ul role="list" className="mt-3 md:mt-6 space-y-1 md:space-y-4 ">
+              {quickLinks.links.map((link, index) => (
+                <Link
+                  key={index}
+                  Icon={MdKeyboardArrowRight}
+                  text={link.name}
+                  url={link.url}
 
-              {/* Contact Us */}
-              <div className=" md:mt-0 ">
-                <h3 className="text-[17px] font-poppins font-semibold leading-6 text-white uppercase text-center md:text-left">
-                  {contactUs.title}
-                </h3>
-                <ul role="list" className="mt-3 md:mt-6 space-y-1 md:space-y-4">
-                  <li>
-                    <a
-                      href={`tel:${link.phone}`}
-                      className="text-[15px] leading-6 text-white hover:text-slate-200 duration-300 flex items-center font-[300] min-w-[160px] w-auto justify-center md:justify-start"
-                    >
-                      <MdPhoneIphone size={20} className="mr-2 hidden md:block " />
-                      {link.phone}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href={`mailto:${link.email}`}
-                      className="text-[15px] leading-6 text-white hover:text-slate-200 duration-300 flex items-center font-[300] min-w-[160px] w-auto justify-center md:justify-start"
-                    >
-                      <MdMailOutline size={20} className="mr-2 hidden md:block " />
-                      {link.email}
-                    </a>
-                  </li>
-                  <li className="max-w-[60px] md:max-w-full">
-                    <a
-                      href=""
-                      className="text-[15px] leading-6 text-wrap text-white hover:text-slate-300 duration-300 flex items-center font-[300] min-w-[160px] w-auto text-center md:text-left"
-                    >
-                      <FaAddressCard size={20} className="mr-2  hidden md:block  " />
-                      {link.address}
-                    </a>
-                  </li>
-                </ul>
-              {/* </div> */}
-            </div>
+                />
+              ))}
+            </ul>
+          </div>
 
-            {/* Follow Us */}
-            <div className="flex justify-center  md:block">
-              <div className="hidden md:block md:mt-0">
-                <h3 className="text-[17px] font-poppins font-semibold leading-6 text-white uppercase mb-5 text-center md:text-left">
-                  {socialMedia.title}
-                </h3>
-                <div className="flex space-x-6">
-                  <a href={link.instagram} className="text-white hover:text-slate-300 duration-300">
-                    <FaInstagram size={30} />
-                  </a>
-                  <a href={link.tiktok} className="text-white hover:text-slate-300 duration-300">
-                    <FaTiktok size={25} />
-                  </a>
-                  <a href={link.youtube} className="text-white hover:text-blue-4 hover:text-slate-300 duration-300">
-                    <FaYoutube size={30} />
-                  </a>
-                  <a href={link.facebook} className="text-white hover:text-slate-300 duration-300">
-                    <FaFacebookF size={25} />
-                  </a>
-                </div>
+          {/* Contact Us */}
+          <div className=" md:mt-0 ">
+            <h3 className="text-[17px] font-poppins font-semibold leading-6 text-white uppercase text-center md:text-left">
+              {contactUs.title}
+            </h3>
+            <ul role="list" className="mt-3 md:mt-6 space-y-1 md:space-y-4">
+              <li>
+                <a
+                  href={`tel:${link.phone}`}
+                  className="text-[15px] leading-6 text-white hover:text-slate-200 duration-300 flex items-center font-[300] min-w-[160px] w-auto justify-center md:justify-start"
+                >
+                  <MdPhoneIphone size={20} className="mr-2 hidden md:block " />
+                  {link.phone}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${link.email}`}
+                  className="text-[15px] leading-6 text-white hover:text-slate-200 duration-300 flex items-center font-[300] min-w-[160px] w-auto justify-center md:justify-start"
+                >
+                  <MdMailOutline size={20} className="mr-2 hidden md:block " />
+                  {link.email}
+                </a>
+              </li>
+              <li className="max-w-[60px] md:max-w-full">
+                <a
+                  href=""
+                  className="text-[15px] leading-6 text-wrap text-white hover:text-slate-300 duration-300 flex items-center font-[300] min-w-[160px] w-auto text-center md:text-left"
+                >
+                  <FaAddressCard size={20} className="mr-2  hidden md:block  " />
+                  {link.address}
+                </a>
+              </li>
+            </ul>
+            {/* </div> */}
+          </div>
+
+          {/* Follow Us */}
+          <div className="flex justify-center  md:block">
+            <div className="hidden md:block md:mt-0">
+              <h3 className="text-[17px] font-poppins font-semibold leading-6 text-white uppercase mb-5 text-center md:text-left">
+                {socialMedia.title}
+              </h3>
+              <div className="flex space-x-6">
+                <a href={link.instagram} className="text-white hover:text-slate-300 duration-300">
+                  <FaInstagram size={30} />
+                </a>
+                <a href={link.tiktok} className="text-white hover:text-slate-300 duration-300">
+                  <FaTiktok size={25} />
+                </a>
+                <a href={link.youtube} className="text-white hover:text-blue-4 hover:text-slate-300 duration-300">
+                  <FaYoutube size={30} />
+                </a>
+                <a href={link.facebook} className="text-white hover:text-slate-300 duration-300">
+                  <FaFacebookF size={25} />
+                </a>
               </div>
             </div>
           </div>
+        </div>
         {/* </div> */}
 
         {/* Bottom Footer */}
@@ -141,7 +141,7 @@ function Footer(props: Props) {
             Copyright &copy; 2013-2024 Jas Oberoi Prec*. All Rights Reserved.
           </p>
           <p className="text-[13px] leading-5 text-[#959595]">
-            Designed by <span className="text-[#c1a468]">Orangebox Media</span>
+            Designed by <span className="text-[#c1a468]">Infridet solutions Private Limited</span>
           </p>
         </div>
       </Container>

@@ -10,15 +10,15 @@ connect();
 
 export async function POST(request: NextRequest) {
   try {
-    
+
     const data = await request.formData();
     // console.log("FormData:", data);
-    
+
     const propertyId = data.get("propertyId");
     // Check if propertyId already exists
     const existingProperty = await Property.findOne({ propertyId });
     if (existingProperty) {
-      
+
       return new NextResponse(
         JSON.stringify({
           message: "Property Id Must Uniq",
@@ -30,9 +30,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const featured =  data.get("featured");
-    const hotOffer =  data.get("hotOffer");
-    const sale =  data.get("sale");
+    const featured = data.get("featured");
+    const hotOffer = data.get("hotOffer");
+    const sale = data.get("sale");
 
     const title = data.get("title");
     const price = data.get("price");
@@ -142,7 +142,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
-
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -296,6 +295,197 @@ export async function PATCH(req: NextRequest) {
       JSON.stringify({
         message: "Failed to update property",
         error: error.message,
+      }),
+      { status: 500 }
+    );
+  }
+}
+
+export async function PUT(request: NextRequest) {
+  try {
+    const data = await request.formData();
+    const id = data.get("id") as string;
+    const featured = data.get("featured");
+    const hotOffer = data.get("hotOffer");
+    const sale = data.get("sale");
+    const title = data.get("title");
+    const price = data.get("price");
+    const sold = data.get("sold");
+    const fullAddress = data.get("address[fullAddress]");
+    const city = data.get("address[city]");
+    const state = data.get("address[state]");
+    const zipOrPostalCode = data.get("address[zipOrPostalCode]");
+    const country = data.get("address[country]");
+    const totalAmount = data.get("mortgage[totalAmount]");
+    const downPayment = data.get("mortgage[downPayment]");
+    const interestRate = data.get("mortgage[interestRate]");
+    const loanYears = data.get("mortgage[loanYears]");
+    const propertyTax = data.get("mortgage[propertyTax]");
+    const insurance = data.get("mortgage[insurance]");
+    const pmi = data.get("mortgage[pmi]");
+    const areaSize = data.get("areaSize");
+    const yearBuilt = data.get("yearBuilt");
+    const propertyType = data.get("propertyType");
+    const description = data.get("description");
+    const gmapLink = data.get("gmapLink");
+    const slider = data.get("slider");
+    const propertyId = data.get("propertyId");
+
+    const newSingleImageFiles = data.getAll("singleImage") as File[];
+    const newImageFiles = data.getAll("images[]") as File[];
+
+
+    console.log(newSingleImageFiles);
+    console.log(data);
+    console.log(newImageFiles);
+    
+    // Validate required fields
+    if (!id || !title || !price) {
+      return new NextResponse(
+        JSON.stringify({
+          message: "ID, title, and price are required",
+          success: false,
+        }),
+        { status: 400 }
+      );
+    }
+  
+    // Find existing Property
+    const existingProperty = await Property.findById(id);
+    if (!existingProperty) {
+      return new NextResponse(
+        JSON.stringify({
+          message: "Property not found",
+          success: false,
+        }),
+        { status: 404 }
+      );
+    }
+
+    
+    const propertyWithSameId = await Property.findOne({ propertyId });
+    if (propertyWithSameId && propertyWithSameId?._id!.toString() !== id) {
+      return new NextResponse(
+        JSON.stringify({
+          message: "Property Id must be unique",
+          success: false,
+        }),
+        { status: 400 }
+      );
+    }
+
+    // Array to hold all promises for image operations
+    const promises: Promise<any>[] = [];
+    // Handle single image update
+    if (newSingleImageFiles.length > 0) {
+      // Delete old single image if exists
+      if (existingProperty.singleImage.length > 0) {
+        promises.push(
+          ...existingProperty.singleImage.map((imagePath) =>
+            unlink(`./public${imagePath}`).catch((error) => {
+              console.error(`Failed to delete image at ${imagePath}:`, error);
+            })
+          )
+        );
+      }
+      // Upload new single image
+
+      promises.push(
+        handleFileUpload(newSingleImageFiles, "./public/uploads").then(
+          (uploadedSingleImages) => {
+            existingProperty.singleImage = uploadedSingleImages;
+          }
+        )
+      );
+    }
+
+    // Handle multiple images update
+    if (newImageFiles.length > 0) {
+      // Delete old images if exist
+      if (existingProperty.images.length > 0) {
+        promises.push(
+          ...existingProperty.images.map((imagePath) =>
+            unlink(`./public${imagePath}`).catch((error) => {
+              console.error(`Failed to delete image at ${imagePath}:`, error);
+            })
+          )
+        );
+      }
+      // Upload new images
+      promises.push(
+        handleFileUpload(newImageFiles, "./public/uploads").then(
+          (uploadedImages) => {
+            existingProperty.images = uploadedImages;
+          }
+        )
+      );
+    }
+
+    // Wait for all promises to complete
+    await Promise.all(promises);
+
+    existingProperty.propertyId = propertyId! as string;
+    existingProperty.title = title as string;
+    existingProperty.price = price as string;
+    existingProperty.sold = sold === 'true'; // Convert string to boolean
+    existingProperty.slider = slider === 'true'; // Convert string to boolean
+    existingProperty.address = {
+      fullAddress: fullAddress as string,
+      city: city as string,
+      state: state as string,
+      zipOrPostalCode: zipOrPostalCode as string,
+      country: country as string,
+    };
+    existingProperty.mortgage = {
+      totalAmount: totalAmount as string,
+      downPayment: downPayment as string,
+      interestRate: interestRate as string,
+      loanYears: loanYears as string,
+      propertyTax: propertyTax as string,
+      insurance: insurance as string,
+      pmi: pmi as string,
+    };
+    existingProperty.areaSize = areaSize as string;
+    existingProperty.yearBuilt = yearBuilt as string;
+    existingProperty.propertyType = propertyType as string;
+    existingProperty.description = description as string;
+    existingProperty.gmapLink = gmapLink as string;
+    existingProperty.featured = featured === 'true'; // Convert string to boolean
+    existingProperty.hotOffer = hotOffer === 'true'; // Convert string to boolean
+
+    // Update additional details
+    let additionalDetails = [];
+    let index = 0;
+    while (data.has(`additionalDetails[${index}][key]`)) {
+      const key = data.get(`additionalDetails[${index}][key]`);
+      const value = data.get(`additionalDetails[${index}][value]`);
+      if (key && value) {
+        additionalDetails.push({ key, value });
+      }
+      index++;
+    }
+    existingProperty.additionalDetails = additionalDetails.map(({ key, value }) => ({
+      key: key.toString(),
+      value: value.toString(),
+    }));
+    // Save updated Property document
+    await existingProperty.save();
+
+    return new NextResponse(
+      JSON.stringify({
+        message: "Property updated successfully",
+        success: true,
+        post: existingProperty,
+      }),
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error("Error updating property:", error);
+    return new NextResponse(
+      JSON.stringify({
+        message: "Failed to update property",
+        error: error.message,
+        success: false,
       }),
       { status: 500 }
     );

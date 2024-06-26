@@ -26,8 +26,7 @@ const page = () => {
   const [totalPages, setTotalPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState("");
-
-  const postsPerPage = Number(process.env.TABLE_ROW_PAGE!);
+  const postsPerPage = 10;
 
   useEffect(() => {
     fetchPosts();
@@ -38,7 +37,7 @@ const page = () => {
       const response = await axios.get(`/api/admin/property?page=${currentPage}&limit=${postsPerPage}`);
       const { propertys, totalPages, totalCount } = response.data;
       console.log(55555, response);
-      
+
       setproperty(propertys);
       setTotalPages(totalPages);
       setTotalCount(totalCount);
@@ -221,6 +220,13 @@ const page = () => {
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
+                            Action
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-start">
+                        <div className="flex items-center gap-x-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
                             Mark as sold
                           </span>
                         </div>
@@ -307,12 +313,12 @@ const page = () => {
                         )}
 
                         {/* <td className="size-px whitespace-nowrap">
-                        <div className="px-6 py-1.5">
-                          <Link className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500" href="#">
-                            Edit
-                          </Link>
-                        </div>
-                      </td> */}
+                          <div className="px-6 py-1.5">
+                            <Link className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500" href={`/admin/property/${property._id}`}>
+                              Edit
+                            </Link>
+                          </div>
+                        </td> */}
 
                         <td className="size-px whitespace-nowrap">
                           <div className="px-6 py-1.5">
@@ -361,12 +367,11 @@ const page = () => {
                   <div>
                     <p className="text-sm text-gray-600 dark:text-neutral-400">
                       Showing{" "}
-                      <span className="font-medium">{`${
-                        (currentPage - 1) * postsPerPage + 1
-                      }-${Math.min(
-                        currentPage * postsPerPage,
-                        totalCount
-                      )}`}</span>{" "}
+                      <span className="font-medium">{`${(currentPage - 1) * Number(postsPerPage) + 1
+                        }-${Math.min(
+                          currentPage * Number(postsPerPage),
+                          totalCount
+                        )}`}</span>{" "}
                       of{" "}
                       <span className="font-semibold text-gray-800 dark:text-neutral-200">
                         {totalCount}

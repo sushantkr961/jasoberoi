@@ -25,7 +25,8 @@ const page = () => {
     const [totalPages, setTotalPages] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(1);
 
-    const postsPerPage = Number(process.env.TABLE_ROW_PAGE!);
+    const postsPerPage =10;
+
 
     useEffect(() => {
         fetchPosts();
