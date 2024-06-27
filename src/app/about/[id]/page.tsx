@@ -33,15 +33,17 @@ const page = ({ params }: Props) => {
                             src={`/assets/aboutus/${member.image}`}
                             height={700}
                             width={580}
-                            alt="JASOBEROI"
-                            layout="responsive"
+                            alt={`${member.name}`}
+                            style={{ width: "auto", height: "auto" }}
                             className="hidden md:block object-cover w-full lg:max-h-[800px]  md:max-h-[700px]  lg:max-w-[460px] rounded-br-[100px]"
                         />
-
-                        <img
+                        <Image
                             src={`/assets/aboutus/${member.image}`}
-                            alt="JASOBEROI"
-                            className="md:hidden object-cover object-top max-h-[900px] w-full"
+                            alt={`${member.name}`}
+                            className="md:hidden object-cover object-top max-h-[1090px] w-full"
+                            height={700}
+                            width={580}
+                            style={{ width: "auto", height: "auto" }}
                         />
 
                     </div>

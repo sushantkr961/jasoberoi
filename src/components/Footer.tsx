@@ -28,6 +28,7 @@ function Footer(props: Props) {
               alt="Company logo"
               width={226}
               height={114}
+              style={{width:"auto",height:"auto"}}
               className="hidden md:block invert"
             />
             <Image

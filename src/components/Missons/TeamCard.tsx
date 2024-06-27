@@ -22,7 +22,7 @@ const TeamCard = ({ teamMemberDetails }: { teamMemberDetails: any }) => {
     };
     return (
         <Link className='relative  bg-cover  h-full w-full m-auto group overflow-hidden'
-        href={`about/${teamMemberDetails.id}`}
+            href={`about/${teamMemberDetails.id}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
@@ -31,15 +31,12 @@ const TeamCard = ({ teamMemberDetails }: { teamMemberDetails: any }) => {
                 alt={teamMemberDetails.name}
                 width={500}
                 height={300}
-                layout="responsive"
-                objectFit="cover"
                 className="md:h-full xl:min-w-[315px] object-cover lg:min-h-[470px]"
             />
             <div className='absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-b from-transparent to-black opacity-80'></div>
             <div
-                className={`text-center absolute bottom-[28px] w-full text-white z-10 transition-all duration-200 ${
-                    showInfo ? 'opacity-0 translate-x-[-100%] pointer-events-none' : 'opacity-100 translate-x-0'
-                }`}
+                className={`text-center absolute bottom-[28px] w-full text-white z-10 transition-all duration-200 ${showInfo ? 'opacity-0 translate-x-[-100%] pointer-events-none' : 'opacity-100 translate-x-0'
+                    }`}
             >
                 <strong className='text-[15px] leading-7'>{teamMemberDetails.name}</strong>
                 <div className="team-title font-poppins text-[14px]">{teamMemberDetails.role}</div>
@@ -49,7 +46,7 @@ const TeamCard = ({ teamMemberDetails }: { teamMemberDetails: any }) => {
                     }`}
                 style={{ visibility: hideInfo ? 'hidden' : 'visible' }}
             >
-            
+
                 <strong className='text-[16px] leading-7'>{teamMemberDetails.name}</strong>
                 <p className='font-poppins text-[15px]  '>{teamMemberDetails.role}</p>
                 {teamMemberDetails.descriptions && teamMemberDetails.descriptions.length > 0 && (

@@ -24,19 +24,24 @@ const About = (props: Props) => {
 
       <Container className="m-auto px-4">
         <div className="flex flex-col md:flex-row justify-between mt-[48px] sm:mt-[44px] lg:mt-[108px] mb-[80px]">
-          <div className="md:w-[47%] flex justify-center">
+          <div className="md:w-[47%]  justify-center hidden md:flex">
             <Image
               src={`/assets/aboutus/${JASOBEROI.image}`}
               height={700}
               width={580}
               alt="JASOBEROI"
-              layout="responsive"
+              style={{ width: "auto", height: "auto" }}
               className="hidden md:block object-cover w-full lg:max-h-[830px] lg:max-w-[580px]"
             />
+          </div>
 
-            <img
-              src="/assets/aboutus/asset 2.jpeg"
+          <div className="md:w-[47%]  justify-center flex md:hidden ">
+            <Image
+              src={`/assets/aboutus/${JASOBEROI.image}`}
+              height={700}
+              width={580}
               alt="JASOBEROI"
+              style={{ width: "auto", height: "auto" }}
               className="md:hidden object-cover object-top max-h-[1090px] w-full"
             />
 
