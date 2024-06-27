@@ -1,14 +1,13 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
 import PageHeading from "@/components/Common/PageHeading";
 import Container from "@/components/Containers/Container";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { CiMail } from "react-icons/ci";
 import { FaMobileAlt } from "react-icons/fa";
 
-import link from '../../data/link.json'
-import Loader from "@/components/Loader/Loader";
 import { usePathname } from "next/navigation";
+import link from '../../data/link.json';
 type Props = {};
 
 const FeaturedListing = (props: Props) => {
