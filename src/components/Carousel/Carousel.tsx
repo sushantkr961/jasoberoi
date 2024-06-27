@@ -3,17 +3,17 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Slider from "react-slick";
 import BigCarousel from "./BigCarousel";
-import {  useFullScreenHandle } from "react-full-screen";
+import { useFullScreenHandle } from "react-full-screen";
 
 type Props = {
   imageUrls: string[];
   backgroundColor?: string;
   onClick?: (index: number) => void;
   fullScreen: boolean;
-  className?:string;
+  className?: string;
 };
 
-function Carousel({ imageUrls, backgroundColor, onClick, fullScreen=false,className }: Props) {
+function Carousel({ imageUrls, backgroundColor, onClick, fullScreen = false, className }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const fullScreenHandle = useFullScreenHandle();
@@ -69,9 +69,7 @@ function Carousel({ imageUrls, backgroundColor, onClick, fullScreen=false,classN
                     alt={`Slide ${index + 1}`}
                     width={600}
                     height={300}
-                    layout="responsive"
-                    unoptimized
-                  className={`object-cover  ${className} `}
+                    className={`object-cover  ${className} `}
                   />
                   <p className="text-white absolute bottom-3 left-5">{`${index + 1}/${imageUrls.length
                     }`}</p>
@@ -101,8 +99,6 @@ function Carousel({ imageUrls, backgroundColor, onClick, fullScreen=false,classN
                     alt={`Slide ${index + 1}`}
                     width={600}
                     height={300}
-                    layout="responsive"
-                    unoptimized
                     className={`object-cover ${className} `}
                   />
                   <p className="text-white absolute bottom-3 left-5">{`${index + 1}/${imageUrls.length

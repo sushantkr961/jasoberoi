@@ -4,7 +4,7 @@ import { stripHtml } from "string-strip-html";
 
 
 async function fetchPostData(id: string) {
-      try {
+    try {
         const response = await axios.get(`${process.env.BASE_URL}/api/admin/blog/single?id=${id}`);
         console.log(response);
         return response.data;

@@ -27,6 +27,7 @@ const Property = () => {
       <Container className="lg:absolute lg:top-[50%] lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 grid grid-cols-1 lg:grid-cols-3 gap-4 w-full">
         {categories?.map((category, index) => (
           <PropertyCard
+            key={category.name}
             imgUrl={category.image}
             imageName={category.name}
             title={category.name}

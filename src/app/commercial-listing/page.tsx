@@ -75,13 +75,13 @@ const commerciallisting = (props: Props) => {
           </p>
           <Link
             href={"/exclusive-properties"}
-        className="uppercase font-semibold text-[15px] md:text-[16px] mt-2 bg-black text-white py-3 px-4">
+            className="uppercase font-semibold text-[15px] md:text-[16px] mt-2 bg-black text-white py-3 px-4">
             {" "}
             EXCLUSIVE PROPERTIES
           </Link>
         </div>
         <div className="flex justify-between flex-col md:flex-row gap-4 items-center md:gap-9 mb-[70px] text-[20px] sm:text-[28px]">
-        <div className="flex gap-2 items-center ">
+          <div className="flex gap-2 items-center ">
             <FaMobileAlt />
             <a href={`tel:${link.phone}`}>{link.phone}</a>
           </div>

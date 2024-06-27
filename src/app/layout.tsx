@@ -1,20 +1,21 @@
 import { cn } from "@/lib/utils";
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import UserCheckProvider from "./UserCheckProvider";
 import "./globals.css";
-import { Toaster } from "react-hot-toast";
+import { Metadata, Viewport } from "next";
 
-const inter = Inter({ subsets: ["latin"] });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1.0,
+};
+
 export const metadata: Metadata = {
   title: "Jas Oberoi | Best Realtor Surrey | White Rock | South Surrey",
   description: "We are one of the best realtors in Surrey. we work to deliver the best experience with Real Estate. Doing more than just finding real estate.",
   icons: {
     icon: "/assets/favicon.ico",
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1.0,
   },
   robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
   alternates: {
@@ -41,6 +42,10 @@ export const metadata: Metadata = {
     "article:modified_time": "2023-12-13T20:41:04+00:00",
   },
 };
+
+const inter = Inter({ subsets: ["latin"] });
+
+
 
 export default function RootLayout({
   children,
@@ -76,31 +81,6 @@ export default function RootLayout({
           type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
         />
-
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              !function(f,b,e,v,n,t,s)
-              {if(f.fbq)return;n=f.fbq=function(){n.callMethod ?
-                n.callMethod.apply(n, arguments) : n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)}(window, document,'script',
-              'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '224717419404384');
-              fbq('track', 'PageView');
-            `,
-          }}
-        />
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=224717419404384&ev=PageView&noscript=1"
-          />
-        </noscript>
       </head>
       <body
         className={cn("relative", inter.className, {
