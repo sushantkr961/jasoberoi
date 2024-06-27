@@ -47,7 +47,7 @@ const soldCommercials = (props: Props) => {
           STORY!
         </h2>
         <p className="text-[#2D2D2D] text-[15px] font-poppins">
-          Get in contact with Jas Oberoi Group to and begin your own story.
+          Get in contact with Jas Oberoi Group and begin your own story.
         </p>
         <Link
           href={"/contact"}
