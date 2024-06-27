@@ -220,7 +220,6 @@ const page = ({ params }: Props) => {
                                 </div>
 
                                 <div className='my-6'>
-                                    <p className="text-[#636363] mb-2 text-[15px]">At preline, our mission has always been focused on bringing openness and transparency to the design process. We've always believed that by providing a space where designers can share ongoing work not only empowers them to make better products, it also helps them grow.</p>
                                     <p
                                         style={{ fontFamily: "Poppins !important" }}
                                         className="text-[#636363] mb-2 text-[15px]"

@@ -5,7 +5,7 @@ import Container from "@/components/Containers/Container";
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaLinkedin } from "react-icons/fa";
 import {
   FaSquareFacebook,
@@ -15,6 +15,7 @@ import {
 import link from '../../data/link.json'
 import axios from "axios";
 import toast from "react-hot-toast";
+import Script from "next/script";
 type Props = {};
 interface FormData {
   firstName: string;
@@ -128,212 +129,74 @@ const contact = (props: Props) => {
     }
   };
 
+
+
+
+  const scriptContainerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    // Create a script element
+    const script = document.createElement("script");
+    script.id = "mrpscript";
+    script.type = "text/javascript";
+    script.src = "https://link.msgsndr.com/js/form_embed.js";
+    script.async = true;
+
+    // Check if the script already exists
+    const existingScript = document.getElementById("mrpscript");
+    if (existingScript) {
+      // If the script already exists, remove it before appending the new one
+      existingScript.remove();
+    }
+
+
+    return () => {
+      // Cleanup function: remove the script when component unmounts
+      if (scriptContainerRef.current) {
+        scriptContainerRef.current.innerHTML = ""; // Clear script content
+      }
+    };
+  }, []);
+  // <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+
   return (
     <section>
       <PageHeading imageSrc="assets/aboutus.jpg" heading="Contact Us" />
 
 
-      <Container className="flex flex-col justify-center m-auto gap-7">
+      <Container className="flex flex-col justify-center m-auto px-0">
         <motion.div
           initial="hidden"
           animate="visible"
           variants={containerVariants}
-          className="flex flex-col md:flex-row justify-between  my-[80px] mx-[12px] md:mx-[80px]">
-          <div className="left w-full md:w-[60%] flex flex-col gap-8">
-            <div className="heading">
-              <h2 className="font-poppins text-[30px] md:text-[46px] uppercase leading-[50px]">
-                <strong className="font-[600] ">Get in</strong> touch
-              </h2>
-
-              <p className="text-[#D3AA54] text-[15px] md:text-[16px] font-poppins">
-                Reach out to our dedicated team and we’ll help answer any
-                questions.
-              </p>
-            </div>
-            <form onSubmit={handleSubmit}>
-              <div className="-mx-3 md:flex mb-2">
-                <div
-                  className="md:w-1/2 px-3 mb-6 md:mb-0"
-                  style={{ transition: "border-color 0.3s ease" }}
-                >
-                  <label
-                    className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                    htmlFor="grid-first-name"
-                  >
-                    First Name <span className="text-red-600 text-lg">*</span>
-                  </label>
-                  <input
-                    className="transition-all duration-200 outline-none focus:outline-none appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-gray-500"
-                    id="grid-first-name"
-                    type="text"
-                    placeholder="Enter your first name"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                  />
-                  {formErrors.firstName && (
-                    <p className="text-xs italic text-red-600">
-                      Please fill out this field.
-                    </p>
-                  )}
-                </div>
-                <div
-                  className="md:w-1/2 px-3 mb-6 md:mb-0"
-                  style={{ transition: "border-color 0.3s ease" }}
-                >
-                  <label
-                    className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                    htmlFor="grid-last-name"
-                  >
-                    Last Name <span className="text-red-600 text-lg">*</span>
-                  </label>
-                  <input
-                    className="transition-all duration-200 outline-none focus:outline-none appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-gray-500"
-                    id="grid-last-name"
-                    type="text"
-                    placeholder="Enter your last name"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                  />
-                  {formErrors.lastName && (
-                    <p className="text-red-600 text-xs italic">
-                      Please fill out this field.
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div className="-mx-3 md:flex mb-2">
-                <div
-                  className="md:w-1/2 px-3 mb-6 md:mb-0"
-                  style={{ transition: "border-color 0.3s ease" }}
-                >
-                  <label
-                    className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                    htmlFor="grid-phone"
-                  >
-                    Phone <span className="text-red-600 text-lg">*</span>
-                  </label>
-                  <input
-                    className="transition-all duration-200 outline-none focus:outline-none appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-gray-500"
-                    id="grid-phone"
-                    type="number"
-                    placeholder="Enter your phone number"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                  />
-                  {formErrors.phone && (
-                    <p className="text-red-600 text-xs italic">
-                      Please fill out this field.
-                    </p>
-                  )}
-                </div>
-                <div
-                  className="md:w-1/2 px-3 mb-6 md:mb-0"
-                  style={{ transition: "border-color 0.3s ease" }}
-                >
-                  <label
-                    className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                    htmlFor="grid-email"
-                  >
-                    Email <span className="text-red-600 text-lg">*</span>
-                  </label>
-                  <input
-                    className="transition-all duration-200 outline-none focus:outline-none appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-gray-500"
-                    id="grid-email"
-                    type="email"
-                    placeholder="Enter your email address"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-                  {formErrors.email && (
-                    <p className="text-red-600 text-xs italic">
-                      Please fill out this field.
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div className="md:w-2/2 mb-4 relative">
-                <label
-                  className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                  htmlFor="grid-state"
-                >
-                  Looking for? <span className="text-red-600 text-lg">*</span>
-                </label>
-                <div className="relative">
-                  <select
-                    className="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded"
-                    id="grid-state"
-                    name="lookingFor"
-                    value={formData.lookingFor}
-                    onChange={handleChange}
-                  >
-                    <option>-- Please Select --</option>
-                    <option>Investor</option>
-                    <option>Buying a house</option>
-                    <option>commercial</option>
-                    <option>selling my house</option>
-                  </select>
-                  <div className="pointer-events-none absolute pin-y pin-r flex items-center px-2 right-0 top-[50%] translate--[-50%] text-grey-darker">
-                    <svg
-                      className="h-4 w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              <div className="-mx-3 md:flex mb-6">
-                <div
-                  className="md:w-full px-3 mb-6 md:mb-0"
-                  style={{ transition: "border-color 0.3s ease" }}
-                >
-                  <label
-                    className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                    htmlFor="grid-additional-info"
-                  >
-                    Additional Information{" "}
-                    <span className="text-red-600 text-lg">*</span>
-                  </label>
-                  <textarea
-                    className="transition-all duration-200 outline-none focus:outline-none appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-gray-500"
-                    id="grid-additional-info"
-                    placeholder="Enter any additional information"
-                    style={{ width: "100%" }}
-                    name="additionalInfo"
-                    value={formData.additionalInfo}
-                    onChange={handleChange}
-                  ></textarea>
-                  {formErrors.additionalInfo && (
-                    <p className="text-red-600 text-xs italic">
-                      Please fill out this field.
-                    </p>
-                  )}
-                </div>
-              </div>
-
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="bg-black py-2 px-10  font-poppins text-white"
+          className="flex flex-col lg:flex-row justify-between my-[80px] lg:mb-0  md:mx-[80px]">
+          <div className="left w-full  flex ">
+            <div className="min-h-[900px] max-h-[900px]  overflow-hidden w-full">
+              <iframe
+                src="https://api.leadconnectorhq.com/widget/form/CzGs82po9AE4GY0vItB7"
+                style={{ width: "100%", height: "100%", border: "none", borderRadius: "3px", padding: "0px", overflow: "hidden" }}
+                id="inline-CzGs82po9AE4GY0vItB7"
+                scrolling="no"
+                data-layout="{'id':'INLINE'}"
+                data-trigger-type="alwaysShow"
+                data-trigger-value=""
+                data-activation-type="alwaysActivated"
+                data-activation-value=""
+                data-deactivation-type="neverDeactivate"
+                data-deactivation-value=""
+                data-form-name="Contact us Page"
+                data-height="806"
+                data-layout-iframe-id="inline-CzGs82po9AE4GY0vItB7"
+                data-form-id="CzGs82po9AE4GY0vItB7"
+                title="Contact us Page"
               >
-                {loading ? "Loading" : "Submit"}
-              </button>
-            </form>
-            {submitted && (
-              <p className="text-green-600 text-md italic border border-green-600 rounded-lg py-2 px-5 bg-green-200">
-                Form Submitted Successfully.
-              </p>
-            )}
+              </iframe>
+            </div>
           </div>
 
           {/* Right Side Black Part */}
-          <div className="right w-full md:w-[36%] xl:min-w-[410px] mt-[50px] bg-black text-white p-[20px] flex flex-col gap-16 max-h-[416px]">
+          <div className="px-4 lg:px-2">
+
+          <div className="right w-full  lg:w-[36%] xl:min-w-[410px] mt-[50px] bg-black text-white p-[20px] flex flex-col gap-16 max-h-[416px]">
             <div className="flex flex-col gap-4 ">
               <h5 className="text-[20px] font-poppins">
                 For Inquiries Contact
@@ -366,6 +229,7 @@ const contact = (props: Props) => {
               <a href={link.linkdin} target="_blank"><FaLinkedin /></a>
             </div>
           </div>
+          </div>
         </motion.div>
         <motion.div
 
@@ -374,7 +238,7 @@ const contact = (props: Props) => {
           animate={controls}
           variants={containerVariants}
 
-          className="map">
+          className="map px-5 lg:px-2">
           <iframe
             title="Google Maps"
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d20928.000849465756!2d-122.804293!3d49.029605000000004!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5485c4bb0fb1f7e1%3A0xaa1e9aa1056c9966!2sJas%20Oberoi%20Group!5e0!3m2!1sen!2sus!4v1715508303712!5m2!1sen!2sus"

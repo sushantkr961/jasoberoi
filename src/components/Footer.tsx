@@ -24,11 +24,11 @@ function Footer(props: Props) {
           {/* Logo Section */}
           <div className="space-y-4 md:space-y-8 flex flex-col lg:col-span-2 justify-center items-center md:items-start lg:ps-3">
             <Image
-              src="https://jasoberoi.ca/wp-content/uploads/elementor/thumbs/Assets-for-videos-horizontal-qgro90ohuycsjyl1241hrplgo9eegohqmzeqpu2agg.png"
+              src="/assets/navLogo.png"
               alt="Company logo"
               width={226}
               height={114}
-              className="hidden md:block"
+              className="hidden md:block invert"
             />
             <Image
               src="/assets/mobilelogo.png"
@@ -41,16 +41,16 @@ function Footer(props: Props) {
               {description}
             </p>
             <div className="flex space-x-6 md:hidden">
-              <a href="#" className="text-white hover:text-white">
+              <a href={link.instagram} className="text-white hover:text-white">
                 <FaInstagram size={30} />
               </a>
-              <a href="#" className="text-white hover:text-white">
+              <a href={link.tiktok} className="text-white hover:text-white">
                 <FaTiktok size={25} />
               </a>
-              <a href="#" className="text-white hover:text-blue-4">
+              <a href={link.youtube} className="text-white hover:text-blue-4">
                 <FaYoutube size={30} />
               </a>
-              <a href="#" className="text-white hover:text-white">
+              <a href={link.facebook} className="text-white hover:text-white">
                 <FaFacebookF size={25} />
               </a>
             </div>

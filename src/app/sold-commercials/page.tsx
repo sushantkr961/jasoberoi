@@ -57,14 +57,14 @@ const soldCommercials = (props: Props) => {
         </Link>
       </div>
       <div className="flex justify-between flex-col md:flex-row gap-4 items-center md:gap-9 mb-[70px] text-[18px]">
-      <div className="flex gap-2 items-center ">
-            <FaMobileAlt />
-            <a href={`tel:${link.phone}`}>{link.phone}</a>
-          </div>
-          <div className="flex gap-2 items-center ">
-            <CiMail />
-            <a href={`mailto:${link.email}`}>{link.email}</a>
-          </div>
+        <div className="flex gap-2 items-center ">
+          <FaMobileAlt />
+          <a href={`tel:${link.phone}`}>{link.phone}</a>
+        </div>
+        <div className="flex gap-2 items-center ">
+          <CiMail />
+          <a href={`mailto:${link.email}`}>{link.email}</a>
+        </div>
       </div>
 
     </Container>

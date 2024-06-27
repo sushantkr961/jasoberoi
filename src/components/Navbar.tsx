@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
   const [isOpen, setOpen] = useState(false);
 
   const handleClick = () => {
-    window.location.href = 'https://www.jaoberoigroup.com/website_clicks';
+    window.location.href = 'https://jaoberoigroup.com/grabcoffee';
   };
 
   return (
@@ -36,6 +36,7 @@ const Navbar: React.FC = () => {
           </div>
           <button
             type="button"
+            onClick={handleClick}
             className="text-white focus:outline-none bg-black font-medium text-[12px] sm:text-[16px] py-[12px] sm:py-[14px] px-[30px] text-center uppercase"
           >
             BOOK NOW
