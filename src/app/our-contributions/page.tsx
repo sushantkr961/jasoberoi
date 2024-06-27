@@ -1,16 +1,14 @@
 "use client";
+import GalleryCarousel from "@/components/Carousel/GalleryCarsouel";
 import YoutubeVideo from "@/components/Common/YoutubeVideo";
 import Container from "@/components/Containers/Container";
-import SponnsorsCard from "@/components/Contributions/SponnsorsCard";
-import Image from "next/image";
-import React, { useEffect } from "react";
-import data from "../../data/Contributions/data.json";
 import MusicCard from "@/components/Contributions/MusicCard";
-import Carousel from "@/components/Carousel/Carousel";
-import GalleryCarousel from "@/components/Carousel/GalleryCarsouel";
-import CarouselSponsors from "@/components/Contributions/CarouselSponsors";
+import SponnsorsCard from "@/components/Contributions/SponnsorsCard";
 import { motion, useAnimation } from 'framer-motion';
+import Image from "next/image";
+import { useEffect } from "react";
 import { useInView } from 'react-intersection-observer';
+import data from "../../data/Contributions/data.json";
 
 type Props = {};
 

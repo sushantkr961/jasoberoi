@@ -15,7 +15,7 @@ const FeaturedListing = (props: Props) => {
 
   const pathname = usePathname();
 
-  
+
   const scriptContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     // Create a script element
@@ -61,7 +61,7 @@ const FeaturedListing = (props: Props) => {
       <Container className="w-full m-auto flex flex-col items-center px-2">
 
         <div ref={scriptContainerRef} className="w-full mt-8 lg:mt-20">
-       
+
         </div>
         {/* Here Come I Fram */}
         <hr className="py-10 md:py-18 w-[90%] border-b-2   mb-5" />

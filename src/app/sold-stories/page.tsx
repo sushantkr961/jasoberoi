@@ -1,11 +1,11 @@
 "use client"
 
-import React, { useEffect, useState } from "react";
-import axios from "axios";
 import PageHeading from "@/components/Common/PageHeading";
 import Container from "@/components/Containers/Container";
-import Card from "@/components/SoldStoris/Card";
 import Loader from "@/components/Loader/Loader";
+import Card from "@/components/SoldStoris/Card";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 interface SoldStories {
   _id: string;

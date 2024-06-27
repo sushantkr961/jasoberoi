@@ -26,18 +26,19 @@ const ourCulture = (props: Props) => {
             src={`/assets/ourculture/${OUR_CULTURE.img}`}
             height={700}
             width={580}
-            alt="cluture"
-            layout="responsive"
+            alt="CULTURE"
             className="hidden md:block object-cover w-full lg:max-h-[830px] lg:max-w-[580px]"
           />
 
-          <img
+          <Image
             src={`/assets/ourculture/${OUR_CULTURE.img}`}
-            alt="cluture"
-            className="md:hidden object-cover object-top max-h-[8 00px] w-full"
+            height={700}
+            width={580}
+            alt="CULTURE"
+            className="md:hidden object-cover object-top max-h-[800px] w-full"
           />
-
         </div>
+
         {/* Right Side Description */}
         <div className="md:w-[51%] mt-7 md:mt-0  pr-3 lg:pr-10  text-center xl:text-left">
           <div className="heading text-center">
@@ -71,26 +72,26 @@ const ourCulture = (props: Props) => {
 
           </div>
         </div>
-        
+
         {/* Right SIDE PART */}
         <div className="lg:w-[50%] flex flex-col  items-center gap-5">
-          <GoalCard 
-          icon={<GoPeople  className='text-[30px] text-[#D3AA54]' />}
+          <GoalCard
+            icon={<GoPeople className='text-[30px] text-[#D3AA54]' />}
             name="Generating lasting value for clients"
           />
-          <GoalCard 
-          icon={<FaPeopleArrows  className='text-[30px] text-[#D3AA54]' />}
+          <GoalCard
+            icon={<FaPeopleArrows className='text-[30px] text-[#D3AA54]' />}
             name="Connecting our clients to industry professionals"
           />
-          
-          <GoalCard 
-          icon={<TbGridDots  className='text-[30px] text-[#D3AA54]' />}
+
+          <GoalCard
+            icon={<TbGridDots className='text-[30px] text-[#D3AA54]' />}
             name="
             Creating a Hassle-Free Experience"
           />
-          
-          <GoalCard 
-          icon={<GrSupport className='text-[30px] text-[#D3AA54]' />}
+
+          <GoalCard
+            icon={<GrSupport className='text-[30px] text-[#D3AA54]' />}
             name="Supporting our communities"
           />
         </div>
@@ -100,8 +101,8 @@ const ourCulture = (props: Props) => {
           href={"/contact"}
           className="m-auto flex gap-2 items-center "
         >
-            <div className="text-[29px]">Contact Us</div>
-            <FaArrowRight className='hidden md:block text-[24px] text-[#D3AA54]' />
+          <div className="text-[29px]">Contact Us</div>
+          <FaArrowRight className='hidden md:block text-[24px] text-[#D3AA54]' />
         </Link>
       </div>
     </Container>

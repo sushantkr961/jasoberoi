@@ -236,12 +236,6 @@ const Post = ({ params }: any) => {
               </div>
 
 
-              {/* <div>
-                <CommentDisplay 
-                blogId={params.id}
-                
-                />
-              </div> */}
               <Comment
                 blogId={params.id}
               />
