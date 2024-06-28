@@ -54,63 +54,26 @@ function Carousel({ imageUrls, backgroundColor, onClick, fullScreen = false, cla
 
   return (
     <div className={sliderContainerClass}>
-      {fullScreen == true ?
-        (
-          <>
-            <Slider {...settings}>
-              {imageUrls?.map((url, index) => (
-                <div
-                  key={index}
-                  className="p-2 focus:outline-none"
-                  onClick={() => handleClick(index)}
-                >
-                  <Image
-                    src={url}
-                    alt={`Slide ${index + 1}`}
-                    width={600}
-                    height={300}
-                    className={`object-cover  ${className} `}
-                  />
-                  <p className="text-white absolute bottom-3 left-5">{`${index + 1}/${imageUrls.length
-                    }`}</p>
-                </div>
-              ))}
-            </Slider>
-            {modalOpen && (
-              <BigCarousel
-                imageUrls={imageUrls}
-                startIndex={currentImageIndex}
-                onClose={() => setModalOpen(false)}
-                onZoom={() => { }}
-                onFullScreen={() => fullScreenHandle.enter()}
+      <>
+        <Slider {...settings}>
+          {imageUrls?.map((url, index) => (
+            <div
+              key={index}
+              className="p-2 focus:outline-none"
+            >
+              <Image
+                src={url}
+                alt={`Slide ${index + 1}`}
+                width={600}
+                height={300}
+                className={`object-cover ${className} `}
               />
-            )}
-          </>
-        ) : (
-          <>
-            <Slider {...settings}>
-              {imageUrls?.map((url, index) => (
-                <div
-                  key={index}
-                  className="p-2 focus:outline-none"
-                >
-                  <Image
-                    src={url}
-                    alt={`Slide ${index + 1}`}
-                    width={600}
-                    height={300}
-                    className={`object-cover ${className} `}
-                  />
-                  <p className="text-white absolute bottom-3 left-5">{`${index + 1}/${imageUrls.length
-                    }`}</p>
-                </div>
-              ))}
-            </Slider>
-          </>
-        )
-
-
-      }
+              <p className="text-white max-h-[200px] absolute bottom-3 left-5">{`${index + 1}/${imageUrls.length
+                }`}</p>
+            </div>
+          ))}
+        </Slider>
+      </>
     </div>
   );
 }

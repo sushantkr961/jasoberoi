@@ -6,19 +6,16 @@ const HeroSection = (props: Props) => {
   return (
     <section
       className="relative  pt-16 pb-4 overflow-hidden sm:pt-[7rem] sm:pb-[2rem] md:pb-0 md:py-24 min-h-full lg:min-h-[470px]  xl:min-h-[670px] w-full flex items-center justify-center "
-    // style={{
-    //   backgroundImage: "url('/assets/webp/background.webp')",
-    //   backgroundPosition: "top center",
-    //   backgroundRepeat: "no-repeat",
-    //   backgroundSize: "100% auto",
-    // }}
+    
     >
+      
       <Image
         src={"/assets/webp/background.webp"}
         alt="JASOBEROI"
         loading="eager"
         layout="fill" // Ensures the image takes up the entire parent div's dimensions
         objectFit="cover" // Adjust as per your design needs
+        unoptimized
         className="z-[-1]"
       />
 
