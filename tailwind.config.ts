@@ -26,7 +26,6 @@ const config: Config = {
   },
 
   plugins: [
-    require("tailwindcss-debug-screens"),
     require("tailwindcss-animate"),
     require("@tailwindcss/forms"),
     require("preline/plugin"),
