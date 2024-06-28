@@ -68,7 +68,6 @@ function Footer(props: Props) {
                   Icon={MdKeyboardArrowRight}
                   text={link.name}
                   url={link.url}
-
                 />
               ))}
             </ul>

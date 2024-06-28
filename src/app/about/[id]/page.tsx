@@ -43,7 +43,7 @@ const page = ({ params }: Props) => {
                             className="md:hidden object-cover object-top max-h-[1090px] w-full"
                             height={700}
                             width={580}
-                            style={{ width: "auto", height: "auto" }}
+                            style={{ width: "100%", height: "100%" }}
                         />
 
                     </div>

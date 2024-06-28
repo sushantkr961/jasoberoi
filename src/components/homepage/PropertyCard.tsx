@@ -25,9 +25,8 @@ const PropertyCard = (props: Props) => {
         width={200}
         height={300}
         loading="lazy"
-        // layout="responsive"
         className="object-cover object-center block lg:hidden w-full max-h-[40rem] sm:max-h-[18rem]"
-        style={{ width: 'auto', height: 'auto' }} 
+        style={{ width: '100%', height: '100%' }} 
       />
       <button className="left-[50%] translate-x-[-50%] bottom-[40px] z-40 absolute bg-white text-black text-[16px] md:text-[18px] py-3 px-4 uppercase whitespace-nowrap overflow-hidden text-overflow-ellipsis min-w-[160px] w-auto">
         {props.title}

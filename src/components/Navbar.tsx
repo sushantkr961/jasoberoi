@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import NavDesktop from "./Navbar/NavDesktop";
 import NavMobile from "./Navbar/NavMobile";
+import Image from "next/image";
 
 type Props = {};
 
@@ -22,11 +23,14 @@ const Navbar: React.FC = () => {
           href="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
-          <img
-            src="/assets/navLogo.png"
-            alt="jasoberoi"
-            className="w-[160px] pb-4 sm:pb-0  md:w-[180px] lg:max-w-[233px] "
-          />
+            <Image
+              src="/assets/navLogo.png"
+              alt="jasoberoi"
+              height={200}
+              width={200}            
+              className="w-[160px] pb-4 sm:pb-0  md:w-[180px] lg:max-w-[233px] "
+            />
+
         </Link>
 
         {/* Menu */}
