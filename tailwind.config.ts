@@ -10,7 +10,7 @@ const config: Config = {
     "node_modules/preline/dist/*.js",
     "./src/**/*.{html,js}",
   ],
-  darkMode:'class',
+  darkMode: 'class',
   theme: {
 
     extend: {

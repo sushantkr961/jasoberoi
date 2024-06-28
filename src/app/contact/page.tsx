@@ -163,7 +163,7 @@ const contact = (props: Props) => {
       <PageHeading imageSrc="assets/aboutus.webp" heading="Contact Us" />
 
 
-      <Container className="flex flex-col justify-center m-auto px-0">
+      <div className="flex flex-col justify-center m-auto px-0">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -264,7 +264,7 @@ const contact = (props: Props) => {
             </p>
           </div>
         </motion.div>
-      </Container>
+      </div>
 
     </section>
   );
