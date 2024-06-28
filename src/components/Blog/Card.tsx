@@ -1,5 +1,6 @@
 import parse from 'html-react-parser';
 import truncate from 'html-truncate';
+import Image from 'next/image';
 import Link from 'next/link';
 
 type Props = {
@@ -22,8 +23,10 @@ const Card = ({
     
     return (
         <Link  href={`/blog/${_id}`} key={_id} className="group w-full rounded-md overflow-hidden">
-            <div className="flex items-center relative z-0 md:min-h-[250px] md:max-h-[260px] overflow-hidden">
-                <img alt="blogs tailwind section" className="bg-gray-500 h-full object-cover w-full rounded-none" src={imageUrl} />
+            <div className="flex items-center relative z-0  md:max-h-[260px] overflow-hidden">
+                {/* <img alt="blogs tailwind section" className="bg-gray-500 h-full object-cover w-full rounded-none" src={imageUrl} /> */}
+                <Image height={300} width={400} alt="blogs " className="bg-gray-500 h-full object-cover w-full rounded-none" src={imageUrl.toString()} />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-30 group-hover:opacity-0 transition-opacity duration-300"></div>
             </div>
             <div className="py-4 lg:py-6 transition-all duration-300 ">

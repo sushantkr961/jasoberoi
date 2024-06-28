@@ -75,9 +75,9 @@ function page({ }: Props) {
                 <Image
                   src={`/assets/ourcontributions/BantingGalawhite.png`}
                   height={700}
+                  loading="lazy"
                   width={580}
                   alt="cluture"
-                  layout="responsive"
                   className="md:block object-cover w-full "
                 />
               </div>
@@ -103,7 +103,7 @@ function page({ }: Props) {
                 height={700}
                 width={580}
                 alt="cluture"
-                layout="responsive"
+                loading="lazy"
                 className="hidden md:block object-cover w-full lg:max-h-[830px] lg:max-w-[500px] xl:max-w-[560px]"
               />
               <Image
@@ -111,6 +111,7 @@ function page({ }: Props) {
                 height={700}
                 width={580}
                 alt="cluture"
+                loading="lazy"
                 className="md:hidden object-cover object-top max-h-[8 00px] w-full"
               />
             </div>

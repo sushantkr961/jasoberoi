@@ -15,8 +15,8 @@ const PropertyCard = (props: Props) => {
         alt={props.imageName}
         width={500}
         height={300}
-        loading="lazy"
         className="hidden lg:block object-cover"
+        loading="lazy"
         style={{ width: 'auto', height: 'auto' }} 
       />
       <Image

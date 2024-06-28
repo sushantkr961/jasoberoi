@@ -21,6 +21,7 @@ const HeroSection = (props: Props) => {
               alt="logo"
               width={768}
               height={128}
+              loading="lazy"
               className="block max-w-full"
             />
           </div>

@@ -26,6 +26,7 @@ const ourCulture = (props: Props) => {
             src={`/assets/ourculture/${OUR_CULTURE.img}`}
             height={700}
             width={580}
+            loading="lazy"
             alt="CULTURE"
             className="hidden md:block object-cover w-full lg:max-h-[830px] lg:max-w-[580px]"
           />
@@ -35,6 +36,7 @@ const ourCulture = (props: Props) => {
             height={700}
             width={580}
             alt="CULTURE"
+            loading="lazy"
             className="md:hidden object-cover object-top max-h-[800px] w-full"
           />
         </div>
