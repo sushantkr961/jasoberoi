@@ -5,6 +5,7 @@ type Props = {
   imageName: string;
   title: string;
   index: number;
+  href: string;
 };
 
 const PropertyCard = (props: Props) => {
@@ -17,7 +18,7 @@ const PropertyCard = (props: Props) => {
         height={300}
         className="hidden lg:block object-cover"
         loading="lazy"
-        style={{ width: 'auto', height: 'auto' }} 
+        style={{ width: 'auto', height: 'auto' }}
       />
       <Image
         src={props.imgUrl}
@@ -26,11 +27,13 @@ const PropertyCard = (props: Props) => {
         height={300}
         loading="lazy"
         className="object-cover object-center block lg:hidden w-full max-h-[40rem] sm:max-h-[18rem]"
-        style={{ width: '100%', height: '100%' }} 
+        style={{ width: '100%', height: '100%' }}
       />
-      <button className="left-[50%] translate-x-[-50%] bottom-[40px] z-40 absolute bg-white text-black text-[16px] md:text-[18px] py-3 px-4 uppercase whitespace-nowrap overflow-hidden text-overflow-ellipsis min-w-[160px] w-auto">
+      <a
+        href={props.href}
+        className="left-[50%] translate-x-[-50%] bottom-[40px] z-40 absolute bg-white text-black text-[16px] md:text-[18px] py-3 px-4 uppercase whitespace-nowrap overflow-hidden text-overflow-ellipsis min-w-[160px] w-auto">
         {props.title}
-      </button>
+      </a>
     </div>
   );
 };

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import PropertyCard from "./PropertyCard";
 import Container from "../Containers/Container";
 
@@ -7,17 +6,17 @@ const Property = () => {
     {
       name: "Residential",
       image: "/assets/webp/asset 29.webp",
-      href:""
+      href: "/featured-listing"
     },
     {
       name: "Commercial",
       image: "/assets/webp/asset 30.webp",
-      href:""
+      href: "/commercial-listing"
     },
     {
       name: "Exclusive Properties",
       image: "/assets/webp/asset 31.webp",
-      href:""
+      href: "/exclusive-properties"
     },
   ];
 
@@ -30,6 +29,7 @@ const Property = () => {
       <Container className="lg:absolute lg:top-[50%] lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 grid grid-cols-1 lg:grid-cols-3 gap-4 w-full">
         {categories?.map((category, index) => (
           <PropertyCard
+            href={category.href}
             key={category.name}
             imgUrl={category.image}
             imageName={category.name}

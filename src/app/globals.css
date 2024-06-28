@@ -38,21 +38,23 @@ body {
 }
 
 .font-belleza {
-  font-family: "Belleza", sans-serif;
+  font-family: var(--font-belleza), sans-serif;
 }
 
 .font-great-vibes {  
-  font-family: 'Great Vibes';
+  /* font-family: 'Great Vibes'; */
+  font-family: var(--font-great-vibes);
   font-style: normal;
   font-style: italic;
 }
 
 .font-lato {
-  font-family: "Lato", sans-serif;
+  
+  font-family: var(--font-lato), sans-serif;
 }
 
 .font-poppins {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins), sans-serif;
 }
 
 .hover-color{
@@ -60,7 +62,7 @@ body {
 }
 
 .font-crimson {
-  font-family: "Crimson Pro", serif;
+  font-family: var(--font-crimson-text), serif;
   letter-spacing: 1px;
 }
 
