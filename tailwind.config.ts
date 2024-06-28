@@ -30,6 +30,9 @@ const config: Config = {
     require("tailwindcss-animate"),
     require("@tailwindcss/forms"),
     require("preline/plugin"),
+    require("cssnano")({
+      preset: "default",
+    }),
   ],
 };
 export default config;
