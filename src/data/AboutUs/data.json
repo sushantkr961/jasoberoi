@@ -2,7 +2,7 @@
     "JASOBEROI": {
         "firstname": "JAS",
         "lastname": "OBEROI",
-        "image":"asset 2.jpeg",
+        "image":"asset 2.webp",
         "workd": "PERSONAL REAL ESTATE COORPORATION",
         "descriptions": [
             {
@@ -29,7 +29,7 @@
         {
             "id":1,
             "name": "Maria Hussain",
-            "image": "asset-4.jpeg",
+            "image": "asset-4.webp",
             "role": "Real Estate Professional",
             "email": "maria@jasoberoi.ca",
             "descriptions": [
@@ -59,7 +59,7 @@
             
             "id":2,
             "name": "Claudia",
-            "image": "asset-5.jpeg",
+            "image": "asset-5.webp",
             "role": "Marketing Manager",
             "email": "info@jasoberoi.ca",
             "descriptions": [
@@ -84,7 +84,7 @@
         {
             "id":3,
             "name": "Emmanuel Gatica",
-            "image": "asset-6.jpeg",
+            "image": "asset-6.webp",
             "role": "Media Director",
             "email": "info@jasoberoi.ca",
             "descriptions": [

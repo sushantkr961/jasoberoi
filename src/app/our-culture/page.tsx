@@ -15,7 +15,7 @@ type Props = {};
 const ourCulture = (props: Props) => {
   const { "OUR-CULTURE": OUR_CULTURE, "OUR-GOAL": OUR_GOAL } = Data;
   return <section>
-    <PageHeading imageSrc="assets/ourculture/asset 1.jpeg" heading="Our Culture" />
+    <PageHeading imageSrc="assets/ourculture/asset 1.webp" heading="Our Culture" />
 
     <Container className="m-auto px-4">
 

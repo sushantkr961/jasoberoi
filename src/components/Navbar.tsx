@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
         >
             <Image
               src="/assets/webp/navLogo.webp"
-              alt=" "
+              alt="JASOBEROI"
               height={200}
               width={200}            
               className="w-[160px] pb-4 sm:pb-0  md:w-[180px] lg:max-w-[233px] "

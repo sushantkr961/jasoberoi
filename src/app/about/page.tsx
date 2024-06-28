@@ -18,7 +18,7 @@ const About = (props: Props) => {
     <section >
 
       <PageHeading
-        imageSrc="assets/aboutus/asset 16.jpeg"
+        imageSrc="assets/aboutus/asset 16.webp"
         heading="About Us"
       />
 

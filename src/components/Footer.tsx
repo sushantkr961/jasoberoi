@@ -25,7 +25,7 @@ function Footer(props: Props) {
           <div className="space-y-4 md:space-y-8 flex flex-col lg:col-span-2 justify-center items-center md:items-start lg:ps-3">
             <Image
               src="/assets/webp/navLogo.webp"
-              alt="Company logo For Desktop"
+              alt="JASOBEROI"
               width={365}
               height={198}
               style={{ width: "auto", height: "auto" }}
@@ -33,7 +33,7 @@ function Footer(props: Props) {
             />
             <Image
               src="/assets/webp/mobilelogo.webp"
-              alt="Company Logo For Mobile"
+              alt="JASOBEROI"
               width={117}
               height={14}
               className="md:hidden block"

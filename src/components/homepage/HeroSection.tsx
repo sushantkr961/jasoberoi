@@ -18,7 +18,7 @@ const HeroSection = (props: Props) => {
           <div className="md:mb-8">
             <Image
               src="/assets/webp/Belleza-White-.webp"
-              alt="logo"
+              alt="JASOBEROI"
               width={768}
               height={128}
               loading="lazy"
