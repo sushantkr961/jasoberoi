@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Inter ,Crimson_Pro,Crimson_Text,Poppins,Lato} from "next/font/google";
+import { Inter, Crimson_Pro, Crimson_Text, Poppins, Lato } from "next/font/google";
 
 import { Toaster } from "react-hot-toast";
 import UserCheckProvider from "./UserCheckProvider";
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
 };
 
-const inter = Inter({ subsets: ["latin"]});
+const inter = Inter({ subsets: ["latin"] });
 export default function RootLayout({
   children,
 }: Readonly<{

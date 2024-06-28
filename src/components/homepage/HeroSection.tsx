@@ -14,7 +14,7 @@ const HeroSection = (props: Props) => {
         loading="eager"
         layout="fill" // Ensures the image takes up the entire parent div's dimensions
         objectFit="cover" // Adjust as per your design needs
-        
+        priority
         className="z-[-1]"
       />
 
