@@ -4,6 +4,7 @@ import ImageGalleryC from '@/components/Property/ImageGalleryC';
 import axios from 'axios';
 import parse from 'html-react-parser';
 import truncate from 'html-truncate';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -105,7 +106,9 @@ const SoldStories = ({ params }: any) => {
 
                                 <div className="text-center">
                                     <figure>
-                                        <img className="w-full object-cover rounded-md" src={post?.singleImage} alt="Image Description" />
+                                    {/* <img className="w-full object-cover rounded-md" src={post?.singleImage} alt="Image Description" /> */}
+                                    <Image width={1300} height={1300} className="w-full object-cover rounded-md" src={post?.singleImage.toString()} alt="Image Description" />
+                                        
                                     </figure>
 
                                 </div>
