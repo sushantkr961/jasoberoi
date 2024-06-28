@@ -6,15 +6,15 @@ const Property = () => {
   const categories = [
     {
       name: "Residential",
-      image: "/assets/asset 29.jpeg",
+      image: "/assets/webp/asset 29.webp",
     },
     {
       name: "Commercial",
-      image: "/assets/asset 30.jpeg",
+      image: "/assets/webp/asset 30.webp",
     },
     {
       name: "Exclusive Properties",
-      image: "/assets/asset 31.jpeg",
+      image: "/assets/webp/asset 31.webp",
     },
   ];
 
