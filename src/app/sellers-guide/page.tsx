@@ -28,7 +28,7 @@ const sellersGuide = (props: Props) => {
     <div
       className="w-full h-full"
       style={{
-        backgroundImage: "url('/assets/realstateinside/buy-guide.jpg')",
+        backgroundImage: "url('/assets/realstateinside/buy-guide.webp')",
         backgroundPosition: "top center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
@@ -82,7 +82,7 @@ const sellersGuide = (props: Props) => {
       <div className="flex flex-col lg:flex-row justify-between md:mt-[0px] lg:mt-[44px] md:mb-[80px]">
         <div className="lg:w-[50%] flex justify-center">
           <Image
-            src={`/assets/realstateinside/exclusive-property.jpg`}
+            src={`/assets/realstateinside/exclusive-property.webp`}
             height={700}
             width={580}
             alt="exclusive-property"
@@ -103,7 +103,7 @@ const sellersGuide = (props: Props) => {
               className="uppercase font-semibold text-[15px] font-poppins mx-auto w-[150px] text-center lg:mx-0 mt-2 bg-black text-white py-2 px-4">Contact Jas</Link>
             <div className="w-full h-full mt-4">
               <Image
-                src={`/assets/realstateinside/Logos.png`}
+                src={`/assets/realstateinside/Logos.webp`}
                 height={700}
                 width={580}
                 alt="exclusive-property"

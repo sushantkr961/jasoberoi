@@ -37,7 +37,7 @@ function Carousel({ imageUrls, backgroundColor, onClick, fullScreen = false, cla
     arrows: false,
     swipe: true,
     swipeThreshold: 10,
-    swipeToSlide: true,
+    swipeToSlide: true, 
     responsive: [
       {
         breakpoint: 1024,

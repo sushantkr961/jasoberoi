@@ -40,7 +40,7 @@ const podcast = (props: Props) => {
             alt="unplugged"
             height={300}
             width={300}
-            src="/assets/realstateinside/unplugged-1.jpg "
+            src="/assets/realstateinside/unplugged-1.webp"
             className="w-[70%] md:lg-[60%] lg:w-[70%] mb-7 mx-auto lg:mx-0"
           />
           <div className="tracking-[1px] flex flex-col gap-6 text-[15px] font-poppins font-[300] md:text-[18px] text-white">

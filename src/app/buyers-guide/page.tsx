@@ -41,7 +41,7 @@ const buyersGuide = (props: Props) => {
       <motion.div
         className="w-full h-full"
         style={{
-          backgroundImage: "url('/assets/realstateinside/buy-guide.jpg')",
+          backgroundImage: "url('/assets/realstateinside/buy-guide.webp')",
           backgroundPosition: "top center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
@@ -67,7 +67,7 @@ const buyersGuide = (props: Props) => {
             style={{ border: "double #C1A468" }}
           >
             <Image
-              src="/assets/realstateinside/Jas-Oberoi-Group-team.jpg"
+              src="/assets/realstateinside/Jas-Oberoi-Group-team.webp"
               height={750}
               width={580}
               alt="JASOBEROI"
