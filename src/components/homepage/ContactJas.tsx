@@ -27,7 +27,7 @@ const ContactJas: React.FC<ContactJasProps> = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-8 lg:pt-[80px]  pb-12 ">
           <div className="flex justify-center items-center m-auto  ">
             <Image
-              src="/assets/jas-oberoi-team.jpg"
+              src="/assets/webp/jas-oberoi-team.webp"
               alt="Team Image"
               className="w-full lg:w-[80%] m-auto"
               height={1200}

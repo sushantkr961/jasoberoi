@@ -26,9 +26,9 @@ function Footer(props: Props) {
             <Image
               src="/assets/navLogo.png"
               alt="Company logo"
-              width={365 }
-              height={198 }
-              style={{width:"auto",height:"auto"}}
+              width={365}
+              height={198}
+              style={{ width: "auto", height: "auto" }}
               className="hidden md:block invert"
             />
             <Image
