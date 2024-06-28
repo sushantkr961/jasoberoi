@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
             <Image
-              src="/assets/navLogo.png"
+              src="/assets/webp/navLogo.webp"
               alt=" "
               height={200}
               width={200}            

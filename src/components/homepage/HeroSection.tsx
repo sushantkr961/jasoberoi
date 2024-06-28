@@ -17,7 +17,7 @@ const HeroSection = (props: Props) => {
         <div className="text-center">
           <div className="md:mb-8">
             <Image
-              src="/assets/Belleza-White-.png"
+              src="/assets/webp/Belleza-White-.webp"
               alt="logo"
               width={768}
               height={128}

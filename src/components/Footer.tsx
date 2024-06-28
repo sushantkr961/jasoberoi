@@ -24,16 +24,16 @@ function Footer(props: Props) {
           {/* Logo Section */}
           <div className="space-y-4 md:space-y-8 flex flex-col lg:col-span-2 justify-center items-center md:items-start lg:ps-3">
             <Image
-              src="/assets/navLogo.png"
-              alt="Company logo"
+              src="/assets/webp/navLogo.webp"
+              alt="Company logo For Desktop"
               width={365}
               height={198}
               style={{ width: "auto", height: "auto" }}
-              className="hidden md:block invert"
+              className="hidden md:block invert max-w-[233px]"
             />
             <Image
-              src="/assets/mobilelogo.png"
-              alt="Company logo"
+              src="/assets/webp/mobilelogo.webp"
+              alt="Company Logo For Mobile"
               width={117}
               height={14}
               className="md:hidden block"

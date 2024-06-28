@@ -6,18 +6,18 @@ import Carousel from "../Carousel/Carousel";
 interface ContactJasProps { }
 
 const imageUrls = [
-  "/assets/asset 4.png",
-  "/assets/asset 5.png",
-  "/assets/asset 6.png",
-  "/assets/asset 7.png",
-  "/assets/asset 8.png",
-  "/assets/asset 9.png",
-  "/assets/asset 10.png",
-  "/assets/asset 11.png",
-  "/assets/asset 12.png",
-  "/assets/asset 13.png",
-  "/assets/asset 14.png",
-  "/assets/asset 15.png",
+  "/assets/webp/asset 4.webp",
+  "/assets/webp/asset 5.webp",
+  "/assets/webp/asset 6.webp",
+  "/assets/webp/asset 7.webp",
+  "/assets/webp/asset 8.webp",
+  "/assets/webp/asset 9.webp",
+  "/assets/webp/asset 10.webp",
+  "/assets/webp/asset 11.webp",
+  "/assets/webp/asset 12.webp",
+  "/assets/webp/asset 13.webp",
+  "/assets/webp/asset 14.webp",
+  "/assets/webp/asset 15.webp",
 ];
 
 const ContactJas: React.FC<ContactJasProps> = () => {
