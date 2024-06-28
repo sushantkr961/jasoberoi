@@ -17,11 +17,9 @@ const HeroSection = (props: Props) => {
         src={"/assets/webp/background.webp"}
         alt="JASOBEROI" layout="fill" // Ensures the image takes up the entire parent div's dimensions
         objectFit="cover" // Adjust as per your design needs
-        loading="lazy"
-      className="z-[-1]"
-      >
+        className="z-[-1]"
+      />
 
-      </Image>
 
       <div className="min-w-full h-auto flex justify-center items-center p-[10px]">
         <div className="text-center">

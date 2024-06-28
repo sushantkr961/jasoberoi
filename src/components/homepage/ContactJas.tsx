@@ -29,7 +29,7 @@ const ContactJas: React.FC<ContactJasProps> = () => {
             <Image
               src="/assets/webp/jas-oberoi-team.webp"
               alt="Team Image"
-              className="w-full lg:w-[80%] m-auto"
+              className="w-full h-full lg:w-[80%] m-auto"
               height={1200}
               width={1200}
             />
