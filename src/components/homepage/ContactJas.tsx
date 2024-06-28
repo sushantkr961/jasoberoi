@@ -26,10 +26,12 @@ const ContactJas: React.FC<ContactJasProps> = () => {
       <Container className="mx-auto px-6 sm:px-6 lg:px-8 bg-black">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-8 lg:pt-[80px]  pb-12 ">
           <div className="flex justify-center items-center m-auto  ">
-            <img
+            <Image
               src="/assets/jas-oberoi-team.jpg"
               alt="Team Image"
               className="w-full lg:w-[80%] m-auto"
+              height={1200}
+              width={1200}
             />
           </div>
           {/* 19% 0%  */}
