@@ -3,37 +3,37 @@
         {
             "id":"1",
             "name":"DR. PETER SENIOR",
-            "image":"DSC00520.jpg",
+            "image":"DSC00520.webp",
             "description":"MEDICAL PROFESSIONALS SUCH AS DR. PETER SENIOR, AND DR. BRIAN RODRIGUES WHO ARE LEADING EXPERTS IN DIABETES RESEARCH TOOK STAGE TO SHARE THEIR KNOWLEGE."
         },
         {
             "id":"2",
             "name":"DR. BRIAN RODRIGUES",
-            "image":"DSC00469.jpg",
+            "image":"DSC00469.webp",
             "description":"DR. BRIAN RODRIGUES PROFESSOR IN THE FACULTY OF PHARMACEUTICAL SCIENCES AT UBC"
         },
         {
             "id":"3",
             "name":"DR. PETER SENIOR",
-            "image":"DSC00520.jpg",
+            "image":"DSC00520.webp",
             "description":"DR. PETER SENIOR, ENDOCRINOLOGIST & PROFESSOR OF MEDICINE"
         },
         {
             "id":"4",
             "name":"DR. SATPREET SINGH, SMILE DENTAL",
-            "image":"DSC00452.jpg",
+            "image":"DSC00452.webp",
             "description":"DR. SATPREET SINGH, SMILE DENTAL"
         },
         {
             "id":"5",
             "name":"RAGHAV MANCHANDA, 7 LENDING",
-            "image":"DSC00487.jpg",
+            "image":"DSC00487.webp",
             "description":"RAGHAV MANCHANDA, 7 LENDING"
         },
         {
             "id":"6",
             "name":"HENNESSY ESCOBAR, D-CAMPER (15)",
-            "image":"DSC00506.jpg",
+            "image":"DSC00506.webp",
             "description":"HENNESSY ESCOBAR, D-CAMPER (15)"
         }
     ],
@@ -41,22 +41,22 @@
         {
             "id":"1",
             "text":"ANMOL",
-            "image":"DSC00319.jpg"
+            "image":"DSC00319.webp"
         },
         {
             "id":"2",
             "text":"SABAT",
-            "image":"DSC00310.jpg"
+            "image":"DSC00310.webp"
         },
         {
             "id":"3",
             "text":"SAWEN",
-            "image":"DSC00306.jpg"
+            "image":"DSC00306.webp"
         },
         {
             "id":"4",
             "text":"EMILYN",
-            "image":"DSC00602.jpg"
+            "image":"DSC00602.webp"
         }
     ]
 }

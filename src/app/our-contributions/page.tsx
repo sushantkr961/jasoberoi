@@ -12,21 +12,6 @@ import data from "../../data/Contributions/data.json";
 
 type Props = {};
 
-const imageUrls = [
-  "/assets/   /asset 178.png",
-  "/assets/ourcontributions/asset 179.png",
-  "/assets/ourcontributions/asset 180.png",
-  "/assets/ourcontributions/asset 181.png",
-  "/assets/ourcontributions/asset 182.png",
-  "/assets/ourcontributions/asset 183.png",
-  "/assets/ourcontributions/asset 184.png",
-  "/assets/ourcontributions/asset 185.png",
-  "/assets/ourcontributions/asset 186.png",
-  "/assets/ourcontributions/asset 187.png",
-  "/assets/ourcontributions/asset 188.png",
-  "/assets/ourcontributions/asset 189.png",
-];
-
 function page({ }: Props) {
   const { music, sponsors } = data;
 
@@ -73,7 +58,7 @@ function page({ }: Props) {
             <div className="md:w-[51%] mt-7 md:mt-0 pr-3 lg:pr-0 text-center ">
               <div className="heading text-center">
                 <Image
-                  src={`/assets/ourcontributions/BantingGalawhite.png`}
+                  src={`/assets/ourcontributions/BantingGalawhite.webp`}
                   height={700}
                   loading="lazy"
                   width={580}
@@ -99,7 +84,7 @@ function page({ }: Props) {
             </div>
             <div className="w-full md:w-[47%] flex justify-center mt-[35px] md:mt-[0px]">
               <Image
-                src={`/assets/ourcontributions/DSC00562.jpg`}
+                src={`/assets/ourcontributions/DSC00562.webp`}
                 height={700}
                 width={580}
                 alt="cluture"
@@ -107,7 +92,7 @@ function page({ }: Props) {
                 className="hidden md:block object-cover w-full lg:max-h-[830px] lg:max-w-[500px] xl:max-w-[560px]"
               />
               <Image
-                src={`/assets/ourcontributions/DSC00562.jpg`}
+                src={`/assets/ourcontributions/DSC00562.webp`}
                 height={700}
                 width={580}
                 alt="cluture"
@@ -124,7 +109,7 @@ function page({ }: Props) {
         <div
           className="relative h-full flex justify-center items-center"
           style={{
-            backgroundImage: "url('/assets/ourcontributions/glass1.jpg')",
+            backgroundImage: "url('/assets/ourcontributions/glass1.webp')",
             backgroundPosition: "top center",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
@@ -141,7 +126,7 @@ function page({ }: Props) {
           className="relative h-full flex justify-center items-center"
           style={{
             backgroundImage:
-              "url('/assets/ourcontributions/girlpurpledress.jpg')",
+              "url('/assets/ourcontributions/girlpurpledress.webp')",
             backgroundPosition: "top center",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
@@ -157,7 +142,7 @@ function page({ }: Props) {
         <div
           className="relative h-full flex justify-center items-center"
           style={{
-            backgroundImage: "url('/assets/ourcontributions/table.jpg')",
+            backgroundImage: "url('/assets/ourcontributions/table.webp')",
             backgroundPosition: "top center",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
@@ -184,7 +169,7 @@ function page({ }: Props) {
         <Container className="flex flex-col gap-7 sm:gap-9 justify-center m-auto py-16 xl:py-0 xl:min-h-[864px]">
           <div>
             <Image
-              src={`/assets/ourcontributions/DSC00474.jpg`}
+              src={`/assets/ourcontributions/DSC00474.webp`}
               height={700}
               width={580}
               alt="cluture"
@@ -249,7 +234,7 @@ function page({ }: Props) {
           <div className="flex flex-col md:flex-row items-center gap-5 max-w-[1340px] justify-between mt-[36px] sm:my-[44px]  lg:my-[70px] ">
             <div className="w-full md:w-[37%] flex  md:mt-[0px]">
               <Image
-                src={`/assets/ourcontributions/DSC00433.jpg`}
+                src={`/assets/ourcontributions/DSC00433.webp`}
                 height={700}
                 width={580}
                 alt="cluture"
@@ -319,7 +304,7 @@ function page({ }: Props) {
             {/* Right Side Description */}
             <div className="w-full flex md:mt-[0px]">
               <Image
-                src={`/assets/ourcontributions/DSC00271.jpg`}
+                src={`/assets/ourcontributions/DSC00271.webp`}
                 height={700}
                 width={580}
                 alt="cluture"
@@ -363,7 +348,7 @@ function page({ }: Props) {
               {/* Right Side Description */}
               <div className="w-full flex md:mt-[0px]">
                 <Image
-                  src={`/assets/ourcontributions/DSC06089.jpg`}
+                  src={`/assets/ourcontributions/DSC06089.webp`}
                   height={700}
                   width={580}
                   alt="cluture"
@@ -413,7 +398,7 @@ function page({ }: Props) {
                 {/* Imagge */}
                 <div className="w-full flex md:mt-[0px]">
                   <Image
-                    src={`/assets/ourcontributions/asset 178.png`}
+                    src={`/assets/ourcontributions/asset 178.webp`}
                     height={700}
                     width={580}
                     alt="cluture"
@@ -434,7 +419,7 @@ function page({ }: Props) {
                 <div className="w-full flex flex-col md:flex-row md:mt-[0px] items-center justify-center">
                   <div className="w-full md:w-auto">
                     <Image
-                      src={`/assets/ourcontributions/asset 179.png`}
+                      src={`/assets/ourcontributions/asset 179.webp`}
                       height={700}
                       width={580}
                       alt="cluture"
@@ -444,7 +429,7 @@ function page({ }: Props) {
                   </div>
                   <div className="w-full md:w-auto">
                     <Image
-                      src={`/assets/ourcontributions/asset 180.png`}
+                      src={`/assets/ourcontributions/asset 180.webp`}
                       height={700}
                       width={580}
                       alt="cluture"
@@ -454,7 +439,7 @@ function page({ }: Props) {
                   </div>
                   <div className="w-full md:w-auto">
                     <Image
-                      src={`/assets/ourcontributions/asset 181.png`}
+                      src={`/assets/ourcontributions/asset 181.webp`}
                       height={700}
                       width={580}
                       alt="cluture"
@@ -479,7 +464,7 @@ function page({ }: Props) {
                     194, 195,
                   ].map((data) => (
                     <Image
-                      src={`/assets/ourcontributions/asset ${data}.png`}
+                      src={`/assets/ourcontributions/asset ${data}.webp`}
                       height={700}
                       width={580}
                       alt="cluture"
@@ -493,7 +478,7 @@ function page({ }: Props) {
                   {
                     [182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195].map((data) => (
                       <Image
-                        src={`/assets/ourcontributions/asset ${data}.png`}
+                        src={`/assets/ourcontributions/asset ${data}.webp`}
                         height={700}
                         width={580}
                         alt="cluture"
