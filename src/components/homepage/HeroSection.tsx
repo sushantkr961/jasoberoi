@@ -3,6 +3,10 @@ import Image from "next/image";
 type Props = {};
 
 const HeroSection = (props: Props) => {
+  const handleClick = () => {
+    window.location.href = 'https://jaoberoigroup.com/grabcoffee';
+  };
+
   return (
     <section
       className="relative  pt-16 pb-4 overflow-hidden sm:pt-[7rem] sm:pb-[2rem] md:pb-0 md:py-24 min-h-full lg:min-h-[470px]  xl:min-h-[670px] w-full flex items-center justify-center "
@@ -32,6 +36,7 @@ const HeroSection = (props: Props) => {
           </div>
           <div className="flex items-end justify-center lh:p-[10px] md:mb-6 xl:mb-0">
             <button
+              onClick={handleClick}
               className="hidden md:block px-10 py-4 lg:py-4 rounded bg-white text-black font-semibold transition-colors sm:text-[1rem] font-poppins uppercase "
             >
               Book Now

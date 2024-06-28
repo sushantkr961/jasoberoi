@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
     <nav className="md:relative bg-white w-full z-20 top-0 start-0 ">
       <div className="flex flex-wrap items-center justify-between mx-auto py-3 px-4 lg:max-w-[1440px]   flex-col sm:flex-row">
         {/* Logo */}
-        <Link
+        <a
           href="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
               className="w-[160px] pb-4 sm:pb-0  md:w-[180px] lg:max-w-[233px] "
             />
 
-        </Link>
+        </a>
 
         {/* Menu */}
         <div className="flex md:order-2 space-x-3 sm:space-x-0 rtl:space-x-reverse items-center w-full justify-between sm:justify-normal sm:w-auto  border-t-[1px] sm:border-none pt-3 sm:pt-0">

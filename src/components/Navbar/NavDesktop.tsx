@@ -26,12 +26,12 @@ function NavDesktop({ }: Props) {
     };
 
     const renderNavLink = (link: NavLink) => (
-        <Link
+        <a
             href={link.href}
             className=" py-4 px-3 text-[15px] rounded md:bg-transparent md:p-0  md:py-4 md:bg-red-700 inline-flex items-center"
         >
             {link.text}
-        </Link>
+        </a>
     );
 
     const renderDropdown = (link: NavLink) => (
@@ -77,12 +77,12 @@ function NavDesktop({ }: Props) {
                                         {subLink.text}
                                     </a>
                                 ) :
-                                    (<Link
+                                    (<a
                                         href={subLink.href}
                                         className="block py-[15px] px-4 hover:text-[#707070] transition-colors duration-500"
                                     >
                                         {subLink.text}
-                                    </Link>
+                                    </a>
                                     )}
                             </li>
                         ))}

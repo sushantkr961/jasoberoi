@@ -7,14 +7,17 @@ const Property = () => {
     {
       name: "Residential",
       image: "/assets/webp/asset 29.webp",
+      href:""
     },
     {
       name: "Commercial",
       image: "/assets/webp/asset 30.webp",
+      href:""
     },
     {
       name: "Exclusive Properties",
       image: "/assets/webp/asset 31.webp",
+      href:""
     },
   ];
 

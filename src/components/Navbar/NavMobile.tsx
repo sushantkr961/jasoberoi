@@ -50,7 +50,7 @@ function NavMobile({ setOpen, isOpen }: Props) {
 
   // Render Nav Links
   const renderNavLink = (link: NavLink) => (
-    <Link
+    <a
       href={link.href}
       className="py-4 px-4 w-full text-[15px] rounded md:bg-transparent border-[1px] inline-flex items-center"
       // onClick={() => handleClick(link)}
@@ -61,7 +61,7 @@ function NavMobile({ setOpen, isOpen }: Props) {
       }}
     >
       {link.text}
-    </Link>
+    </a>
   );
 
   const renderDropdown = (link: NavLink) => {
@@ -113,7 +113,7 @@ function NavMobile({ setOpen, isOpen }: Props) {
                       {subLink.text}
                     </a>
                   ) : (
-                    <Link
+                    <a
                       href={subLink.href}
                       className="block py-[15px] hover:bg-black hover:text-white px-4  transition-colors duration-500"
                       onClick={(e) => {
@@ -123,7 +123,7 @@ function NavMobile({ setOpen, isOpen }: Props) {
                       }}
                     >
                       {subLink.text}
-                    </Link>
+                    </a>
                   )}
 
                 </li>
