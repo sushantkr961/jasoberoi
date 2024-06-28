@@ -5,8 +5,6 @@
 /* globals.css or in your React component */
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
-@import "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css";
-@import "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css";
 
 @import url('https://fonts.googleapis.com/css2?family=Belleza:wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Great+Vibes:wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
@@ -38,23 +36,21 @@ body {
 }
 
 .font-belleza {
-  font-family: var(--font-belleza), sans-serif;
+  font-family: "Belleza", sans-serif;
 }
 
 .font-great-vibes {  
-  /* font-family: 'Great Vibes'; */
-  font-family: var(--font-great-vibes);
+  font-family: 'Great Vibes';
   font-style: normal;
   font-style: italic;
 }
 
 .font-lato {
-  
-  font-family: var(--font-lato), sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 .font-poppins {
-  font-family: var(--font-poppins), sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .hover-color{
@@ -62,7 +58,7 @@ body {
 }
 
 .font-crimson {
-  font-family: var(--font-crimson-text), serif;
+  font-family: "Crimson Pro", serif;
   letter-spacing: 1px;
 }
 

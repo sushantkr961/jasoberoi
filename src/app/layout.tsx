@@ -43,24 +43,26 @@ export const metadata: Metadata = {
     "article:modified_time": "2023-12-13T20:41:04+00:00",
   },
 };
-const belleza = Belleza({ subsets: ["latin"], variable: '--font-belleza', weight: '400' });
-const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
-const crimsonPro = Crimson_Pro({ subsets: ["latin"], variable: '--font-crimson-pro', weight: ['200', '900'] });
-const crimsonText = Crimson_Text({ subsets: ["latin"], variable: '--font-crimson-text', weight: ['400', '600', '700'] });
-const poppins = Poppins({ subsets: ["latin"], variable: '--font-poppins', weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'] });
-const lato = Lato({ subsets: ["latin"], variable: '--font-lato', weight: ['100', '300', '400', '700', '900'] });
-const greatVibes = Great_Vibes({ subsets: ["latin"], variable: '--font-great-vibes', weight: '400' });
+// const belleza = Belleza({ subsets: ["latin"], variable: '--font-belleza', weight: '400' });
+const inter = Inter({ subsets: ["latin"]});
+// const crimsonPro = Crimson_Pro({ subsets: ["latin"], variable: '--font-crimson-pro', weight: ['200', '900'] });
+// const crimsonText = Crimson_Text({ subsets: ["latin"], variable: '--font-crimson-text', weight: ['400', '600', '700'] });
+// const poppins = Poppins({ subsets: ["latin"], variable: '--font-poppins', weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'] });
+// const lato = Lato({ subsets: ["latin"], variable: '--font-lato', weight: ['100', '300', '400', '700', '900'] });
+// const greatVibes = Great_Vibes({ subsets: ["latin"], variable: '--font-great-vibes', weight: '400' });
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
 
-  return (<html lang="en" className={`${inter.variable} ${crimsonPro.variable} ${crimsonText.variable} ${poppins.variable} ${lato.variable} ${greatVibes.variable} ${belleza.variable}`}>
+  return (
+    // <html lang="en" className={`${inter.variable} ${crimsonPro.variable} ${crimsonText.variable} ${poppins.variable} ${lato.variable} ${greatVibes.variable} ${belleza.variable}`}>
+    <html lang="en">
 
-    <head>
+      <head>
 
-      {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
           href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Great+Vibes&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
@@ -71,14 +73,14 @@ export default function RootLayout({
           rel="stylesheet"
         /> */}
 
-      {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Great+Vibes&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"></link>
- */}
 
 
-      <link rel="icon" href="/assets/favicon.ico" />
-      {/* <link
+
+        <link rel="icon" href="/assets/favicon.ico" />
+        {/* <link
           rel="stylesheet"
           type="text/css"
           charSet="UTF-8"
@@ -90,10 +92,10 @@ export default function RootLayout({
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
         /> */}
 
-      <script
-        id="fb-pixel"
-        dangerouslySetInnerHTML={{
-          __html: `!function(f,b,e,v,n,t,s)
+        <script
+          id="fb-pixel"
+          dangerouslySetInnerHTML={{
+            __html: `!function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
 if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
@@ -104,22 +106,22 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 fbq('init', '224717419404384');
 fbq('track', 'PageView');
 `,
-        }}
-      />
-    </head>
-    <body
-      className={cn("relative", inter.className, {
-        "debug-screens": process.env.NODE_ENV === "development",
-      })}
-    >
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-      />
-      <UserCheckProvider>
-        {children}
-      </UserCheckProvider>
-    </body>
-  </html>
+          }}
+        />
+      </head>
+      <body
+        className={cn("relative", inter.className, {
+          "debug-screens": process.env.NODE_ENV === "development",
+        })}
+      >
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+        />
+        <UserCheckProvider>
+          {children}
+        </UserCheckProvider>
+      </body>
+    </html>
   );
 }
