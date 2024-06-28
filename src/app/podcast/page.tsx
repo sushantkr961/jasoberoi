@@ -8,7 +8,7 @@ type Props = {};
 
 const podcast = (props: Props) => {
   return <section>
-    <PageHeading imageSrc="assets/ourculture/asset 1.jpeg" heading="Unplugged With Jas Oberoi Podcast" className="md:text-[50px]" />
+    <PageHeading imageSrc="assets/ourculture/asset 1.webp" heading="Unplugged With Jas Oberoi Podcast" className="md:text-[50px]" />
 
     {/* Video Container */}
     <Container className="w-full sm:w-[95%]  h-[260px] sm:h-[320px] md:h-[420px] lg:h-[520px] xl:h-[740px] mx-auto max-h-[600px] xl:max-h-full my-[50px]">

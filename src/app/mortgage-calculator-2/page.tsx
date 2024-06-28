@@ -30,7 +30,7 @@ const mortgageCalculator = (props: Props) => {
   return (
     <section>
       <PageHeading
-        imageSrc="assets/ourculture/asset 1.jpeg"
+        imageSrc="assets/ourculture/asset 1.webp"
         heading="Mortgage Calculator"
       />
       <Container className="flex m-auto justify-center my-14 md:my-16">

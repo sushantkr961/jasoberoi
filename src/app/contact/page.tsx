@@ -160,7 +160,7 @@ const contact = (props: Props) => {
 
   return (
     <section>
-      <PageHeading imageSrc="assets/aboutus.jpg" heading="Contact Us" />
+      <PageHeading imageSrc="assets/aboutus.webp" heading="Contact Us" />
 
 
       <Container className="flex flex-col justify-center m-auto px-0">

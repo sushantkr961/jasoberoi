@@ -12,7 +12,7 @@ type Props = {};
 const soldCommercials = (props: Props) => {
   return <section>
     <PageHeading
-      imageSrc="assets/ourculture/asset 1.jpeg"
+      imageSrc="assets/ourculture/asset 1.webp"
       heading="Sold Commercials"
     />
 

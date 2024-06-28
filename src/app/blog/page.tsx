@@ -50,7 +50,7 @@ const Blog = () => {
     <section>
       <PageHeading
         heading="Blog"
-        imageSrc="assets/ourculture/asset 1.jpeg"
+        imageSrc="assets/ourculture/asset 1.webp"
       />
 
       <Container className="m-auto flex flex-col items-center px-2 py-14 md:py-24 ">
