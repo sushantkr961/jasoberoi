@@ -37,4 +37,6 @@ const PropertyCard = (props: Props) => {
     </div>
   );
 };
+
+
 export default PropertyCard;

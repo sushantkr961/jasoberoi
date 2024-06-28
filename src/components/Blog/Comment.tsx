@@ -11,6 +11,7 @@ interface ValidationError {
     content?: string;
 }
 
+
 type Comment = {
     _id: string;
     name: string;

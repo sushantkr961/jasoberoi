@@ -16,8 +16,8 @@ const HeroSection = (props: Props) => {
         src={"/assets/webp/background.webp"}
         alt="JASOBEROI"
         loading="eager"
-        layout="fill" // Ensures the image takes up the entire parent div's dimensions
-        objectFit="cover" // Adjust as per your design needs
+        layout="fill" 
+        objectFit="cover" 
         priority
         className="z-[-1]"
       />
