@@ -162,12 +162,12 @@ const contact = (props: Props) => {
     <section>
       <PageHeading imageSrc="assets/aboutus.webp" heading="Contact Us" />
 
-      <div className="max-w-[1440px] flex flex-col justify-center m-auto gap-7 " > 
+      <div className="max-w-[1440px] flex flex-col justify-center m-auto gap-4 lg:gap-7 " > 
         <motion.div
           initial="hidden"
           animate="visible"
           variants={containerVariants}
-          className="flex flex-col lg:flex-row justify-between my-[80px] lg:mb-0  md:mx-[80px]">
+          className="flex flex-col lg:flex-row justify-between lg:mt-[80px] lg:mb-0  md:mx-[80px]">
           <div className="left w-full  flex ">
             <div className="min-h-[900px] max-h-[900px]  overflow-hidden w-full">
               <iframe
@@ -195,7 +195,7 @@ const contact = (props: Props) => {
           {/* Right Side Black Part */}
           <div className="px-4 lg:px-2">
 
-          <div className="right w-full   xl:min-w-[410px] mt-[50px] bg-black text-white p-[20px] flex flex-col gap-16 max-h-[416px]">
+          <div className="right w-full   xl:min-w-[410px] lg:mt-[30px] bg-black text-white p-[20px] flex flex-col gap-16 max-h-[416px]">
             <div className="flex flex-col gap-4 ">
               <h5 className="text-[20px] font-poppins">
                 For Inquiries Contact
