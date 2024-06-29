@@ -110,7 +110,7 @@ const page = ({ params }: any) => {
             try {
                 const response = await axios.get(`/api/admin/property/single?id=${propertyId}`);
 
-                setFormData(response.data);
+                setFormData({ ...response.data, singleImage: [], images: [] });
                 setSingleImageName(response.data.singleImage);
                 setGalleryImageNames(response.data.images);
                 setContent(response.data.description);
@@ -252,17 +252,21 @@ const page = ({ params }: any) => {
             updatedData.append(`additionalDetails[${index}][key]`, detail.key);
             updatedData.append(`additionalDetails[${index}][value]`, detail.value);
         });
-        
+
         // Append the file fields to the FormData only if they exist
         if (formData.singleImage.length > 0) {
             updatedData.append('singleImage', formData.singleImage[0]);
         }
+
         if (formData.images.length > 0) {
             formData.images.forEach((image, index) => {
-                updatedData.append(`images[${index}][file]`, image);
+                updatedData.append(`images`, image);
             });
         }
 
+
+        console.log(propertyId);
+        console.log(updatedData);
 
         try {
             const response = await axios.put(`/api/admin/property?id=${propertyId}`, updatedData, {

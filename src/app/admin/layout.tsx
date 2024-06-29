@@ -51,7 +51,7 @@ export default function DashboardLayout({
               className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
               href="/admin"
             >          <img
-                src="/assets/navLogo.webp"
+                src="/assets/webp/navLogo.webp"
                 alt="jasoberoi"
                 className="w-[160px] pb-4 sm:pb-0  md:w-[180px] lg:max-w-[233px] "
               />
@@ -168,7 +168,7 @@ dark:bg-neutral-800 dark:border-neutral-700
             aria-label="Preline"
           >
             <img
-              src="/assets/navLogo.png"
+              src="/assets/webp/navLogo.webp"
               alt="jasoberoi"
               className="w-[160px] pb-4 sm:pb-0  md:w-[180px] lg:max-w-[233px] "
             />

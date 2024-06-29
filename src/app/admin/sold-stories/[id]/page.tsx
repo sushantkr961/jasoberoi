@@ -46,7 +46,6 @@ const page = ({ params }: any) => {
                     images: [],
                     content: data.content,
                 });
-                console.log(formData);
                 setContent(data.content);
             } catch (error) {
                 router.push("/admin/sold-stories");

@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
 import { handleFileUpload } from "../../../../helpers/fileUpload";
+import fs from "fs";
 
 connect();
 
@@ -332,13 +333,8 @@ export async function PUT(request: NextRequest) {
     const propertyId = data.get("propertyId");
 
     const newSingleImageFiles = data.getAll("singleImage") as File[];
-    const newImageFiles = data.getAll("images[]") as File[];
+    const newImageFiles = data.getAll("images") as File[];
 
-
-    console.log(newSingleImageFiles);
-    console.log(data);
-    console.log(newImageFiles);
-    
     // Validate required fields
     if (!id || !title || !price) {
       return new NextResponse(
@@ -349,7 +345,7 @@ export async function PUT(request: NextRequest) {
         { status: 400 }
       );
     }
-  
+
     // Find existing Property
     const existingProperty = await Property.findById(id);
     if (!existingProperty) {
@@ -362,7 +358,7 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    
+
     const propertyWithSameId = await Property.findOne({ propertyId });
     if (propertyWithSameId && propertyWithSameId?._id!.toString() !== id) {
       return new NextResponse(
@@ -374,28 +370,22 @@ export async function PUT(request: NextRequest) {
       );
     }
 
+    // Signle Image
     // Array to hold all promises for image operations
     const promises: Promise<any>[] = [];
     // Handle single image update
     if (newSingleImageFiles.length > 0) {
-      // Delete old single image if exists
       if (existingProperty.singleImage.length > 0) {
-        promises.push(
-          ...existingProperty.singleImage.map((imagePath) =>
-            unlink(`./public${imagePath}`).catch((error) => {
-              console.error(`Failed to delete image at ${imagePath}:`, error);
-            })
-          )
-        );
+        if (fs.existsSync(`./public${existingProperty.singleImage}`)) {
+          promises.push(unlink(`./public${existingProperty.singleImage}`));
+        }
       }
       // Upload new single image
-
       promises.push(
-        handleFileUpload(newSingleImageFiles, "./public/uploads").then(
-          (uploadedSingleImages) => {
-            existingProperty.singleImage = uploadedSingleImages;
-          }
-        )
+        handleFileUpload(newSingleImageFiles, "./public/uploads")
+          .then((uploadedSingleImages) => {
+            existingProperty.singleImage = [uploadedSingleImages[0]]; // Assuming only one image is expected
+          })
       );
     }
 
@@ -413,13 +403,13 @@ export async function PUT(request: NextRequest) {
       }
       // Upload new images
       promises.push(
-        handleFileUpload(newImageFiles, "./public/uploads").then(
-          (uploadedImages) => {
+        handleFileUpload(newImageFiles, "./public/uploads")
+          .then((uploadedImages) => {
             existingProperty.images = uploadedImages;
-          }
-        )
+          })
       );
     }
+
 
     // Wait for all promises to complete
     await Promise.all(promises);

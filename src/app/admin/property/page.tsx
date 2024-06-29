@@ -36,11 +36,11 @@ const page = () => {
     try {
       const response = await axios.get(`/api/admin/property?page=${currentPage}&limit=${postsPerPage}`);
       const { propertys, totalPages, totalCount } = response.data;
-      console.log(55555, response);
-
       setproperty(propertys);
       setTotalPages(totalPages);
       setTotalCount(totalCount);
+      
+
     } catch (error) {
       console.error("Failed to fetch posts:", error);
     }
@@ -312,13 +312,13 @@ const page = () => {
                           </td>
                         )}
 
-                        {/* <td className="size-px whitespace-nowrap">
+                        <td className="size-px whitespace-nowrap">
                           <div className="px-6 py-1.5">
                             <Link className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500" href={`/admin/property/${property._id}`}>
                               Edit
                             </Link>
                           </div>
-                        </td> */}
+                        </td>
 
                         <td className="size-px whitespace-nowrap">
                           <div className="px-6 py-1.5">
