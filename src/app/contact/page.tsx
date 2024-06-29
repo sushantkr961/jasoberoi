@@ -162,8 +162,7 @@ const contact = (props: Props) => {
     <section>
       <PageHeading imageSrc="assets/aboutus.webp" heading="Contact Us" />
 
-
-      <div className="flex flex-col justify-center m-auto px-0">
+      <Container className="flex flex-col justify-center m-auto gap-7 px-0"> 
         <motion.div
           initial="hidden"
           animate="visible"
@@ -196,7 +195,7 @@ const contact = (props: Props) => {
           {/* Right Side Black Part */}
           <div className="px-4 lg:px-2">
 
-          <div className="right w-full  lg:w-[36%] xl:min-w-[410px] mt-[50px] bg-black text-white p-[20px] flex flex-col gap-16 max-h-[416px]">
+          <div className="right w-full   xl:min-w-[410px] mt-[50px] bg-black text-white p-[20px] flex flex-col gap-16 max-h-[416px]">
             <div className="flex flex-col gap-4 ">
               <h5 className="text-[20px] font-poppins">
                 For Inquiries Contact
@@ -264,7 +263,7 @@ const contact = (props: Props) => {
             </p>
           </div>
         </motion.div>
-      </div>
+      </Container>
 
     </section>
   );
