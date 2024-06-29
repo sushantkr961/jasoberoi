@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { useRouter, useParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { stripHtml } from "string-strip-html";
 
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
@@ -21,8 +22,8 @@ const page = ({ params }: any) => {
     const [galleryImageNames, setGalleryImageNames] = useState<string[]>([]);
 
     const router = useRouter();
-    const { id } = useParams(); 
-    const [useEditor, setUseEditor] = useState(true);
+    const { id } = useParams();
+    const [loading, setLoading] = useState(false);
     const [content, setContent] = useState("");
     const [formData, setFormData] = useState<SoldStoriesData>({
         title: "",
@@ -87,7 +88,12 @@ const page = ({ params }: any) => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
+        if (stripHtml(content).result == "") {
+            toast.error("Content field is required.");
+            setLoading(false);
+            return;
+        }
+        setLoading(true);
         const updatedData = new FormData();
         updatedData.append('title', formData.title);
         updatedData.append('content', content);
@@ -115,11 +121,14 @@ const page = ({ params }: any) => {
         } catch (error: any) {
             toast.error(error?.response?.data?.message);
             console.error("Error updating sold story:", error);
+        } finally {
+
+            setLoading(false);
         }
     };
 
     return (
-        <div className="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        <div className="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:pb-12 mx-auto shadow-xl rounded-xl  border-gray-100 border-2 ">
             <form onSubmit={handleSubmit}>
                 {/* Sold Stories Details Start Here Here */}
                 <section
@@ -189,27 +198,6 @@ const page = ({ params }: any) => {
                         )}
                     </div>
                     <div className="col-span-full">
-                        {/* <div className="flex items-center mb-4">
-                            <label
-                                htmlFor="AcceptConditions"
-                                className="block text-sm font-medium leading-6 text-gray-900 mr-10"
-                            >
-                                Use Advance Editor
-                            </label>
-                            <label
-                                htmlFor="AcceptConditions"
-                                className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-indigo-600"
-                            >
-                                <input
-                                    type="checkbox"
-                                    id="AcceptConditions"
-                                    className="peer sr-only"
-                                    checked={useEditor}
-                                    onChange={() => setUseEditor(!useEditor)}
-                                />
-                                <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
-                            </label>
-                        </div> */}
 
                         <label
                             htmlFor="content"
@@ -218,26 +206,15 @@ const page = ({ params }: any) => {
                             Content
                         </label>
 
-                        {useEditor ? (
-                            <JoditEditor
-                                ref={editor}
-                                value={content}
-                                config={{ readonly: false }}
-                                onBlur={(newContent) => handleEditorChange(newContent)}
-                                onChange={() => { }}
-                                className="showList"
-                            />
-                        ) : (
-                            <textarea
-                                id="about"
-                                name="content"
-                                rows={8}
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                value={content}
-                                onChange={(e) => handleEditorChange(e.target.value)}
-                                required
-                            />
-                        )}
+                        <JoditEditor
+                            ref={editor}
+                            value={content}
+                            config={{ readonly: false, height: "320px" }}
+                            onBlur={(newContent) => handleEditorChange(newContent)}
+                            onChange={() => { }}
+                            className="showList"
+                        />
+
                     </div>
                     <div className="sm:col-span-3">
                         <label
@@ -275,12 +252,12 @@ const page = ({ params }: any) => {
                     </div>
                 </section>
 
-                <div className="mt-5 flex justify-center gap-x-2">
+                <div className="flex justify-center gap-x-2">
                     <button
                         type="submit"
-                        className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                        className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-50 disabled:pointer-events-none"
                     >
-                        Update Sold Story
+                        {loading ? "Loading..." : "Update Sold Story"}
                     </button>
                 </div>
             </form>

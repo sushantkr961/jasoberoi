@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { stripHtml } from "string-strip-html";
 
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
@@ -97,13 +98,13 @@ const page = ({ params }: any) => {
         gmapLink: "",
         additionalDetails: [],
     });
-
     const [singleImageName, setSingleImageName] = useState<string>("");
     const [galleryImageNames, setGalleryImageNames] = useState<string[]>([]);
     const [currentField, setCurrentField] = useState<Attribute>({
         key: "",
         value: "",
     });
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchPropertyData = async () => {
@@ -129,14 +130,6 @@ const page = ({ params }: any) => {
             price: !prevData.contactListingAgent ? "Contact Listing Agent" : "",
         }));
     };
-
-    // const handleSliderToggle = () => {
-    //     setToggleSlider(!toggleSlider);
-    //     setFormData((prevData) => ({
-    //         ...prevData,
-    //         slider: !toggleSlider,
-    //     }));
-    // };
 
     const handleAdditionalDetailChange = (
         e: React.ChangeEvent<HTMLInputElement>
@@ -186,15 +179,6 @@ const page = ({ params }: any) => {
         }
     };
 
-    const handleMapImage = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files) {
-            setFormData({
-                ...formData,
-                mapImages: Array.from(event.target.files),
-            });
-        }
-    };
-
     const handleMultipleFileChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
@@ -219,7 +203,12 @@ const page = ({ params }: any) => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const updatedData = new FormData();
-
+        if (stripHtml(content).result == "") {
+            toast.error("Content field is required.");
+            setLoading(false);
+            return;
+        }
+        setLoading(true);
         // Append the non-file fields to the FormData
         updatedData.append('propertyId', formData.propertyId);
         updatedData.append('title', formData.title);
@@ -264,10 +253,6 @@ const page = ({ params }: any) => {
             });
         }
 
-
-        console.log(propertyId);
-        console.log(updatedData);
-
         try {
             const response = await axios.put(`/api/admin/property?id=${propertyId}`, updatedData, {
                 headers: {
@@ -284,10 +269,12 @@ const page = ({ params }: any) => {
         } catch (error: any) {
             toast.error(error?.response.data.message);
             console.error("Error submitting property:", error);
+        } finally {
+            setLoading(false);
         }
     };
     return (
-        <div className="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        <div className="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:pb-12 mx-auto shadow-xl rounded-xl  border-gray-100 border-2 ">
             <form onSubmit={handleSubmit}>
                 {/* Property Details Start Here Here */}
                 <section
@@ -735,7 +722,7 @@ const page = ({ params }: any) => {
                         <JoditEditor
                             ref={editor}
                             value={content}
-                            config={{ readonly: false }}
+                            config={{ readonly: false, height: "320px" }}
                             onBlur={(newContent) => handleEditorChange(newContent)}
                             onChange={() => { }}
                             className="showList"
@@ -749,7 +736,7 @@ const page = ({ params }: any) => {
                 <section className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
                     <div className="sm:col-span-12">
                         <h2 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
-                            Slider With Toggle{" "}
+                            Multi Image{" "}
                         </h2>
                     </div>
 
@@ -785,7 +772,7 @@ const page = ({ params }: any) => {
                                 htmlFor="af-submit-application-resume-cv"
                                 className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
                             >
-                                Slider Images
+                                Multi Images
                             </label>
                         </div>
                         <div className="sm:col-span-9">
@@ -1020,9 +1007,9 @@ const page = ({ params }: any) => {
                 <div className="mt-5 flex justify-center gap-x-2">
                     <button
                         type="submit"
-                        className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                        className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-50 disabled:pointer-events-none"
                     >
-                        Update Your Property
+                        {loading ? "Loading..." : "Update Your Property"}
                     </button>
                 </div>
             </form>

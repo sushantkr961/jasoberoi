@@ -2,8 +2,9 @@
 import PrelineScript from "@/components/PrelineScript";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 interface User {
   _id: string;
   username: string;
@@ -31,8 +32,18 @@ export default function DashboardLayout({
   useEffect(() => {
     getAdminDetails();
   }, []);
-
-
+  const router = useRouter();
+  const logout = async () => {
+    try {
+      await axios.get("/api/logout");
+      // toast.success("Logout successful");
+      // console.log("Logout successful");
+      router.push("/");
+    } catch (error: any) {
+      console.log(error.message);
+      toast.error(error.message);
+    }
+  };
   return (
     <>
 
@@ -41,12 +52,12 @@ export default function DashboardLayout({
         reverseOrder={false}
       />
 
-      <header className="sticky top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 sm:py-4 lg:ps-64 dark:bg-neutral-800 dark:border-neutral-700">
+      <header className="sticky top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 sm:py-4 lg:ps-64 ">
         <nav
-          className="flex basis-full items-center w-full mx-auto px-4 sm:px-6"
+          className="flex basis-full items-center w-full mx-auto px-4 sm:px-6 justify-between"
           aria-label="Global"
         >
-          <div className="me-5 lg:me-0 lg:hidden">
+          <div className="me-5 lg:me-0 lg:hidden ">
             <Link
               className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
               href="/admin"
@@ -58,73 +69,21 @@ export default function DashboardLayout({
             </Link>
           </div>
 
-          <div className="w-full flex items-center justify-end ms-auto sm:justify-between sm:gap-x-3 sm:order-3">
-            <div className="sm:hidden">
-              <button
-                type="button"
-                className="w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700"
-              >
-                <svg
-                  className="flex-shrink-0 size-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="m21 21-4.3-4.3" />
-                </svg>
-              </button>
-            </div>
-            <div
-              className="py-2 text-xl font-bold  block w-full border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-
-            >
-
-              Admin Panel
-            </div>
-            <div className="flex flex-row items-center justify-end gap-2"></div>
-          </div>
+          <button
+          onClick={logout}
+            className="ml-auto py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-50 disabled:pointer-events-none"
+          >
+            Logout
+          </button>
         </nav>
       </header>
 
-      <div className="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden dark:bg-neutral-800 dark:border-neutral-700">
-        <div className="flex justify-between items-center py-2">
-          <ol className="ms-3 flex items-center whitespace-nowrap">
-            <li className="flex items-center text-sm text-gray-800 dark:text-neutral-400">
-              Application Layout
-              <svg
-                className="flex-shrink-0 mx-3 overflow-visible size-2.5 text-gray-400 dark:text-neutral-500"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </li>
-            <li
-              className="text-sm font-semibold text-gray-800 truncate dark:text-neutral-400"
-              aria-current="page"
-            >
-              Dashboard
-            </li>
-          </ol>
+      <div className="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden ">
+        <div className="flex justify-end items-center py-2">
 
           <button
             type="button"
-            className="py-2 px-3 flex justify-center items-center gap-x-1.5 text-xs rounded-lg border border-gray-200 text-gray-500 hover:text-gray-600 dark:border-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"
+            className="py-2 px-3 flex justify-center items-center gap-x-1.5 text-xs rounded-lg border border-gray-200 text-gray-500 hover:text-gray-600 "
             data-hs-overlay="#application-sidebar"
             aria-controls="application-sidebar"
             aria-label="Sidebar"
@@ -158,7 +117,7 @@ hidden
 fixed inset-y-0 start-0 z-[60]
 bg-white border-e border-gray-200
 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0
-dark:bg-neutral-800 dark:border-neutral-700
+
 "
       >
         <div className="px-8 pt-4">
@@ -182,7 +141,7 @@ dark:bg-neutral-800 dark:border-neutral-700
           <ul className="space-y-1.5">
             <li>
               <Link
-                className="flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-700 dark:text-white"
+                className="flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 "
                 href="/admin"
               >
                 <svg
@@ -203,10 +162,10 @@ dark:bg-neutral-800 dark:border-neutral-700
                 Dashboard
               </Link>
             </li>
-            <li className={`hs-accordion ${user?.isAdmin == true ?"":"hidden"}`}  id="account-accordion">
+            <li className={`hs-accordion ${user?.isAdmin == true ? "" : "hidden"}`} id="account-accordion">
               <button
                 type="button"
-                className="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 dark:hs-accordion-active:text-white"
+                className="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-neutral-700 rounded-lg hover:bg-gray-100 "
               >
                 <svg
                   className="flex-shrink-0 mt-0.5 size-4"
@@ -270,7 +229,7 @@ dark:bg-neutral-800 dark:border-neutral-700
                 <ul className="pt-2 ps-2">
                   <li>
                     <Link
-                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
+                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 "
                       href="/admin/add-users"
                     >
                       Add Users
@@ -278,27 +237,20 @@ dark:bg-neutral-800 dark:border-neutral-700
                   </li>
                   <li>
                     <Link
-                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
+                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 "
                       href="/admin/users"
                     >
                       All Users
                     </Link>
                   </li>
-                  {/* <li>
-                    <Link
-                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
-                      href="#"
-                    >
-                      Link 3
-                    </Link>
-                  </li> */}
+
                 </ul>
               </div>
             </li>
             <li className="hs-accordion" id="account-accordion">
               <button
                 type="button"
-                className="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 dark:hs-accordion-active:text-white"
+                className="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-neutral-700 rounded-lg hover:bg-gray-100 "
               >
                 <svg
                   className="flex-shrink-0 mt-0.5 size-4"
@@ -362,7 +314,7 @@ dark:bg-neutral-800 dark:border-neutral-700
                 <ul className="pt-2 ps-2">
                   <li>
                     <Link
-                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
+                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 "
                       href="/admin/add-blog"
                     >
                       Add Blog
@@ -370,20 +322,13 @@ dark:bg-neutral-800 dark:border-neutral-700
                   </li>
                   <li>
                     <Link
-                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
+                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 "
                       href="/admin/blogs"
                     >
                       All Blogs
                     </Link>
                   </li>
-                  {/* <li>
-                    <a
-                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
-                      href="#"
-                    >
-                      Link 3
-                    </a>
-                  </li> */}
+                
                 </ul>
               </div>
             </li>
@@ -391,7 +336,7 @@ dark:bg-neutral-800 dark:border-neutral-700
             <li className="hs-accordion" id="account-accordion">
               <button
                 type="button"
-                className="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 dark:hs-accordion-active:text-white"
+                className="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-neutral-700 rounded-lg hover:bg-gray-100 "
               >
                 <svg
                   className="flex-shrink-0 mt-0.5 size-4"
@@ -455,7 +400,7 @@ dark:bg-neutral-800 dark:border-neutral-700
                 <ul className="pt-2 ps-2">
                   <li>
                     <Link
-                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
+                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 "
                       href="/admin/add-property"
                     >
                       Add Property
@@ -463,20 +408,13 @@ dark:bg-neutral-800 dark:border-neutral-700
                   </li>
                   <li>
                     <Link
-                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
+                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 "
                       href="/admin/property"
                     >
                       All Property
                     </Link>
                   </li>
-                  {/* <li>
-                    <Link
-                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
-                      href="#"
-                    >
-                      Link 3
-                    </Link>
-                  </li> */}
+
                 </ul>
               </div>
             </li>
@@ -484,7 +422,7 @@ dark:bg-neutral-800 dark:border-neutral-700
             <li className="hs-accordion" id="projects-accordion">
               <button
                 type="button"
-                className="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 dark:hs-accordion-active:text-white"
+                className="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-neutral-700 rounded-lg hover:bg-gray-100 "
               >
                 <svg
                   className="flex-shrink-0 size-4"
@@ -539,7 +477,7 @@ dark:bg-neutral-800 dark:border-neutral-700
                 <ul className="pt-2 ps-2">
                   <li>
                     <Link
-                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
+                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 "
                       href="/admin/add-sold-stories"
                     >
                       Add Sold-Stories
@@ -547,7 +485,7 @@ dark:bg-neutral-800 dark:border-neutral-700
                   </li>
                   <li>
                     <Link
-                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
+                      className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 "
                       href="/admin/sold-stories"
                     >
                       Sold-Stories
@@ -559,7 +497,7 @@ dark:bg-neutral-800 dark:border-neutral-700
             </li>
             <li>
               <Link
-                className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300"
+                className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 "
                 href="/admin/commentlist"
               >
                 Comments

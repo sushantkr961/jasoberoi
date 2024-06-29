@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { stripHtml } from "string-strip-html";
 
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
@@ -60,6 +61,7 @@ const AddProperty = () => {
   const [useEditor, setUseEditor] = useState(true);
   const [toggleSlider, setToggleSlider] = useState(false);
   const [content, setContent] = useState("");
+
   const [formData, setFormData] = useState<PropertyData>({
     propertyId: "",
     title: "",
@@ -96,7 +98,7 @@ const AddProperty = () => {
     gmapLink: "",
     additionalDetails: [],
   });
-
+  const [loading, setLoading] = useState(false);
   const [currentField, setCurrentField] = useState<Attribute>({
     key: "",
     value: "",
@@ -107,14 +109,6 @@ const AddProperty = () => {
       ...prevData,
       contactListingAgent: !prevData.contactListingAgent,
       price: !prevData.contactListingAgent ? "Contact Listing Agent" : "",
-    }));
-  };
-
-  const handleSliderToggle = () => {
-    setToggleSlider(!toggleSlider);
-    setFormData((prevData) => ({
-      ...prevData,
-      slider: !toggleSlider,
     }));
   };
 
@@ -193,9 +187,11 @@ const AddProperty = () => {
 
   const handleSumbit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    console.log(4444, formData);
-
+    if (stripHtml(content).result == "") {
+      toast.error("Content field is required.");
+      return;
+    }
+    setLoading(true);
     try {
       const response = await axios.post("/api/admin/property", { ...formData, description: content }, {
         headers: {
@@ -203,7 +199,6 @@ const AddProperty = () => {
         },
       });
 
-      console.log(response);
       if (response.data.message && response.data.success == true) {
         toast.success(response?.data?.message)
       } else {
@@ -213,11 +208,13 @@ const AddProperty = () => {
     } catch (error: any) {
       toast.error(error?.response.data.message);
       console.error("Error submitting property:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <div className="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:pb-12 mx-auto shadow-xl rounded-xl  border-gray-100 border-2 ">
       <form onSubmit={handleSumbit}>
         {/* Property Details Start Here Here */}
         <section
@@ -679,28 +676,15 @@ const AddProperty = () => {
               Content
             </label>
 
-            {useEditor ? (
-              <JoditEditor
-                ref={editor}
-                value={content}
-                config={{ readonly: false }}
-                onBlur={(newContent) => handleEditorChange(newContent)}
-                onChange={() => { }}
-                className="showList"
-              />
-            ) : (
-              <textarea
-                id="about"
-                name="content"
-                rows={8}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                value={content}
-                onChange={(e) =>
-                  setContent(e.target.value)
-                }
-                required
-              />
-            )}
+            <JoditEditor
+              ref={editor}
+              value={content}
+              config={{ readonly: false }}
+              onBlur={(newContent) => handleEditorChange(newContent)}
+              onChange={() => { }}
+              className="showList"
+            />
+
           </div>
         </div>
         {/* Description Section End Here */}
@@ -709,43 +693,17 @@ const AddProperty = () => {
         <section className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
           <div className="sm:col-span-12">
             <h2 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
-              Slider With Toggle{" "}
+              Multi Images{" "}
             </h2>
           </div>
 
-          <div className="col-span-full">
-            <div className="flex items-center mb-4">
-              <label
-                htmlFor="SliderToggle"
-                className="block text-sm font-medium leading-6 text-gray-900 mr-10"
-              >
-                Do You Want Slider?
-              </label>
-              <label
-                htmlFor="SliderToggle"
-                className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-indigo-600"
-              >
-                <input
-                  type="checkbox"
-                  id="SliderToggle"
-                  className="peer sr-only"
-                  checked={toggleSlider}
-                  onChange={handleSliderToggle}
-                />
-
-                <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
-              </label>
-            </div>
-          </div>
-          {/* Slider Imaged */}
-          {/* {toggleSlider && ( */}
           <>
             <div className="sm:col-span-3">
               <label
                 htmlFor="af-submit-application-resume-cv"
                 className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
               >
-                Slider Images
+                Multi Images
               </label>
             </div>
             <div className="sm:col-span-9">
@@ -997,7 +955,7 @@ const AddProperty = () => {
             type="submit"
             className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
           >
-            Submit your project
+            {loading ? "Loading..." : "Add Your Property"}
           </button>
         </div>
       </form>

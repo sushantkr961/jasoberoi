@@ -12,7 +12,7 @@
 # next.js
 /.next/
 /out/
-/uploads2
+public/uploads2
 # production
 public/assets/build
 

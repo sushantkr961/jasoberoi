@@ -24,7 +24,7 @@ const Blog = () => {
   const [deletePostId, setDeletePostId] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const postsPerPage =10;
+  const postsPerPage = 10;
 
   useEffect(() => {
     fetchPosts();
@@ -91,7 +91,7 @@ const Blog = () => {
                       Blogs
                     </h2>
                     <p className="text-sm text-gray-600 dark:text-neutral-400">
-                      Add Blog, edit and more.
+                      Add Blog, edit and delete more.
                     </p>
                   </div>
 
@@ -186,7 +186,6 @@ const Blog = () => {
 
                       <th scope="col" className="px-6 py-3 text-end"></th>
                       <th scope="col" className="px-6 py-3 text-end"></th>
-                      <th scope="col" className="px-6 py-3 text-end"></th>
                     </tr>
                   </thead>
 
@@ -208,7 +207,7 @@ const Blog = () => {
                                 <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">
                                   {post.title}
                                 </span>
-                              
+
                               </div>
                             </div>
                           </div>
@@ -249,18 +248,7 @@ const Blog = () => {
                           </div>
                         </td>
 
-                        <td className="size-px whitespace-nowrap">
-                          <div className="flex justify-end">
-                            <div className="inline-block relative px-3 py-2 text-sm font-semibold leading-tight text-gray-800 whitespace-nowrap select-none">
-                              <a href="#">
-                                <i className="fas fa-asterisk"></i>
-                              </a>
-                              <a href="#">
-                                <i className="fas fa-asterisk"></i>
-                              </a>
-                            </div>
-                          </div>
-                        </td>
+                       
 
 
                       </tr>
