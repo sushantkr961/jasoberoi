@@ -77,14 +77,14 @@ const page = () => {
         <div className="flex flex-col">
           <div className="-m-1.5 overflow-x-auto">
             <div className="p-1.5 min-w-full inline-block align-middle">
-              <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-800 dark:border-neutral-700">
+              <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden ">
                 {/* Table Header */}
-                <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
+                <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 ">
                   <div>
-                    <h2 className="text-xl font-semibold text-gray-800 dark:text-neutral-200">
+                    <h2 className="text-xl font-semibold text-gray-800 ">
                       Users
                     </h2>
-                    <p className="text-sm text-gray-600 dark:text-neutral-400">
+                    <p className="text-sm text-gray-600 ">
                       Add Users, edit and delete more.
                     </p>
                   </div>
@@ -99,7 +99,7 @@ const page = () => {
                           <div className="relative min-w-72 md:min-w-80">
                             <div className="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4">
                               <svg
-                                className="flex-shrink-0 size-4 text-gray-400 dark:text-neutral-400"
+                                className="flex-shrink-0 size-4 text-gray-400 "
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
                                 height="24"
@@ -120,13 +120,13 @@ const page = () => {
                               name="icon"
                               value={searchQuery}
                               onChange={(e) => setSearchQuery(e.target.value)}
-                              className="py-2 px-4 ps-11 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                              className="py-2 px-4 ps-11 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                               placeholder="Search"
                             />
                           </div>
                         </div>
                       </div>
-                      <div className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
+                      <div className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none ">
                         User
                       </div>
 
@@ -157,12 +157,12 @@ const page = () => {
                 {/* End Table Header */}
 
                 {/* Table */}
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-                  <thead className="bg-gray-50 dark:bg-neutral-800">
+                <table className="min-w-full divide-y divide-gray-200 ">
+                  <thead className="bg-gray-50 ">
                     <tr>
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 ">
                             Username
                           </span>
                         </div>
@@ -170,21 +170,21 @@ const page = () => {
 
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
                             email
                           </span>
                         </div>
                       </th>
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
                             Role
                           </span>
                         </div>
                       </th>
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
                             Action
                           </span>
                         </div>
@@ -192,13 +192,13 @@ const page = () => {
                     </tr>
                   </thead>
 
-                  <tbody className="divide-y divide-gray-200 dark:divide-neutral-700">
+                  <tbody className="divide-y divide-gray-200">
                     {filteredUsers.map((user) => (
                       <tr key={user._id}>
                         <td className="size-px whitespace-nowrap">
                           <div className="ps-6 py-3">
                             <div className="flex items-center gap-x-3">
-                              <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">
+                              <span className="block text-sm font-semibold text-gray-800">
                                 {user.username}
                               </span>
                             </div>
@@ -207,7 +207,7 @@ const page = () => {
                         <td className="size-px whitespace-nowrap">
                           <div className="ps-6 py-3">
                             <div className="flex items-center gap-x-3">
-                              <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">
+                              <span className="block text-sm font-semibold text-gray-800">
                                 {user.email}
                               </span>
                             </div>
@@ -217,27 +217,17 @@ const page = () => {
                         <td className="size-px whitespace-nowrap">
                           <div className="ps-6 py-3">
                             <div className="flex items-center gap-x-3">
-                              <span className="block text-sm font-semibold text-gray-800 dark:text-neutral-200">
+                              <span className="block text-sm font-semibold text-gray-800">
                                 {user.isAdmin ? "Master" : "Admin"}
                               </span>
                             </div>
                           </div>
                         </td>
-                        {/* <td className="size-px whitespace-nowrap">
-                          <div className="px-6 py-1.5">
-                            <Link
-                              className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500"
-                              href="#"
-                            >
-                              Edit
-                            </Link>
-                          </div>
-                        </td> */}
-
+                    
                         <td className="size-px whitespace-nowrap">
                           <div className="px-6 py-1.5">
                             <button
-                              className="inline-flex items-center gap-x-1 text-sm text-red-600 decoration-2 hover:underline font-medium dark:text-blue-500"
+                              className="inline-flex items-center gap-x-1 text-sm text-red-600 decoration-2 hover:underline font-medium "
                               onClick={() => {
                                 setDeleteUserId(user._id);
                                 setOpen(true);
@@ -260,9 +250,9 @@ const page = () => {
                   </tbody>
                 </table>
                 {/* End Table */}
-                <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-neutral-700">
+                <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200">
                   <div>
-                    <p className="text-sm text-gray-600 dark:text-neutral-400">
+                    <p className="text-sm text-gray-600 ">
                       Showing{" "}
                       <span className="font-medium">{`${
                         (currentPage - 1) * postsPerPage + 1
@@ -271,7 +261,7 @@ const page = () => {
                         totalCount
                       )}`}</span>{" "}
                       of{" "}
-                      <span className="font-semibold text-gray-800 dark:text-neutral-200">
+                      <span className="font-semibold text-gray-800 ">
                         {totalCount}
                       </span>{" "}
                       results
@@ -284,7 +274,7 @@ const page = () => {
                         onClick={handlePrevPage}
                         disabled={currentPage === 1}
                         type="button"
-                        className="py-1.5 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
+                        className="py-1.5 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none "
                       >
                         <svg
                           className="flex-shrink-0 size-4"
@@ -307,7 +297,7 @@ const page = () => {
                         onClick={handleNextPage}
                         disabled={currentPage === totalPages}
                         type="button"
-                        className="py-1.5 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
+                        className="py-1.5 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none "
                       >
                         Next
                         <svg

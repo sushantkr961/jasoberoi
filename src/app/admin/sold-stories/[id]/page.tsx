@@ -133,10 +133,10 @@ const page = ({ params }: any) => {
                 {/* Sold Stories Details Start Here Here */}
                 <section
                     id="propertydetails"
-                    className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent"
+                    className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 "
                 >
                     <div className="sm:col-span-12">
-                        <h2 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
+                        <h2 className="text-lg font-semibold text-gray-800 ">
                             Sold Stories Details
                         </h2>
                     </div>
@@ -145,7 +145,7 @@ const page = ({ params }: any) => {
                     <div className="sm:col-span-3">
                         <label
                             htmlFor="af-submit-application-full-name"
-                            className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+                            className="inline-block text-sm font-medium text-gray-500 mt-2.5 "
                         >
                             Title
                         </label>
@@ -156,7 +156,7 @@ const page = ({ params }: any) => {
                                 id="af-submit-application-full-name"
                                 placeholder="Enter Your Property ID"
                                 type="text"
-                                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none  "
                                 required
                                 value={formData.title}
                                 onChange={(e) =>
@@ -168,7 +168,7 @@ const page = ({ params }: any) => {
                     <div className="sm:col-span-3">
                         <label
                             htmlFor="af-submit-application-resume-cv"
-                            className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+                            className="inline-block text-sm font-medium text-gray-500 mt-2.5 "
                         >
                             Single Image
                         </label>
@@ -184,7 +184,7 @@ const page = ({ params }: any) => {
                             type="file"
                             name="af-submit-application-resume-cv"
                             id="af-submit-application-resume-cv"
-                            className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
+                            className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none  file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 "
                             accept="image/*"
                             onChange={handleImageChange}
                         />
@@ -219,7 +219,7 @@ const page = ({ params }: any) => {
                     <div className="sm:col-span-3">
                         <label
                             htmlFor="af-submit-application-resume-cv"
-                            className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+                            className="inline-block text-sm font-medium text-gray-500 mt-2.5 "
                         >
                             Gallery Images (Optional)
                         </label>
@@ -236,7 +236,7 @@ const page = ({ params }: any) => {
                             multiple
                             name="af-submit-application-resume-cv"
                             id="af-submit-application-resume-cv"
-                            className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
+                            className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none  file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 "
                             accept="image/*"
                             onChange={handleMultipleFileChange}
                         />

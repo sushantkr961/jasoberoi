@@ -279,10 +279,10 @@ const page = ({ params }: any) => {
                 {/* Property Details Start Here Here */}
                 <section
                     id="propertydetails"
-                    className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent"
+                    className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200"
                 >
                     <div className="sm:col-span-12">
-                        <h2 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
+                        <h2 className="text-lg font-semibold text-gray-800 ">
                             Property Details
                         </h2>
                     </div>
@@ -291,7 +291,7 @@ const page = ({ params }: any) => {
                     <div className="sm:col-span-3">
                         <label
                             htmlFor="af-submit-application-full-name"
-                            className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+                            className="inline-block text-sm font-medium text-gray-500 mt-2.5 "
                         >
                             Property ID
                         </label>
@@ -302,7 +302,7 @@ const page = ({ params }: any) => {
                                 id="af-submit-application-full-name"
                                 placeholder="Enter Your Property ID"
                                 type="text"
-                                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                                 required
                                 value={formData.propertyId}
                                 onChange={(e) =>
@@ -316,7 +316,7 @@ const page = ({ params }: any) => {
                     <div className="sm:col-span-3">
                         <label
                             htmlFor="af-submit-application-email"
-                            className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+                            className="inline-block text-sm font-medium text-gray-500 mt-2.5 "
                         >
                             Property Name
                         </label>
@@ -326,7 +326,7 @@ const page = ({ params }: any) => {
                             id="af-submit-application-email"
                             type="text"
                             placeholder="Enter Your Property Name"
-                            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                             required
                             value={formData.title}
                             onChange={(e) =>
@@ -340,7 +340,7 @@ const page = ({ params }: any) => {
                         <div className="inline-block">
                             <label
                                 htmlFor="af-submit-application-phone"
-                                className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+                                className="inline-block text-sm font-medium text-gray-500 mt-2.5 "
                             >
                                 Manual Property Price
                             </label>
@@ -351,7 +351,7 @@ const page = ({ params }: any) => {
                             <input
                                 id="listsagent"
                                 type="number"
-                                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ext-neutral-400 "
                                 placeholder="Enter Property Price"
                                 required
                                 value={formData.price}
@@ -369,19 +369,19 @@ const page = ({ params }: any) => {
 
                     <div className="sm:col-span-full">
                         <div className="sm:flex">
-                            <label htmlFor="hs-default-checkbox1" className="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                <input checked={formData.featured} onChange={() => handleCheckboxToggle("featured")} type="checkbox" name="af-account-gender-checkbox" className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-default-checkbox1" />
-                                <span className="text-sm text-gray-500 ms-3 dark:text-neutral-400">Featured</span>
+                            <label htmlFor="hs-default-checkbox1" className="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none  ">
+                                <input checked={formData.featured} onChange={() => handleCheckboxToggle("featured")} type="checkbox" name="af-account-gender-checkbox" className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none   " id="hs-default-checkbox1" />
+                                <span className="text-sm text-gray-500 ms-3 ">Featured</span>
                             </label>
 
-                            <label htmlFor="hs-default-checkbox2" className="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                <input checked={formData.hotOffer} onChange={() => handleCheckboxToggle("hotOffer")} type="checkbox" name="af-account-gender-checkbox" className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-default-checkbox2" />
-                                <span className="text-sm text-gray-500 ms-3 dark:text-neutral-400">Hot Offer</span>
+                            <label htmlFor="hs-default-checkbox2" className="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ">
+                                <input checked={formData.hotOffer} onChange={() => handleCheckboxToggle("hotOffer")} type="checkbox" name="af-account-gender-checkbox" className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none " id="hs-default-checkbox2" />
+                                <span className="text-sm text-gray-500 ms-3 0">Hot Offer</span>
                             </label>
 
-                            <label htmlFor="hs-default-checkbox3" className="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                <input checked={formData.sale} onChange={() => handleCheckboxToggle("sale")} type="checkbox" name="af-account-gender-checkbox" className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-default-checkbox3" />
-                                <span className="text-sm text-gray-500 ms-3 dark:text-neutral-400">Sale</span>
+                            <label htmlFor="hs-default-checkbox3" className="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ">
+                                <input checked={formData.sale} onChange={() => handleCheckboxToggle("sale")} type="checkbox" name="af-account-gender-checkbox" className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none " id="hs-default-checkbox3" />
+                                <span className="text-sm text-gray-500 ms-3 ">Sale</span>
                             </label>
                         </div>
                     </div>
@@ -391,7 +391,7 @@ const page = ({ params }: any) => {
                         <div className="flex items-center mb-4">
                             <label
                                 htmlFor="listagent"
-                                className="leading-6 mr-12 inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+                                className="leading-6 mr-12 inline-block text-sm font-medium text-gray-500 mt-2.5 "
                             >
                                 Contact Listing Agent
                             </label>
@@ -417,7 +417,7 @@ const page = ({ params }: any) => {
                         <div className="inline-block">
                             <label
                                 htmlFor="af-submit-application-phone"
-                                className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+                                className="inline-block text-sm font-medium text-gray-500 mt-2.5 "
                             >
                                 Property Area Size
                             </label>
@@ -427,7 +427,7 @@ const page = ({ params }: any) => {
                         <input
                             id="af-submit-application-phone"
                             type="number"
-                            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                             placeholder="Enter Property Area Size"
                             value={formData.areaSize}
                             onChange={(e) =>
@@ -440,7 +440,7 @@ const page = ({ params }: any) => {
                         <div className="inline-block">
                             <label
                                 htmlFor="af-submit-application-phone"
-                                className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+                                className="inline-block text-sm font-medium text-gray-500 mt-2.5 "
                             >
                                 Property Built Year
                             </label>
@@ -450,7 +450,7 @@ const page = ({ params }: any) => {
                         <input
                             id="af-submit-application-phone"
                             type="number"
-                            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                             placeholder="Enter Property Built Year"
                             value={formData.yearBuilt}
                             onChange={(e) =>
@@ -500,9 +500,9 @@ const page = ({ params }: any) => {
                 </section>
                 {/* Property Details End Here */}
                 {/* Address  Section Start Here */}
-                <section className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
+                <section className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 ">
                     <div className="sm:col-span-12">
-                        <h2 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
+                        <h2 className="text-lg font-semibold text-gray-800 ">
                             Address
                         </h2>
                     </div>
@@ -521,7 +521,7 @@ const page = ({ params }: any) => {
                                     <input
                                         id="af-submit-application-phone"
                                         type="text"
-                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                                         placeholder="Enter Full Address"
                                         required
                                         value={formData.address.fullAddress}
@@ -548,7 +548,7 @@ const page = ({ params }: any) => {
                                     <input
                                         id="af-submit-application-phone"
                                         type="text"
-                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                                         placeholder="Enter State"
                                         required
                                         value={formData.address.state}
@@ -575,7 +575,7 @@ const page = ({ params }: any) => {
                                     <input
                                         id="af-submit-application-phone"
                                         type="text"
-                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none  "
                                         placeholder="Enter City"
                                         required
                                         value={formData.address.city}
@@ -602,7 +602,7 @@ const page = ({ params }: any) => {
                                     <input
                                         id="af-submit-application-phone"
                                         type="text"
-                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                                         placeholder="Enter Country"
                                         required
                                         value={formData.address.country}
@@ -629,7 +629,7 @@ const page = ({ params }: any) => {
                                     <input
                                         id="af-submit-application-phone"
                                         type="text"
-                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                                         placeholder="Enter Zip or Postal Code"
                                         required
                                         value={formData.address.zipOrPostalCode}
@@ -656,7 +656,7 @@ const page = ({ params }: any) => {
                                     <input
                                         id="af-submit-application-phone"
                                         type="text"
-                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                                         placeholder="Enter Map Location URL"
                                         value={formData.gmapLink}
                                         onChange={(e) =>
@@ -670,9 +670,9 @@ const page = ({ params }: any) => {
                 </section>
                 {/* Address section End Here */}
                 {/* Description Section Start Here */}
-                <div className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
+                <div className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 ">
                     <div className="sm:col-span-12">
-                        <h2 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
+                        <h2 className="text-lg font-semibold text-gray-800 ">
                             Description
                         </h2>
                     </div>
@@ -681,7 +681,7 @@ const page = ({ params }: any) => {
                     <div className="sm:col-span-3">
                         <label
                             htmlFor="af-submit-application-resume-cv"
-                            className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+                            className="inline-block text-sm font-medium text-gray-500 mt-2.5 "
                         >
                             Hero Image /Signle Image
                         </label>
@@ -697,7 +697,7 @@ const page = ({ params }: any) => {
                             type="file"
                             name="af-submit-application-resume-cv"
                             id="af-submit-application-resume-cv"
-                            className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
+                            className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 "
                             accept="image/*"
                             onChange={handleImageChange}
                         />
@@ -733,44 +733,19 @@ const page = ({ params }: any) => {
                 {/* Description Section End Here */}
                 {/* Slider Section Start Here */}
 
-                <section className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
+                <section className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200  ">
                     <div className="sm:col-span-12">
-                        <h2 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
+                        <h2 className="text-lg font-semibold text-gray-800 ">
                             Multi Image{" "}
                         </h2>
                     </div>
 
-                    {/* <div className="col-span-full">
-                        <div className="flex items-center mb-4">
-                            <label
-                                htmlFor="SliderToggle"
-                                className="block text-sm font-medium leading-6 text-gray-900 mr-10"
-                            >
-                                Do You Want Slider?
-                            </label>
-                            <label
-                                htmlFor="SliderToggle"
-                                className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-indigo-600"
-                            >
-                                <input
-                                    type="checkbox"
-                                    id="SliderToggle"
-                                    className="peer sr-only"
-                                    checked={toggleSlider}
-                                    onChange={handleSliderToggle}
-                                />
-
-                                <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
-                            </label>
-                        </div>
-                    </div> */}
-                    {/* Slider Imaged */}
-                    {/* {toggleSlider && ( */}
+                    
                     <>
                         <div className="sm:col-span-3">
                             <label
                                 htmlFor="af-submit-application-resume-cv"
-                                className="inline-block text-sm font-medium text-gray-500 mt-2.5 dark:text-neutral-500"
+                                className="inline-block text-sm font-medium text-gray-500 mt-2.5 "
                             >
                                 Multi Images
                             </label>
@@ -787,7 +762,7 @@ const page = ({ params }: any) => {
                                 multiple
                                 name="af-submit-application-resume-cv"
                                 id="af-submit-application-resume-cv"
-                                className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
+                                className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none  file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4 "
                                 accept="image/*"
                                 onChange={handleMultipleFileChange}
                             />
@@ -808,9 +783,9 @@ const page = ({ params }: any) => {
                 {/* Slider Section End Here */}
 
                 {/* Mortgage Calculator Start Here */}
-                <section className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
+                <section className="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 ">
                     <div className="sm:col-span-12">
-                        <h2 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
+                        <h2 className="text-lg font-semibold text-gray-800 ">
                             Mortgage Calculator{" "}
                         </h2>
                     </div>
@@ -829,7 +804,7 @@ const page = ({ params }: any) => {
                                     <input
                                         id="af-submit-application-phone"
                                         type="text"
-                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                                         placeholder="$1"
                                         value={formData.mortgage.totalAmount}
                                         onChange={(e) =>
@@ -855,7 +830,7 @@ const page = ({ params }: any) => {
                                     <input
                                         id="af-submit-application-phone"
                                         type="text"
-                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                                         placeholder="$1"
                                         value={formData.mortgage.downPayment}
                                         onChange={(e) =>
@@ -881,7 +856,7 @@ const page = ({ params }: any) => {
                                     <input
                                         id="af-submit-application-phone"
                                         type="text"
-                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                                         placeholder="%"
                                         value={formData.mortgage.interestRate}
                                         onChange={(e) =>
@@ -907,7 +882,7 @@ const page = ({ params }: any) => {
                                     <input
                                         id="af-submit-application-phone"
                                         type="text"
-                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                                         placeholder="1 year"
                                         value={formData.mortgage.loanYears}
                                         onChange={(e) =>
@@ -933,7 +908,7 @@ const page = ({ params }: any) => {
                                     <input
                                         id="af-submit-application-phone"
                                         type="text"
-                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                                         placeholder="$1"
                                         value={formData.mortgage.propertyTax}
                                         onChange={(e) =>
@@ -959,7 +934,7 @@ const page = ({ params }: any) => {
                                     <input
                                         id="af-submit-application-phone"
                                         type="text"
-                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none  "
                                         placeholder="$1"
                                         value={formData.mortgage.insurance}
                                         onChange={(e) =>
@@ -985,7 +960,7 @@ const page = ({ params }: any) => {
                                     <input
                                         id="af-submit-application-phone"
                                         type="text"
-                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                        className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                                         placeholder="$1"
                                         value={formData.mortgage.pmi}
                                         onChange={(e) =>
