@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import Container from "../Containers/Container";
 import Carousel from "../Carousel/Carousel";
+import Link from "next/link";
 
 interface ContactJasProps { }
 
@@ -41,9 +42,9 @@ const ContactJas: React.FC<ContactJasProps> = () => {
               NETWORK OF INDUSTRY PROFESSIONALS SO THAT ALL YOUR REAL ESTATE
               NEEDS ARE UNDER ONE ROOF.
             </p>
-            <button className="w-[210px] sm:w-[260px] lg:w-[48%] uppercase bg-[#E7C67C] text-black px-3 py-2 font-bold shadow-lg   transition-colors">
+            <Link href="/contact" className="w-[210px] text-center sm:w-[260px] lg:w-[48%] uppercase bg-[#E7C67C] text-black px-3 py-2 font-bold shadow-lg   transition-colors">
               Connect with Jas
-            </button>
+            </Link>
           </div>
         </div>
         <div className="flex justify-center space-x-2 py-4">

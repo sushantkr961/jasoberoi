@@ -21,7 +21,7 @@
         { "href": "/featured-listing", "text": "Featured Listings" },
         { "href": "/mls-search", "text": "MLS Search" },
         { "href": "/commercial-listing", "text": "Commercial Listing" },
-        { "href": "/sold commercial", "text": "sold Commercial" },
+        { "href": "/sold-commercials", "text": "Sold Commercial" },
         { "href": "/exclusive-properties", "text": "Exclusive Properties" },
         { "href": "/sold-stories", "text": "Sold Stories" }
       ]

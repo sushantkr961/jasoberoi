@@ -31,8 +31,8 @@ const Card = ({
             </div>
             <div className="py-4 lg:py-6 transition-all duration-300 ">
                 <span className="text-[#C1A468] font-medium mb-2 block">{new Date(createdAt).toLocaleDateString()}</span>
-                <h4 className=" text-gray-900 font-medium text-[18px] mb-2">{title}</h4>
-                <p className="text-[#636363] mb-1 text-[15px] " style={{ fontSize: "15px !important" }}>
+                <h4 className=" text-gray-900 font-medium  text-[18px] mb-2">{title}</h4>
+                <p className="text-[#636363] mb-1 text-[15px] font-poppins" style={{ fontSize: "15px !important" }}>
                     {parsedContent}
                 </p>
                 <Link href={`/blog/${_id}`} className="cursor-pointer text-[15px] text-[#C1A468] font-semibold">Read more..</Link>

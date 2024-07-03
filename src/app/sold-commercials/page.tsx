@@ -32,7 +32,7 @@ const soldCommercials = (props: Props) => {
 
         <div className="mt-8">
           <Link
-            href={"/contact"}
+            href={"https://youtu.be/-MaWYUiauIg?si=JuLJmM3vYW0QilXb"}
             className="flex gap-3 items-center uppercase font-semibold text-[15px]  mt-2 bg-black text-white py-3 px-7">
             {" "}
             <FaYoutube />
