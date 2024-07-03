@@ -2,7 +2,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import Slider from "react-slick";
-import BigCarousel from "./BigCarousel";
 import { useFullScreenHandle } from "react-full-screen";
 
 type Props = {
