@@ -16,8 +16,8 @@ const HeroSection = (props: Props) => {
         src={"/assets/webp/background.webp"}
         alt="JASOBEROI"
         loading="eager"
-        layout="fill" 
-        objectFit="cover" 
+        fill
+        style={{ objectFit: 'cover' }}
         priority
         className="z-[-1]"
       />
