@@ -2,32 +2,14 @@
 import Container from "@/components/Containers/Container";
 import Image from "next/image";
 import React from "react";
-import Data from "../../../data/AboutUs/data.json";
+import Data from "../../data/AboutUs/data.json";
 import { CiMail } from "react-icons/ci";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-type Props = {
-    params: {
-        id: string
-    }
-};
 
 
-
-const page = ({ params }: Props) => {
-    const { JASOBEROI, TEAM } = Data;
-    const router = useRouter();
-    let member;
-    if (params.id == "maria") {
-        member = TEAM[0];
-    } else if (params.id == "claudia") {
-        member = TEAM[1];
-
-    } else if (params.id == "emmanuel-gatica") {
-        member = TEAM[2];
-    } else {
-        router.push("/about");
-    }
+const page = () => {
+    const { TEAM } = Data;
+    let member = TEAM[1];
     return (
         <>
             <Container className="m-auto px-4">

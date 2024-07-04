@@ -22,7 +22,7 @@ const TeamCard = ({ teamMemberDetails }: { teamMemberDetails: any }) => {
     };
     return (
         <Link className='relative  bg-cover  h-full w-full m-auto group overflow-hidden'
-            href={`about/${teamMemberDetails.id}`}
+            href={`/${teamMemberDetails.id}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
