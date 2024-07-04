@@ -464,6 +464,7 @@ const AddProperty = () => {
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                     placeholder="Enter Full Address"
                     value={formData.address.fullAddress}
+                    required
                     onChange={(e) =>
                       setFormData({
                         ...formData,
@@ -490,6 +491,7 @@ const AddProperty = () => {
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                     placeholder="Enter State"
                     value={formData.address.state}
+                    required
                     onChange={(e) =>
                       setFormData({
                         ...formData,
@@ -515,6 +517,7 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                     placeholder="Enter City"
+                    required
                     value={formData.address.city}
                     onChange={(e) =>
                       setFormData({
@@ -539,6 +542,7 @@ const AddProperty = () => {
                   <input
                     id="af-submit-application-phone"
                     type="text"
+                    required
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                     placeholder="Enter Country"
                     value={formData.address.country}
@@ -567,6 +571,7 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                     placeholder="Enter Zip or Postal Code"
+                    required
                     value={formData.address.zipOrPostalCode}
                     onChange={(e) =>
                       setFormData({
@@ -592,6 +597,7 @@ const AddProperty = () => {
                     id="af-submit-application-phone"
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
+                    required
                     placeholder="Enter Map Location URL"
                     value={formData.gmapLink}
                     onChange={(e) =>
