@@ -82,6 +82,7 @@ export async function POST(request: NextRequest) {
       "./public/uploads"
     );
 
+    
     const newPost = new Property({
       propertyId,
       title,

@@ -463,7 +463,6 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                     placeholder="Enter Full Address"
-                    required
                     value={formData.address.fullAddress}
                     onChange={(e) =>
                       setFormData({
@@ -490,7 +489,6 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                     placeholder="Enter State"
-                    required
                     value={formData.address.state}
                     onChange={(e) =>
                       setFormData({
@@ -517,7 +515,6 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                     placeholder="Enter City"
-                    required
                     value={formData.address.city}
                     onChange={(e) =>
                       setFormData({
@@ -544,7 +541,6 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                     placeholder="Enter Country"
-                    required
                     value={formData.address.country}
                     onChange={(e) =>
                       setFormData({
@@ -571,7 +567,6 @@ const AddProperty = () => {
                     type="text"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                     placeholder="Enter Zip or Postal Code"
-                    required
                     value={formData.address.zipOrPostalCode}
                     onChange={(e) =>
                       setFormData({

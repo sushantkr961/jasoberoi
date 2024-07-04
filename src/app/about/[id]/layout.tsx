@@ -101,11 +101,11 @@ export async function generateMetadata({ params }: any) {
         }
     }
 
-    if (params.id == "1") {
+    if (params.id == "maria") {
         return Maria;
-    } else if (params.id == "2") {
+    } else if (params.id == "claudia") {
         return Claudia;
-    } else if (params.id == "3") {
+    } else if (params.id == "emmanuel-gatica") {
         return Emmanuel;
     }
 };

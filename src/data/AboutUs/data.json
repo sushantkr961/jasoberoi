@@ -25,9 +25,8 @@
         "benefits": "Save time for yourself, seize financial efficiency, and work with Jas Oberoi."
     },
     "TEAM": [
-
         {
-            "id":1,
+            "id":"maria",
             "name": "Maria Hussain",
             "image": "asset-4.webp",
             "role": "Real Estate Professional",
@@ -57,7 +56,7 @@
         },
         {
             
-            "id":2,
+            "id":"claudia",
             "name": "Claudia",
             "image": "asset-5.webp",
             "role": "Marketing Manager",
@@ -82,7 +81,7 @@
             ]
         },
         {
-            "id":3,
+            "id":"emmanuel-gatica",
             "name": "Emmanuel Gatica",
             "image": "asset-6.webp",
             "role": "Media Director",
